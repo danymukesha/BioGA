@@ -1,18 +1,17 @@
-#' Plot Fitness Values
+#' Plot Population Distribution
 #'
-#' Plot the fitness values of the population over generations.
+#' Plot the distribution of individuals in the population.
 #'
-#' @param fitness_values A numeric vector containing fitness values.
+#' @param population A numeric matrix containing the population data.
 #'
 #' @examples
 #' # example of usage
-#' fitness_values <- c(10, 8, 6, 4, 2)
-#' plot_fitness(fitness_values)
+#' population <- matrix(runif(100), nrow = 10, ncol = 10)
+#' plot_population(population)
 #'
 #' @export
-plot_fitness <- function(fitness_values) {
-  generations <- seq_along(fitness_values)
-  plot(generations, fitness_values, type = "l",
-       xlab = "Generations", ylab = "Fitness",
-       main = "Fitness Values Over Generations")
+plot_population <- function(population) {
+  par(mfrow=c(1,2))
+  boxplot(population, main = "Boxplot of Population")
+  hist(population, main = "Histogram of Population")
 }

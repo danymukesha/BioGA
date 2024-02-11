@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The `BioGA` package provides a set of functions for genetic algorithm optimization tailored for analyzing high throughput genomic data. These functions are implemented in C++ for improved speed and efficiency, with a convenient interface for use within R.
+The `BioGA` package provides a set of functions for genetic algorithm optimization tailored for analyzing high throughput genomic data. These functions are implemented in C++ for improved speed and efficiency, with an easy-to-use interface for use within R.
 
 ## Installation
 
