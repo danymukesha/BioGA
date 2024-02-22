@@ -48,8 +48,8 @@
 <li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/Overview.html">Overview</a>
     <a class="dropdown-item" href="../articles/Usage.html">Usage</a>
+    <a class="dropdown-item" href="../articles/Overview.html">Overview</a>
   </div>
 </li>
       </ul>
@@ -78,12 +78,10 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://danymukesha.github.io/BioGA/">BioGA</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load the BioGA package</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://danymukesha.github.io/BioGA/">BioGA</a></span><span class="op">)</span></span>
 <span></span>
@@ -119,7 +117,7 @@ In the context of the <code>evaluate_fitness_cpp</code> function,
 genomic data is used to calculate fitness scores for individuals in a
 population, typically in the context of genetic algorithm
 optimization.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Initialize population</span></span>
 <span><span class="va">population</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/initialize_population_cpp.html">initialize_population_cpp</a></span><span class="op">(</span><span class="va">genomic_data</span>, population_size <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <p>The population represents a set of candidate combinations of genes
@@ -131,48 +129,48 @@ the absence of Gene2. The population undergoes genetic algorithm
 operations such as selection, crossover, mutation, and replacement to
 evolve towards individuals with higher predictive power for the
 trait.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize fitness history</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>fitness_history <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize time progress</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>start_time <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Run genetic algorithm optimization</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>generation <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (<span class="cn">TRUE</span>) {</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    generation <span class="ot">&lt;-</span> generation <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Evaluate fitness</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    fitness <span class="ot">&lt;-</span> <span class="fu">evaluate_fitness_cpp</span>(genomic_data, population)</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    fitness_history[[generation]] <span class="ot">&lt;-</span> fitness</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Check termination condition</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (generation<span class="sc">==</span>generations) { <span class="co"># defined number of generations</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Selection</span></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    selected_parents <span class="ot">&lt;-</span> <span class="fu">selection_cpp</span>(population, fitness, <span class="at">num_parents =</span> <span class="dv">2</span>)</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Crossover and Mutation</span></span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    offspring <span class="ot">&lt;-</span> <span class="fu">crossover_cpp</span>(selected_parents, <span class="at">offspring_size =</span> <span class="dv">2</span>)</span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    mutated_offspring <span class="ot">&lt;-</span> <span class="fu">mutation_cpp</span>(offspring, <span class="at">mutation_rate =</span> <span class="dv">0</span>) <span class="co"># (no mutation in this example)</span></span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Replacement</span></span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    population <span class="ot">&lt;-</span> <span class="fu">replacement_cpp</span>(population, mutated_offspring, <span class="at">num_to_replace =</span> <span class="dv">1</span>)</span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate time progress</span></span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>    elapsed_time <span class="ot">&lt;-</span> <span class="fu">difftime</span>(<span class="fu">Sys.time</span>(), start_time, <span class="at">units =</span> <span class="st">"secs"</span>)</span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Print time progress</span></span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">"</span><span class="sc">\r</span><span class="st">Generation:"</span>, generation, <span class="st">"- Elapsed Time:"</span>, <span class="fu">format</span>(elapsed_time, <span class="at">units =</span> <span class="st">"secs"</span>), <span class="st">"     "</span>)</span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">1</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.02746749</span> secs      </span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">2</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.0282979</span> secs      </span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">3</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.02839375</span> secs      </span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">4</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.02847576</span> secs      </span>
-<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">5</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.02855492</span> secs</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize fitness history</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>fitness_history <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize time progress</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>start_time <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Run genetic algorithm optimization</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>generation <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (<span class="cn">TRUE</span>) {</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    generation <span class="ot">&lt;-</span> generation <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Evaluate fitness</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    fitness <span class="ot">&lt;-</span> <span class="fu">evaluate_fitness_cpp</span>(genomic_data, population)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    fitness_history[[generation]] <span class="ot">&lt;-</span> fitness</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Check termination condition</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (generation<span class="sc">==</span>generations) { <span class="co"># defined number of generations</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Selection</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    selected_parents <span class="ot">&lt;-</span> <span class="fu">selection_cpp</span>(population, fitness, <span class="at">num_parents =</span> <span class="dv">2</span>)</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Crossover and Mutation</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    offspring <span class="ot">&lt;-</span> <span class="fu">crossover_cpp</span>(selected_parents, <span class="at">offspring_size =</span> <span class="dv">2</span>)</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    mutated_offspring <span class="ot">&lt;-</span> <span class="fu">mutation_cpp</span>(offspring, <span class="at">mutation_rate =</span> <span class="dv">0</span>) <span class="co"># (no mutation in this example)</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Replacement</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    population <span class="ot">&lt;-</span> <span class="fu">replacement_cpp</span>(population, mutated_offspring, <span class="at">num_to_replace =</span> <span class="dv">1</span>)</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate time progress</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    elapsed_time <span class="ot">&lt;-</span> <span class="fu">difftime</span>(<span class="fu">Sys.time</span>(), start_time, <span class="at">units =</span> <span class="st">"secs"</span>)</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Print time progress</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">"</span><span class="sc">\r</span><span class="st">Generation:"</span>, generation, <span class="st">"- Elapsed Time:"</span>, <span class="fu">format</span>(elapsed_time, <span class="at">units =</span> <span class="st">"secs"</span>), <span class="st">"     "</span>)</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">1</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.008136749</span> secs      </span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">2</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.008934021</span> secs      </span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">3</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.009027719</span> secs      </span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">4</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.009109259</span> secs      </span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">5</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.009189606</span> secs</span></code></pre></div>
 <p>The fitness calculation described in the provided code calculates a
 measure of dissimilarity between the gene expression profiles of
 individuals in the population and the genomic data. This measure of
@@ -210,7 +208,7 @@ and the genomic data. Individuals with lower fitness scores are
 considered to have gene expression profiles that are more similar to the
 genomic data and are therefore more likely to be selected for further
 optimization in the genetic algorithm.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Plot fitness change over generations</span></span>
 <span><span class="fu"><a href="../reference/plot_fitness_history.html">plot_fitness_history</a></span><span class="op">(</span><span class="va">fitness_history</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Overview_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>

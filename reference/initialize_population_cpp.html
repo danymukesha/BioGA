@@ -24,8 +24,8 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/Overview.html">Overview</a>
     <a class="dropdown-item" href="../articles/Usage.html">Usage</a>
+    <a class="dropdown-item" href="../articles/Overview.html">Overview</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -69,6 +69,25 @@
 <p>Numeric matrix representing the initialized population.</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># example of usage</span></span></span>
+<span class="r-in"><span><span class="va">genomic_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">10</span>, ncol <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">BioGA</span><span class="fu">::</span><span class="fu">initialize_population_cpp</span><span class="op">(</span><span class="va">genomic_data</span>, population_size <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]        [,2]        [,3]       [,4]         [,5]       [,6]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -1.1533984 -0.07557425  0.04020439 -0.2721537  0.007886198 1.12983515</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.4293801 -0.91905160 -0.01030332 -1.5625184 -0.998432551 1.23339006</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -0.4293801 -0.22174452  1.10018974  0.1243011 -2.446680029 0.07510590</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] -1.1533984  1.31763370  0.74702859  1.2037678  0.007886198 0.06548664</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] -0.4293801 -0.50359291 -0.01030332  0.3224827  0.542141549 0.07510590</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,7]       [,8]       [,9]      [,10]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -1.09850890  0.6752447  1.1533758  2.6489320</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.55851442 -0.6331782  0.7087531  2.1122773</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  0.34042449  0.7097145 -1.4522998  0.9412061</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]  0.00312594  0.8767773 -0.6048294 -0.3837330</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] -1.09850890 -0.4727025  1.1533758  0.1289229</span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 
