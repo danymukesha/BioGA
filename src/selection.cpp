@@ -7,6 +7,12 @@ using namespace Rcpp;
 //' @param fitness Numeric vector of fitness scores for each individual.
 //' @param num_parents Number of individuals to select.
 //' @return Numeric matrix representing the selected individuals.
+//' @examples
+//' # example of usage
+//' genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
+//' population <- BioGA::initialize_population_cpp(genomic_data, population_size = 5)
+//' fitness <- BioGA::evaluate_fitness_cpp(genomic_data, population)
+//' BioGA::selection_cpp(population, fitness, num_parents = 2)
 //' @export
 // [[Rcpp::export]]
 NumericMatrix selection_cpp(const NumericMatrix& population, const NumericVector& fitness, int num_parents) {

@@ -4,6 +4,8 @@
 #'
 #' @param fitness_values A numeric vector containing fitness values.
 #'
+#' @return Plot of fitness
+#'
 #' @examples
 #' # example of usage
 #' fitness_values <- c(10, 8, 6, 4, 2)

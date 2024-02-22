@@ -4,7 +4,7 @@
 #'
 #' @param fitness_history A list containing fitness values for each generation.
 #'
-#' @import ggplot2
+#' @return Plot of fitness history
 #'
 #' @examples
 #' # example of usage
@@ -17,16 +17,15 @@ plot_fitness_history <- function(fitness_history) {
   fitness_values <- unlist(fitness_history)
 
   # Create generation index
-  generations <- rep(seq_along(fitness_history), sapply(fitness_history, length))
+  generations <- rep(seq_along(fitness_history), vapply(fitness_history, length))
 
   # Create data frame
   df <- data.frame(Generation = generations, Fitness = fitness_values)
 
   # Plot
-  library(ggplot2)
-  ggplot(df, aes(x = Generation, y = Fitness)) +
+  ggplot2::ggplot(df, ggplot2::aes_string(x = "Generation", y = "Fitness")) +
     geom_line() +
     labs(x = "Generation", y = "Fitness") +
-    ggtitle("Fitness Change Over Generations")
+    ggplot2::ggtitle("Fitness Change Over Generations")
 }
 

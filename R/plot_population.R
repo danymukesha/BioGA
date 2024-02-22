@@ -4,6 +4,8 @@
 #'
 #' @param population A numeric matrix containing the population data.
 #'
+#' @return Plot of population
+#'
 #' @import graphics
 #'
 #' @examples

@@ -69,6 +69,22 @@
 <p>Numeric matrix representing the offspring.</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># example of usage</span></span></span>
+<span class="r-in"><span><span class="va">genomic_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">10</span>, ncol <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">population</span> <span class="op">&lt;-</span> <span class="fu">BioGA</span><span class="fu">::</span><span class="fu"><a href="initialize_population_cpp.html">initialize_population_cpp</a></span><span class="op">(</span><span class="va">genomic_data</span>, population_size <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">fitness</span> <span class="op">&lt;-</span> <span class="fu">BioGA</span><span class="fu">::</span><span class="fu"><a href="evaluate_fitness_cpp.html">evaluate_fitness_cpp</a></span><span class="op">(</span><span class="va">genomic_data</span>, <span class="va">population</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">selected_parents</span> <span class="op">&lt;-</span> <span class="fu">BioGA</span><span class="fu">::</span><span class="fu"><a href="selection_cpp.html">selection_cpp</a></span><span class="op">(</span><span class="va">population</span>, <span class="va">fitness</span>, num_parents <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">BioGA</span><span class="fu">::</span><span class="fu">crossover_cpp</span><span class="op">(</span><span class="va">selected_parents</span>, offspring_size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]     [,3]       [,4]       [,5]      [,6]       [,7]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.07003485  0.2841503 1.337320 0.23669628 -0.5482573 -0.133997 -0.3543612</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 0.07003485 -0.1774865 1.225636 0.09929669 -0.2181096  1.310710 -0.3543612</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          [,8]      [,9]       [,10]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 2.682557 0.1721817 -0.09032729</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 1.630133 0.3575890 -0.18651637</span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 

@@ -6,6 +6,8 @@
 \alias{BioGA-package}
 \title{BioGA: Bioinformatics Genetic Algorithm (BioGA)}
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
 Genetic algorithm are a class of optimization algorithms inspired by the process of natural selection and genetics. This package allows users to analyze and optimize high throughput genomic data using genetic algorithms.
 }
 \seealso{

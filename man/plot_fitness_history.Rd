@@ -9,6 +9,9 @@ plot_fitness_history(fitness_history)
 \arguments{
 \item{fitness_history}{A list containing fitness values for each generation.}
 }
+\value{
+Plot of fitness history
+}
 \description{
 Plot the change in fitness values over generations.
 }

@@ -1,3 +1,7 @@
 exportPattern("^[[:alpha:]]+")
-importFrom(Rcpp, evalCpp, sourceCpp)
+importFrom(Rcpp,
+           evalCpp,
+           sourceCpp)
+import(ggplot2,
+       graphics)
 useDynLib(BioGA, .registration = TRUE)

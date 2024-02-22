@@ -17,3 +17,9 @@ Numeric vector of fitness scores for each individual.
 \description{
 Function to evaluate fitness using genomic data
 }
+\examples{
+# example of usage
+genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
+population <- BioGA::initialize_population_cpp(genomic_data, population_size = 5)
+BioGA::evaluate_fitness_cpp(genomic_data, population)
+}

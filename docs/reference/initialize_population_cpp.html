@@ -69,6 +69,25 @@
 <p>Numeric matrix representing the initialized population.</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># example of usage</span></span></span>
+<span class="r-in"><span><span class="va">genomic_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">10</span>, ncol <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">BioGA</span><span class="fu">::</span><span class="fu">initialize_population_cpp</span><span class="op">(</span><span class="va">genomic_data</span>, population_size <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]        [,3]       [,4]       [,5]       [,6]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.90281495 -0.5035929  1.10018974 -1.5625184 -2.4466800 -1.5150245</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.42938009 -0.2217445  0.78636258 -0.2721537  1.6044073  1.8777439</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  0.23742535  1.3604613  0.04020439  0.1243011 -0.9063402  0.0751059</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]  0.06089889 -0.9190516  0.78636258 -1.2705131  0.5421415  1.1298352</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]  1.01200185  1.3604613 -0.11786014 -0.7517233  0.5421415  1.3829109</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,7]        [,8]       [,9]      [,10]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  0.3404245  0.70971452  1.4154123 -0.3837330</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  1.8933605  0.87677733 -0.1026030 -0.3082114</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -0.8451957  0.87677733  0.4414282  2.1122773</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] -1.4160239 -0.07788682  0.6241324 -1.5289587</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]  0.2897745  0.87677733 -0.1026030  1.4601102</span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 

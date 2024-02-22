@@ -9,6 +9,9 @@ plot_fitness(fitness_values)
 \arguments{
 \item{fitness_values}{A numeric vector containing fitness values.}
 }
+\value{
+Plot of fitness
+}
 \description{
 Plot the fitness values of the population over generations.
 }

@@ -9,6 +9,9 @@ plot_population(population)
 \arguments{
 \item{population}{A numeric matrix containing the population data.}
 }
+\value{
+Plot of population
+}
 \description{
 Plot the distribution of individuals in the population.
 }

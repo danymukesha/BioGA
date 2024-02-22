@@ -9,9 +9,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-library(BioGA)
-```
 
 ## Overview
 
@@ -123,7 +120,3 @@ This fitness calculation aims to minimize the overall dissimilarity between the 
 # Plot fitness change over generations
 plot_fitness_history(fitness_history)
 ```
-
-
-
-

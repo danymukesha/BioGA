@@ -13,7 +13,7 @@ Description: Genetic algorithm are a class of optimization
     genomic data using genetic algorithms.
 License: MIT + file LICENSE
 Encoding: UTF-8
-LazyData: true
+LazyData: false
 RoxygenNote: 7.3.1
 LinkingTo: 
     Rcpp
@@ -26,3 +26,4 @@ Suggests:
     rmarkdown
 VignetteBuilder: knitr
 URL: https://danymukesha.github.io/BioGA/
+biocViews: ExperimentalDesign, Technology

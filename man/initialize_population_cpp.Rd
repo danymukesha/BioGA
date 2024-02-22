@@ -17,3 +17,8 @@ Numeric matrix representing the initialized population.
 \description{
 Function to initialize the population from genomic data
 }
+\examples{
+# example of usage
+genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
+BioGA::initialize_population_cpp(genomic_data, population_size = 5)
+}
