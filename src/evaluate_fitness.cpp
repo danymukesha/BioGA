@@ -3,7 +3,8 @@ using namespace Rcpp;
 
 //' Function to evaluate fitness using genomic data
 //'
-//' @param genomic_data Numeric matrix of genomic data where rows represent genes/features and columns represent samples.
+//' @param genomic_data Numeric matrix of genomic data where rows represent
+//' genes/features and columns represent samples.
 //' @param population Numeric matrix representing the population of individuals.
 //' @return Numeric vector of fitness scores for each individual.
 //' @examples

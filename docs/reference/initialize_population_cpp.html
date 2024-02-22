@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">BioGA</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,7 +31,13 @@
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
-      <ul class="navbar-nav"></ul></div>
+      <ul class="navbar-nav"><li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/danymukesha/BioGA/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div>
 
     
   </div>
@@ -39,7 +45,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Function to initialize the population from genomic data</h1>
-      
+      <small class="dont-index">Source: <a href="https://github.com/danymukesha/BioGA/blob/HEAD/R/RcppExports.R" class="external-link"><code>R/RcppExports.R</code></a></small>
       <div class="d-none name"><code>initialize_population_cpp.Rd</code></div>
     </div>
 
@@ -74,18 +80,18 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># example of usage</span></span></span>
 <span class="r-in"><span><span class="va">genomic_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">10</span>, ncol <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">BioGA</span><span class="fu">::</span><span class="fu">initialize_population_cpp</span><span class="op">(</span><span class="va">genomic_data</span>, population_size <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]        [,2]        [,3]       [,4]       [,5]       [,6]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  1.0120018 -0.91905160  0.78636258 -0.2721537 -2.4466800  1.8777439</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.1496794 -2.17757603  0.04020439 -0.2122360  1.4558414 -1.5150245</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  0.2374253 -1.43332110 -0.11786014 -1.2705131 -0.9984326  1.8777439</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]  0.2374253 -0.07557425  0.04020439  0.3224827  1.4558414  0.0751059</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] -0.9028149 -0.91905160  1.10018974  0.3224827  0.3666744  1.2333901</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           [,7]        [,8]       [,9]      [,10]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.5585144  0.70971452 -2.0636545  2.1122773</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 0.3404245 -0.07788682  0.7087531  2.1122773</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] 0.5585144  0.21783764  0.7087531 -0.3837330</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] 1.8933605 -0.47270248  1.4154123 -0.3837330</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] 2.1587566  0.67524470  0.6241324  0.9412061</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]        [,2]        [,3]       [,4]        [,5]       [,6]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  0.1496794  1.31763370  0.74702859 -1.5625184 0.007886198 -1.5150245</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  1.0120018  1.36046133 -0.01030332 -1.5625184 0.007886198 -2.1021525</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -0.3389359  1.31763370  0.56338008 -1.5625184 1.455841403  1.1298352</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]  0.1496794 -0.07557425  0.78636258  0.3224827 1.604407328 -0.6395348</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] -0.9028149  1.31763370 -0.07085743  0.4807253 0.007886198 -0.6395348</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,7]       [,8]      [,9]      [,10]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.55851442 -0.9681258 1.1533758  0.1289229</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 0.55851442  0.8767773 0.7669834  2.6489320</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] 0.34042449 -0.6331782 0.7087531 -0.3837330</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] 0.55851442  0.2178376 0.7087531  0.1289229</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] 0.00312594  0.6752447 0.7669834  1.4601102</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

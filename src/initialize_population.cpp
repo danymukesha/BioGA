@@ -4,7 +4,8 @@ using namespace Rcpp;
 
 //' Function to initialize the population from genomic data
 //'
-//' @param genomic_data Numeric matrix of genomic data where rows represent genes/features and columns represent samples.
+//' @param genomic_data Numeric matrix of genomic data where rows represent
+//' genes/features and columns represent samples.
 //' @param population_size Number of individuals in the population.
 //' @return Numeric matrix representing the initialized population.
 //' @examples

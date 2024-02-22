@@ -1,5 +1,10 @@
 ---
 title: "Overview"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Overview}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r, include = FALSE}
@@ -9,8 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-
-## Overview
+Let's consider an example scenario of using genetic algorithm optimization to select the best combination of genes for predicting a certain trait, such as disease susceptibility.
 
 ```{r}
 # Load the BioGA package
@@ -27,6 +31,13 @@ genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
 
 
 Genomic data refers to the genetic information stored in an organism's DNA. It includes the sequence of nucleotides (adenine, thymine, cytosine, and guanine) that make up the DNA molecules. Genomic data can provide valuable insights into various biological processes, such as gene expression, genetic variation, and evolutionary relationships.
+
+Genomic data in this context could consist of gene expression profiles measured across different individuals (e.g., patients).
+
+- Each row in the genomic_data matrix represents a gene, and each column represents a patient sample.
+
+- The values in the matrix represent the expression levels of each gene in each patient sample.
+
 
 Here's an example of genomic data:
 
@@ -63,34 +74,33 @@ start_time <- Sys.time()
 # Run genetic algorithm optimization
 generation <- 0
 while (TRUE) {
-    generation <- generation + 1
-    
-    # Evaluate fitness
-    fitness <- evaluate_fitness_cpp(genomic_data, population)
-    fitness_history[[generation]] <- fitness
-    
-    # Check termination condition
-    if (generation==generations) { # defined number of generations
-        break
-    }
-    
-    # Selection
-    selected_parents <- selection_cpp(population, fitness, num_parents = 2)
+  generation <- generation + 1
 
-    # Crossover and Mutation
-    offspring <- crossover_cpp(selected_parents, offspring_size = 2)
-    mutated_offspring <- mutation_cpp(offspring, mutation_rate = 0) # (no mutation in this example)
+  # Evaluate fitness
+  fitness <- evaluate_fitness_cpp(genomic_data, population)
+  fitness_history[[generation]] <- fitness
 
-    # Replacement
-    population <- replacement_cpp(population, mutated_offspring, num_to_replace = 1)
-    
-    # Calculate time progress
-    elapsed_time <- difftime(Sys.time(), start_time, units = "secs")
-    
-    # Print time progress
-    cat("\rGeneration:", generation, "- Elapsed Time:", format(elapsed_time, units = "secs"), "     ")
+  # Check termination condition
+  if (generation == generations) { # defined number of generations
+    break
+  }
+
+  # Selection
+  selected_parents <- selection_cpp(population, fitness, num_parents = 2)
+
+  # Crossover and Mutation
+  offspring <- crossover_cpp(selected_parents, offspring_size = 2)
+  mutated_offspring <- mutation_cpp(offspring, mutation_rate = 0) # (no mutation in this example)
+
+  # Replacement
+  population <- replacement_cpp(population, mutated_offspring, num_to_replace = 1)
+
+  # Calculate time progress
+  elapsed_time <- difftime(Sys.time(), start_time, units = "secs")
+
+  # Print time progress
+  cat("\rGeneration:", generation, "- Elapsed Time:", format(elapsed_time, units = "secs"), "     ")
 }
-
 ```
 
 

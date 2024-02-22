@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">BioGA</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,7 +31,13 @@
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
-      <ul class="navbar-nav"></ul></div>
+      <ul class="navbar-nav"><li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/danymukesha/BioGA/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div>
 
     
   </div>
@@ -39,7 +45,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Function to perform crossover between selected individuals</h1>
-      
+      <small class="dont-index">Source: <a href="https://github.com/danymukesha/BioGA/blob/HEAD/R/RcppExports.R" class="external-link"><code>R/RcppExports.R</code></a></small>
       <div class="d-none name"><code>crossover_cpp.Rd</code></div>
     </div>
 
@@ -77,12 +83,12 @@
 <span class="r-in"><span><span class="va">fitness</span> <span class="op">&lt;-</span> <span class="fu">BioGA</span><span class="fu">::</span><span class="fu"><a href="evaluate_fitness_cpp.html">evaluate_fitness_cpp</a></span><span class="op">(</span><span class="va">genomic_data</span>, <span class="va">population</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">selected_parents</span> <span class="op">&lt;-</span> <span class="fu">BioGA</span><span class="fu">::</span><span class="fu"><a href="selection_cpp.html">selection_cpp</a></span><span class="op">(</span><span class="va">population</span>, <span class="va">fitness</span>, num_parents <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">BioGA</span><span class="fu">::</span><span class="fu">crossover_cpp</span><span class="op">(</span><span class="va">selected_parents</span>, offspring_size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           [,1]     [,2]     [,3]         [,4]       [,5]     [,6]       [,7]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.4241876 1.298393 1.337320 -0.005571287  0.1120381 1.672883 0.04653138</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 1.0743459 1.298393 2.065025 -0.005571287 -0.5482573 1.148412 0.60674805</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            [,8]       [,9]       [,10]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  0.9463479  0.5429963  1.06730788</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.1099357 -0.3134460 -0.09032729</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           [,1]       [,2]     [,3]      [,4]      [,5]       [,6]       [,7]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 1.0743459  0.3629513 2.065025 0.5562243 0.4861489 -0.1339970 -0.5220125</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 0.7712502 -0.1380860 1.406908 1.0898866 0.2578548  0.4882689 -0.7289299</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,8]      [,9]     [,10]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.1556938 -0.826789 -1.911720</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.2015095 -0.826789 -1.146836</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
