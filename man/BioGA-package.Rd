@@ -14,6 +14,7 @@ Genetic algorithm are a class of optimization algorithms inspired by the process
 Useful links:
 \itemize{
   \item \url{https://danymukesha.github.io/BioGA/}
+  \item Report bugs at \url{https://github.com/danymukesha/BioGA/issues}
 }
 
 }
