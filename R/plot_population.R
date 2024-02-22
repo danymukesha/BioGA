@@ -4,6 +4,8 @@
 #'
 #' @param population A numeric matrix containing the population data.
 #'
+#' @import graphics
+#'
 #' @examples
 #' # example of usage
 #' population <- matrix(runif(100), nrow = 10, ncol = 10)

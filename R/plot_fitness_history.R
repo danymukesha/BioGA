@@ -4,6 +4,8 @@
 #'
 #' @param fitness_history A list containing fitness values for each generation.
 #'
+#' @import ggplot2
+#'
 #' @examples
 #' # example of usage
 #' fitness_history <- list(c(10, 8, 6, 4, 2), c(9, 7, 5, 3, 1))
