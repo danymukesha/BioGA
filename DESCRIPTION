@@ -2,8 +2,11 @@ Package: BioGA
 Type: Package
 Title: Bioinformatics Genetic Algorithm (BioGA)
 Version: 0.1.0
-Author: Dany Mukesha
-Maintainer: Dany Mukesha <danymukesha@gmail.com>
+Authors@R: 
+    person("Dany", "Mukesha", ,
+    "danymukesha@gmail.com", 
+    role = c("aut", "cre"), 
+    comment = c(ORCID = "0009-0001-9514-751X"))
 Description: analyze and optimize high throughput genomic data 
     using genetic algorithms
 License: What license is it under?
@@ -14,3 +17,7 @@ LinkingTo:
     Rcpp
 Imports: 
     Rcpp
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
