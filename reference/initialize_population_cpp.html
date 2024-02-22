@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">BioGA</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,14 +24,20 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/Usage.html">Usage</a>
     <a class="dropdown-item" href="../articles/Overview.html">Overview</a>
+    <a class="dropdown-item" href="../articles/Usage.html">Usage</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
-      <ul class="navbar-nav"></ul></div>
+      <ul class="navbar-nav"><li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/danymukesha/BioGA/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div>
 
     
   </div>
@@ -39,7 +45,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Function to initialize the population from genomic data</h1>
-      
+      <small class="dont-index">Source: <a href="https://github.com/danymukesha/BioGA/blob/HEAD/R/RcppExports.R" class="external-link"><code>R/RcppExports.R</code></a></small>
       <div class="d-none name"><code>initialize_population_cpp.Rd</code></div>
     </div>
 
@@ -74,18 +80,18 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># example of usage</span></span></span>
 <span class="r-in"><span><span class="va">genomic_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">10</span>, ncol <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">BioGA</span><span class="fu">::</span><span class="fu">initialize_population_cpp</span><span class="op">(</span><span class="va">genomic_data</span>, population_size <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]        [,2]        [,3]       [,4]         [,5]       [,6]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -1.1533984 -0.07557425  0.04020439 -0.2721537  0.007886198 1.12983515</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.4293801 -0.91905160 -0.01030332 -1.5625184 -0.998432551 1.23339006</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -0.4293801 -0.22174452  1.10018974  0.1243011 -2.446680029 0.07510590</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] -1.1533984  1.31763370  0.74702859  1.2037678  0.007886198 0.06548664</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] -0.4293801 -0.50359291 -0.01030332  0.3224827  0.542141549 0.07510590</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             [,7]       [,8]       [,9]      [,10]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -1.09850890  0.6752447  1.1533758  2.6489320</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.55851442 -0.6331782  0.7087531  2.1122773</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  0.34042449  0.7097145 -1.4522998  0.9412061</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]  0.00312594  0.8767773 -0.6048294 -0.3837330</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] -1.09850890 -0.4727025  1.1533758  0.1289229</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]      [,3]       [,4]       [,5]       [,6]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.4293801 -1.3128142 0.7470286  0.4807253 -1.4312708 -2.1021525</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.1740864 -0.5035929 0.7470286  0.1243011 -0.9984326  0.0751059</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -0.8302143  1.3176337 0.5633801 -1.2705131  0.3666744  1.1298352</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] -0.1740864 -2.1775760 0.7470286  1.2037678  1.6044073  1.1298352</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]  1.0120018 -1.3128142 1.1001897 -1.2705131  0.3666744 -2.1021525</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,7]        [,8]       [,9]      [,10]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  2.15875655 -0.07788682  0.4414282  2.6489320</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -1.41602391  0.70971452  1.4154123 -1.6865047</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  0.34042449 -0.63317818 -0.6048294  2.6489320</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]  0.34042449 -0.96812584  0.4414282  0.2399596</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]  0.00312594  0.70971452 -0.1026030  1.4601102</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

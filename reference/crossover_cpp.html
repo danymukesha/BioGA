@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">BioGA</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,14 +24,20 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/Usage.html">Usage</a>
     <a class="dropdown-item" href="../articles/Overview.html">Overview</a>
+    <a class="dropdown-item" href="../articles/Usage.html">Usage</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
-      <ul class="navbar-nav"></ul></div>
+      <ul class="navbar-nav"><li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/danymukesha/BioGA/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div>
 
     
   </div>
@@ -39,7 +45,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Function to perform crossover between selected individuals</h1>
-      
+      <small class="dont-index">Source: <a href="https://github.com/danymukesha/BioGA/blob/HEAD/R/RcppExports.R" class="external-link"><code>R/RcppExports.R</code></a></small>
       <div class="d-none name"><code>crossover_cpp.Rd</code></div>
     </div>
 
@@ -77,12 +83,12 @@
 <span class="r-in"><span><span class="va">fitness</span> <span class="op">&lt;-</span> <span class="fu">BioGA</span><span class="fu">::</span><span class="fu"><a href="evaluate_fitness_cpp.html">evaluate_fitness_cpp</a></span><span class="op">(</span><span class="va">genomic_data</span>, <span class="va">population</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">selected_parents</span> <span class="op">&lt;-</span> <span class="fu">BioGA</span><span class="fu">::</span><span class="fu"><a href="selection_cpp.html">selection_cpp</a></span><span class="op">(</span><span class="va">population</span>, <span class="va">fitness</span>, num_parents <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">BioGA</span><span class="fu">::</span><span class="fu">crossover_cpp</span><span class="op">(</span><span class="va">selected_parents</span>, offspring_size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]      [,2]      [,3]       [,4]     [,5]     [,6]       [,7]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.5536994 -0.138086 -0.530429 -0.1285274 1.318293 1.129473 -0.8876431</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.5536994 -0.138086 -0.530429 -0.1285274 1.318293 1.129473 -0.8876431</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           [,8]       [,9]      [,10]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.3335553 -0.3373336 -0.3323283</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 0.3335553 -0.3373336 -0.3323283</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           [,1]       [,2]       [,3]     [,4]      [,5]     [,6]      [,7]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.7017588 -0.1774865 -0.2778761 0.287701 0.9153602 1.391709 -2.612334</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 0.7017588 -0.1774865 -0.2778761 0.287701 0.9153602 1.391709 -2.612334</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           [,8]      [,9]     [,10]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.1492359 0.9299113 -1.001024</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 0.1492359 0.9299113 -1.001024</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

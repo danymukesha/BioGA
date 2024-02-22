@@ -2,9 +2,9 @@ pandoc: 2.19.2
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
-  Usage: Usage.html
   Overview: Overview.html
-last_built: 2024-02-22T18:42Z
+  Usage: Usage.html
+last_built: 2024-02-22T20:27Z
 urls:
   reference: https://danymukesha.github.io/BioGA/reference
   article: https://danymukesha.github.io/BioGA/articles

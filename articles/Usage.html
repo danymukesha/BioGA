@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">BioGA</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,8 +48,8 @@
 <li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/Usage.html">Usage</a>
     <a class="dropdown-item" href="../articles/Overview.html">Overview</a>
+    <a class="dropdown-item" href="../articles/Usage.html">Usage</a>
   </div>
 </li>
       </ul>
@@ -57,7 +57,14 @@
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
 </form>
 
-      <ul class="navbar-nav"></ul>
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/danymukesha/BioGA/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 
     
@@ -72,7 +79,7 @@
       <img src="../logo.png" class="logo" alt=""><h1>Usage</h1>
             
       
-      
+      <small class="dont-index">Source: <a href="https://github.com/danymukesha/BioGA/blob/HEAD/vignettes/Usage.Rmd" class="external-link"><code>vignettes/Usage.Rmd</code></a></small>
       <div class="d-none name"><code>Usage.Rmd</code></div>
     </div>
 
@@ -136,11 +143,11 @@ algorithm optimization process using the BioGA package.</p>
 <span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">"</span><span class="sc">\r</span><span class="st">Generation:"</span>, generation, <span class="st">"- Elapsed Time:"</span>, <span class="fu">format</span>(elapsed_time, <span class="at">units =</span> <span class="st">"secs"</span>), <span class="st">"     "</span>)</span>
 <span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">1</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.07045913</span> secs      </span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">2</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.07125974</span> secs      </span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">3</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.07135463</span> secs      </span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">4</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.07143474</span> secs      </span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">5</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.07151246</span> secs</span></code></pre></div>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">1</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.07080555</span> secs      </span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">2</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.07158995</span> secs      </span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">3</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.07168102</span> secs      </span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">4</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.07176089</span> secs      </span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">5</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.07183528</span> secs</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="chapter-3-results-visualization">Chapter 3: Results Visualization<a class="anchor" aria-label="anchor" href="#chapter-3-results-visualization"></a>
