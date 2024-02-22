@@ -4,5 +4,8 @@ pkgdown_sha: ~
 articles:
   Overview: Overview.html
   Usage: Usage.html
-last_built: 2024-02-22T13:04Z
+last_built: 2024-02-22T13:36Z
+urls:
+  reference: https://danymukesha.github.io/BioGA/reference
+  article: https://danymukesha.github.io/BioGA/articles
 

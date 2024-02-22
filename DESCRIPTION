@@ -7,9 +7,11 @@ Authors@R:
     "danymukesha@gmail.com", 
     role = c("aut", "cre"), 
     comment = c(ORCID = "0009-0001-9514-751X"))
-Description: analyze and optimize high throughput genomic data 
-    using genetic algorithms
-License: What license is it under?
+Description: Genetic algorithm are a class of optimization
+    algorithms inspired by the process of natural selection and genetics.
+    This package allows users to analyze and optimize high throughput 
+    genomic data using genetic algorithms.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.1
