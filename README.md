@@ -16,19 +16,17 @@ package:
 ``` r
 devtools::install_github("danymukesha/BioGA")
 #> Downloading GitHub repo danymukesha/BioGA@HEAD
-#> 
-#> ── R CMD build ─────────────────────────────────────────────────────────────────
-#>       ✔  checking for file 'C:\Users\dany.mukesha\AppData\Local\Temp\Rtmpi677dZ\remotes74f83ba675ab\danymukesha-BioGA-1c67b09/DESCRIPTION'
-#>       ─  preparing 'BioGA':
-#>    checking DESCRIPTION meta-information ...     checking DESCRIPTION meta-information ...   ✔  checking DESCRIPTION meta-information
-#> ─  cleaning src
-#>       ─  checking for LF line-endings in source and make files and shell scripts
-#>       ─  checking for empty or unneeded directories
-#>   Removed empty directory      Removed empty directory 'BioGA/vignettes'
-#>      Omitted 'LazyData' from DESCRIPTION
-#>       ─  building 'BioGA_0.1.0.tar.gz'
+#> -- R CMD build ----------------------------------------------------------------------------------------------------------------
+#>          checking for file 'C:\Users\dany.mukesha\AppData\Local\Temp\RtmpKsciOD\remotes35a879dd6114\danymukesha-BioGA-1917033/DESCRIPTION' ...  v  checking for file 'C:\Users\dany.mukesha\AppData\Local\Temp\RtmpKsciOD\remotes35a879dd6114\danymukesha-BioGA-1917033/DESCRIPTION' (369ms)
+#>       -  preparing 'BioGA':
+#>    checking DESCRIPTION meta-information ...     checking DESCRIPTION meta-information ...   v  checking DESCRIPTION meta-information
+#> -  cleaning src
+#>       -  checking for LF line-endings in source and make files and shell scripts
+#>       -  checking for empty or unneeded directories
+#>      Removed empty directory 'BioGA/vignettes'
+#>    Omitted 'LazyData' from DESCRIPTION
+#>       -  building 'BioGA_0.1.0.tar.gz'
 #>      
 #> 
-#> Installing package into 'C:/Users/dany.mukesha/AppData/Local/Temp/RtmpKsciOD/temp_libpath35a823037c24'
-#> (as 'lib' is unspecified)
+#> Warning: package 'BioGA' is in use and will not be installed
 ```

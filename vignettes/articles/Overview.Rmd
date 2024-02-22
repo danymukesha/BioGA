@@ -21,7 +21,7 @@ library(BioGA)
 
 # Define parameters for genetic algorithm
 population_size <- 100
-generations <- 50
+generations <- 6
 mutation_rate <- 0.1
 
 # Generate example genomic data
@@ -73,7 +73,7 @@ while (TRUE) {
     fitness_history[[generation]] <- fitness
     
     # Check termination condition
-    if (generation==6) {
+    if (generation==generations) { # defined number of generations
         break
     }
     

@@ -10,6 +10,12 @@
     This package allows users to analyze and optimize high throughput 
     genomic data using genetic algorithms.">
 <title>Bioinformatics Genetic Algorithm (BioGA) • BioGA</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
@@ -19,6 +25,7 @@
     algorithms inspired by the process of natural selection and genetics.
     This package allows users to analyze and optimize high throughput 
     genomic data using genetic algorithms.">
+<meta property="og:image" content="https://danymukesha.github.io/BioGA/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -64,8 +71,11 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header"><h1 id="bioga">BioGA<a class="anchor" aria-label="anchor" href="#bioga"></a>
-</h1></div>
+<div class="page-header">
+<img src="logo.png" class="logo" alt=""><h1 id="bioga-">BioGA 
+<a class="anchor" aria-label="anchor" href="#bioga-"></a>
+</h1>
+</div>
 <p>The <code>BioGA</code> package provides a set of functions for genetic algorithm optimization tailored for analyzing high throughput genomic data. These functions are implemented in C++ for improved speed and efficiency, with an easy-to-use interface for use within R.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -74,21 +84,19 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"danymukesha/BioGA"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Downloading GitHub repo danymukesha/BioGA@HEAD</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ── R CMD build ─────────────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt;       ✔  checking for file 'C:\Users\dany.mukesha\AppData\Local\Temp\RtmpiewjI3\remotes92106b184edc\danymukesha-BioGA-1c67b09/DESCRIPTION'</span></span>
-<span><span class="co">#&gt;       ─  preparing 'BioGA': (599ms)</span></span>
-<span><span class="co">#&gt;    checking DESCRIPTION meta-information ...     checking DESCRIPTION meta-information ...   ✔  checking DESCRIPTION meta-information</span></span>
-<span><span class="co">#&gt; ─  cleaning src</span></span>
-<span><span class="co">#&gt;       ─  checking for LF line-endings in source and make files and shell scripts</span></span>
-<span><span class="co">#&gt;       ─  checking for empty or unneeded directories</span></span>
-<span><span class="co">#&gt;   Removed empty directory      Removed empty directory 'BioGA/vignettes'</span></span>
-<span><span class="co">#&gt;      Omitted 'LazyData' from DESCRIPTION</span></span>
-<span><span class="co">#&gt;       ─  building 'BioGA_0.1.0.tar.gz'</span></span>
+<span><span class="co">#&gt; -- R CMD build ----------------------------------------------------------------------------------------------------------------</span></span>
+<span><span class="co">#&gt;          checking for file 'C:\Users\dany.mukesha\AppData\Local\Temp\RtmpKsciOD\remotes35a879dd6114\danymukesha-BioGA-1917033/DESCRIPTION' ...  v  checking for file 'C:\Users\dany.mukesha\AppData\Local\Temp\RtmpKsciOD\remotes35a879dd6114\danymukesha-BioGA-1917033/DESCRIPTION' (369ms)</span></span>
+<span><span class="co">#&gt;       -  preparing 'BioGA':</span></span>
+<span><span class="co">#&gt;    checking DESCRIPTION meta-information ...     checking DESCRIPTION meta-information ...   v  checking DESCRIPTION meta-information</span></span>
+<span><span class="co">#&gt; -  cleaning src</span></span>
+<span><span class="co">#&gt;       -  checking for LF line-endings in source and make files and shell scripts</span></span>
+<span><span class="co">#&gt;       -  checking for empty or unneeded directories</span></span>
+<span><span class="co">#&gt;      Removed empty directory 'BioGA/vignettes'</span></span>
+<span><span class="co">#&gt;    Omitted 'LazyData' from DESCRIPTION</span></span>
+<span><span class="co">#&gt;       -  building 'BioGA_0.1.0.tar.gz'</span></span>
 <span><span class="co">#&gt;      </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Installing package into 'C:/Users/dany.mukesha/AppData/Local/Temp/RtmpKsciOD/temp_libpath35a8572827c5'</span></span>
-<span><span class="co">#&gt; (as 'lib' is unspecified)</span></span></code></pre></div>
+<span><span class="co">#&gt; Warning: package 'BioGA' is in use and will not be installed</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="license">
