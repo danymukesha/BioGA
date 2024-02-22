@@ -17,7 +17,7 @@ plot_fitness_history <- function(fitness_history) {
   fitness_values <- unlist(fitness_history)
 
   # Create generation index
-  generations <- rep(seq_along(fitness_history), vapply(fitness_history, length))
+  generations <- rep(seq_along(fitness_history), sapply(fitness_history, length, integer(1)))
 
   # Create data frame
   df <- data.frame(Generation = generations, Fitness = fitness_values)
