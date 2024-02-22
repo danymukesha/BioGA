@@ -1,10 +1,5 @@
 ---
-title: "Usage"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Usage}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+title: "Overview"
 ---
 
 ```{r, include = FALSE}
@@ -14,6 +9,11 @@ knitr::opts_chunk$set(
 )
 ```
 
+```{r setup}
+library(BioGA)
+```
+
+## Overview
 
 ```{r}
 # Load the BioGA package
@@ -65,7 +65,7 @@ start_time <- Sys.time()
 
 # Run genetic algorithm optimization
 generation <- 0
-while (generation <= 100) {
+while (TRUE) {
     generation <- generation + 1
     
     # Evaluate fitness
@@ -73,11 +73,19 @@ while (generation <= 100) {
     fitness_history[[generation]] <- fitness
     
     # Check termination condition
-    if (all(abs(fitness) <= 0.01)) {
+    if (generation==6) {
         break
     }
     
-    # Other genetic algorithm operations (selection, crossover, mutation, replacement)
+    # Selection
+    selected_parents <- selection_cpp(population, fitness, num_parents = 2)
+
+    # Crossover and Mutation
+    offspring <- crossover_cpp(selected_parents, offspring_size = 2)
+    mutated_offspring <- mutation_cpp(offspring, mutation_rate = 0) # (no mutation in this example)
+
+    # Replacement
+    population <- replacement_cpp(population, mutated_offspring, num_to_replace = 1)
     
     # Calculate time progress
     elapsed_time <- difftime(Sys.time(), start_time, units = "secs")
@@ -85,6 +93,7 @@ while (generation <= 100) {
     # Print time progress
     cat("\rGeneration:", generation, "- Elapsed Time:", format(elapsed_time, units = "secs"), "     ")
 }
+
 ```
 
 
@@ -93,10 +102,15 @@ The fitness calculation described in the provided code calculates a measure of d
 Mathematically, the fitness calculation can be represented as follows:
 
 Let:
+
 - \( g_{ijk} \) be the gene expression level of gene \( j \) in individual \( i \) and sample \( k \) from the genomic data.
+
 - \( p_{ij} \) be the gene expression level of gene \( j \) in individual \( i \) from the population.
+
 - \( N \) be the number of individuals in the population.
+
 - \( G \) be the number of genes.
+
 - \( S \) be the number of samples.
 
 Then, the fitness \( F_i \) for individual \( i \) in the population can be calculated as the sum of squared differences between the gene expression levels of individual \( i \) and the corresponding gene expression levels in the genomic data, across all genes and samples:
@@ -109,4 +123,7 @@ This fitness calculation aims to minimize the overall dissimilarity between the 
 # Plot fitness change over generations
 plot_fitness_history(fitness_history)
 ```
+
+
+
 

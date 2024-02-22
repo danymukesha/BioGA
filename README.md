@@ -4,6 +4,8 @@
 # BioGA
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/danymukesha/BioGA/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/danymukesha/BioGA/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The `BioGA` package provides a set of functions for genetic algorithm
@@ -21,16 +23,19 @@ devtools::install_github("danymukesha/BioGA")
 #> Downloading GitHub repo danymukesha/BioGA@HEAD
 #> 
 #> ── R CMD build ─────────────────────────────────────────────────────────────────
-#>          checking for file 'C:\Users\dany.mukesha\AppData\Local\Temp\RtmpWo8Nbx\remotes487c16443358\danymukesha-BioGA-7cd0e45/DESCRIPTION' ...  ✔  checking for file 'C:\Users\dany.mukesha\AppData\Local\Temp\RtmpWo8Nbx\remotes487c16443358\danymukesha-BioGA-7cd0e45/DESCRIPTION'
+#>          checking for file 'C:\Users\dany.mukesha\AppData\Local\Temp\RtmpqmJZpg\remotes921c790555c6\danymukesha-BioGA-fe9ca8f/DESCRIPTION' ...  ✔  checking for file 'C:\Users\dany.mukesha\AppData\Local\Temp\RtmpqmJZpg\remotes921c790555c6\danymukesha-BioGA-fe9ca8f/DESCRIPTION'
 #>       ─  preparing 'BioGA':
-#>    checking DESCRIPTION meta-information ...     checking DESCRIPTION meta-information ...   ✔  checking DESCRIPTION meta-information
+#>    checking DESCRIPTION meta-information ...  ✔  checking DESCRIPTION meta-information
 #> ─  cleaning src
 #>       ─  checking for LF line-endings in source and make files and shell scripts
-#>   ─  checking for empty or unneeded directories
-#>    Omitted 'LazyData' from DESCRIPTION
-#> ─  building 'BioGA_0.1.0.tar.gz'
+#>       ─  checking for empty or unneeded directories
+#>      Omitted 'LazyData' from DESCRIPTION
+#>       ─  building 'BioGA_0.1.0.tar.gz'
 #>      
 #> 
-#> Installing package into 'C:/Users/dany.mukesha/AppData/Local/Temp/RtmpCYhgBT/temp_libpath5ff4ab03803'
+#> Installing package into 'C:/Users/dany.mukesha/AppData/Local/R/win-library/4.3'
 #> (as 'lib' is unspecified)
+#> Warning in i.p(...): installation of package
+#> 'C:/Users/DANY~1.MUK/AppData/Local/Temp/RtmpqmJZpg/file921c57703de/BioGA_0.1.0.tar.gz'
+#> had non-zero exit status
 ```

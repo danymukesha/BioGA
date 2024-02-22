@@ -1,0 +1,84 @@
+---
+title: "Usage"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Usage}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Genetic Algorithm Optimization Vignette
+
+This vignette provides a step-by-step explanation of a genetic algorithm optimization process using the BioGA package.
+
+## Chapter 1: Initialization
+
+```{r}
+# Load the BioGA package
+library(BioGA)
+
+# Example genomic data
+genomic_data <- matrix(rnorm(50), nrow = 10, ncol = 10)
+
+# Initialize population
+population <- initialize_population_cpp(genomic_data, population_size = 5)
+
+# Initialize fitness history
+fitness_history <- list()
+
+# Initialize time progress
+start_time <- Sys.time()
+```
+
+## Chapter 2: Genetic Algorithm Optimization
+
+```{r}
+# Run genetic algorithm optimization
+generation <- 0
+while (TRUE) {
+    generation <- generation + 1
+    
+    # Evaluate fitness
+    fitness <- evaluate_fitness_cpp(genomic_data, population)
+    fitness_history[[generation]] <- fitness
+    
+    # Check termination condition
+    if (generation==6) {
+        break
+    }
+    
+    # Selection
+    selected_parents <- selection_cpp(population, fitness, num_parents = 2)
+
+    # Crossover and Mutation
+    offspring <- crossover_cpp(selected_parents, offspring_size = 2)
+    mutated_offspring <- mutation_cpp(offspring, mutation_rate = 0) # (no mutation in this example)
+
+    # Replacement
+    population <- replacement_cpp(population, mutated_offspring, num_to_replace = 1)
+    
+    # Calculate time progress
+    elapsed_time <- difftime(Sys.time(), start_time, units = "secs")
+    
+    # Print time progress
+    cat("\rGeneration:", generation, "- Elapsed Time:", format(elapsed_time, units = "secs"), "     ")
+}
+```
+
+## Chapter 3: Results Visualization
+
+```{r}
+# Plot fitness change over generations
+plot_fitness_history(fitness_history)
+```
+
+This vignette demonstrates how to implement a genetic algorithm optimization process using the BioGA package, from initialization to results visualization.
+
+
