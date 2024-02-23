@@ -52,6 +52,9 @@
     <a class="dropdown-item" href="../articles/Usage.html">Usage</a>
   </div>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
@@ -131,23 +134,26 @@ algorithm optimization process using the BioGA package.</p>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Crossover and Mutation</span></span>
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    offspring <span class="ot">&lt;-</span> <span class="fu">crossover_cpp</span>(selected_parents, <span class="at">offspring_size =</span> <span class="dv">2</span>)</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    mutated_offspring <span class="ot">&lt;-</span> <span class="fu">mutation_cpp</span>(offspring, <span class="at">mutation_rate =</span> <span class="dv">0</span>) <span class="co"># (no mutation in this example)</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Replacement</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    population <span class="ot">&lt;-</span> <span class="fu">replacement_cpp</span>(population, mutated_offspring, <span class="at">num_to_replace =</span> <span class="dv">1</span>)</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate time progress</span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    elapsed_time <span class="ot">&lt;-</span> <span class="fu">difftime</span>(<span class="fu">Sys.time</span>(), start_time, <span class="at">units =</span> <span class="st">"secs"</span>)</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Print time progress</span></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">"</span><span class="sc">\r</span><span class="st">Generation:"</span>, generation, <span class="st">"- Elapsed Time:"</span>, <span class="fu">format</span>(elapsed_time, <span class="at">units =</span> <span class="st">"secs"</span>), <span class="st">"     "</span>)</span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">1</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.07111454</span> secs      </span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">2</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.07194805</span> secs      </span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">3</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.07204413</span> secs      </span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">4</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.07212925</span> secs      </span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">5</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.0722096</span> secs</span></code></pre></div>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># (no mutation in this example)</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    mutated_offspring <span class="ot">&lt;-</span> <span class="fu">mutation_cpp</span>(offspring, <span class="at">mutation_rate =</span> <span class="dv">0</span>) </span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Replacement</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    population <span class="ot">&lt;-</span> <span class="fu">replacement_cpp</span>(population, mutated_offspring, </span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">num_to_replace =</span> <span class="dv">1</span>)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate time progress</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    elapsed_time <span class="ot">&lt;-</span> <span class="fu">difftime</span>(<span class="fu">Sys.time</span>(), start_time, <span class="at">units =</span> <span class="st">"secs"</span>)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Print time progress</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">"</span><span class="sc">\r</span><span class="st">Generation:"</span>, generation, <span class="st">"- Elapsed Time:"</span>, </span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>        <span class="fu">format</span>(elapsed_time, <span class="at">units =</span> <span class="st">"secs"</span>), <span class="st">"     "</span>)</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">1</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.07365346</span> secs      </span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">2</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.07442188</span> secs      </span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">3</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.0745151</span> secs      </span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">4</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.07459688</span> secs      </span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">5</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.07467294</span> secs</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="chapter-3-results-visualization">Chapter 3: Results Visualization<a class="anchor" aria-label="anchor" href="#chapter-3-results-visualization"></a>

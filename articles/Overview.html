@@ -52,6 +52,9 @@
     <a class="dropdown-item" href="../articles/Usage.html">Usage</a>
   </div>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
@@ -134,7 +137,8 @@ population, typically in the context of genetic algorithm
 optimization.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Initialize population</span></span>
-<span><span class="va">population</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/initialize_population_cpp.html">initialize_population_cpp</a></span><span class="op">(</span><span class="va">genomic_data</span>, population_size <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">population</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/initialize_population_cpp.html">initialize_population_cpp</a></span><span class="op">(</span><span class="va">genomic_data</span>, </span>
+<span>                                        population_size <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <p>The population represents a set of candidate combinations of genes
 that could be predictive of the trait. Each individual in the population
 is represented by a binary vector indicating the presence or absence of
@@ -169,23 +173,26 @@ trait.</p>
 <span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Crossover and Mutation</span></span>
 <span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>  offspring <span class="ot">&lt;-</span> <span class="fu">crossover_cpp</span>(selected_parents, <span class="at">offspring_size =</span> <span class="dv">2</span>)</span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  mutated_offspring <span class="ot">&lt;-</span> <span class="fu">mutation_cpp</span>(offspring, <span class="at">mutation_rate =</span> <span class="dv">0</span>) <span class="co"># (no mutation in this example)</span></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Replacement</span></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>  population <span class="ot">&lt;-</span> <span class="fu">replacement_cpp</span>(population, mutated_offspring, <span class="at">num_to_replace =</span> <span class="dv">1</span>)</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate time progress</span></span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>  elapsed_time <span class="ot">&lt;-</span> <span class="fu">difftime</span>(<span class="fu">Sys.time</span>(), start_time, <span class="at">units =</span> <span class="st">"secs"</span>)</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Print time progress</span></span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"</span><span class="sc">\r</span><span class="st">Generation:"</span>, generation, <span class="st">"- Elapsed Time:"</span>, <span class="fu">format</span>(elapsed_time, <span class="at">units =</span> <span class="st">"secs"</span>), <span class="st">"     "</span>)</span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">1</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.008187294</span> secs      </span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">2</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.009019613</span> secs      </span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">3</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.009114504</span> secs      </span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">4</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.009196758</span> secs      </span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">5</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.009273529</span> secs</span></code></pre></div>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  <span class="co"># (no mutation in this example)</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>  mutated_offspring <span class="ot">&lt;-</span> <span class="fu">mutation_cpp</span>(offspring, <span class="at">mutation_rate =</span> <span class="dv">0</span>) </span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Replacement</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>  population <span class="ot">&lt;-</span> <span class="fu">replacement_cpp</span>(population, mutated_offspring, </span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>                                <span class="at">num_to_replace =</span> <span class="dv">1</span>)</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate time progress</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>  elapsed_time <span class="ot">&lt;-</span> <span class="fu">difftime</span>(<span class="fu">Sys.time</span>(), start_time, <span class="at">units =</span> <span class="st">"secs"</span>)</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Print time progress</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"</span><span class="sc">\r</span><span class="st">Generation:"</span>, generation, <span class="st">"- Elapsed Time:"</span>, </span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>      <span class="fu">format</span>(elapsed_time, <span class="at">units =</span> <span class="st">"secs"</span>), <span class="st">"     "</span>)</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">1</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.008038998</span> secs      </span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">2</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.008818865</span> secs      </span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">3</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.008910656</span> secs      </span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">4</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.008992434</span> secs      </span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">5</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.009069443</span> secs</span></code></pre></div>
 <p>The fitness calculation described in the provided code calculates a
 measure of dissimilarity between the gene expression profiles of
 individuals in the population and the genomic data. This measure of

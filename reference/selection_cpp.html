@@ -28,6 +28,9 @@
     <a class="dropdown-item" href="../articles/Usage.html">Usage</a>
   </div>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
@@ -61,7 +64,8 @@
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>population</dt>
-<dd><p>Numeric matrix representing the population of individuals.</p></dd>
+<dd><p>Numeric matrix representing the population of
+individuals.</p></dd>
 
 
 <dt>fitness</dt>
@@ -83,15 +87,16 @@
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># example of usage</span></span></span>
 <span class="r-in"><span><span class="va">genomic_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">10</span>, ncol <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">population</span> <span class="op">&lt;-</span> <span class="fu">BioGA</span><span class="fu">::</span><span class="fu"><a href="initialize_population_cpp.html">initialize_population_cpp</a></span><span class="op">(</span><span class="va">genomic_data</span>, population_size <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">population</span> <span class="op">&lt;-</span> <span class="fu">BioGA</span><span class="fu">::</span><span class="fu"><a href="initialize_population_cpp.html">initialize_population_cpp</a></span><span class="op">(</span><span class="va">genomic_data</span>,</span></span>
+<span class="r-in"><span>                population_size <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">fitness</span> <span class="op">&lt;-</span> <span class="fu">BioGA</span><span class="fu">::</span><span class="fu"><a href="evaluate_fitness_cpp.html">evaluate_fitness_cpp</a></span><span class="op">(</span><span class="va">genomic_data</span>, <span class="va">population</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">BioGA</span><span class="fu">::</span><span class="fu">selection_cpp</span><span class="op">(</span><span class="va">population</span>, <span class="va">fitness</span>, num_parents <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]        [,2]        [,3]      [,4]       [,5]       [,6]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -1.2225016 -1.10623595 -0.05367151 0.1668892 -0.8643498 0.01321448</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.2360958 -0.09513491 -0.81756827 0.1668892 -0.9425540 0.30279571</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            [,7]      [,8]        [,9]      [,10]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.9487057 1.1675207 -0.04642821  0.7360680</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  1.8070866 0.8100538 -0.13694343 -0.4711791</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]       [,3]       [,4]      [,5]       [,6]     [,7]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  1.1700562 -1.4047145  0.3520101 -0.2890583 0.3504924 -0.9302853 1.336447</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.7510122  0.6289534 -0.9459850 -0.2890583 0.8886290 -0.9302853 1.336447</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           [,8]       [,9]      [,10]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.1538725  0.4131548 -0.4711791</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 1.1675207 -0.1369434 -1.4215347</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
