@@ -22,12 +22,12 @@ using namespace Rcpp;
    NumericMatrix population(population_size, num_genes);
 
    // Seed the random number generator
-   srand(time(NULL));
+   // srand(time(NULL));
 
    // Generate random population using genomic data
    for (int i = 0; i < population_size; ++i) {
      for (int j = 0; j < num_genes; ++j) {
-       int sample_index = rand() % num_samples;
+       int sample_index = std::rand() % num_samples;
        population(i, j) = genomic_data(j, sample_index);
      }
    }

@@ -61,7 +61,8 @@
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>population</dt>
-<dd><p>Numeric matrix representing the population of individuals.</p></dd>
+<dd><p>Numeric matrix representing the population of
+individuals.</p></dd>
 
 
 <dt>offspring</dt>
@@ -83,24 +84,26 @@
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># example of usage</span></span></span>
 <span class="r-in"><span><span class="va">genomic_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">10</span>, ncol <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">population</span> <span class="op">&lt;-</span> <span class="fu">BioGA</span><span class="fu">::</span><span class="fu"><a href="initialize_population_cpp.html">initialize_population_cpp</a></span><span class="op">(</span><span class="va">genomic_data</span>, population_size <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">population</span> <span class="op">&lt;-</span> <span class="fu">BioGA</span><span class="fu">::</span><span class="fu"><a href="initialize_population_cpp.html">initialize_population_cpp</a></span><span class="op">(</span><span class="va">genomic_data</span>,</span></span>
+<span class="r-in"><span>                population_size <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">fitness</span> <span class="op">&lt;-</span> <span class="fu">BioGA</span><span class="fu">::</span><span class="fu"><a href="evaluate_fitness_cpp.html">evaluate_fitness_cpp</a></span><span class="op">(</span><span class="va">genomic_data</span>, <span class="va">population</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">selected_parents</span> <span class="op">&lt;-</span> <span class="fu">BioGA</span><span class="fu">::</span><span class="fu"><a href="selection_cpp.html">selection_cpp</a></span><span class="op">(</span><span class="va">population</span>, <span class="va">fitness</span>, num_parents <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">selected_parents</span> <span class="op">&lt;-</span> <span class="fu">BioGA</span><span class="fu">::</span><span class="fu"><a href="selection_cpp.html">selection_cpp</a></span><span class="op">(</span><span class="va">population</span>, <span class="va">fitness</span>,</span></span>
+<span class="r-in"><span>                      num_parents <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">offspring</span> <span class="op">&lt;-</span> <span class="fu">BioGA</span><span class="fu">::</span><span class="fu"><a href="crossover_cpp.html">crossover_cpp</a></span><span class="op">(</span><span class="va">selected_parents</span>, offspring_size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">mutated_offspring</span> <span class="op">&lt;-</span> <span class="fu">BioGA</span><span class="fu">::</span><span class="fu"><a href="mutation_cpp.html">mutation_cpp</a></span><span class="op">(</span><span class="va">offspring</span>, mutation_rate <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">BioGA</span><span class="fu">::</span><span class="fu">replacement_cpp</span><span class="op">(</span><span class="va">population</span>, <span class="va">mutated_offspring</span>, num_to_replace <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]        [,2]       [,3]       [,4]       [,5]        [,6]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.26196562 -0.26371930 -0.4473445  0.8965603 -0.2166291 -0.26976184</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.26196562 -0.26371930 -0.4473445  0.8965603 -0.2166291 -0.26976184</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  0.06454387 -0.08382568  1.7927561  0.1979580 -0.5064189  0.72399496</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]  1.81345434  0.62630977 -0.1569172 -0.7740868 -0.5064189 -0.03981704</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] -1.23891024 -0.80773497 -0.8604899  0.8965603 -0.2166291 -0.49313247</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             [,7]       [,8]      [,9]      [,10]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  0.05742171  0.7468031 0.6241831 -0.6954311</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.05742171  0.7468031 0.6241831 -0.6954311</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  0.53728318  0.3621591 1.1797842  0.6410374</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] -1.08515492  0.7468031 1.1797842  0.6410374</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] -1.08515492 -0.3335997 1.1797842  1.1279266</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]      [,3]       [,4]       [,5]       [,6]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.9515076  0.1812952 0.9482857 -1.0190678 -0.7009766 -0.6594729</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -1.2389102 -0.2637193 1.3677067 -0.6274346 -0.1983871 -0.6594035</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  1.8134543 -0.8077350 0.2911302  0.1979580 -0.1983871 -0.6594035</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] -0.6641049  0.6263098 0.5288647 -1.4107009 -1.2035661 -0.6595424</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]  1.8134543 -0.2651474 0.7488550 -0.4234901 -0.1983871 -0.8059519</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,7]       [,8]      [,9]      [,10]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.37220209  0.1364451 0.3533590  0.1727737</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 0.68698246  0.6064898 0.2207249 -0.7823792</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] 0.53728318  0.7052670 0.2207249 -2.0600707</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] 0.05742171 -0.3335997 0.4859931  1.1279266</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] 0.10566470 -0.6178692 1.8963171 -2.0600707</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

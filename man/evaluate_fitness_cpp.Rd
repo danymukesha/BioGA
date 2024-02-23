@@ -7,9 +7,11 @@
 evaluate_fitness_cpp(genomic_data, population)
 }
 \arguments{
-\item{genomic_data}{Numeric matrix of genomic data where rows represent genes/features and columns represent samples.}
+\item{genomic_data}{Numeric matrix of genomic data where rows represent
+genes/features and columns represent samples.}
 
-\item{population}{Numeric matrix representing the population of individuals.}
+\item{population}{Numeric matrix representing the population of
+individuals.}
 }
 \value{
 Numeric vector of fitness scores for each individual.
@@ -20,6 +22,7 @@ Function to evaluate fitness using genomic data
 \examples{
 # example of usage
 genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
-population <- BioGA::initialize_population_cpp(genomic_data, population_size = 5)
+population <- BioGA::initialize_population_cpp(genomic_data,
+                population_size = 5)
 BioGA::evaluate_fitness_cpp(genomic_data, population)
 }

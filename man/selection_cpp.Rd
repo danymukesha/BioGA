@@ -7,7 +7,8 @@
 selection_cpp(population, fitness, num_parents)
 }
 \arguments{
-\item{population}{Numeric matrix representing the population of individuals.}
+\item{population}{Numeric matrix representing the population of
+individuals.}
 
 \item{fitness}{Numeric vector of fitness scores for each individual.}
 
@@ -22,7 +23,8 @@ Function to select individuals based on fitness scores
 \examples{
 # example of usage
 genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
-population <- BioGA::initialize_population_cpp(genomic_data, population_size = 5)
+population <- BioGA::initialize_population_cpp(genomic_data,
+                population_size = 5)
 fitness <- BioGA::evaluate_fitness_cpp(genomic_data, population)
 BioGA::selection_cpp(population, fitness, num_parents = 2)
 }

@@ -3,7 +3,8 @@ Package: BioGA
 Title: Bioinformatics Genetic Algorithm (BioGA)
 Version: 0.99.0
 Authors@R: 
-    person("Dany", "Mukesha", , "danymukesha@gmail.com", role = c("aut", "cre"),
+    person("Dany", "Mukesha", , "danymukesha@gmail.com", 
+            role = c("aut", "cre"),
            comment = c(ORCID = "0009-0001-9514-751X"))
 Description: Genetic algorithm are a class of optimization algorithms
     inspired by the process of natural selection and genetics. This
@@ -17,7 +18,8 @@ BugReports: https://github.com/danymukesha/BioGA/issues
 Imports:
     ggplot2,
     graphics,
-    Rcpp
+    Rcpp,
+    sessioninfo
 Suggests: 
     knitr,
     rmarkdown

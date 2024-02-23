@@ -7,7 +7,8 @@
 crossover_cpp(selected_parents, offspring_size)
 }
 \arguments{
-\item{selected_parents}{Numeric matrix representing the selected individuals.}
+\item{selected_parents}{Numeric matrix representing the selected
+individuals.}
 
 \item{offspring_size}{Number of offspring to generate.}
 }
@@ -20,8 +21,10 @@ Function to perform crossover between selected individuals
 \examples{
 # example of usage
 genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
-population <- BioGA::initialize_population_cpp(genomic_data, population_size = 5)
+population <- BioGA::initialize_population_cpp(genomic_data,
+                population_size = 5)
 fitness <- BioGA::evaluate_fitness_cpp(genomic_data, population)
-selected_parents <- BioGA::selection_cpp(population, fitness, num_parents = 2)
+selected_parents <- BioGA::selection_cpp(population, fitness,
+                num_parents = 2)
 BioGA::crossover_cpp(selected_parents, offspring_size = 2)
 }

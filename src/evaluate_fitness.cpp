@@ -5,12 +5,14 @@ using namespace Rcpp;
 //'
 //' @param genomic_data Numeric matrix of genomic data where rows represent
 //' genes/features and columns represent samples.
-//' @param population Numeric matrix representing the population of individuals.
+//' @param population Numeric matrix representing the population of
+//' individuals.
 //' @return Numeric vector of fitness scores for each individual.
 //' @examples
 //' # example of usage
 //' genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
-//' population <- BioGA::initialize_population_cpp(genomic_data, population_size = 5)
+//' population <- BioGA::initialize_population_cpp(genomic_data,
+//'                 population_size = 5)
 //' BioGA::evaluate_fitness_cpp(genomic_data, population)
 //' @export
 // [[Rcpp::export]]

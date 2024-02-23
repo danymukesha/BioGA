@@ -3,5 +3,6 @@ importFrom(Rcpp,
            evalCpp,
            sourceCpp)
 import(ggplot2,
-       graphics)
+       graphics,
+       sessioninfo)
 useDynLib(BioGA, .registration = TRUE)

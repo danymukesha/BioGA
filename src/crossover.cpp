@@ -3,7 +3,8 @@ using namespace Rcpp;
 
 //' Function to perform crossover between selected individuals
 //'
-//' @param selected_parents Numeric matrix representing the selected individuals.
+//' @param selected_parents Numeric matrix representing the selected
+//' individuals.
 //' @param offspring_size Number of offspring to generate.
 //' @return Numeric matrix representing the offspring.
 //' @examples
@@ -12,7 +13,8 @@ using namespace Rcpp;
 //' population <- BioGA::initialize_population_cpp(genomic_data,
 //'                 population_size = 5)
 //' fitness <- BioGA::evaluate_fitness_cpp(genomic_data, population)
-//' selected_parents <- BioGA::selection_cpp(population, fitness, num_parents = 2)
+//' selected_parents <- BioGA::selection_cpp(population, fitness,
+//'                 num_parents = 2)
 //' BioGA::crossover_cpp(selected_parents, offspring_size = 2)
 //' @export
 // [[Rcpp::export]]

@@ -7,7 +7,8 @@
 initialize_population_cpp(genomic_data, population_size)
 }
 \arguments{
-\item{genomic_data}{Numeric matrix of genomic data where rows represent genes/features and columns represent samples.}
+\item{genomic_data}{Numeric matrix of genomic data where rows represent
+genes/features and columns represent samples.}
 
 \item{population_size}{Number of individuals in the population.}
 }
