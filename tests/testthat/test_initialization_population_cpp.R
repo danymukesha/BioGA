@@ -1,5 +1,5 @@
 test_that("initialize_population_cpp returns a matrix with correct dimensions", {
-  # Load your package
+  # Load The PACKAGE
   library(BioGA)
 
   # Generate some test data
