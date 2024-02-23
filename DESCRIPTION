@@ -22,7 +22,8 @@ Imports:
     sessioninfo
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
+    testthat (>= 3.0.0)
 LinkingTo: 
     Rcpp
 VignetteBuilder: 
@@ -32,3 +33,4 @@ Encoding: UTF-8
 LazyData: false
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
+Config/testthat/edition: 3
