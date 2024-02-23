@@ -95,18 +95,18 @@ individuals.</p></dd>
 <span class="r-in"><span><span class="va">offspring</span> <span class="op">&lt;-</span> <span class="fu">BioGA</span><span class="fu">::</span><span class="fu"><a href="crossover_cpp.html">crossover_cpp</a></span><span class="op">(</span><span class="va">selected_parents</span>, offspring_size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">mutated_offspring</span> <span class="op">&lt;-</span> <span class="fu">BioGA</span><span class="fu">::</span><span class="fu"><a href="mutation_cpp.html">mutation_cpp</a></span><span class="op">(</span><span class="va">offspring</span>, mutation_rate <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">BioGA</span><span class="fu">::</span><span class="fu">replacement_cpp</span><span class="op">(</span><span class="va">population</span>, <span class="va">mutated_offspring</span>, num_to_replace <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           [,1]       [,2]       [,3]       [,4]       [,5]        [,6]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  1.018179 -0.2651474 -0.8604899  0.8965603 -1.2035661  0.72399496</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -1.238910  0.6263098  0.5288647  0.8965603 -0.9239379 -0.65954237</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -1.238910 -0.2637193 -0.8604899 -0.6274346 -1.3758365 -0.03981704</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] -1.238910 -0.8077350  1.6585423 -0.6274346 -1.3758365 -0.26976184</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] -1.238910 -0.0907126  1.0937035  0.1345628 -1.1498872 -0.46465210</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            [,7]       [,8]       [,9]      [,10]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.5816520  0.6064898 -0.3356721 -0.7823792</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.4447027 -0.6178692 -0.9122598 -1.3333958</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -1.0851549 -2.8080105  0.2207249  1.0256851</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]  0.1056647  0.3621591  1.6418480  1.0256851</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] -0.1695190 -0.1278550  0.3647941 -0.1538553</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]       [,3]       [,4]       [,5]       [,6]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.6641049  0.6263098 -0.5072482 -0.6274346  0.5496843 -0.2755334</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  1.0181790 -0.9531239 -0.1569172  0.8965603  0.4674769  0.7239950</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -0.7238720  0.6393480 -0.5072482 -0.6274346  0.4043941 -0.5851679</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] -0.7307786  2.6548983  0.7488550 -0.7740868 -1.3758365 -0.8059519</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] -0.7836391  0.6523863 -0.5072482 -0.6274346  0.2591038 -0.8948024</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,7]       [,8]      [,9]      [,10]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -1.0851549 -0.1672293 1.1797842 -1.3333958</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.5933997  0.7468031 0.2207249 -0.6439059</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -0.8392773 -0.1447576 1.0856130 -1.0144134</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]  0.1056647  0.6064898 1.8963171 -0.7823792</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] -0.5933997 -0.1222859 0.9914417 -0.6954311</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
