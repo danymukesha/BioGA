@@ -52,6 +52,9 @@
     <a class="dropdown-item" href="../articles/Usage.html">Usage</a>
   </div>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
@@ -95,7 +98,7 @@ algorithm optimization process using the BioGA package.</p>
 </h3>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load the BioGA package</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">BioGA</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://danymukesha.github.io/BioGA/">BioGA</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Example genomic data</span></span>
 <span><span class="va">genomic_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">10</span>, ncol <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
@@ -146,11 +149,11 @@ algorithm optimization process using the BioGA package.</p>
 <span id="cb2-32"><a href="#cb2-32" tabindex="-1"></a>        <span class="fu">format</span>(elapsed_time, <span class="at">units =</span> <span class="st">"secs"</span>), <span class="st">"     "</span>)</span>
 <span id="cb2-33"><a href="#cb2-33" tabindex="-1"></a>}</span>
 <span id="cb2-34"><a href="#cb2-34" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb2-35"><a href="#cb2-35" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">1</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.04917407</span> secs      </span>
-<span id="cb2-36"><a href="#cb2-36" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">2</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.04976892</span> secs      </span>
-<span id="cb2-37"><a href="#cb2-37" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">3</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.04987597</span> secs      </span>
-<span id="cb2-38"><a href="#cb2-38" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">4</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.04996204</span> secs      </span>
-<span id="cb2-39"><a href="#cb2-39" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">5</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.05001187</span> secs</span></code></pre></div>
+<span id="cb2-35"><a href="#cb2-35" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">1</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.0476501</span> secs      </span>
+<span id="cb2-36"><a href="#cb2-36" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">2</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.04823804</span> secs      </span>
+<span id="cb2-37"><a href="#cb2-37" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">3</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.04832196</span> secs      </span>
+<span id="cb2-38"><a href="#cb2-38" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">4</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.04838705</span> secs      </span>
+<span id="cb2-39"><a href="#cb2-39" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">5</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.04844403</span> secs</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="chapter-3-results-visualization">Chapter 3: Results Visualization<a class="anchor" aria-label="anchor" href="#chapter-3-results-visualization"></a>
@@ -172,7 +175,7 @@ results visualization.</p>
 
     <footer><div class="pkgdown-footer-left">
   <p></p>
-<p>Developed by Dany Mukesha.</p>
+<p>Developed by <a href="https://danymukesha.github.io/" class="external-link">Dany Mukesha</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

@@ -28,6 +28,9 @@
     <a class="dropdown-item" href="../articles/Usage.html">Usage</a>
   </div>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
@@ -92,18 +95,18 @@ individuals.</p></dd>
 <span class="r-in"><span><span class="va">offspring</span> <span class="op">&lt;-</span> <span class="fu">BioGA</span><span class="fu">::</span><span class="fu"><a href="crossover_cpp.html">crossover_cpp</a></span><span class="op">(</span><span class="va">selected_parents</span>, offspring_size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">mutated_offspring</span> <span class="op">&lt;-</span> <span class="fu">BioGA</span><span class="fu">::</span><span class="fu"><a href="mutation_cpp.html">mutation_cpp</a></span><span class="op">(</span><span class="va">offspring</span>, mutation_rate <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">BioGA</span><span class="fu">::</span><span class="fu">replacement_cpp</span><span class="op">(</span><span class="va">population</span>, <span class="va">mutated_offspring</span>, num_to_replace <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]      [,3]       [,4]       [,5]       [,6]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.9515076  0.1812952 0.9482857 -1.0190678 -0.7009766 -0.6594729</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -1.2389102 -0.2637193 1.3677067 -0.6274346 -0.1983871 -0.6594035</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  1.8134543 -0.8077350 0.2911302  0.1979580 -0.1983871 -0.6594035</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] -0.6641049  0.6263098 0.5288647 -1.4107009 -1.2035661 -0.6595424</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]  1.8134543 -0.2651474 0.7488550 -0.4234901 -0.1983871 -0.8059519</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            [,7]       [,8]      [,9]      [,10]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.37220209  0.1364451 0.3533590  0.1727737</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 0.68698246  0.6064898 0.2207249 -0.7823792</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] 0.53728318  0.7052670 0.2207249 -2.0600707</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] 0.05742171 -0.3335997 0.4859931  1.1279266</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] 0.10566470 -0.6178692 1.8963171 -2.0600707</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           [,1]       [,2]       [,3]       [,4]       [,5]        [,6]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  1.018179 -0.2651474 -0.8604899  0.8965603 -1.2035661  0.72399496</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -1.238910  0.6263098  0.5288647  0.8965603 -0.9239379 -0.65954237</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -1.238910 -0.2637193 -0.8604899 -0.6274346 -1.3758365 -0.03981704</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] -1.238910 -0.8077350  1.6585423 -0.6274346 -1.3758365 -0.26976184</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] -1.238910 -0.0907126  1.0937035  0.1345628 -1.1498872 -0.46465210</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,7]       [,8]       [,9]      [,10]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.5816520  0.6064898 -0.3356721 -0.7823792</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.4447027 -0.6178692 -0.9122598 -1.3333958</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -1.0851549 -2.8080105  0.2207249  1.0256851</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]  0.1056647  0.3621591  1.6418480  1.0256851</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] -0.1695190 -0.1278550  0.3647941 -0.1538553</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -111,7 +114,7 @@ individuals.</p></dd>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Dany Mukesha.</p>
+  <p></p><p>Developed by <a href="https://danymukesha.github.io/" class="external-link">Dany Mukesha</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
