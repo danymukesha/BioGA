@@ -19,7 +19,8 @@ Imports:
     ggplot2,
     graphics,
     Rcpp,
-    sessioninfo
+    sessioninfo,
+    SummarizedExperiment
 Suggests: 
     knitr,
     rmarkdown,
