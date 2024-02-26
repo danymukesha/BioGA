@@ -92,17 +92,42 @@ the best combination of genes for predicting a certain trait, such as disease
 susceptibility.
 
 ```{r}
-# Load the BioGA package
+# Load necessary packages
 library(BioGA)
+library(SummarizedExperiment)
+
+# Define parameters
+num_genes <- 1000
+num_samples <- 10
 
 # Define parameters for genetic algorithm
 population_size <- 100
-generations <- 6
+generations <- 20
 mutation_rate <- 0.1
 
-# Generate example genomic data
-genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
+# Generate example genomic data using SummarizedExperiment
+counts <- matrix(rpois(num_genes * num_samples, lambda = 10), nrow = num_genes)
+rownames(counts) <- paste0("Gene", 1:num_genes)
+colnames(counts) <- paste0("Sample", 1:num_samples)
+
+# Create SummarizedExperiment object
+se <- SummarizedExperiment(assays = list(counts = counts))
+
+# Convert SummarizedExperiment to matrix for compatibility with BioGA package
+genomic_data <- assay(se)
 ```
+
+In this example, `counts` is a matrix representing the counts 
+of gene expression levels across different samples. Each row corresponds 
+to a gene, and each column corresponds to a sample. We use the 
+`SummarizedExperiment` class to store this data, which is 
+common Bioconductor class for representing rectangular feature x sample data, 
+such as RNAseq count matrices or microarray data.
+
+```{r}
+head(genomic_data)
+```
+
 
 ## Initialization
 
