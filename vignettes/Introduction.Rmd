@@ -1,0 +1,217 @@
+---
+title: "Introduction"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Genetic algorithms (GAs) are optimization techniques inspired by 
+the process of natural selection and genetics. They operate by evolving 
+a population of candidate solutions over successive generations, 
+with each individual representing a potential solution to the optimization 
+problem at hand. Through the application of genetic operators 
+such as selection, crossover, and mutation, genetic algorithms 
+iteratively improve the population, eventually converging towards 
+optimal or near-optimal solutions.
+
+In the field of genomics, where data sets are often large, complex, 
+and high-dimensional, genetic algorithms offer a promising approach 
+for addressing optimization challenges such as feature selection, 
+parameter tuning, and model optimization. By harnessing the power 
+of evolutionary principles, genetic algorithms can effectively explore 
+the solution space, identify informative features, and optimize 
+model parameters, leading to improved accuracy and interpretability 
+in genomic data analysis.
+
+The BioGA package extends the capabilities of genetic algorithms 
+to the realm of genomic data analysis, providing a suite of functions 
+optimized for handling high throughput genomic data. Implemented in C++ 
+for enhanced performance, BioGA offers efficient algorithms for tasks 
+such as feature selection, classification, clustering, and more. 
+By integrating seamlessly with the Bioconductor ecosystem, 
+BioGA empowers researchers and analysts to leverage the power 
+of genetic algorithms within their genomics workflows, facilitating 
+the discovery of biological insights from large-scale genomic data sets.
+
+In this vignette, we illustrate the usage of BioGA for genetic algorithm 
+optimization in the context of high throughput genomic data analysis. 
+We showcase its interoperability with Bioconductor classes, demonstrating
+how genetic algorithm optimization can be seamlessly integrated into 
+existing genomics pipelines for improved analysis and interpretation.
+
+The BioGA package provides a comprehensive set of functions for 
+genetic algorithm optimization tailored for analyzing high throughput 
+genomic data. This vignette demonstrates the usage of BioGA in the context 
+of selecting the best combination of genes for predicting a certain trait, 
+such as disease susceptibility.
+
+## Overview
+
+Genomic data refers to the genetic information stored in an organism's DNA. 
+It includes the sequence of nucleotides (adenine, thymine, cytosine, 
+and guanine) that make up the DNA molecules. Genomic data can provide valuable 
+insights into various biological processes, such as gene expression, 
+genetic variation, and evolutionary relationships.
+
+Genomic data in this context could consist of gene expression profiles 
+measured across different individuals (e.g., patients).
+
+- Each row in the genomic_data matrix represents a gene, and each column 
+represents a patient sample.
+
+- The values in the matrix represent the expression levels of each gene in 
+each patient sample.
+
+Here's an example of genomic data:
+
+```
+      Sample 1   Sample 2   Sample 3   Sample 4
+Gene1    0.1        0.2        0.3        0.4
+Gene2    1.2        1.3        1.4        1.5
+Gene3    2.3        2.2        2.1        2.0
+```
+
+In this example, each row represents a gene (or genomic feature), and 
+each column represents a sample. The values in the matrix represent 
+some measurement of gene expression, such as mRNA levels or protein abundance,
+in each sample.
+
+## Example Scenario
+
+Consider an example scenario of using genetic algorithm optimization to select 
+the best combination of genes for predicting a certain trait, such as disease 
+susceptibility.
+
+```{r}
+# Load the BioGA package
+library(BioGA)
+
+# Define parameters for genetic algorithm
+population_size <- 100
+generations <- 6
+mutation_rate <- 0.1
+
+# Generate example genomic data
+genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
+```
+
+## Initialization
+
+```{r}
+# Initialize population
+population <- BioGA::initialize_population_cpp(genomic_data, 
+                                        population_size = 5)
+```
+
+The population represents a set of candidate combinations of genes that 
+could be predictive of the trait. Each individual in the population is 
+represented by a binary vector indicating the presence or absence of each gene.
+For example, an individual in the population might be represented as [1, 0, 1],
+indicating the presence of Gene1 and Gene3 but the absence of Gene2. 
+The population undergoes genetic algorithm operations such as selection, 
+crossover, mutation, and replacement to evolve towards individuals 
+with higher predictive power for the trait.
+
+## Genetic Algorithm Optimization
+
+```{r}
+# Initialize fitness history
+fitness_history <- list()
+
+# Initialize time progress
+start_time <- Sys.time()
+
+# Run genetic algorithm optimization
+generation <- 0
+while (TRUE) {
+  generation <- generation + 1
+
+  # Evaluate fitness
+  fitness <- BioGA::evaluate_fitness_cpp(genomic_data, population)
+  fitness_history[[generation]] <- fitness
+
+  # Check termination condition
+  if (generation == generations) { # defined number of generations
+    break
+  }
+
+  # Selection
+  selected_parents <- BioGA::selection_cpp(population, fitness, num_parents = 2)
+
+  # Crossover and Mutation
+  offspring <- BioGA::crossover_cpp(selected_parents, offspring_size = 2)
+  # (no mutation in this example)
+  mutated_offspring <- BioGA::mutation_cpp(offspring, mutation_rate = 0) 
+
+  # Replacement
+  population <- BioGA::replacement_cpp(population, mutated_offspring, 
+                                num_to_replace = 1)
+
+  # Calculate time progress
+  elapsed_time <- difftime(Sys.time(), start_time, units = "secs")
+
+  # Print time progress
+  cat("\rGeneration:", generation, "- Elapsed Time:", 
+      format(elapsed_time, units = "secs"), "     ")
+}
+```
+
+## Fitness Calculation
+
+The fitness calculation described in the provided code calculates a measure 
+of dissimilarity between the gene expression profiles of individuals 
+in the population and the genomic data. This measure of dissimilarity, 
+or "fitness", quantifies how well the gene expression profile of an individual
+matches the genomic data.
+
+Mathematically, the fitness calculation can be represented as follows:
+
+Let:
+
+- \( g_{ijk} \) be the gene expression level of gene \( j \) 
+in individual \( i \) and sample \( k \) from the genomic data.
+
+- \( p_{ij} \) be the gene expression level of gene \( j \) 
+in individual \( i \) from the population.
+
+- \( N \) be the number of individuals in the population.
+
+- \( G \) be the number of genes.
+
+- \( S \) be the number of samples.
+
+Then, the fitness \( F_i \) for individual \( i \) in the population can be 
+calculated as the sum of squared differences between the gene expression levels
+of individual \( i \) and the corresponding gene expression levels 
+in the genomic data, across all genes and samples:
+$$
+ F_i = \sum_{j=1}^{G} \sum_{k=1}^{S} (g_{ijk} - p_{ij})^2 
+$$
+
+This fitness calculation aims to minimize the overall dissimilarity between 
+the gene expression profiles of individuals in the population and 
+the genomic data. Individuals with lower fitness scores are considered to have
+gene expression profiles that are more similar to the genomic data and 
+are therefore more likely to be selected for further optimization 
+in the genetic algorithm.
+
+```{r}
+# Plot fitness change over generations
+BioGA::plot_fitness_history(fitness_history)
+```
+
+This vignette demonstrates how genetic algorithm optimization can be applied 
+to select the best combination of genes for predicting a certain trait using 
+the BioGA package. It showcases the integration of genetic algorithms 
+with genomic data analysis and highlights the potential of genetic algorithms 
+for feature selection in genomics.
+

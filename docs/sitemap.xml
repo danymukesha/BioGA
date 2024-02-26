@@ -7,6 +7,9 @@
     <loc>https://danymukesha.github.io/BioGA/articles/index.html</loc>
   </url>
   <url>
+    <loc>https://danymukesha.github.io/BioGA/articles/Introduction.html</loc>
+  </url>
+  <url>
     <loc>https://danymukesha.github.io/BioGA/articles/Overview.html</loc>
   </url>
   <url>
@@ -14,9 +17,6 @@
   </url>
   <url>
     <loc>https://danymukesha.github.io/BioGA/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://danymukesha.github.io/BioGA/docute.html</loc>
   </url>
   <url>
     <loc>https://danymukesha.github.io/BioGA/index.html</loc>
@@ -29,6 +29,9 @@
   </url>
   <url>
     <loc>https://danymukesha.github.io/BioGA/news/index.html</loc>
+  </url>
+  <url>
+    <loc>https://danymukesha.github.io/BioGA/reference/animate_fitness_history.html</loc>
   </url>
   <url>
     <loc>https://danymukesha.github.io/BioGA/reference/BioGA-package.html</loc>

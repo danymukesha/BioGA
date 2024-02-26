@@ -18,6 +18,12 @@ knitr::opts_chunk$set(
 sessioninfo::session_info() 
 ```
 
+The BioGA package provides a comprehensive set of functions for 
+genetic algorithm optimization tailored for analyzing high throughput 
+genomic data. This vignette demonstrates the usage of BioGA in the context
+of selecting the best combination of genes for predicting a certain trait,
+such as disease susceptibility.
+
 Let's consider an example scenario of using genetic algorithm optimization 
 to select the best combination of genes for predicting a certain trait, 
 such as disease susceptibility.
