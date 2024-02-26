@@ -24,6 +24,7 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/Introduction.html">Introduction</a>
     <a class="dropdown-item" href="../articles/Overview.html">Overview</a>
     <a class="dropdown-item" href="../articles/Usage.html">Usage</a>
   </div>
@@ -95,18 +96,18 @@ individuals.</p></dd>
 <span class="r-in"><span><span class="va">offspring</span> <span class="op">&lt;-</span> <span class="fu">BioGA</span><span class="fu">::</span><span class="fu"><a href="crossover_cpp.html">crossover_cpp</a></span><span class="op">(</span><span class="va">selected_parents</span>, offspring_size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">mutated_offspring</span> <span class="op">&lt;-</span> <span class="fu">BioGA</span><span class="fu">::</span><span class="fu"><a href="mutation_cpp.html">mutation_cpp</a></span><span class="op">(</span><span class="va">offspring</span>, mutation_rate <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">BioGA</span><span class="fu">::</span><span class="fu">replacement_cpp</span><span class="op">(</span><span class="va">population</span>, <span class="va">mutated_offspring</span>, num_to_replace <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]      [,3]       [,4]       [,5]       [,6]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.7115241  0.6621788 1.6585423  0.2703613  0.4674769 -0.8059519</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.2619656  0.6523863 0.7488550  0.2703613 -1.2035661 -0.2697618</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -0.7307786 -0.1901455 0.2911302 -0.6274346  0.4674769 -0.4931325</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] -0.4963721  0.2311204 0.5199926 -0.1785366 -0.3680446 -0.3814472</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] -0.7307786 -0.1901455 1.3677067 -0.6274346 -0.1983871 -0.6594035</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            [,7]        [,8]     [,9]      [,10]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  0.5372832 -2.80801051 1.641848  1.0256851</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.5816520  0.70526701 1.641848  0.6410374</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -0.4447027  0.07964921 1.896317 -2.0600707</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] -0.5131774  0.39245811 1.769083 -0.7095167</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] -1.0851549 -2.80801051 1.641848  1.3638045</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]      [,3]       [,4]       [,5]       [,6]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  0.54136145 -0.2269324 0.1208034 -0.1119381  0.1345449 -0.3814472</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  1.81345434  0.6523863 0.2911302 -1.4107009 -0.2166291 -0.6595424</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -0.78363908 -0.2651474 0.7488550  0.2703613 -0.1983871 -0.2755334</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]  0.06454387 -0.1901455 0.7488550 -0.7740868 -0.1983871 -0.4931325</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]  0.06454387 -0.8077350 1.7927561  0.2703613 -1.2035661 -0.8059519</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,7]       [,8]       [,9]      [,10]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.0904429 -0.1447576  1.5380507  0.8333612</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.9042691  0.7468031 -0.9122598 -0.6439059</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -0.5816520 -2.8080105 -0.9122598 -1.3333958</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] -1.0851549 -0.1222859  1.8963171  1.0256851</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]  0.9042691 -0.1672293  0.9914417 -1.3333958</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

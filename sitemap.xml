@@ -10,6 +10,9 @@
     <loc>https://danymukesha.github.io/BioGA/LICENSE.html</loc>
   </url>
   <url>
+    <loc>https://danymukesha.github.io/BioGA/articles/Introduction.html</loc>
+  </url>
+  <url>
     <loc>https://danymukesha.github.io/BioGA/articles/Overview.html</loc>
   </url>
   <url>
@@ -29,6 +32,9 @@
   </url>
   <url>
     <loc>https://danymukesha.github.io/BioGA/reference/BioGA-package.html</loc>
+  </url>
+  <url>
+    <loc>https://danymukesha.github.io/BioGA/reference/animate_fitness_history.html</loc>
   </url>
   <url>
     <loc>https://danymukesha.github.io/BioGA/reference/crossover_cpp.html</loc>
