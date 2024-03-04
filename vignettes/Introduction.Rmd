@@ -1,5 +1,33 @@
 ---
 title: "Introduction"
+abstract:
+    Genetic algorithms (GAs) are optimization techniques inspired by 
+    the process of natural selection and genetics. They operate by evolving 
+    a population of candidate solutions over successive generations, 
+    with each individual representing a potential solution to the optimization 
+    problem at hand. Through the application of genetic operators 
+    such as selection, crossover, and mutation, genetic algorithms 
+    iteratively improve the population, eventually converging towards 
+    optimal or near-optimal solutions.
+    
+    In the field of genomics, where data sets are often large, complex, 
+    and high-dimensional, genetic algorithms offer a promising approach 
+    for addressing optimization challenges such as feature selection, 
+    parameter tuning, and model optimization. By harnessing the power 
+    of evolutionary principles, genetic algorithms can effectively explore 
+    the solution space, identify informative features, and optimize 
+    model parameters, leading to improved accuracy and interpretability 
+    in genomic data analysis.
+    
+    The BioGA package extends the capabilities of genetic algorithms 
+    to the realm of genomic data analysis, providing a suite of functions 
+    optimized for handling high throughput genomic data. Implemented in C++ 
+      for enhanced performance, BioGA offers efficient algorithms for tasks 
+    such as feature selection, classification, clustering, and more. 
+    By integrating seamlessly with the Bioconductor ecosystem, 
+    BioGA empowers researchers and analysts to leverage the power 
+    of genetic algorithms within their genomics workflows, facilitating 
+    the discovery of biological insights from large-scale genomic data sets.
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Introduction}
@@ -14,33 +42,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-Genetic algorithms (GAs) are optimization techniques inspired by 
-the process of natural selection and genetics. They operate by evolving 
-a population of candidate solutions over successive generations, 
-with each individual representing a potential solution to the optimization 
-problem at hand. Through the application of genetic operators 
-such as selection, crossover, and mutation, genetic algorithms 
-iteratively improve the population, eventually converging towards 
-optimal or near-optimal solutions.
+<br>
 
-In the field of genomics, where data sets are often large, complex, 
-and high-dimensional, genetic algorithms offer a promising approach 
-for addressing optimization challenges such as feature selection, 
-parameter tuning, and model optimization. By harnessing the power 
-of evolutionary principles, genetic algorithms can effectively explore 
-the solution space, identify informative features, and optimize 
-model parameters, leading to improved accuracy and interpretability 
-in genomic data analysis.
-
-The BioGA package extends the capabilities of genetic algorithms 
-to the realm of genomic data analysis, providing a suite of functions 
-optimized for handling high throughput genomic data. Implemented in C++ 
-for enhanced performance, BioGA offers efficient algorithms for tasks 
-such as feature selection, classification, clustering, and more. 
-By integrating seamlessly with the Bioconductor ecosystem, 
-BioGA empowers researchers and analysts to leverage the power 
-of genetic algorithms within their genomics workflows, facilitating 
-the discovery of biological insights from large-scale genomic data sets.
+# Getting Started
 
 In this vignette, we illustrate the usage of BioGA for genetic algorithm 
 optimization in the context of high throughput genomic data analysis. 
