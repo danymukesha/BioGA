@@ -154,51 +154,51 @@ the absence of Gene2. The population undergoes genetic algorithm
 operations such as selection, crossover, mutation, and replacement to
 evolve towards individuals with higher predictive power for the
 trait.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize fitness history</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>fitness_history <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize time progress</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>start_time <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Run genetic algorithm optimization</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>generation <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (<span class="cn">TRUE</span>) {</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  generation <span class="ot">&lt;-</span> generation <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Evaluate fitness</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  fitness <span class="ot">&lt;-</span> <span class="fu">evaluate_fitness_cpp</span>(genomic_data, population)</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  fitness_history[[generation]] <span class="ot">&lt;-</span> fitness</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Check termination condition</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (generation <span class="sc">==</span> generations) { <span class="co"># defined number of generations</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">break</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Selection</span></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  selected_parents <span class="ot">&lt;-</span> <span class="fu">selection_cpp</span>(population, fitness, <span class="at">num_parents =</span> <span class="dv">2</span>)</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Crossover and Mutation</span></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>  offspring <span class="ot">&lt;-</span> <span class="fu">crossover_cpp</span>(selected_parents, <span class="at">offspring_size =</span> <span class="dv">2</span>)</span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  <span class="co"># (no mutation in this example)</span></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>  mutated_offspring <span class="ot">&lt;-</span> <span class="fu">mutation_cpp</span>(offspring, <span class="at">mutation_rate =</span> <span class="dv">0</span>) </span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Replacement</span></span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>  population <span class="ot">&lt;-</span> <span class="fu">replacement_cpp</span>(population, mutated_offspring, </span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>                                <span class="at">num_to_replace =</span> <span class="dv">1</span>)</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate time progress</span></span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>  elapsed_time <span class="ot">&lt;-</span> <span class="fu">difftime</span>(<span class="fu">Sys.time</span>(), start_time, <span class="at">units =</span> <span class="st">"secs"</span>)</span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Print time progress</span></span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"</span><span class="sc">\r</span><span class="st">Generation:"</span>, generation, <span class="st">"- Elapsed Time:"</span>, </span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>      <span class="fu">format</span>(elapsed_time, <span class="at">units =</span> <span class="st">"secs"</span>), <span class="st">"     "</span>)</span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">1</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.008238554</span> secs      </span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">2</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.009041309</span> secs      </span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">3</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.009135723</span> secs      </span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">4</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.009214878</span> secs      </span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">5</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.009293318</span> secs</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Initialize fitness history</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>fitness_history <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co"># Initialize time progress</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>start_time <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co"># Run genetic algorithm optimization</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>generation <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="cf">while</span> (<span class="cn">TRUE</span>) {</span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>  generation <span class="ot">&lt;-</span> generation <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>  <span class="co"># Evaluate fitness</span></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a>  fitness <span class="ot">&lt;-</span> <span class="fu">evaluate_fitness_cpp</span>(genomic_data, population)</span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a>  fitness_history[[generation]] <span class="ot">&lt;-</span> fitness</span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a>  <span class="co"># Check termination condition</span></span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a>  <span class="cf">if</span> (generation <span class="sc">==</span> generations) { <span class="co"># defined number of generations</span></span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a>    <span class="cf">break</span></span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a>  }</span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a>  <span class="co"># Selection</span></span>
+<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a>  selected_parents <span class="ot">&lt;-</span> <span class="fu">selection_cpp</span>(population, fitness, <span class="at">num_parents =</span> <span class="dv">2</span>)</span>
+<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a>  <span class="co"># Crossover and Mutation</span></span>
+<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a>  offspring <span class="ot">&lt;-</span> <span class="fu">crossover_cpp</span>(selected_parents, <span class="at">offspring_size =</span> <span class="dv">2</span>)</span>
+<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a>  <span class="co"># (no mutation in this example)</span></span>
+<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a>  mutated_offspring <span class="ot">&lt;-</span> <span class="fu">mutation_cpp</span>(offspring, <span class="at">mutation_rate =</span> <span class="dv">0</span>) </span>
+<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a></span>
+<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a>  <span class="co"># Replacement</span></span>
+<span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a>  population <span class="ot">&lt;-</span> <span class="fu">replacement_cpp</span>(population, mutated_offspring, </span>
+<span id="cb4-31"><a href="#cb4-31" tabindex="-1"></a>                                <span class="at">num_to_replace =</span> <span class="dv">1</span>)</span>
+<span id="cb4-32"><a href="#cb4-32" tabindex="-1"></a></span>
+<span id="cb4-33"><a href="#cb4-33" tabindex="-1"></a>  <span class="co"># Calculate time progress</span></span>
+<span id="cb4-34"><a href="#cb4-34" tabindex="-1"></a>  elapsed_time <span class="ot">&lt;-</span> <span class="fu">difftime</span>(<span class="fu">Sys.time</span>(), start_time, <span class="at">units =</span> <span class="st">"secs"</span>)</span>
+<span id="cb4-35"><a href="#cb4-35" tabindex="-1"></a></span>
+<span id="cb4-36"><a href="#cb4-36" tabindex="-1"></a>  <span class="co"># Print time progress</span></span>
+<span id="cb4-37"><a href="#cb4-37" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"</span><span class="sc">\r</span><span class="st">Generation:"</span>, generation, <span class="st">"- Elapsed Time:"</span>, </span>
+<span id="cb4-38"><a href="#cb4-38" tabindex="-1"></a>      <span class="fu">format</span>(elapsed_time, <span class="at">units =</span> <span class="st">"secs"</span>), <span class="st">"     "</span>)</span>
+<span id="cb4-39"><a href="#cb4-39" tabindex="-1"></a>}</span>
+<span id="cb4-40"><a href="#cb4-40" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-41"><a href="#cb4-41" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">1</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.00801897</span> secs      </span>
+<span id="cb4-42"><a href="#cb4-42" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">2</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.008817196</span> secs      </span>
+<span id="cb4-43"><a href="#cb4-43" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">3</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.008912325</span> secs      </span>
+<span id="cb4-44"><a href="#cb4-44" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">4</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.008995295</span> secs      </span>
+<span id="cb4-45"><a href="#cb4-45" tabindex="-1"></a>Generation<span class="sc">:</span> <span class="dv">5</span> <span class="sc">-</span> Elapsed Time<span class="sc">:</span> <span class="fl">0.009073019</span> secs</span></code></pre></div>
 <p>The fitness calculation described in the provided code calculates a
 measure of dissimilarity between the gene expression profiles of
 individuals in the population and the genomic data. This measure of
