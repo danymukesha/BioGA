@@ -85,18 +85,18 @@ genes/features and columns represent samples.</p></dd>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># example of usage</span></span></span>
 <span class="r-in"><span><span class="va">genomic_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">10</span>, ncol <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">BioGA</span><span class="fu">::</span><span class="fu">initialize_population_cpp</span><span class="op">(</span><span class="va">genomic_data</span>, population_size <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]       [,3]       [,4]        [,5]       [,6]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -1.1533984 -0.2217445 -1.0095287  0.1243011 -0.90634018 -1.5150245</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.9028149 -0.2217445  0.7470286 -0.2721537  0.54214155  1.2333901</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -1.1533984 -0.3406379 -1.1936412 -0.2721537 -1.43127078  1.1298352</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] -0.4293801 -1.3128142 -0.1178601 -1.2705131  1.45584140 -0.6395348</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]  1.0120018 -0.3406379 -0.1178601  0.1243011  0.07105336  0.0751059</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            [,7]       [,8]       [,9]      [,10]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  1.8933605  0.4154064 -0.6048294  1.4601102</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.3404245 -0.6331782  1.1533758 -1.6865047</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  0.3404245 -0.4800535 -2.0636545  0.2399596</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] -1.0985089  0.4154064 -0.1026030  0.2399596</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]  1.8933605 -0.4800535 -1.4522998  0.9412061</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]        [,3]       [,4]       [,5]      [,6]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.33893587 -0.3406379 -0.11786014 -0.2721537 -1.4312708 -1.515025</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.06089889  1.3176337 -1.00952872 -0.2721537 -1.4312708 -1.515025</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -1.15339839 -2.1775760 -0.01030332  0.1243011 -0.9063402  1.233390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] -0.83021426  1.3176337 -0.07085743  1.2037678 -1.4312708  1.382911</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] -0.33893587  1.3604613  0.74702859 -1.2705131 -0.9984326  1.877744</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,7]       [,8]       [,9]     [,10]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.94149808  0.2178376  1.1533758 1.4601102</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.55851442 -0.4800535  0.7669834 2.6489320</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  0.00312594 -0.4800535 -2.0636545 0.2399596</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]  0.00312594 -0.4800535  1.1533758 2.1122773</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]  0.34042449  0.6752447 -0.6048294 0.9412061</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
