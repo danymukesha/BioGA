@@ -1,8 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# BioGA <a href="https://danymukesha.github.io/BioGA/"><img src="man/figures/logo.png"
-align="right" height="139" alt="BioGA website" /></a>
+# BioGA <a href="https://danymukesha.github.io/BioGA/"><img src="man/figures/logo.png" align="right" height="139" alt="BioGA website" /></a>
 
 The `BioGA` package provides a set of functions for genetic algorithm
 optimization tailored for analyzing high throughput genomic data. These
@@ -20,7 +19,7 @@ devtools::install_github("danymukesha/BioGA")
 #> Downloading GitHub repo danymukesha/BioGA@HEAD
 #> Skipping 16 packages ahead of CRAN: BiocGenerics, graph, S4Arrays, IRanges, S4Vectors, MatrixGenerics, GenomeInfoDbData, zlibbioc, XVector, GenomeInfoDb, RBGL, Biobase, DelayedArray, GenomicRanges, biocViews, SummarizedExperiment
 #> ── R CMD build ─────────────────────────────────────────────────────────────────
-#>          checking for file 'C:\Users\dany.mukesha\AppData\Local\Temp\RtmpmMdUaw\remotes565c18d23454\danymukesha-BioGA-ff25dc5/DESCRIPTION' ...     checking for file 'C:\Users\dany.mukesha\AppData\Local\Temp\RtmpmMdUaw\remotes565c18d23454\danymukesha-BioGA-ff25dc5/DESCRIPTION' ...   ✔  checking for file 'C:\Users\dany.mukesha\AppData\Local\Temp\RtmpmMdUaw\remotes565c18d23454\danymukesha-BioGA-ff25dc5/DESCRIPTION' (366ms)
+#>          checking for file 'C:\Users\dany.mukesha\AppData\Local\Temp\RtmpeMTOmQ\remotes6e2c19f3527f\danymukesha-BioGA-39ae5be/DESCRIPTION' ...     checking for file 'C:\Users\dany.mukesha\AppData\Local\Temp\RtmpeMTOmQ\remotes6e2c19f3527f\danymukesha-BioGA-39ae5be/DESCRIPTION' ...   ✔  checking for file 'C:\Users\dany.mukesha\AppData\Local\Temp\RtmpeMTOmQ\remotes6e2c19f3527f\danymukesha-BioGA-39ae5be/DESCRIPTION' (387ms)
 #>       ─  preparing 'BioGA':
 #>    checking DESCRIPTION meta-information ...     checking DESCRIPTION meta-information ...   ✔  checking DESCRIPTION meta-information
 #> ─  cleaning src
@@ -30,6 +29,6 @@ devtools::install_github("danymukesha/BioGA")
 #>       ─  building 'BioGA_0.99.0.tar.gz'
 #>      
 #> 
-#> Installing package into 'C:/Users/dany.mukesha/AppData/Local/Temp/RtmpS0ZNjt/temp_libpath58884b2761af'
+#> Installing package into 'C:/Users/dany.mukesha/AppData/Local/Temp/RtmpQ9yEQT/temp_libpath43e05a565418'
 #> (as 'lib' is unspecified)
 ```
