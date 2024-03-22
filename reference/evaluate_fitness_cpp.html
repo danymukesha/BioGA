@@ -86,9 +86,10 @@ individuals.</p></dd>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># example of usage</span></span></span>
 <span class="r-in"><span><span class="va">genomic_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">10</span>, ncol <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">population</span> <span class="op">&lt;-</span> <span class="fu">BioGA</span><span class="fu">::</span><span class="fu"><a href="initialize_population_cpp.html">initialize_population_cpp</a></span><span class="op">(</span><span class="va">genomic_data</span>,</span></span>
-<span class="r-in"><span>                population_size <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    population_size <span class="op">=</span> <span class="fl">5</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">BioGA</span><span class="fu">::</span><span class="fu">evaluate_fitness_cpp</span><span class="op">(</span><span class="va">genomic_data</span>, <span class="va">population</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 157.4367 164.6819 139.8584 203.9128 139.2978</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 156.3420 171.7485 163.4475 248.9873 217.9974</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

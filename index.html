@@ -87,10 +87,10 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header">
-<img src="logo.png" class="logo" alt=""><h1 id="bioga-">BioGA 
-<a class="anchor" aria-label="anchor" href="#bioga-"></a>
+<img src="logo.png" class="logo" alt=""><h1 id="bioga">BioGA<a class="anchor" aria-label="anchor" href="#bioga"></a>
 </h1>
 </div>
+<p><a href="https://danymukesha.github.io/BioGA/"><img src="reference/figures/logo.png" align="right" height="139" alt="BioGA website"></a></p>
 <p>The <code>BioGA</code> package provides a set of functions for genetic algorithm optimization tailored for analyzing high throughput genomic data. These functions are implemented in C++ for improved speed and efficiency, with an easy-to-use interface for use within R.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -98,20 +98,22 @@
 <p>You can install the package directly from GitHub using the <code>devtools</code> package:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"danymukesha/BioGA"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Using GitHub PAT from the git credential store.</span></span>
 <span><span class="co">#&gt; Downloading GitHub repo danymukesha/BioGA@HEAD</span></span>
-<span><span class="co">#&gt; -- R CMD build ----------------------------------------------------------------------------------------------------------------</span></span>
-<span><span class="co">#&gt;          checking for file 'C:\Users\dany.mukesha\AppData\Local\Temp\RtmpKsciOD\remotes35a879dd6114\danymukesha-BioGA-1917033/DESCRIPTION' ...  v  checking for file 'C:\Users\dany.mukesha\AppData\Local\Temp\RtmpKsciOD\remotes35a879dd6114\danymukesha-BioGA-1917033/DESCRIPTION' (369ms)</span></span>
-<span><span class="co">#&gt;       -  preparing 'BioGA':</span></span>
-<span><span class="co">#&gt;    checking DESCRIPTION meta-information ...     checking DESCRIPTION meta-information ...   v  checking DESCRIPTION meta-information</span></span>
-<span><span class="co">#&gt; -  cleaning src</span></span>
-<span><span class="co">#&gt;       -  checking for LF line-endings in source and make files and shell scripts</span></span>
-<span><span class="co">#&gt;       -  checking for empty or unneeded directories</span></span>
-<span><span class="co">#&gt;      Removed empty directory 'BioGA/vignettes'</span></span>
-<span><span class="co">#&gt;    Omitted 'LazyData' from DESCRIPTION</span></span>
-<span><span class="co">#&gt;       -  building 'BioGA_0.1.0.tar.gz'</span></span>
+<span><span class="co">#&gt; Skipping 13 packages ahead of CRAN: S4Arrays, IRanges, S4Vectors, MatrixGenerics, BiocGenerics, GenomeInfoDbData, zlibbioc, XVector, GenomeInfoDb, DelayedArray, Biobase, GenomicRanges, SummarizedExperiment</span></span>
+<span><span class="co">#&gt; ── R CMD build ─────────────────────────────────────────────────────────────────</span></span>
+<span><span class="co">#&gt;       ✔  checking for file 'C:\Users\dany.mukesha\AppData\Local\Temp\RtmpSwhRjW\remotes5b94698548e5\danymukesha-BioGA-dfbd6c8/DESCRIPTION'</span></span>
+<span><span class="co">#&gt;       ─  preparing 'BioGA':</span></span>
+<span><span class="co">#&gt;    checking DESCRIPTION meta-information ...     checking DESCRIPTION meta-information ...   ✔  checking DESCRIPTION meta-information</span></span>
+<span><span class="co">#&gt; ─  cleaning src</span></span>
+<span><span class="co">#&gt;       ─  checking for LF line-endings in source and make files and shell scripts</span></span>
+<span><span class="co">#&gt;       ─  checking for empty or unneeded directories</span></span>
+<span><span class="co">#&gt;      Omitted 'LazyData' from DESCRIPTION</span></span>
+<span><span class="co">#&gt;       ─  building 'BioGA_0.99.0.tar.gz'</span></span>
 <span><span class="co">#&gt;      </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Warning: package 'BioGA' is in use and will not be installed</span></span></code></pre></div>
+<span><span class="co">#&gt; Installing package into 'C:/Users/dany.mukesha/AppData/Local/Temp/RtmpS0ZNjt/temp_libpath58887e2e6161'</span></span>
+<span><span class="co">#&gt; (as 'lib' is unspecified)</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
