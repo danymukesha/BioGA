@@ -15,7 +15,7 @@
 #'
 #' @export
 plot_population <- function(population) {
-  par(mfrow=c(1,2))
-  boxplot(population, main = "Boxplot of Population")
-  hist(population, main = "Histogram of Population")
+    par(mfrow = c(1, 2))
+    boxplot(population, main = "Boxplot of Population")
+    hist(population, main = "Histogram of Population")
 }

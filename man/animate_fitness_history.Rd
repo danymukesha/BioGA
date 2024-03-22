@@ -7,7 +7,8 @@
 animate_fitness_history(fitness_history)
 }
 \arguments{
-\item{fitness_history}{A list containing fitness values for each generation.}
+\item{fitness_history}{A list containing fitness values for
+each generation.}
 }
 \value{
 Animation of fitness history

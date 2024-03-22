@@ -4,7 +4,7 @@ abstract:
     Genetic algorithms (GAs) are optimization techniques inspired by 
     the process of natural selection and genetics. They operate by evolving 
     a population of candidate solutions over successive generations, 
-    with each individual representing a potential solution to the optimization 
+    with each individual representing a potential solution to the optimization
     problem at hand. Through the application of genetic operators 
     such as selection, crossover, and mutation, genetic algorithms 
     iteratively improve the population, eventually converging towards 
@@ -37,8 +37,8 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
+    collapse = TRUE,
+    comment = "#>"
 )
 ```
 
@@ -91,8 +91,8 @@ in each sample.
 
 ## Example Scenario
 
-Consider an example scenario of using genetic algorithm optimization to select 
-the best combination of genes for predicting a certain trait, such as disease 
+Consider an example scenario of using genetic algorithm optimization to select
+the best combination of genes for predicting a certain trait, such as disease
 susceptibility.
 
 ```{r}
@@ -110,7 +110,9 @@ generations <- 20
 mutation_rate <- 0.1
 
 # Generate example genomic data using SummarizedExperiment
-counts <- matrix(rpois(num_genes * num_samples, lambda = 10), nrow = num_genes)
+counts <- matrix(rpois(num_genes * num_samples, lambda = 10),
+    nrow = num_genes
+)
 rownames(counts) <- paste0("Gene", 1:num_genes)
 colnames(counts) <- paste0("Sample", 1:num_samples)
 
@@ -125,7 +127,7 @@ In this example, `counts` is a matrix representing the counts
 of gene expression levels across different samples. Each row corresponds 
 to a gene, and each column corresponds to a sample. We use the 
 `SummarizedExperiment` class to store this data, which is 
-common Bioconductor class for representing rectangular feature x sample data, 
+common Bioconductor class for representing rectangular feature x sample data,
 such as RNAseq count matrices or microarray data.
 
 ```{r}
@@ -137,15 +139,18 @@ head(genomic_data)
 
 ```{r}
 # Initialize population
-population <- BioGA::initialize_population_cpp(genomic_data, 
-                                        population_size = 5)
+population <- BioGA::initialize_population_cpp(genomic_data,
+    population_size = 5
+)
 ```
 
 The population represents a set of candidate combinations of genes that 
 could be predictive of the trait. Each individual in the population is 
-represented by a binary vector indicating the presence or absence of each gene.
-For example, an individual in the population might be represented as [1, 0, 1],
-indicating the presence of Gene1 and Gene3 but the absence of Gene2. 
+represented by a binary vector indicating the presence or absence of 
+each gene.
+For example, an individual in the population might be represented 
+as [1, 0, 1], indicating the presence of Gene1 and Gene3 but the absence
+of Gene2. 
 The population undergoes genetic algorithm operations such as selection, 
 crossover, mutation, and replacement to evolve towards individuals 
 with higher predictive power for the trait.
@@ -162,35 +167,41 @@ start_time <- Sys.time()
 # Run genetic algorithm optimization
 generation <- 0
 while (TRUE) {
-  generation <- generation + 1
+    generation <- generation + 1
 
-  # Evaluate fitness
-  fitness <- BioGA::evaluate_fitness_cpp(genomic_data, population)
-  fitness_history[[generation]] <- fitness
+    # Evaluate fitness
+    fitness <- BioGA::evaluate_fitness_cpp(genomic_data, population)
+    fitness_history[[generation]] <- fitness
 
-  # Check termination condition
-  if (generation == generations) { # defined number of generations
-    break
-  }
+    # Check termination condition
+    if (generation == generations) { # defined number of generations
+        break
+    }
 
-  # Selection
-  selected_parents <- BioGA::selection_cpp(population, fitness, num_parents = 2)
+    # Selection
+    selected_parents <- BioGA::selection_cpp(population,
+        fitness,
+        num_parents = 2
+    )
 
-  # Crossover and Mutation
-  offspring <- BioGA::crossover_cpp(selected_parents, offspring_size = 2)
-  # (no mutation in this example)
-  mutated_offspring <- BioGA::mutation_cpp(offspring, mutation_rate = 0) 
+    # Crossover and Mutation
+    offspring <- BioGA::crossover_cpp(selected_parents, offspring_size = 2)
+    # (no mutation in this example)
+    mutated_offspring <- BioGA::mutation_cpp(offspring, mutation_rate = 0)
 
-  # Replacement
-  population <- BioGA::replacement_cpp(population, mutated_offspring, 
-                                num_to_replace = 1)
+    # Replacement
+    population <- BioGA::replacement_cpp(population, mutated_offspring,
+        num_to_replace = 1
+    )
 
-  # Calculate time progress
-  elapsed_time <- difftime(Sys.time(), start_time, units = "secs")
+    # Calculate time progress
+    elapsed_time <- difftime(Sys.time(), start_time, units = "secs")
 
-  # Print time progress
-  cat("\rGeneration:", generation, "- Elapsed Time:", 
-      format(elapsed_time, units = "secs"), "     ")
+    # Print time progress
+    cat(
+        "\rGeneration:", generation, "- Elapsed Time:",
+        format(elapsed_time, units = "secs"), "     "
+    )
 }
 ```
 
@@ -219,8 +230,8 @@ in individual \( i \) from the population.
 - \( S \) be the number of samples.
 
 Then, the fitness \( F_i \) for individual \( i \) in the population can be 
-calculated as the sum of squared differences between the gene expression levels
-of individual \( i \) and the corresponding gene expression levels 
+calculated as the sum of squared differences between the gene expression 
+levels of individual \( i \) and the corresponding gene expression levels 
 in the genomic data, across all genes and samples:
 $$
  F_i = \sum_{j=1}^{G} \sum_{k=1}^{S} (g_{ijk} - p_{ij})^2 
@@ -241,6 +252,16 @@ BioGA::plot_fitness_history(fitness_history)
 This vignette demonstrates how genetic algorithm optimization can be applied 
 to select the best combination of genes for predicting a certain trait using 
 the BioGA package. It showcases the integration of genetic algorithms 
-with genomic data analysis and highlights the potential of genetic algorithms 
+with genomic data analysis and highlights the potential of genetic algorithms
 for feature selection in genomics.
 
+
+<details>
+
+<summary>**Session Info**</summary>
+
+```{r sessioninfo}
+sessioninfo::session_info()
+```
+
+</details>

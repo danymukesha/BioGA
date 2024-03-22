@@ -3,7 +3,13 @@
 
 ## usethis namespace: start
 #' @import biocViews
-#' @importFrom ggplot2 ggplot aes geom_line coord_flip
+#' @import ggplot2
 #' @import sessioninfo
+#' @import SummarizedExperiment
+#' @importFrom Rcpp evalCpp sourceCpp
+#' @import graphics
+#' @import animation
+#' @import rlang
+#' @useDynLib BioGA, .registration = TRUE
 ## usethis namespace: end
 NULL

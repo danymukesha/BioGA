@@ -9,8 +9,8 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
+    collapse = TRUE,
+    comment = "#>"
 )
 ```
 
@@ -49,34 +49,39 @@ start_time <- Sys.time()
 generation <- 0
 while (TRUE) {
     generation <- generation + 1
-    
+
     # Evaluate fitness
     fitness <- evaluate_fitness_cpp(genomic_data, population)
     fitness_history[[generation]] <- fitness
-    
+
     # Check termination condition
-    if (generation==6) {
+    if (generation == 6) {
         break
     }
-    
+
     # Selection
-    selected_parents <- selection_cpp(population, fitness, num_parents = 2)
+    selected_parents <- selection_cpp(population, fitness,
+        num_parents = 2
+    )
 
     # Crossover and Mutation
     offspring <- crossover_cpp(selected_parents, offspring_size = 2)
     # (no mutation in this example)
-    mutated_offspring <- mutation_cpp(offspring, mutation_rate = 0) 
+    mutated_offspring <- mutation_cpp(offspring, mutation_rate = 0)
 
     # Replacement
-    population <- replacement_cpp(population, mutated_offspring, 
-                                  num_to_replace = 1)
-    
+    population <- replacement_cpp(population, mutated_offspring,
+        num_to_replace = 1
+    )
+
     # Calculate time progress
     elapsed_time <- difftime(Sys.time(), start_time, units = "secs")
-    
+
     # Print time progress
-    cat("\rGeneration:", generation, "- Elapsed Time:", 
-        format(elapsed_time, units = "secs"), "     ")
+    cat(
+        "\rGeneration:", generation, "- Elapsed Time:",
+        format(elapsed_time, units = "secs"), "     "
+    )
 }
 ```
 
@@ -87,7 +92,18 @@ while (TRUE) {
 plot_fitness_history(fitness_history)
 ```
 
-This vignette demonstrates how to implement a genetic algorithm optimization 
-process using the BioGA package, from initialization to results visualization.
+This vignette demonstrates how to implement a genetic algorithm optimization
+process using the BioGA package, from initialization to results 
+visualization.
 
 
+
+<details>
+
+<summary>**Session Info**</summary>
+
+```{r sessioninfo}
+sessioninfo::session_info()
+```
+
+</details>

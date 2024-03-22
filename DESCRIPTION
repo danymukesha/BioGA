@@ -20,7 +20,10 @@ Imports:
     graphics,
     Rcpp,
     sessioninfo,
-    SummarizedExperiment
+    SummarizedExperiment,
+    animation,
+    rlang,
+    biocViews 
 Suggests: 
     knitr,
     rmarkdown,

@@ -13,8 +13,10 @@
 #'
 #' @export
 plot_fitness <- function(fitness_values) {
-  generations <- seq_along(fitness_values)
-  plot(generations, fitness_values, type = "l",
-       xlab = "Generations", ylab = "Fitness",
-       main = "Fitness Values Over Generations")
+    generations <- seq_along(fitness_values)
+    plot(generations, fitness_values,
+        type = "l",
+        xlab = "Generations", ylab = "Fitness",
+        main = "Fitness Values Over Generations"
+    )
 }
