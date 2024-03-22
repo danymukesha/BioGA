@@ -24,8 +24,7 @@ Function to select individuals based on fitness scores
 # example of usage
 genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
 population <- BioGA::initialize_population_cpp(genomic_data,
-    population_size = 5
-)
+                population_size = 5)
 fitness <- BioGA::evaluate_fitness_cpp(genomic_data, population)
 BioGA::selection_cpp(population, fitness, num_parents = 2)
 }

@@ -11,19 +11,14 @@
 #' # example of usage
 #' genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
 #' population <- BioGA::initialize_population_cpp(genomic_data,
-#'     population_size = 5
-#' )
+#'                 population_size = 5)
 #' fitness <- BioGA::evaluate_fitness_cpp(genomic_data, population)
 #' selected_parents <- BioGA::selection_cpp(population, fitness,
-#'     num_parents = 2
-#' )
+#'                 num_parents = 2)
 #' BioGA::crossover_cpp(selected_parents, offspring_size = 2)
 #' @export
 crossover_cpp <- function(selected_parents, offspring_size) {
-    .Call("_BioGA_crossover_cpp",
-        PACKAGE = "BioGA",
-        selected_parents,
-        offspring_size)
+    .Call(`_BioGA_crossover_cpp`, selected_parents, offspring_size)
 }
 
 #' Function to evaluate fitness using genomic data
@@ -37,15 +32,11 @@ crossover_cpp <- function(selected_parents, offspring_size) {
 #' # example of usage
 #' genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
 #' population <- BioGA::initialize_population_cpp(genomic_data,
-#'     population_size = 5
-#' )
+#'                 population_size = 5)
 #' BioGA::evaluate_fitness_cpp(genomic_data, population)
 #' @export
 evaluate_fitness_cpp <- function(genomic_data, population) {
-    .Call("_BioGA_evaluate_fitness_cpp",
-        PACKAGE = "BioGA",
-        genomic_data,
-        population)
+    .Call(`_BioGA_evaluate_fitness_cpp`, genomic_data, population)
 }
 
 #' Function to initialize the population from genomic data
@@ -60,9 +51,7 @@ evaluate_fitness_cpp <- function(genomic_data, population) {
 #' BioGA::initialize_population_cpp(genomic_data, population_size = 5)
 #' @export
 initialize_population_cpp <- function(genomic_data, population_size) {
-    .Call("_BioGA_initialize_population_cpp",
-        PACKAGE = "BioGA",
-        genomic_data, population_size)
+    .Call(`_BioGA_initialize_population_cpp`, genomic_data, population_size)
 }
 
 #' Function to mutate the offspring
@@ -74,21 +63,15 @@ initialize_population_cpp <- function(genomic_data, population_size) {
 #' # example of usage
 #' genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
 #' population <- BioGA::initialize_population_cpp(genomic_data,
-#'     population_size = 5
-#' )
+#'                 population_size = 5)
 #' fitness <- BioGA::evaluate_fitness_cpp(genomic_data, population)
 #' selected_parents <- BioGA::selection_cpp(population,
-#'     fitness,
-#'     num_parents = 2
-#' )
+#'                 fitness, num_parents = 2)
 #' offspring <- BioGA::crossover_cpp(selected_parents, offspring_size = 2)
 #' BioGA::mutation_cpp(offspring, mutation_rate = 0)
 #' @export
 mutation_cpp <- function(offspring, mutation_rate) {
-    .Call("_BioGA_mutation_cpp",
-        PACKAGE = "BioGA",
-        offspring,
-        mutation_rate)
+    .Call(`_BioGA_mutation_cpp`, offspring, mutation_rate)
 }
 
 #' Function to replace non-selected individuals in the population
@@ -103,22 +86,16 @@ mutation_cpp <- function(offspring, mutation_rate) {
 #' # example of usage
 #' genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
 #' population <- BioGA::initialize_population_cpp(genomic_data,
-#'     population_size = 5
-#' )
+#'                 population_size = 5)
 #' fitness <- BioGA::evaluate_fitness_cpp(genomic_data, population)
 #' selected_parents <- BioGA::selection_cpp(population, fitness,
-#'     num_parents = 2
-#' )
+#'                       num_parents = 2)
 #' offspring <- BioGA::crossover_cpp(selected_parents, offspring_size = 2)
 #' mutated_offspring <- BioGA::mutation_cpp(offspring, mutation_rate = 0)
 #' BioGA::replacement_cpp(population, mutated_offspring, num_to_replace = 1)
 #' @export
 replacement_cpp <- function(population, offspring, num_to_replace) {
-    .Call("_BioGA_replacement_cpp",
-        PACKAGE = "BioGA",
-        population,
-        offspring,
-        num_to_replace)
+    .Call(`_BioGA_replacement_cpp`, population, offspring, num_to_replace)
 }
 
 #' Function to select individuals based on fitness scores
@@ -132,14 +109,11 @@ replacement_cpp <- function(population, offspring, num_to_replace) {
 #' # example of usage
 #' genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
 #' population <- BioGA::initialize_population_cpp(genomic_data,
-#'     population_size = 5
-#' )
+#'                 population_size = 5)
 #' fitness <- BioGA::evaluate_fitness_cpp(genomic_data, population)
 #' BioGA::selection_cpp(population, fitness, num_parents = 2)
 #' @export
 selection_cpp <- function(population, fitness, num_parents) {
-    .Call("_BioGA_selection_cpp",
-        PACKAGE = "BioGA",
-        population, fitness,
-        num_parents)
+    .Call(`_BioGA_selection_cpp`, population, fitness, num_parents)
 }
+
