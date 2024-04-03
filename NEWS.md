@@ -1,3 +1,7 @@
+# BioGA 0.99.2
+
+# BioGA 0.99.1
+
 # BioGA 0.99.0
 
 * Added a `NEWS.md` file to track changes to the package.
