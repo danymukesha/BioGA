@@ -263,19 +263,19 @@ data, such as RNAseq count matrices or microarray data.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">genomic_data</span><span class="op">)</span></span>
 <span><span class="co">#&gt;       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6 Sample7 Sample8 Sample9</span></span>
-<span><span class="co">#&gt; Gene1      12      11       6       8       7      11      10      11      15</span></span>
-<span><span class="co">#&gt; Gene2      14       9      11      13      12      12      12       7      11</span></span>
-<span><span class="co">#&gt; Gene3      14       8      12       9      12       9      11      18       9</span></span>
-<span><span class="co">#&gt; Gene4       8      11       6      12       8       8       6       7       8</span></span>
-<span><span class="co">#&gt; Gene5       8       7      11       6      13      13      11       8      13</span></span>
-<span><span class="co">#&gt; Gene6       8      15      13      11      19      11      11       8      17</span></span>
+<span><span class="co">#&gt; Gene1      13      12       9       9       8       7       8      12       8</span></span>
+<span><span class="co">#&gt; Gene2       5      11       8      11       4      15      17       8      10</span></span>
+<span><span class="co">#&gt; Gene3      10      17       6       9       9      12       9      10      11</span></span>
+<span><span class="co">#&gt; Gene4      12      15       6      15       7       6       8      12       9</span></span>
+<span><span class="co">#&gt; Gene5       9       7      14       8      13      10       7       8       8</span></span>
+<span><span class="co">#&gt; Gene6       7      17      13       9      15      14      10      13      18</span></span>
 <span><span class="co">#&gt;       Sample10</span></span>
 <span><span class="co">#&gt; Gene1       11</span></span>
-<span><span class="co">#&gt; Gene2       10</span></span>
-<span><span class="co">#&gt; Gene3        6</span></span>
-<span><span class="co">#&gt; Gene4        9</span></span>
-<span><span class="co">#&gt; Gene5        6</span></span>
-<span><span class="co">#&gt; Gene6        7</span></span></code></pre></div>
+<span><span class="co">#&gt; Gene2        7</span></span>
+<span><span class="co">#&gt; Gene3        5</span></span>
+<span><span class="co">#&gt; Gene4       14</span></span>
+<span><span class="co">#&gt; Gene5       15</span></span>
+<span><span class="co">#&gt; Gene6       16</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="initialization">Initialization<a class="anchor" aria-label="anchor" href="#initialization"></a>
@@ -344,7 +344,7 @@ trait.</p>
 <span>        <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">elapsed_time</span>, units <span class="op">=</span> <span class="st">"secs"</span><span class="op">)</span>, <span class="st">"     "</span></span>
 <span>    <span class="op">)</span></span>
 <span><span class="op">}</span></span>
-<span><span class="co">#&gt; Generation: 1 - Elapsed Time: 0.009510279 secs      Generation: 2 - Elapsed Time: 0.01180482 secs      Generation: 3 - Elapsed Time: 0.01202369 secs      Generation: 4 - Elapsed Time: 0.01223445 secs      Generation: 5 - Elapsed Time: 0.01241231 secs      Generation: 6 - Elapsed Time: 0.0126307 secs      Generation: 7 - Elapsed Time: 0.01291156 secs      Generation: 8 - Elapsed Time: 0.01318288 secs      Generation: 9 - Elapsed Time: 0.01344705 secs      Generation: 10 - Elapsed Time: 0.01371312 secs      Generation: 11 - Elapsed Time: 0.01397729 secs      Generation: 12 - Elapsed Time: 0.01423669 secs      Generation: 13 - Elapsed Time: 0.01450753 secs      Generation: 14 - Elapsed Time: 0.01476359 secs      Generation: 15 - Elapsed Time: 0.01502919 secs      Generation: 16 - Elapsed Time: 0.0152905 secs      Generation: 17 - Elapsed Time: 0.015558 secs      Generation: 18 - Elapsed Time: 0.01581931 secs      Generation: 19 - Elapsed Time: 0.01608229 secs</span></span></code></pre></div>
+<span><span class="co">#&gt; Generation: 1 - Elapsed Time: 0.01230216 secs      Generation: 2 - Elapsed Time: 0.0148313 secs      Generation: 3 - Elapsed Time: 0.01511884 secs      Generation: 4 - Elapsed Time: 0.01541185 secs      Generation: 5 - Elapsed Time: 0.01568818 secs      Generation: 6 - Elapsed Time: 0.01595592 secs      Generation: 7 - Elapsed Time: 0.01622868 secs      Generation: 8 - Elapsed Time: 0.01649761 secs      Generation: 9 - Elapsed Time: 0.01677179 secs      Generation: 10 - Elapsed Time: 0.01703191 secs      Generation: 11 - Elapsed Time: 0.01729941 secs      Generation: 12 - Elapsed Time: 0.01756549 secs      Generation: 13 - Elapsed Time: 0.01782632 secs      Generation: 14 - Elapsed Time: 0.01808691 secs      Generation: 15 - Elapsed Time: 0.01834989 secs      Generation: 16 - Elapsed Time: 0.01860714 secs      Generation: 17 - Elapsed Time: 0.01887107 secs      Generation: 18 - Elapsed Time: 0.01912999 secs      Generation: 19 - Elapsed Time: 0.01940989 secs</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="fitness-calculation">Fitness Calculation<a class="anchor" aria-label="anchor" href="#fitness-calculation"></a>
@@ -408,7 +408,7 @@ genetic algorithms for feature selection in genomics.</p>
 <span><span class="co">#&gt;  collate  C.UTF-8</span></span>
 <span><span class="co">#&gt;  ctype    C.UTF-8</span></span>
 <span><span class="co">#&gt;  tz       UTC</span></span>
-<span><span class="co">#&gt;  date     2024-04-03</span></span>
+<span><span class="co">#&gt;  date     2024-04-10</span></span>
 <span><span class="co">#&gt;  pandoc   3.1.11 @ /opt/hostedtoolcache/pandoc/3.1.11/x64/ (via rmarkdown)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">─ Packages ───────────────────────────────────────────────────────────────────</span></span></span>
@@ -419,7 +419,7 @@ genetic algorithms for feature selection in genomics.</p>
 <span><span class="co">#&gt;  BiocGenerics         * 0.48.1      <span style="color: #555555;">2023-11-01</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">Bioconductor</span></span></span>
 <span><span class="co">#&gt;  BiocManager            1.30.22     <span style="color: #555555;">2023-08-08</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
 <span><span class="co">#&gt;  biocViews              1.70.0      <span style="color: #555555;">2023-10-24</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">Bioconductor</span></span></span>
-<span><span class="co">#&gt;  BioGA                * 0.99.2      <span style="color: #555555;">2024-04-03</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">local</span></span></span>
+<span><span class="co">#&gt;  BioGA                * 0.99.2      <span style="color: #555555;">2024-04-10</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">local</span></span></span>
 <span><span class="co">#&gt;  bitops                 1.0-7       <span style="color: #555555;">2021-04-24</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
 <span><span class="co">#&gt;  bslib                  0.7.0       <span style="color: #555555;">2024-03-29</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
 <span><span class="co">#&gt;  cachem                 1.0.8       <span style="color: #555555;">2023-05-01</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
@@ -442,11 +442,11 @@ genetic algorithms for feature selection in genomics.</p>
 <span><span class="co">#&gt;  graph                  1.80.0      <span style="color: #555555;">2023-10-24</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">Bioconductor</span></span></span>
 <span><span class="co">#&gt;  gtable                 0.3.4       <span style="color: #555555;">2023-08-21</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
 <span><span class="co">#&gt;  highr                  0.10        <span style="color: #555555;">2022-12-22</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
-<span><span class="co">#&gt;  htmltools              0.5.8       <span style="color: #555555;">2024-03-25</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  htmltools              0.5.8.1     <span style="color: #555555;">2024-04-04</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
 <span><span class="co">#&gt;  IRanges              * 2.36.0      <span style="color: #555555;">2023-10-24</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">Bioconductor</span></span></span>
 <span><span class="co">#&gt;  jquerylib              0.1.4       <span style="color: #555555;">2021-04-26</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
 <span><span class="co">#&gt;  jsonlite               1.8.8       <span style="color: #555555;">2023-12-04</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
-<span><span class="co">#&gt;  knitr                  1.45        <span style="color: #555555;">2023-10-30</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  knitr                  1.46        <span style="color: #555555;">2024-04-06</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
 <span><span class="co">#&gt;  labeling               0.4.3       <span style="color: #555555;">2023-08-29</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
 <span><span class="co">#&gt;  lattice                0.22-5      <span style="color: #555555;">2023-10-24</span> <span style="color: #555555;">[3]</span> <span style="color: #555555;">CRAN (R 4.3.3)</span></span></span>
 <span><span class="co">#&gt;  lifecycle              1.0.4       <span style="color: #555555;">2023-11-07</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
