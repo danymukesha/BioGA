@@ -1,3 +1,5 @@
+# BioGA 0.99.3
+
 # BioGA 0.99.2
 
 * Fixed ERROR: System files 'BioGA.Rproj' found that should not be Git tracked.
