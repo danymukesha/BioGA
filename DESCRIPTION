@@ -15,7 +15,7 @@ Description: Genetic algorithm are a class of optimization algorithms
 License: MIT + file LICENSE
 URL: https://danymukesha.github.io/BioGA/
 BugReports: https://github.com/danymukesha/BioGA/issues
-Imports:
+Depends:
     ggplot2,
     graphics,
     Rcpp,
