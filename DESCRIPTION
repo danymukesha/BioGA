@@ -23,7 +23,8 @@ Imports:
     animation,
     rlang,
     biocViews,
-    sessioninfo 
+    sessioninfo,
+    BiocStyle
 Depends: 
     R (>= 4.3.3)
 Suggests: 

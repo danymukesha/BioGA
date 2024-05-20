@@ -10,6 +10,7 @@
 #' @importFrom graphics boxplot hist par
 #' @importFrom animation saveGIF
 #' @importFrom rlang local_options
+#' @importFrom BiocStyle html_document
 #' @useDynLib BioGA, .registration = TRUE
 ## usethis namespace: end
 NULL
