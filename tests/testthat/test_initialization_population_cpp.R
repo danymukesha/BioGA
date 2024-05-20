@@ -1,4 +1,5 @@
-test_that("initialize_population_cpp returns a matrix with correct dimensions", {
+test_that("initialize_population_cpp returns a matrix 
+          with correct dimensions", {
     # Load The PACKAGE
     library(BioGA)
 
@@ -14,7 +15,8 @@ test_that("initialize_population_cpp returns a matrix with correct dimensions", 
     expect_equal(ncol(population), nrow(genomic_data))
 })
 
-test_that("initialize_population_cpp returns a matrix with values from genomic data", {
+test_that("initialize_population_cpp returns a matrix 
+          with values from genomic data", {
     # Load THE PACKAGE
     library(BioGA)
 

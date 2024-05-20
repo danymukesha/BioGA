@@ -74,7 +74,6 @@ plot_fitness <- function(fitness_values) {
 #'
 #' @return Plot of population
 #'
-#' @import graphics
 #'
 #' @examples
 #' # example of usage

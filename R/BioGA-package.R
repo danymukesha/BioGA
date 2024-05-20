@@ -2,14 +2,14 @@
 "_PACKAGE"
 
 ## usethis namespace: start
-#' @import biocViews
-#' @import ggplot2
-#' @import sessioninfo
-#' @import SummarizedExperiment
+#' @importFrom biocViews getBiocViews
+#' @importFrom ggplot2 ggtitle ggplot
+#' @importFrom sessioninfo session_info
+#' @importFrom SummarizedExperiment SummarizedExperiment
 #' @importFrom Rcpp evalCpp sourceCpp
-#' @import graphics
-#' @import animation
-#' @import rlang
+#' @importFrom graphics boxplot hist par
+#' @importFrom animation saveGIF
+#' @importFrom rlang local_options
 #' @useDynLib BioGA, .registration = TRUE
 ## usethis namespace: end
 NULL
