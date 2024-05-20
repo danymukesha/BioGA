@@ -27,7 +27,7 @@ using namespace Rcpp;
    // Generate random population using genomic data
    for (int i = 0; i < population_size; ++i) {
      for (int j = 0; j < num_genes; ++j) {
-       int sample_index = std::rand() % num_samples;
+       int sample_index = R::unif_rand() / num_samples;
        population(i, j) = genomic_data(j, sample_index);
      }
    }

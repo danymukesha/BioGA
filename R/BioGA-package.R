@@ -3,7 +3,7 @@
 
 ## usethis namespace: start
 #' @importFrom biocViews getBiocViews
-#' @importFrom ggplot2 ggtitle ggplot
+#' @importFrom ggplot2 ggtitle ggplot geom_line labs
 #' @importFrom sessioninfo session_info
 #' @importFrom SummarizedExperiment SummarizedExperiment
 #' @importFrom Rcpp evalCpp sourceCpp
