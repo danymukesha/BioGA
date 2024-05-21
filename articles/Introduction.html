@@ -97,23 +97,23 @@
       mutation, genetic algorithms iteratively improve the population,
       eventually converging towards optimal or near-optimal solutions.
       In the field of genomics, where data sets are often large,
-      complex, and high-dimensional, genetic algorithms offer a
-      promising approach for addressing optimization challenges such as
-      feature selection, parameter tuning, and model optimization. By
-      harnessing the power of evolutionary principles, genetic
-      algorithms can effectively explore the solution space, identify
-      informative features, and optimize model parameters, leading to
-      improved accuracy and interpretability in genomic data analysis.
-      The BioGA package extends the capabilities of genetic algorithms
-      to the realm of genomic data analysis, providing a suite of
-      functions optimized for handling high throughput genomic data.
-      Implemented in C++ for enhanced performance, BioGA offers
-      efficient algorithms for tasks such as feature selection,
-      classification, clustering, and more. By integrating seamlessly
-      with the Bioconductor ecosystem, BioGA empowers researchers and
-      analysts to leverage the power of genetic algorithms within their
-      genomics workflows, facilitating the discovery of biological
-      insights from large-scale genomic data sets.
+      complex, and high-dimensional, genetic algorithms offer a good
+      approach for addressing optimization challenges such as feature
+      selection, parameter tuning, and model optimization. By harnessing
+      the power of evolutionary principles, genetic algorithms can
+      effectively explore the solution space, identify informative
+      features, and optimize model parameters, leading to improved
+      accuracy and interpretability in genomic data analysis. The BioGA
+      package extends the capabilities of genetic algorithms to the
+      realm of genomic data analysis, providing a suite of functions
+      optimized for handling high throughput genomic data. Implemented
+      in C++ for enhanced performance, BioGA offers efficient algorithms
+      for tasks such as feature selection, classification, clustering,
+      and more. By integrating seamlessly with the Bioconductor
+      ecosystem, BioGA empowers researchers and analysts to leverage the
+      power of genetic algorithms within their genomics workflows,
+      facilitating the discovery of biological insights from large-scale
+      genomic data sets.
     </div>
     
 <p><br></p>
@@ -139,11 +139,11 @@ analysis. We showcase its interoperability with Bioconductor classes,
 demonstrating how genetic algorithm optimization can be seamlessly
 integrated into existing genomics pipelines for improved analysis and
 interpretation.</p>
-<p>The BioGA package provides a comprehensive set of functions for
-genetic algorithm optimization tailored for analyzing high throughput
-genomic data. This vignette demonstrates the usage of BioGA in the
-context of selecting the best combination of genes for predicting a
-certain trait, such as disease susceptibility.</p>
+<p>The BioGA package provides a set of functions for genetic algorithm
+optimization tailored for analyzing high throughput genomic data. This
+vignette demonstrates the usage of BioGA in the context of selecting the
+best combination of genes for predicting a certain trait, such as
+disease susceptibility.</p>
 </div>
 <div class="section level3">
 <h3 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
@@ -171,6 +171,25 @@ Gene3    2.3        2.2        2.1        2.0</code></pre>
 each column represents a sample. The values in the matrix represent some
 measurement of gene expression, such as mRNA levels or protein
 abundance, in each sample.</p>
+<p>For instance, the value 0.1 in Sample 1 for Gene1 indicates the
+expression level of Gene1 in Sample 1. Similarly, the value 2.2 in
+Sample 2 for Gene3 indicates the expression level of Gene3 in Sample
+2.</p>
+<p>Genomic data can be used in various analyses, including genetic
+association studies, gene expression analysis, and comparative genomics.
+In the context of the <code>evaluate_fitness_cpp</code> function,
+genomic data is used to calculate fitness scores for individuals in a
+population, typically in the context of genetic algorithm
+optimization.</p>
+<p>The population represents a set of candidate combinations of genes
+that could be predictive of the trait. Each individual in the population
+is represented by a binary vector indicating the presence or absence of
+each gene. For example, an individual in the population might be
+represented as [1, 0, 1], indicating the presence of Gene1 and Gene3 but
+the absence of Gene2. The population undergoes genetic algorithm
+operations such as selection, crossover, mutation, and replacement to
+evolve towards individuals with higher predictive power for the
+trait.</p>
 </div>
 <div class="section level3">
 <h3 id="example-scenario">Example Scenario<a class="anchor" aria-label="anchor" href="#example-scenario"></a>
@@ -295,7 +314,7 @@ data, such as RNAseq count matrices or microarray data.</p>
 <h3 id="initialization">Initialization<a class="anchor" aria-label="anchor" href="#initialization"></a>
 </h3>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Initialize population</span></span>
+<code class="sourceCode R"><span><span class="co"># Initialize population (select the number of canditate you wish `population`)</span></span>
 <span><span class="va">population</span> <span class="op">&lt;-</span> <span class="fu">BioGA</span><span class="fu">::</span><span class="fu"><a href="../reference/initialize_population_cpp.html">initialize_population_cpp</a></span><span class="op">(</span><span class="va">genomic_data</span>,</span>
 <span>    population_size <span class="op">=</span> <span class="fl">5</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -358,7 +377,7 @@ trait.</p>
 <span>        <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">elapsed_time</span>, units <span class="op">=</span> <span class="st">"secs"</span><span class="op">)</span>, <span class="st">"     "</span></span>
 <span>    <span class="op">)</span></span>
 <span><span class="op">}</span></span>
-<span><span class="co">#&gt; Generation: 1 - Elapsed Time: 0.009705544 secs      Generation: 2 - Elapsed Time: 0.01191998 secs      Generation: 3 - Elapsed Time: 0.01211929 secs      Generation: 4 - Elapsed Time: 0.01228666 secs      Generation: 5 - Elapsed Time: 0.01245046 secs      Generation: 6 - Elapsed Time: 0.01261282 secs      Generation: 7 - Elapsed Time: 0.01277518 secs      Generation: 8 - Elapsed Time: 0.01293445 secs      Generation: 9 - Elapsed Time: 0.01309371 secs      Generation: 10 - Elapsed Time: 0.01325536 secs      Generation: 11 - Elapsed Time: 0.01341534 secs      Generation: 12 - Elapsed Time: 0.01357532 secs      Generation: 13 - Elapsed Time: 0.01374459 secs      Generation: 14 - Elapsed Time: 0.01391149 secs      Generation: 15 - Elapsed Time: 0.0140748 secs      Generation: 16 - Elapsed Time: 0.01423502 secs      Generation: 17 - Elapsed Time: 0.014395 secs      Generation: 18 - Elapsed Time: 0.01455712 secs      Generation: 19 - Elapsed Time: 0.01471615 secs</span></span></code></pre></div>
+<span><span class="co">#&gt; Generation: 1 - Elapsed Time: 0.009496689 secs      Generation: 2 - Elapsed Time: 0.01147652 secs      Generation: 3 - Elapsed Time: 0.01166081 secs      Generation: 4 - Elapsed Time: 0.01183033 secs      Generation: 5 - Elapsed Time: 0.0119946 secs      Generation: 6 - Elapsed Time: 0.01215553 secs      Generation: 7 - Elapsed Time: 0.01231742 secs      Generation: 8 - Elapsed Time: 0.01247978 secs      Generation: 9 - Elapsed Time: 0.01264405 secs      Generation: 10 - Elapsed Time: 0.01280522 secs      Generation: 11 - Elapsed Time: 0.01298714 secs      Generation: 12 - Elapsed Time: 0.01315951 secs      Generation: 13 - Elapsed Time: 0.01332283 secs      Generation: 14 - Elapsed Time: 0.01348448 secs      Generation: 15 - Elapsed Time: 0.01364517 secs      Generation: 16 - Elapsed Time: 0.01380563 secs      Generation: 17 - Elapsed Time: 0.01396966 secs      Generation: 18 - Elapsed Time: 0.01413703 secs      Generation: 19 - Elapsed Time: 0.01429939 secs</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="fitness-calculation">Fitness Calculation<a class="anchor" aria-label="anchor" href="#fitness-calculation"></a>
@@ -404,16 +423,9 @@ optimization in the genetic algorithm.</p>
 <code class="sourceCode R"><span><span class="co"># Plot fitness change over generations</span></span>
 <span><span class="fu">BioGA</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_fitness_history.html">plot_fitness_history</a></span><span class="op">(</span><span class="va">fitness_history</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Introduction_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
-<p>This vignette demonstrates how genetic algorithm optimization can be
-applied to select the best combination of genes for predicting a certain
-trait using the BioGA package. It showcases the integration of genetic
-algorithms with genomic data analysis and highlights the potential of
-genetic algorithms for feature selection in genomics.</p>
-<p>BioGA is a computational tool designed to analyze and optimize high
-throughputgenomic data using genetic algorithms (GAs). Genetic
-algorithms are a type of optimization algorithm inspired by the process
-of natural selection and genetics. They operate by iteratively evolving
-a population of candidate solutions towards better solutions.</p>
+<p>This showcases the integration of genetic algorithms with genomic
+data analysis and highlights the potential of genetic algorithms for
+feature selection in genomics.</p>
 <p>Here’s how BioGA could work in the context of high throughput genomic
 data analysis:</p>
 <ol style="list-style-type: decimal">
@@ -453,170 +465,14 @@ solution(s) found. This could involve further validation or
 interpretation of the results in the context of the original
 problem.</p></li>
 </ol>
-<p>Applications of BioGA in genomic data analysis could include
+<p>Other applications of BioGA in genomic data analysis could include
 genome-wide association studies (GWAS), gene expression analysis,
 pathway analysis, and predictive modeling for personalized medicine,
 among others. By leveraging genetic algorithms, BioGA offers a powerful
 approach to exploring complex genomic datasets and identifying
 meaningful patterns and associations.</p>
-<p>The BioGA package provides a comprehensive set of functions for
-genetic algorithm optimization tailored for analyzing high throughput
-genomic data. This vignette demonstrates the usage of BioGA in the
-context of selecting the best combination of genes for predicting a
-certain trait, such as disease susceptibility.</p>
-<p>Let’s consider an example scenario of using genetic algorithm
-optimization to select the best combination of genes for predicting a
-certain trait, such as disease susceptibility.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Load the BioGA package</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://danymukesha.github.io/BioGA/">BioGA</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Define parameters for genetic algorithm</span></span>
-<span><span class="va">population_size</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
-<span><span class="va">generations</span> <span class="op">&lt;-</span> <span class="fl">6</span></span>
-<span><span class="va">mutation_rate</span> <span class="op">&lt;-</span> <span class="fl">0.1</span></span>
-<span></span>
-<span><span class="co"># Generate example genomic data</span></span>
-<span><span class="va">genomic_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">10</span>, ncol <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
-</div>
-</div>
-<div class="section level2">
-<h2 id="overview-1">Overview<a class="anchor" aria-label="anchor" href="#overview-1"></a>
-</h2>
-<p>Genomic data refers to the genetic information stored in an
-organism’s DNA. It includes the sequence of nucleotides (adenine,
-thymine, cytosine, and guanine) that make up the DNA molecules. Genomic
-data can provide valuable insights into various biological processes,
-such as gene expression, genetic variation, and evolutionary
-relationships.</p>
-<p>Genomic data in this context could consist of gene expression
-profiles measured across different individuals (e.g., patients).</p>
-<ul>
-<li><p>Each row in the genomic_data matrix represents a gene, and each
-column represents a patient sample.</p></li>
-<li><p>The values in the matrix represent the expression levels of each
-gene in each patient sample.</p></li>
-</ul>
-<p>Here’s an example of genomic data:</p>
-<pre><code>      Sample 1   Sample 2   Sample 3   Sample 4
-Gene1    0.1        0.2        0.3        0.4
-Gene2    1.2        1.3        1.4        1.5
-Gene3    2.3        2.2        2.1        2.0</code></pre>
-<p>In this example, each row represents a gene (or genomic feature), and
-each column represents a sample. The values in the matrix represent some
-measurement of gene expression, such as mRNA levels or protein
-abundance, in each sample.</p>
-<p>For instance, the value 0.1 in Sample 1 for Gene1 indicates the
-expression level of Gene1 in Sample 1. Similarly, the value 2.2 in
-Sample 2 for Gene3 indicates the expression level of Gene3 in Sample
-2.</p>
-<p>Genomic data can be used in various analyses, including genetic
-association studies, gene expression analysis, and comparative genomics.
-In the context of the <code>evaluate_fitness_cpp</code> function,
-genomic data is used to calculate fitness scores for individuals in a
-population, typically in the context of genetic algorithm
-optimization.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Initialize population</span></span>
-<span><span class="va">population</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/initialize_population_cpp.html">initialize_population_cpp</a></span><span class="op">(</span><span class="va">genomic_data</span>,</span>
-<span>    population_size <span class="op">=</span> <span class="fl">5</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-<p>The population represents a set of candidate combinations of genes
-that could be predictive of the trait. Each individual in the population
-is represented by a binary vector indicating the presence or absence of
-each gene. For example, an individual in the population might be
-represented as [1, 0, 1], indicating the presence of Gene1 and Gene3 but
-the absence of Gene2. The population undergoes genetic algorithm
-operations such as selection, crossover, mutation, and replacement to
-evolve towards individuals with higher predictive power for the
-trait.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Initialize fitness history</span></span>
-<span><span class="va">fitness_history</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Initialize time progress</span></span>
-<span><span class="va">start_time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Run genetic algorithm optimization</span></span>
-<span><span class="va">generation</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
-<span><span class="kw">while</span> <span class="op">(</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">generation</span> <span class="op">&lt;-</span> <span class="va">generation</span> <span class="op">+</span> <span class="fl">1</span></span>
-<span></span>
-<span>    <span class="co"># Evaluate fitness</span></span>
-<span>    <span class="va">fitness</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/evaluate_fitness_cpp.html">evaluate_fitness_cpp</a></span><span class="op">(</span><span class="va">genomic_data</span>, <span class="va">population</span><span class="op">)</span></span>
-<span>    <span class="va">fitness_history</span><span class="op">[[</span><span class="va">generation</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">fitness</span></span>
-<span></span>
-<span>    <span class="co"># Check termination condition</span></span>
-<span>    <span class="kw">if</span> <span class="op">(</span><span class="va">generation</span> <span class="op">==</span> <span class="va">generations</span><span class="op">)</span> <span class="op">{</span> <span class="co"># defined number of generations</span></span>
-<span>        <span class="kw">break</span></span>
-<span>    <span class="op">}</span></span>
-<span></span>
-<span>    <span class="co"># Selection</span></span>
-<span>    <span class="va">selected_parents</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/selection_cpp.html">selection_cpp</a></span><span class="op">(</span><span class="va">population</span>, <span class="va">fitness</span>, num_parents <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
-<span></span>
-<span>    <span class="co"># Crossover and Mutation</span></span>
-<span>    <span class="va">offspring</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/crossover_cpp.html">crossover_cpp</a></span><span class="op">(</span><span class="va">selected_parents</span>, offspring_size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
-<span>    <span class="co"># (no mutation in this example)</span></span>
-<span>    <span class="va">mutated_offspring</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mutation_cpp.html">mutation_cpp</a></span><span class="op">(</span><span class="va">offspring</span>, mutation_rate <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
-<span></span>
-<span>    <span class="co"># Replacement</span></span>
-<span>    <span class="va">population</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/replacement_cpp.html">replacement_cpp</a></span><span class="op">(</span><span class="va">population</span>, <span class="va">mutated_offspring</span>,</span>
-<span>        num_to_replace <span class="op">=</span> <span class="fl">1</span></span>
-<span>    <span class="op">)</span></span>
-<span></span>
-<span>    <span class="co"># Calculate time progress</span></span>
-<span>    <span class="va">elapsed_time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/difftime.html" class="external-link">difftime</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">start_time</span>, units <span class="op">=</span> <span class="st">"secs"</span><span class="op">)</span></span>
-<span></span>
-<span>    <span class="co"># Print time progress</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span></span>
-<span>        <span class="st">"\rGeneration:"</span>, <span class="va">generation</span>, <span class="st">"- Elapsed Time:"</span>,</span>
-<span>        <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">elapsed_time</span>, units <span class="op">=</span> <span class="st">"secs"</span><span class="op">)</span>, <span class="st">"     "</span></span>
-<span>    <span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span><span class="co">#&gt; Generation: 1 - Elapsed Time: 0.009124279 secs      Generation: 2 - Elapsed Time: 0.009276867 secs      Generation: 3 - Elapsed Time: 0.009371281 secs      Generation: 4 - Elapsed Time: 0.009451866 secs      Generation: 5 - Elapsed Time: 0.009526014 secs</span></span></code></pre></div>
-<p>The fitness calculation described in the provided code calculates a
-measure of dissimilarity between the gene expression profiles of
-individuals in the population and the genomic data. This measure of
-dissimilarity, or “fitness”, quantifies how well the gene expression
-profile of an individual matches the genomic data.</p>
-<p>Mathematically, the fitness calculation can be represented as
-follows:</p>
-<p>Let:</p>
-<ul>
-<li><p><span class="math inline">\(g_{ijk}\)</span> be the gene
-expression level of gene <span class="math inline">\(j\)</span> in
-individual <span class="math inline">\(i\)</span> and sample <span class="math inline">\(k\)</span> from the genomic data.</p></li>
-<li><p><span class="math inline">\(p_{ij}\)</span> be the gene
-expression level of gene <span class="math inline">\(j\)</span> in
-individual <span class="math inline">\(i\)</span> from the
-population.</p></li>
-<li><p><span class="math inline">\(N\)</span> be the number of
-individuals in the population.</p></li>
-<li><p><span class="math inline">\(G\)</span> be the number of
-genes.</p></li>
-<li><p><span class="math inline">\(S\)</span> be the number of
-samples.</p></li>
-</ul>
-<p>Then, the fitness <span class="math inline">\(F_i\)</span> for
-individual <span class="math inline">\(i\)</span> in the population can
-be calculated as the sum of squared differences between the gene
-expression levels of individual <span class="math inline">\(i\)</span>
-and the corresponding gene expression levels in the genomic data, across
-all genes and samples:</p>
-<p><span class="math display">\[ F_i = \sum_{j=1}^{G} \sum_{k=1}^{S}
-(g_{ijk} - p_{ij})^2 \]</span></p>
-<p>This fitness calculation aims to minimize the overall dissimilarity
-between the gene expression profiles of individuals in the population
-and the genomic data. Individuals with lower fitness scores are
-considered to have gene expression profiles that are more similar to the
-genomic data and are therefore more likely to be selected for further
-optimization in the genetic algorithm.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Plot fitness change over generations</span></span>
-<span><span class="fu"><a href="../reference/plot_fitness_history.html">plot_fitness_history</a></span><span class="op">(</span><span class="va">fitness_history</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Introduction_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
 <details><summary><strong>Session Info</strong>
-</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">sessioninfo</span><span class="fu">::</span><span class="fu"><a href="https://r-lib.github.io/sessioninfo/reference/session_info.html" class="external-link">session_info</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">─ Session info ───────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt;  <span style="color: #555555; font-style: italic;">setting </span> <span style="color: #555555; font-style: italic;">value</span></span></span>
@@ -717,6 +573,7 @@ optimization in the genetic algorithm.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">──────────────────────────────────────────────────────────────────────────────</span></span></span></code></pre></div>
 </details>
+</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
