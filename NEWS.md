@@ -1,5 +1,7 @@
 # BioGA 0.99.4
 
+* Fixed and added updates requested by Bioconductor Peer review
+
 # BioGA 0.99.3
 
 # BioGA 0.99.2
