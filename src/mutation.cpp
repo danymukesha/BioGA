@@ -18,7 +18,8 @@ using namespace Rcpp;
 //' BioGA::mutation_cpp(offspring, mutation_rate = 0)
 //' @export
 // [[Rcpp::export]]
-NumericMatrix mutation_cpp(const NumericMatrix& offspring, double mutation_rate) {
+NumericMatrix mutation_cpp(const NumericMatrix& offspring, 
+                           double mutation_rate) {
   int num_offspring = offspring.nrow();
   int num_genes = offspring.ncol();
 
@@ -29,7 +30,8 @@ NumericMatrix mutation_cpp(const NumericMatrix& offspring, double mutation_rate)
   for (int i = 0; i < num_offspring; ++i) {
     for (int j = 0; j < num_genes; ++j) {
       if (R::runif(0.0, 1.0) < mutation_rate) {
-        mutated_offspring(i, j) += R::rnorm(0.0, 0.1); // Add small random value
+        // Add small random value
+        mutated_offspring(i, j) += R::rnorm(0.0, 0.1); 
       }
     }
   }

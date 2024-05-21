@@ -14,7 +14,8 @@ using namespace Rcpp;
 //' BioGA::initialize_population_cpp(genomic_data, population_size = 5)
 //' @export
 // [[Rcpp::export]]
- NumericMatrix initialize_population_cpp(const NumericMatrix& genomic_data, int population_size) {
+ NumericMatrix initialize_population_cpp(const NumericMatrix& genomic_data, 
+                                         int population_size) {
    int num_genes = genomic_data.nrow();
    int num_samples = genomic_data.ncol();
 

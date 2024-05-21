@@ -18,7 +18,8 @@ using namespace Rcpp;
 //' BioGA::crossover_cpp(selected_parents, offspring_size = 2)
 //' @export
 // [[Rcpp::export]]
-NumericMatrix crossover_cpp(const NumericMatrix& selected_parents, int offspring_size) {
+NumericMatrix crossover_cpp(const NumericMatrix& selected_parents, 
+                            int offspring_size) {
   int num_parents = selected_parents.nrow();
   int num_genes = selected_parents.ncol();
 
@@ -30,7 +31,8 @@ NumericMatrix crossover_cpp(const NumericMatrix& selected_parents, int offspring
     int parent1_index = int(R::unif_rand()) % num_parents;
     int parent2_index = int(R::unif_rand()) % num_parents;
     for (int j = 0; j < num_genes; ++j) {
-      offspring(i, j) = (selected_parents(parent1_index, j) + selected_parents(parent2_index, j)) / 2.0;
+      offspring(i, j) = (selected_parents(parent1_index, j) + 
+        selected_parents(parent2_index, j)) / 2.0;
     }
   }
 

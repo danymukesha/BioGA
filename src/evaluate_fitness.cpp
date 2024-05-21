@@ -16,7 +16,8 @@ using namespace Rcpp;
 //' BioGA::evaluate_fitness_cpp(genomic_data, population)
 //' @export
 // [[Rcpp::export]]
-NumericVector evaluate_fitness_cpp(const NumericMatrix& genomic_data, const NumericMatrix& population) {
+NumericVector evaluate_fitness_cpp(const NumericMatrix& genomic_data, 
+                                   const NumericMatrix& population) {
   int num_genes = genomic_data.nrow();
   int num_samples = genomic_data.ncol();
   int population_size = population.nrow();

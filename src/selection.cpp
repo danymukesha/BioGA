@@ -17,7 +17,9 @@ using namespace Rcpp;
 //' BioGA::selection_cpp(population, fitness, num_parents = 2)
 //' @export
 // [[Rcpp::export]]
-NumericMatrix selection_cpp(const NumericMatrix& population, const NumericVector& fitness, int num_parents) {
+NumericMatrix selection_cpp(const NumericMatrix& population, 
+                            const NumericVector& fitness, 
+                            int num_parents) {
   int population_size = population.nrow();
   int num_genes = population.ncol();
 
@@ -29,7 +31,8 @@ NumericMatrix selection_cpp(const NumericMatrix& population, const NumericVector
 
   // Select parents based on fitness scores
   for (int i = 0; i < num_parents; ++i) {
-    // Find the individual with the minimum fitness score that has not been selected
+    // Find the individual with the minimum fitness score 
+    // that has not been selected
     int min_fitness_index = -1;
     double min_fitness = std::numeric_limits<double>::infinity();
     for (int j = 0; j < population_size; ++j) {

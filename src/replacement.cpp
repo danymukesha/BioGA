@@ -23,7 +23,9 @@ using namespace Rcpp;
 //' BioGA::replacement_cpp(population, mutated_offspring, num_to_replace = 1)
 //' @export
 // [[Rcpp::export]]
-NumericMatrix replacement_cpp(const NumericMatrix& population, const NumericMatrix& offspring, int num_to_replace) {
+NumericMatrix replacement_cpp(const NumericMatrix& population, 
+                              const NumericMatrix& offspring, 
+                              int num_to_replace) {
   int population_size = population.nrow();
   int num_genes = population.ncol();
 
