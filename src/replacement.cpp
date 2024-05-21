@@ -1,4 +1,5 @@
 #include <Rcpp.h>
+#include <cmath>
 using namespace Rcpp;
 
 //' Function to replace non-selected individuals in the population
@@ -31,7 +32,7 @@ NumericMatrix replacement_cpp(const NumericMatrix& population, const NumericMatr
 
   // Replace non-selected individuals in the population with offspring
   for (int i = 0; i < num_to_replace; ++i) {
-    int index_to_replace = R::unif_rand() / population_size;
+    int index_to_replace = int(R::unif_rand()) % population_size;
     for (int j = 0; j < num_genes; ++j) {
       updated_population(index_to_replace, j) = offspring(i, j);
     }

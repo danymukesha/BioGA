@@ -27,8 +27,8 @@ NumericMatrix crossover_cpp(const NumericMatrix& selected_parents, int offspring
 
   // Perform crossover between selected parents
   for (int i = 0; i < offspring_size; ++i) {
-    int parent1_index = R::unif_rand() / num_parents;
-    int parent2_index = R::unif_rand() / num_parents;
+    int parent1_index = int(R::unif_rand()) % num_parents;
+    int parent2_index = int(R::unif_rand()) % num_parents;
     for (int j = 0; j < num_genes; ++j) {
       offspring(i, j) = (selected_parents(parent1_index, j) + selected_parents(parent2_index, j)) / 2.0;
     }
