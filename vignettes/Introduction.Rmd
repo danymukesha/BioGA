@@ -1,5 +1,7 @@
 ---
 title: "Introduction"
+author: "Dany Mukesha"
+date: "`r Sys.Date()`"
 abstract:
     Genetic algorithms (GAs) are optimization techniques inspired by 
     the process of natural selection and genetics. They operate by evolving 

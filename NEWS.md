@@ -1,3 +1,8 @@
+# BioGA 0.99.6
+
+* add the authors and date in the vignettes?
+* no R version less than 4.4
+
 # BioGA 0.99.5
 
 # BioGA 0.99.4
