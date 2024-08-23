@@ -1,60 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://danymukesha.github.io/BioGA/404.html</loc>
-  </url>
-  <url>
-    <loc>https://danymukesha.github.io/BioGA/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://danymukesha.github.io/BioGA/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://danymukesha.github.io/BioGA/articles/Introduction.html</loc>
-  </url>
-  <url>
-    <loc>https://danymukesha.github.io/BioGA/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://danymukesha.github.io/BioGA/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://danymukesha.github.io/BioGA/index.html</loc>
-  </url>
-  <url>
-    <loc>https://danymukesha.github.io/BioGA/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://danymukesha.github.io/BioGA/reference/BioGA-package.html</loc>
-  </url>
-  <url>
-    <loc>https://danymukesha.github.io/BioGA/reference/crossover_cpp.html</loc>
-  </url>
-  <url>
-    <loc>https://danymukesha.github.io/BioGA/reference/evaluate_fitness_cpp.html</loc>
-  </url>
-  <url>
-    <loc>https://danymukesha.github.io/BioGA/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://danymukesha.github.io/BioGA/reference/initialize_population_cpp.html</loc>
-  </url>
-  <url>
-    <loc>https://danymukesha.github.io/BioGA/reference/mutation_cpp.html</loc>
-  </url>
-  <url>
-    <loc>https://danymukesha.github.io/BioGA/reference/plot_fitness.html</loc>
-  </url>
-  <url>
-    <loc>https://danymukesha.github.io/BioGA/reference/plot_fitness_history.html</loc>
-  </url>
-  <url>
-    <loc>https://danymukesha.github.io/BioGA/reference/plot_population.html</loc>
-  </url>
-  <url>
-    <loc>https://danymukesha.github.io/BioGA/reference/replacement_cpp.html</loc>
-  </url>
-  <url>
-    <loc>https://danymukesha.github.io/BioGA/reference/selection_cpp.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://danymukesha.github.io/BioGA/404.html</loc></url>
+<url><loc>https://danymukesha.github.io/BioGA/LICENSE-text.html</loc></url>
+<url><loc>https://danymukesha.github.io/BioGA/LICENSE.html</loc></url>
+<url><loc>https://danymukesha.github.io/BioGA/articles/Introduction.html</loc></url>
+<url><loc>https://danymukesha.github.io/BioGA/articles/index.html</loc></url>
+<url><loc>https://danymukesha.github.io/BioGA/authors.html</loc></url>
+<url><loc>https://danymukesha.github.io/BioGA/index.html</loc></url>
+<url><loc>https://danymukesha.github.io/BioGA/news/index.html</loc></url>
+<url><loc>https://danymukesha.github.io/BioGA/reference/BioGA-package.html</loc></url>
+<url><loc>https://danymukesha.github.io/BioGA/reference/crossover_cpp.html</loc></url>
+<url><loc>https://danymukesha.github.io/BioGA/reference/evaluate_fitness_cpp.html</loc></url>
+<url><loc>https://danymukesha.github.io/BioGA/reference/index.html</loc></url>
+<url><loc>https://danymukesha.github.io/BioGA/reference/initialize_population_cpp.html</loc></url>
+<url><loc>https://danymukesha.github.io/BioGA/reference/mutation_cpp.html</loc></url>
+<url><loc>https://danymukesha.github.io/BioGA/reference/plot_fitness.html</loc></url>
+<url><loc>https://danymukesha.github.io/BioGA/reference/plot_fitness_history.html</loc></url>
+<url><loc>https://danymukesha.github.io/BioGA/reference/plot_population.html</loc></url>
+<url><loc>https://danymukesha.github.io/BioGA/reference/replacement_cpp.html</loc></url>
+<url><loc>https://danymukesha.github.io/BioGA/reference/selection_cpp.html</loc></url>
 </urlset>
+
