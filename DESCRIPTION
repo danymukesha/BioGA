@@ -13,7 +13,8 @@ Description: Genetic algorithm are a class of optimization algorithms
     in C++ for improved speed and efficiency, with an easy-to-use
     interface for use within R.
 License: MIT + file LICENSE
-URL: https://danymukesha.github.io/BioGA/
+URL: https://danymukesha.github.io/BioGA/,
+    https://bioconductor.org/packages/BioGA/
 BugReports: https://github.com/danymukesha/BioGA/issues
 Imports:
     ggplot2,
@@ -39,5 +40,5 @@ biocViews: ExperimentalDesign, Technology
 Encoding: UTF-8
 LazyData: false
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Config/testthat/edition: 3

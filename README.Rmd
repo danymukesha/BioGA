@@ -15,6 +15,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
   [![R-CMD-check](https://github.com/danymukesha/BioGA/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/danymukesha/BioGA/actions/workflows/R-CMD-check.yaml)
+  [![](https://img.shields.io/badge/devel%20version-0.99.6-blue.svg)](https://github.com/danymukesha/BioGA)
   <!-- badges: end -->
   
 # BioGA <a href="https://danymukesha.github.io/BioGA/"><img src="man/figures/logo.png" align="right" height="139" alt="BioGA website" /></a>
@@ -28,7 +29,7 @@ with an easy-to-use interface for use within R.
 
 You can install the package directly from GitHub using the `devtools` package:
 
-```{r}
+```{r eval=FALSE}
 devtools::install_github("danymukesha/BioGA")
 ```
 
