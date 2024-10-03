@@ -8,12 +8,12 @@ abstract:
     a population of candidate solutions over successive generations, 
     with each individual representing a potential solution to the optimization
     problem at hand. Through the application of genetic operators 
-    such as selection, crossover, and mutation, genetic algorithms 
-    iteratively improve the population, eventually converging towards 
+    such as selection, crossover, and mutation, the genetic algorithms 
+    iteratively improve the population by eventually converging towards 
     optimal or near-optimal solutions.
     
     In the field of genomics, where data sets are often large, complex, 
-    and high-dimensional, genetic algorithms offer a good approach 
+    and high-dimensional, the genetic algorithms offer a good approach 
     for addressing optimization challenges such as feature selection, 
     parameter tuning, and model optimization. By harnessing the power 
     of evolutionary principles, genetic algorithms can effectively explore 
@@ -57,7 +57,10 @@ To install this package, start R (version "4.4") and enter:
 if (!require("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 
-BiocManager::install("BioGA")
+# The following initializes usage of Bioc devel
+BiocManager::install(version='devel')
+
+BiocManager::install(pkgs = "BioGA", version = "devel", force = TRUE)
 ```
 
 You can also install the package directly from GitHub 
