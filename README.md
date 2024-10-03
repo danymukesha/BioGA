@@ -15,8 +15,20 @@ an easy-to-use interface for use within R.
 
 ## Installation
 
-You can install the package directly from GitHub using the `devtools`
-package:
+To install this package, start R (version “4.4”) and enter folliw:
+
+``` r
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+# The following initializes usage of Bioc devel
+BiocManager::install(version='devel')
+
+BiocManager::install(pkgs = "BioGA", version = "devel", force = TRUE)
+```
+
+You can also install the package directly from GitHub using the
+`devtools` package:
 
 ``` r
 devtools::install_github("danymukesha/BioGA")
