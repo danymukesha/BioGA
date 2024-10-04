@@ -5,22 +5,22 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Introduction • BioGA</title>
-<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Introduction to BioGA • BioGA</title>
+<script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Introduction">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Introduction to BioGA">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
-    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
+    <nav class="navbar navbar-expand-lg fixed-top " aria-label="Site navigation"><div class="container">
 
     <a class="navbar-brand me-2" href="../index.html">BioGA</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.99.6</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,6 +38,14 @@
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
 </form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/danymukesha/BioGA/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-lightswitch" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" aria-label="Light switch"><span class="fa fa-sun"></span></button>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-lightswitch">
+<li><button class="dropdown-item" data-bs-theme-value="light"><span class="fa fa-sun"></span> Light</button></li>
+    <li><button class="dropdown-item" data-bs-theme-value="dark"><span class="fa fa-moon"></span> Dark</button></li>
+    <li><button class="dropdown-item" data-bs-theme-value="auto"><span class="fa fa-adjust"></span> Auto</button></li>
+  </ul>
+</li>
       </ul>
 </div>
 
@@ -50,11 +58,11 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1>Introduction</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>Introduction to BioGA</h1>
                         <h4 data-toc-skip class="author">Dany
 Mukesha</h4>
             
-            <h4 data-toc-skip class="date">2024-10-03</h4>
+            <h4 data-toc-skip class="date">2024-10-04</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/danymukesha/BioGA/blob/main/vignettes/BioGA.Rmd" class="external-link"><code>vignettes/BioGA.Rmd</code></a></small>
       <div class="d-none name"><code>BioGA.Rmd</code></div>
@@ -84,11 +92,11 @@ Mukesha</h4>
       suite of functions optimized for handling high throughput genomic
       data. Implemented in C++ for enhanced performance, BioGA offers
       efficient algorithms for tasks such as feature selection,
-      classification, clustering, and more. By integrating seamlessly
+      classification, clustering, and more. By integrating flawlessly
       with the Bioconductor ecosystem, BioGA empowers researchers and
-      analysts to leverage the power of genetic algorithms within their
-      genomics workflows, facilitating the discovery of biological
-      insights from large-scale genomic data sets.
+      analysts to take advantage of the power of genetic algorithms
+      within their genomics workflows, facilitating the discovery of
+      biological insights from large-scale genomic data sets.
     </div>
     
 <p><br></p>
@@ -111,166 +119,112 @@ Mukesha</h4>
 <code>devtools</code> package:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"danymukesha/BioGA"</span><span class="op">)</span></span></code></pre></div>
-<p>In this vignette, we illustrate the usage of BioGA for genetic
-algorithm optimization in the context of high throughput genomic data
-analysis. We showcase its interoperability with Bioconductor classes,
-demonstrating how genetic algorithm optimization can be seamlessly
-integrated into existing genomics pipelines for improved analysis and
+<p>With a simplified example, we illustrated the usage of <em><a href="https://bioconductor.org/packages/3.19/BioGA" class="external-link">BioGA</a></em> for
+genetic algorithm optimization in the context of high throughput genomic
+data analysis. We showcased its interoperability with Bioconductor
+classes, demonstrating how genetic algorithm optimization can be
+integrated into existing genomics pipelines to improve the analysis and
 interpretation.</p>
-<p>The BioGA package provides a set of functions for genetic algorithm
-optimization tailored for analyzing high throughput genomic data. This
-vignette demonstrates the usage of BioGA in the context of selecting the
-best combination of genes for predicting a certain trait, such as
-disease susceptibility.</p>
+<p>We demonstrated the usage of <em><a href="https://bioconductor.org/packages/3.19/BioGA" class="external-link">BioGA</a></em> in
+the context of selecting the best combination of genes for predicting a
+certain trait, such as disease susceptibility.</p>
 </div>
 <div class="section level3">
 <h3 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h3>
-<p>Genomic data refers to the genetic information stored in an
-organism’s DNA. It includes the sequence of nucleotides (adenine,
-thymine, cytosine, and guanine) that make up the DNA molecules. Genomic
-data can provide valuable insights into various biological processes,
-such as gene expression, genetic variation, and evolutionary
-relationships.</p>
-<p>Genomic data in this context could consist of gene expression
+<p>Genomic data generally refers to the genetic information stored in a
+DNA of an organism. The DNA molecules are basically mmade up of sequence
+of nucleotides (adenine, thymine, cytosine, and guanine).</p>
+<p>The genetic information likely provides clear understanding into
+various biological processes, such as gene expression, genetic
+variation, and evolutionary relationships.</p>
+<p>In this context, genomic data could consist of gene expression
 profiles measured across different individuals (e.g., patients).</p>
+<p>Where:</p>
 <ul>
-<li><p>Each row in the genomic_data matrix represents a gene, and each
-column represents a patient sample.</p></li>
-<li><p>The values in the matrix represent the expression levels of each
-gene in each patient sample.</p></li>
+<li>Each row in the <code>genomic_data</code> matrix represents a gene,
+and each column represents a patient sample.</li>
 </ul>
-<p>Here’s an example of genomic data:</p>
+<p>and</p>
+<ul>
+<li>Values in the matrix represent the expression levels of each gene in
+each patient sample.</li>
+</ul>
+<p>As an example of genomic data, let’s consider have a table similar to
+the following:</p>
 <pre><code>      Sample 1   Sample 2   Sample 3   Sample 4
 Gene1    0.1        0.2        0.3        0.4
 Gene2    1.2        1.3        1.4        1.5
 Gene3    2.3        2.2        2.1        2.0</code></pre>
-<p>In this example, each row represents a gene (or genomic feature), and
-each column represents a sample. The values in the matrix represent some
-measurement of gene expression, such as mRNA levels or protein
+<p>In the table above, each row represents a gene (or genomic feature),
+and each column represents a sample. The values in the matrix represent
+some measurement of gene expression, such as mRNA levels or protein
 abundance, in each sample.</p>
-<p>For instance, the value 0.1 in Sample 1 for Gene1 indicates the
-expression level of Gene1 in Sample 1. Similarly, the value 2.2 in
-Sample 2 for Gene3 indicates the expression level of Gene3 in Sample
-2.</p>
+<p>For instance, the value <code>0.1</code> in “Sample 1” for
+<em>Gene1</em> indicates the expression level of <em>Gene1</em> in
+“Sample 1”. Similarly, the value <code>2.2</code> in “Sample 2” for
+<em>Gene3</em> indicates the expression level of <em>Gene3</em> in
+“Sample 2”.</p>
 <p>Genomic data can be used in various analyses, including genetic
 association studies, gene expression analysis, and comparative genomics.
 In the context of the <code>evaluate_fitness_cpp</code> function,
 genomic data is used to calculate fitness scores for individuals in a
-population, typically in the context of genetic algorithm
-optimization.</p>
+population.</p>
+<div class="line-block">Just to clarify, an individual is “feature”
+typically in the context of genetic algorithm optimization.</div>
 <p>The population represents a set of candidate combinations of genes
-that could be predictive of the trait. Each individual in the population
-is represented by a binary vector indicating the presence or absence of
-each gene. For example, an individual in the population might be
-represented as [1, 0, 1], indicating the presence of Gene1 and Gene3 but
-the absence of Gene2. The population undergoes genetic algorithm
-operations such as selection, crossover, mutation, and replacement to
-evolve towards individuals with higher predictive power for the
-trait.</p>
+that could be predictive of the trait (a specific characteristic of an
+individual, which is determined by the genes).</p>
+<p>The important information that we need to know is if a gene is part
+of this set or not. To do so, each individual in the population is
+represented by a binary vector indicating the presence or absence of
+each gene.</p>
+<p>For example, a set of candidate genes (a population) might be
+represented as [1, 0, 1], indicating the presence of <em>Gene1</em> and
+<em>Gene3</em> but the absence of <em>Gene2</em>. The population
+undergoes genetic algorithm operations such as selection, crossover,
+mutation, and replacement to evolve towards individuals with higher
+predictive power for the trait.</p>
 </div>
 <div class="section level3">
-<h3 id="example-scenario">Example Scenario<a class="anchor" aria-label="anchor" href="#example-scenario"></a>
+<h3 id="example-of-scenario">Example of scenario<a class="anchor" aria-label="anchor" href="#example-of-scenario"></a>
 </h3>
 <p>Consider an example scenario of using genetic algorithm optimization
 to select the best combination of genes for predicting a certain trait,
 such as disease susceptibility.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Load necessary packages</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://danymukesha.github.io/BioGA/">BioGA</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/SummarizedExperiment" class="external-link">SummarizedExperiment</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; Loading required package: MatrixGenerics</span></span>
-<span><span class="co">#&gt; Loading required package: matrixStats</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Attaching package: 'MatrixGenerics'</span></span>
-<span><span class="co">#&gt; The following objects are masked from 'package:matrixStats':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     colAlls, colAnyNAs, colAnys, colAvgsPerRowSet, colCollapse,</span></span>
-<span><span class="co">#&gt;     colCounts, colCummaxs, colCummins, colCumprods, colCumsums,</span></span>
-<span><span class="co">#&gt;     colDiffs, colIQRDiffs, colIQRs, colLogSumExps, colMadDiffs,</span></span>
-<span><span class="co">#&gt;     colMads, colMaxs, colMeans2, colMedians, colMins, colOrderStats,</span></span>
-<span><span class="co">#&gt;     colProds, colQuantiles, colRanges, colRanks, colSdDiffs, colSds,</span></span>
-<span><span class="co">#&gt;     colSums2, colTabulates, colVarDiffs, colVars, colWeightedMads,</span></span>
-<span><span class="co">#&gt;     colWeightedMeans, colWeightedMedians, colWeightedSds,</span></span>
-<span><span class="co">#&gt;     colWeightedVars, rowAlls, rowAnyNAs, rowAnys, rowAvgsPerColSet,</span></span>
-<span><span class="co">#&gt;     rowCollapse, rowCounts, rowCummaxs, rowCummins, rowCumprods,</span></span>
-<span><span class="co">#&gt;     rowCumsums, rowDiffs, rowIQRDiffs, rowIQRs, rowLogSumExps,</span></span>
-<span><span class="co">#&gt;     rowMadDiffs, rowMads, rowMaxs, rowMeans2, rowMedians, rowMins,</span></span>
-<span><span class="co">#&gt;     rowOrderStats, rowProds, rowQuantiles, rowRanges, rowRanks,</span></span>
-<span><span class="co">#&gt;     rowSdDiffs, rowSds, rowSums2, rowTabulates, rowVarDiffs, rowVars,</span></span>
-<span><span class="co">#&gt;     rowWeightedMads, rowWeightedMeans, rowWeightedMedians,</span></span>
-<span><span class="co">#&gt;     rowWeightedSds, rowWeightedVars</span></span>
-<span><span class="co">#&gt; Loading required package: GenomicRanges</span></span>
-<span><span class="co">#&gt; Loading required package: stats4</span></span>
-<span><span class="co">#&gt; Loading required package: BiocGenerics</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Attaching package: 'BiocGenerics'</span></span>
-<span><span class="co">#&gt; The following objects are masked from 'package:stats':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     IQR, mad, sd, var, xtabs</span></span>
-<span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     anyDuplicated, aperm, append, as.data.frame, basename, cbind,</span></span>
-<span><span class="co">#&gt;     colnames, dirname, do.call, duplicated, eval, evalq, Filter, Find,</span></span>
-<span><span class="co">#&gt;     get, grep, grepl, intersect, is.unsorted, lapply, Map, mapply,</span></span>
-<span><span class="co">#&gt;     match, mget, order, paste, pmax, pmax.int, pmin, pmin.int,</span></span>
-<span><span class="co">#&gt;     Position, rank, rbind, Reduce, rownames, sapply, setdiff, table,</span></span>
-<span><span class="co">#&gt;     tapply, union, unique, unsplit, which.max, which.min</span></span>
-<span><span class="co">#&gt; Loading required package: S4Vectors</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Attaching package: 'S4Vectors'</span></span>
-<span><span class="co">#&gt; The following object is masked from 'package:utils':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     findMatches</span></span>
-<span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     expand.grid, I, unname</span></span>
-<span><span class="co">#&gt; Loading required package: IRanges</span></span>
-<span><span class="co">#&gt; Loading required package: GenomeInfoDb</span></span>
-<span><span class="co">#&gt; Loading required package: Biobase</span></span>
-<span><span class="co">#&gt; Welcome to Bioconductor</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     Vignettes contain introductory material; view with</span></span>
-<span><span class="co">#&gt;     'browseVignettes()'. To cite Bioconductor, see</span></span>
-<span><span class="co">#&gt;     'citation("Biobase")', and for packages 'citation("pkgname")'.</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Attaching package: 'Biobase'</span></span>
-<span><span class="co">#&gt; The following object is masked from 'package:MatrixGenerics':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     rowMedians</span></span>
-<span><span class="co">#&gt; The following objects are masked from 'package:matrixStats':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     anyMissing, rowMedians</span></span>
-<span></span>
-<span><span class="co"># Define parameters</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://danymukesha.github.io/BioGA/">BioGA</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/SummarizedExperiment" class="external-link">SummarizedExperiment</a></span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># define parameters</span></span>
 <span><span class="va">num_genes</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
 <span><span class="va">num_samples</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
 <span></span>
-<span><span class="co"># Define parameters for genetic algorithm</span></span>
+<span><span class="co"># parameters for genetic algorithm</span></span>
 <span><span class="va">population_size</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
-<span><span class="va">generations</span> <span class="op">&lt;-</span> <span class="fl">20</span></span>
-<span><span class="va">mutation_rate</span> <span class="op">&lt;-</span> <span class="fl">0.1</span></span>
-<span></span>
-<span><span class="co"># Generate example genomic data using SummarizedExperiment</span></span>
+<span><span class="va">generations</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
+<span><span class="va">mutation_rate</span> <span class="op">&lt;-</span> <span class="fl">0.5</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># generate an example of genomic data using "SummarizedExperiment"</span></span>
 <span><span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">rpois</a></span><span class="op">(</span><span class="va">num_genes</span> <span class="op">*</span> <span class="va">num_samples</span>, lambda <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>,</span>
 <span>    nrow <span class="op">=</span> <span class="va">num_genes</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">counts</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Gene"</span>, <span class="fl">1</span><span class="op">:</span><span class="va">num_genes</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">counts</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Sample"</span>, <span class="fl">1</span><span class="op">:</span><span class="va">num_samples</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Create SummarizedExperiment object</span></span>
+<span><span class="co"># create "SummarizedExperiment" object</span></span>
 <span><span class="va">se</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu">SummarizedExperiment</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/RangedSummarizedExperiment-class.html" class="external-link">SummarizedExperiment</a></span><span class="op">(</span>assays <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>counts <span class="op">=</span> <span class="va">counts</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Convert SummarizedExperiment to matrix for compatibility with BioGA package</span></span>
+<span><span class="co"># convert "SummarizedExperiment" to matrix for compatibility with `BioGA` </span></span>
 <span><span class="va">genomic_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">assay</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span></span></code></pre></div>
-<p>In this example, <code>counts</code> is a matrix representing the
-counts of gene expression levels across different samples. Each row
-corresponds to a gene, and each column corresponds to a sample. We use
+<p>In the above example, <code>counts</code> is a matrix that represents
+the counts of gene expression levels across different samples. Each row
+corresponds to a gene, and each column corresponds to a sample. We used
 the <code>SummarizedExperiment</code> class to store this data, which is
 common Bioconductor class for representing rectangular feature x sample
 data, such as RNAseq count matrices or microarray data.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">genomic_data</span><span class="op">)</span></span>
 <span><span class="co">#&gt;       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6 Sample7 Sample8 Sample9</span></span>
 <span><span class="co">#&gt; Gene1       5      11       6      14       9      14       4      12       8</span></span>
@@ -290,74 +244,66 @@ data, such as RNAseq count matrices or microarray data.</p>
 <div class="section level3">
 <h3 id="initialization">Initialization<a class="anchor" aria-label="anchor" href="#initialization"></a>
 </h3>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Initialize population (select the number of canditate you wish `population`)</span></span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># (select the number of canditate you wish `population`)</span></span>
 <span><span class="va">population</span> <span class="op">&lt;-</span> <span class="fu">BioGA</span><span class="fu">::</span><span class="fu"><a href="../reference/initialize_population_cpp.html">initialize_population_cpp</a></span><span class="op">(</span><span class="va">genomic_data</span>,</span>
 <span>    population_size <span class="op">=</span> <span class="fl">5</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>The population represents a set of candidate combinations of genes
-that could be predictive of the trait. Each individual in the population
-is represented by a binary vector indicating the presence or absence of
-each gene. For example, an individual in the population might be
-represented as [1, 0, 1], indicating the presence of Gene1 and Gene3 but
-the absence of Gene2. The population undergoes genetic algorithm
-operations such as selection, crossover, mutation, and replacement to
-evolve towards individuals with higher predictive power for the
-trait.</p>
+<p>As we already mentioned, the population represents a set of candidate
+combinations of genes that could be predictive of the trait. The
+population undergoes then genetic algorithm operations such as
+selection, crossover, mutation, and replacement to evolve towards
+individuals with higher predictive power for the trait.</p>
 </div>
 <div class="section level3">
-<h3 id="genetic-algorithm-optimization">Genetic Algorithm Optimization<a class="anchor" aria-label="anchor" href="#genetic-algorithm-optimization"></a>
+<h3 id="ga-optimization">GA Optimization<a class="anchor" aria-label="anchor" href="#ga-optimization"></a>
 </h3>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Initialize fitness history</span></span>
-<span><span class="va">fitness_history</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fitness_history</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Initialize time progress</span></span>
 <span><span class="va">start_time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Run genetic algorithm optimization</span></span>
 <span><span class="va">generation</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
 <span><span class="kw">while</span> <span class="op">(</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">generation</span> <span class="op">&lt;-</span> <span class="va">generation</span> <span class="op">+</span> <span class="fl">1</span></span>
 <span></span>
-<span>    <span class="co"># Evaluate fitness</span></span>
+<span>    <span class="co"># evaluate fitness</span></span>
 <span>    <span class="va">fitness</span> <span class="op">&lt;-</span> <span class="fu">BioGA</span><span class="fu">::</span><span class="fu"><a href="../reference/evaluate_fitness_cpp.html">evaluate_fitness_cpp</a></span><span class="op">(</span><span class="va">genomic_data</span>, <span class="va">population</span><span class="op">)</span></span>
 <span>    <span class="va">fitness_history</span><span class="op">[[</span><span class="va">generation</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">fitness</span></span>
 <span></span>
-<span>    <span class="co"># Check termination condition</span></span>
+<span>    <span class="co"># check termination condition</span></span>
 <span>    <span class="kw">if</span> <span class="op">(</span><span class="va">generation</span> <span class="op">==</span> <span class="va">generations</span><span class="op">)</span> <span class="op">{</span> <span class="co"># defined number of generations</span></span>
 <span>        <span class="kw">break</span></span>
 <span>    <span class="op">}</span></span>
 <span></span>
-<span>    <span class="co"># Selection</span></span>
+<span>    <span class="co"># selection</span></span>
 <span>    <span class="va">selected_parents</span> <span class="op">&lt;-</span> <span class="fu">BioGA</span><span class="fu">::</span><span class="fu"><a href="../reference/selection_cpp.html">selection_cpp</a></span><span class="op">(</span><span class="va">population</span>,</span>
 <span>        <span class="va">fitness</span>,</span>
 <span>        num_parents <span class="op">=</span> <span class="fl">2</span></span>
 <span>    <span class="op">)</span></span>
 <span></span>
-<span>    <span class="co"># Crossover and Mutation</span></span>
-<span>    <span class="va">offspring</span> <span class="op">&lt;-</span> <span class="fu">BioGA</span><span class="fu">::</span><span class="fu"><a href="../reference/crossover_cpp.html">crossover_cpp</a></span><span class="op">(</span><span class="va">selected_parents</span>, offspring_size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span>    <span class="co"># crossover and Mutation</span></span>
+<span>    <span class="va">offspring</span> <span class="op">&lt;-</span> <span class="fu">BioGA</span><span class="fu">::</span><span class="fu"><a href="../reference/crossover_cpp.html">crossover_cpp</a></span><span class="op">(</span><span class="va">selected_parents</span>, offspring_size <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
 <span>    <span class="co"># (no mutation in this example)</span></span>
-<span>    <span class="va">mutated_offspring</span> <span class="op">&lt;-</span> <span class="fu">BioGA</span><span class="fu">::</span><span class="fu"><a href="../reference/mutation_cpp.html">mutation_cpp</a></span><span class="op">(</span><span class="va">offspring</span>, mutation_rate <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
+<span>    <span class="va">mutated_offspring</span> <span class="op">&lt;-</span> <span class="fu">BioGA</span><span class="fu">::</span><span class="fu"><a href="../reference/mutation_cpp.html">mutation_cpp</a></span><span class="op">(</span><span class="va">offspring</span>, mutation_rate <span class="op">=</span> <span class="va">mutation_rate</span><span class="op">)</span></span>
 <span></span>
-<span>    <span class="co"># Replacement</span></span>
+<span>    <span class="co"># replacement</span></span>
 <span>    <span class="va">population</span> <span class="op">&lt;-</span> <span class="fu">BioGA</span><span class="fu">::</span><span class="fu"><a href="../reference/replacement_cpp.html">replacement_cpp</a></span><span class="op">(</span><span class="va">population</span>, <span class="va">mutated_offspring</span>,</span>
 <span>        num_to_replace <span class="op">=</span> <span class="fl">1</span></span>
 <span>    <span class="op">)</span></span>
 <span></span>
-<span>    <span class="co"># Calculate time progress</span></span>
+<span>    <span class="co"># calculate time progress</span></span>
 <span>    <span class="va">elapsed_time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/difftime.html" class="external-link">difftime</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">start_time</span>, units <span class="op">=</span> <span class="st">"secs"</span><span class="op">)</span></span>
 <span></span>
-<span>    <span class="co"># Print time progress</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span></span>
 <span>        <span class="st">"\rGeneration:"</span>, <span class="va">generation</span>, <span class="st">"- Elapsed Time:"</span>,</span>
-<span>        <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">elapsed_time</span>, units <span class="op">=</span> <span class="st">"secs"</span><span class="op">)</span>, <span class="st">"     "</span></span>
-<span>    <span class="op">)</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">elapsed_time</span>, units <span class="op">=</span> <span class="st">"secs\n"</span><span class="op">)</span>, <span class="st">"     "</span></span>
+<span>    <span class="op">)</span> </span>
 <span><span class="op">}</span></span>
-<span><span class="co">#&gt; Generation: 1 - Elapsed Time: 0.00903821 secs      Generation: 2 - Elapsed Time: 0.01099992 secs      Generation: 3 - Elapsed Time: 0.01134801 secs      Generation: 4 - Elapsed Time: 0.01169682 secs      Generation: 5 - Elapsed Time: 0.01203299 secs      Generation: 6 - Elapsed Time: 0.0123589 secs      Generation: 7 - Elapsed Time: 0.0126946 secs      Generation: 8 - Elapsed Time: 0.01302624 secs      Generation: 9 - Elapsed Time: 0.0133481 secs      Generation: 10 - Elapsed Time: 0.01368117 secs      Generation: 11 - Elapsed Time: 0.01401305 secs      Generation: 12 - Elapsed Time: 0.01433897 secs      Generation: 13 - Elapsed Time: 0.01467276 secs      Generation: 14 - Elapsed Time: 0.01500177 secs      Generation: 15 - Elapsed Time: 0.01534271 secs      Generation: 16 - Elapsed Time: 0.01650381 secs      Generation: 17 - Elapsed Time: 0.01725197 secs      Generation: 18 - Elapsed Time: 0.01822042 secs      Generation: 19 - Elapsed Time: 0.0192554 secs</span></span></code></pre></div>
+<span><span class="co">#&gt; Generation: 1 - Elapsed Time: 0.01059628 secs      Generation: 2 - Elapsed Time: 0.01335406 secs      Generation: 3 - Elapsed Time: 0.5915804 secs      Generation: 4 - Elapsed Time: 0.5922561 secs      Generation: 5 - Elapsed Time: 0.5927584 secs      Generation: 6 - Elapsed Time: 0.5932658 secs      Generation: 7 - Elapsed Time: 0.5937698 secs      Generation: 8 - Elapsed Time: 0.5942438 secs      Generation: 9 - Elapsed Time: 0.5947063 secs</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="fitness-calculation">Fitness Calculation<a class="anchor" aria-label="anchor" href="#fitness-calculation"></a>
+<h3 id="fitness-calculation">Fitness calculation<a class="anchor" aria-label="anchor" href="#fitness-calculation"></a>
 </h3>
 <p>The fitness calculation described in the provided code calculates a
 measure of dissimilarity between the gene expression profiles of
@@ -407,60 +353,61 @@ and the genomic data. Individuals with lower fitness scores are
 considered to have gene expression profiles that are more similar to the
 genomic data and are therefore more likely to be selected for further
 optimization in the genetic algorithm.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Plot fitness change over generations</span></span>
 <span><span class="fu">BioGA</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_fitness_history.html">plot_fitness_history</a></span><span class="op">(</span><span class="va">fitness_history</span><span class="op">)</span></span></code></pre></div>
-<p><img src="BioGA_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
+<p><img src="BioGA_files/figure-html/plot_fitness-1.png" width="80%" style="display: block; margin: auto;"></p>
 <p>This showcases the integration of genetic algorithms with genomic
 data analysis and highlights the potential of genetic algorithms for
 feature selection in genomics.</p>
-<p>Here’s how BioGA could work in the context of high throughput genomic
-data analysis:</p>
+<p>Here’s how <em><a href="https://bioconductor.org/packages/3.19/BioGA" class="external-link">BioGA</a></em> could
+work in the context of high throughput genomic data analysis:</p>
 <ol style="list-style-type: decimal">
-<li><p><strong>Problem Definition</strong>: BioGA starts with a clear
-definition of the problem to be solved. This could include tasks such as
-identifying genetic markers associated with a particular disease,
-optimizing gene expression patterns, or clustering genomic data to
-identify patterns or groupings.</p></li>
+<li><p><strong>Problem Definition</strong>: <em><a href="https://bioconductor.org/packages/3.19/BioGA" class="external-link">BioGA</a></em>
+starts with a clear definition of the problem to be solved. This could
+include tasks such as identifying genetic markers associated with a
+particular disease, optimizing gene expression patterns, or clustering
+genomic data to identify patterns or groupings.</p></li>
 <li><p><strong>Representation</strong>: Genomic data would need to be
 appropriately represented for use within the genetic algorithm
 framework. This might involve encoding the data in a suitable format,
 such as binary strings representing genes or chromosomes.</p></li>
-<li><p><strong>Fitness Evaluation</strong>: BioGA would define a fitness
-function that evaluates how well a particular solution performs with
-respect to the problem being addressed. In the context of genomic data
-analysis, this could involve measures such as classification accuracy,
-correlation with clinical outcomes, or fitness to a particular
-model.</p></li>
+<li><p><strong>Fitness Evaluation</strong>: <em><a href="https://bioconductor.org/packages/3.19/BioGA" class="external-link">BioGA</a></em> would
+define a fitness function that evaluates how well a particular solution
+performs with respect to the problem being addressed. In the context of
+genomic data analysis, this could involve measures such as
+classification accuracy, correlation with clinical outcomes, or fitness
+to a particular model.</p></li>
 <li><p><strong>Initialization</strong>: The algorithm would initialize a
 population of candidate solutions, typically randomly or using some
 heuristic method. Each solution in the population represents a potential
 solution to the problem at hand.</p></li>
-<li><p><strong>Genetic Operations</strong>: BioGA would apply genetic
-operators such as selection, crossover, and mutation to evolve the
-population over successive generations. Selection identifies individuals
-with higher fitness to serve as parents for the next generation.
-Crossover combines genetic material from two parent solutions to produce
-offspring. Mutation introduces random changes to the offspring to
-maintain genetic diversity.</p></li>
+<li><p><strong>Genetic Operations</strong>: <em><a href="https://bioconductor.org/packages/3.19/BioGA" class="external-link">BioGA</a></em> would
+apply genetic operators such as selection, crossover, and mutation to
+evolve the population over successive generations. Selection identifies
+individuals with higher fitness to serve as parents for the next
+generation. Crossover combines genetic material from two parent
+solutions to produce offspring. Mutation introduces random changes to
+the offspring to maintain genetic diversity.</p></li>
 <li><p><strong>Termination Criteria</strong>: The algorithm would
 continue iterating through generations until a termination criterion is
 met. This could be a maximum number of generations, reaching a
 satisfactory solution, or convergence of the population.</p></li>
 <li><p><strong>Result Analysis</strong>: Once the algorithm terminates,
-BioGA would analyze the final population to identify the best
-solution(s) found. This could involve further validation or
-interpretation of the results in the context of the original
-problem.</p></li>
+<em><a href="https://bioconductor.org/packages/3.19/BioGA" class="external-link">BioGA</a></em> would
+analyze the final population to identify the best solution(s) found.
+This could involve further validation or interpretation of the results
+in the context of the original problem.</p></li>
 </ol>
-<p>Other applications of BioGA in genomic data analysis could include
-genome-wide association studies (GWAS), gene expression analysis,
-pathway analysis, and predictive modeling for personalized medicine,
-among others. By leveraging genetic algorithms, BioGA offers a powerful
-approach to exploring complex genomic datasets and identifying
-meaningful patterns and associations.</p>
+<p>Other applications of <em><a href="https://bioconductor.org/packages/3.19/BioGA" class="external-link">BioGA</a></em> in
+genomic data analysis could include genome-wide association studies
+(GWAS), gene expression analysis, pathway analysis, and predictive
+modeling for personalized medicine, among others. By leveraging genetic
+algorithms, <em><a href="https://bioconductor.org/packages/3.19/BioGA" class="external-link">BioGA</a></em>
+offers a powerful approach to exploring complex genomic datasets and
+identifying meaningful patterns and associations.</p>
 <details><summary><strong>Session Info</strong>
-</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">sessioninfo</span><span class="fu">::</span><span class="fu"><a href="https://r-lib.github.io/sessioninfo/reference/session_info.html" class="external-link">session_info</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">─ Session info ───────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt;  <span style="color: #555555; font-style: italic;">setting </span> <span style="color: #555555; font-style: italic;">value</span></span></span>
@@ -472,7 +419,7 @@ meaningful patterns and associations.</p>
 <span><span class="co">#&gt;  collate  C.UTF-8</span></span>
 <span><span class="co">#&gt;  ctype    C.UTF-8</span></span>
 <span><span class="co">#&gt;  tz       UTC</span></span>
-<span><span class="co">#&gt;  date     2024-10-03</span></span>
+<span><span class="co">#&gt;  date     2024-10-04</span></span>
 <span><span class="co">#&gt;  pandoc   3.1.11 @ /opt/hostedtoolcache/pandoc/3.1.11/x64/ (via rmarkdown)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">─ Packages ───────────────────────────────────────────────────────────────────</span></span></span>
@@ -484,8 +431,8 @@ meaningful patterns and associations.</p>
 <span><span class="co">#&gt;  BiocManager            1.30.25   <span style="color: #555555;">2024-08-28</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
 <span><span class="co">#&gt;  BiocStyle            * 2.32.1    <span style="color: #555555;">2024-06-16</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">Bioconduc~</span></span></span>
 <span><span class="co">#&gt;  biocViews              1.72.0    <span style="color: #555555;">2024-04-30</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">Bioconduc~</span></span></span>
-<span><span class="co">#&gt;  BioGA                * 0.99.6    <span style="color: #555555;">2024-10-03</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">local</span></span></span>
-<span><span class="co">#&gt;  bitops                 1.0-8     <span style="color: #555555;">2024-07-29</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  BioGA                * 0.99.6    <span style="color: #555555;">2024-10-04</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">local</span></span></span>
+<span><span class="co">#&gt;  bitops                 1.0-9     <span style="color: #555555;">2024-10-03</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
 <span><span class="co">#&gt;  bookdown               0.40      <span style="color: #555555;">2024-07-02</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
 <span><span class="co">#&gt;  bslib                  0.8.0     <span style="color: #555555;">2024-07-29</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
 <span><span class="co">#&gt;  cachem                 1.1.0     <span style="color: #555555;">2024-05-16</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
@@ -547,7 +494,7 @@ meaningful patterns and associations.</p>
 <span><span class="co">#&gt;  utf8                   1.2.4     <span style="color: #555555;">2023-10-22</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
 <span><span class="co">#&gt;  vctrs                  0.6.5     <span style="color: #555555;">2023-12-01</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
 <span><span class="co">#&gt;  withr                  3.0.1     <span style="color: #555555;">2024-07-31</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
-<span><span class="co">#&gt;  xfun                   0.47      <span style="color: #555555;">2024-08-17</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  xfun                   0.48      <span style="color: #555555;">2024-10-03</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
 <span><span class="co">#&gt;  XML                    3.99-0.17 <span style="color: #555555;">2024-06-25</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
 <span><span class="co">#&gt;  XVector                0.44.0    <span style="color: #555555;">2024-04-30</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">Bioconduc~</span></span></span>
 <span><span class="co">#&gt;  yaml                   2.3.10    <span style="color: #555555;">2024-07-26</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
