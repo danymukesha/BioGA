@@ -8,14 +8,15 @@
 
 # BioGA <a href="https://danymukesha.github.io/BioGA/"><img src="man/figures/logo.png" align="right" height="139" alt="BioGA website" /></a>
 
-The `BioGA` package provides a set of functions for genetic algorithm
-optimization tailored for analyzing high throughput genomic data. These
-functions are implemented in C++ for improved speed and efficiency, with
-an easy-to-use interface for use within R.
+*[BioGA](https://bioconductor.org/packages/3.20/BioGA)* package provides
+a set of functions for genetic algorithm optimization adapted for
+analyzing high throughput genomic data. These functions are implemented
+in C++ for improved speed and efficiency, with an easy-to-use interface
+for use within R.
 
 ## Installation
 
-To install this package, start R (version “4.4”) and enter folliw:
+To install this package, start R (preferably version “4.4”) and enter:
 
 ``` r
 if (!require("BiocManager", quietly = TRUE))

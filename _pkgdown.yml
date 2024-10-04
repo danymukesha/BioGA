@@ -1,6 +1,15 @@
 url: https://danymukesha.github.io/BioGA/
+
 template:
     bootstrap: 5
+    light-switch: true
+    bslib:
+        primary: "#0054AD"
+        danger: "#A6081A"
+
+development:
+    mode: auto
+
 authors:
     Dany Mukesha:
         href: https://danymukesha.github.io/
