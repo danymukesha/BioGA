@@ -1,3 +1,20 @@
+# BioGA 0.99.7
+
+*Commit -m "Optimized evaluate_fitness.cpp"*
+
+Improvements:
+
+* Add multi-objective fitness evaluation (e.g., minimize expression difference and maximize gene sparsity).
+* Use vectorized operations for faster computation.
+* Add parallelization with RcppParallel for large datasets.
+
+Changes:
+
+* Added multi-objective support (expression difference and sparsity).
+* Used `RcppParallel` for parallel computation.
+* Returned a matrix of fitness scores for each objective.
+* Added weights parameter for flexible objective prioritization.
+
 # BioGA 0.99.6
 
 * add the authors and date in the vignettes?
