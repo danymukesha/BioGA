@@ -1,3 +1,18 @@
+# BioGA 0.99.8
+
+*Commit -m "Optimized crossover.cpp"*
+"
+Improvements:
+
+* Implement simulated binary crossover (SBX) for better exploration.
+* Add adaptive crossover rate based on population diversity.
+
+Changes:
+
+* Replaced simple averaging with SBX crossover for better exploration.
+* Added adaptive crossover rate based on population diversity.
+* Included parameters for crossover rate and distribution index.
+
 # BioGA 0.99.7
 
 *Commit -m "Optimized evaluate_fitness.cpp"*
