@@ -20,6 +20,7 @@ Imports:
     ggplot2,
     graphics,
     Rcpp,
+    RcppParallel,
     SummarizedExperiment,
     animation,
     rlang,
@@ -33,7 +34,8 @@ Suggests:
     rmarkdown,
     testthat (>= 3.0.0)
 LinkingTo: 
-    Rcpp
+    Rcpp,
+    RcppParallel
 VignetteBuilder: 
     knitr
 biocViews: ExperimentalDesign, Technology

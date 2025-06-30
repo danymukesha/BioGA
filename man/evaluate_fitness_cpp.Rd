@@ -2,27 +2,26 @@
 % Please edit documentation in R/RcppExports.R
 \name{evaluate_fitness_cpp}
 \alias{evaluate_fitness_cpp}
-\title{Function to evaluate fitness using genomic data}
+\title{Function to evaluate fitness using genomic data with multi-objective support}
 \usage{
-evaluate_fitness_cpp(genomic_data, population)
+evaluate_fitness_cpp(genomic_data, population, weights)
 }
 \arguments{
-\item{genomic_data}{Numeric matrix of genomic data where rows represent
-genes/features and columns represent samples.}
+\item{genomic_data}{Numeric matrix of genomic data (rows: genes, columns: samples).}
 
-\item{population}{Numeric matrix representing the population of
-individuals.}
+\item{population}{Numeric matrix representing the population of individuals.}
+
+\item{weights}{Numeric vector of weights for multi-objective fitness (e.g., expression difference, sparsity).}
 }
 \value{
-Numeric vector of fitness scores for each individual.
+Numeric matrix of fitness scores (columns: objectives, rows: individuals).
 }
 \description{
-Function to evaluate fitness using genomic data
+Function to evaluate fitness using genomic data with multi-objective support
 }
 \examples{
-# example of usage
 genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
-population <- BioGA::initialize_population_cpp(genomic_data,
-                population_size = 5)
-BioGA::evaluate_fitness_cpp(genomic_data, population)
+population <- BioGA::initialize_population_cpp(genomic_data, population_size = 5)
+weights <- c(1.0, 0.5) # Weight for expression difference and sparsity
+BioGA::evaluate_fitness_cpp(genomic_data, population, weights)
 }

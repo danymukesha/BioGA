@@ -23,14 +23,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // evaluate_fitness_cpp
-NumericVector evaluate_fitness_cpp(const NumericMatrix& genomic_data, const NumericMatrix& population);
-RcppExport SEXP _BioGA_evaluate_fitness_cpp(SEXP genomic_dataSEXP, SEXP populationSEXP) {
+NumericMatrix evaluate_fitness_cpp(const NumericMatrix& genomic_data, const NumericMatrix& population, const NumericVector& weights);
+RcppExport SEXP _BioGA_evaluate_fitness_cpp(SEXP genomic_dataSEXP, SEXP populationSEXP, SEXP weightsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const NumericMatrix& >::type genomic_data(genomic_dataSEXP);
     Rcpp::traits::input_parameter< const NumericMatrix& >::type population(populationSEXP);
-    rcpp_result_gen = Rcpp::wrap(evaluate_fitness_cpp(genomic_data, population));
+    Rcpp::traits::input_parameter< const NumericVector& >::type weights(weightsSEXP);
+    rcpp_result_gen = Rcpp::wrap(evaluate_fitness_cpp(genomic_data, population, weights));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -87,7 +88,7 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_BioGA_crossover_cpp", (DL_FUNC) &_BioGA_crossover_cpp, 2},
-    {"_BioGA_evaluate_fitness_cpp", (DL_FUNC) &_BioGA_evaluate_fitness_cpp, 2},
+    {"_BioGA_evaluate_fitness_cpp", (DL_FUNC) &_BioGA_evaluate_fitness_cpp, 3},
     {"_BioGA_initialize_population_cpp", (DL_FUNC) &_BioGA_initialize_population_cpp, 2},
     {"_BioGA_mutation_cpp", (DL_FUNC) &_BioGA_mutation_cpp, 2},
     {"_BioGA_replacement_cpp", (DL_FUNC) &_BioGA_replacement_cpp, 3},

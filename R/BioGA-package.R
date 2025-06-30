@@ -11,6 +11,7 @@
 #' @importFrom animation saveGIF
 #' @importFrom rlang local_options
 #' @importFrom BiocStyle html_document
+#' @import RcppParallel
 #' @useDynLib BioGA, .registration = TRUE
 ## usethis namespace: end
 NULL

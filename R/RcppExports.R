@@ -21,22 +21,20 @@ crossover_cpp <- function(selected_parents, offspring_size) {
     .Call(`_BioGA_crossover_cpp`, selected_parents, offspring_size)
 }
 
-#' Function to evaluate fitness using genomic data
+#' Function to evaluate fitness using genomic data with multi-objective support
 #'
-#' @param genomic_data Numeric matrix of genomic data where rows represent
-#' genes/features and columns represent samples.
-#' @param population Numeric matrix representing the population of
-#' individuals.
-#' @return Numeric vector of fitness scores for each individual.
+#' @param genomic_data Numeric matrix of genomic data (rows: genes, columns: samples).
+#' @param population Numeric matrix representing the population of individuals.
+#' @param weights Numeric vector of weights for multi-objective fitness (e.g., expression difference, sparsity).
+#' @return Numeric matrix of fitness scores (columns: objectives, rows: individuals).
 #' @examples
-#' # example of usage
 #' genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
-#' population <- BioGA::initialize_population_cpp(genomic_data,
-#'                 population_size = 5)
-#' BioGA::evaluate_fitness_cpp(genomic_data, population)
+#' population <- BioGA::initialize_population_cpp(genomic_data, population_size = 5)
+#' weights <- c(1.0, 0.5) # Weight for expression difference and sparsity
+#' BioGA::evaluate_fitness_cpp(genomic_data, population, weights)
 #' @export
-evaluate_fitness_cpp <- function(genomic_data, population) {
-    .Call(`_BioGA_evaluate_fitness_cpp`, genomic_data, population)
+evaluate_fitness_cpp <- function(genomic_data, population, weights) {
+    .Call(`_BioGA_evaluate_fitness_cpp`, genomic_data, population, weights)
 }
 
 #' Function to initialize the population from genomic data
