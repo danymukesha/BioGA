@@ -2,29 +2,26 @@
 % Please edit documentation in R/RcppExports.R
 \name{selection_cpp}
 \alias{selection_cpp}
-\title{Function to select individuals based on fitness scores}
+\title{Function to select individuals using NSGA-II non-dominated sorting}
 \usage{
 selection_cpp(population, fitness, num_parents)
 }
 \arguments{
-\item{population}{Numeric matrix representing the population of
-individuals.}
+\item{population}{Numeric matrix of individuals.}
 
-\item{fitness}{Numeric vector of fitness scores for each individual.}
+\item{fitness}{Numeric matrix of fitness scores (columns: objectives).}
 
 \item{num_parents}{Number of individuals to select.}
 }
 \value{
-Numeric matrix representing the selected individuals.
+Numeric matrix of selected individuals.
 }
 \description{
-Function to select individuals based on fitness scores
+Function to select individuals using NSGA-II non-dominated sorting
 }
 \examples{
-# example of usage
 genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
-population <- BioGA::initialize_population_cpp(genomic_data,
-                population_size = 5)
-fitness <- BioGA::evaluate_fitness_cpp(genomic_data, population)
+population <- BioGA::initialize_population_cpp(genomic_data, population_size = 5)
+fitness <- BioGA::evaluate_fitness_cpp(genomic_data, population, c(1.0, 0.5))
 BioGA::selection_cpp(population, fitness, num_parents = 2)
 }

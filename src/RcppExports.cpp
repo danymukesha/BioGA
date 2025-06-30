@@ -75,13 +75,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // selection_cpp
-NumericMatrix selection_cpp(const NumericMatrix& population, const NumericVector& fitness, int num_parents);
+NumericMatrix selection_cpp(const NumericMatrix& population, const NumericMatrix& fitness, int num_parents);
 RcppExport SEXP _BioGA_selection_cpp(SEXP populationSEXP, SEXP fitnessSEXP, SEXP num_parentsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const NumericMatrix& >::type population(populationSEXP);
-    Rcpp::traits::input_parameter< const NumericVector& >::type fitness(fitnessSEXP);
+    Rcpp::traits::input_parameter< const NumericMatrix& >::type fitness(fitnessSEXP);
     Rcpp::traits::input_parameter< int >::type num_parents(num_parentsSEXP);
     rcpp_result_gen = Rcpp::wrap(selection_cpp(population, fitness, num_parents));
     return rcpp_result_gen;

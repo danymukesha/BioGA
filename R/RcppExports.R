@@ -94,19 +94,16 @@ replacement_cpp <- function(population, offspring, num_to_replace) {
     .Call(`_BioGA_replacement_cpp`, population, offspring, num_to_replace)
 }
 
-#' Function to select individuals based on fitness scores
+#' Function to select individuals using NSGA-II non-dominated sorting
 #'
-#' @param population Numeric matrix representing the population of
-#' individuals.
-#' @param fitness Numeric vector of fitness scores for each individual.
+#' @param population Numeric matrix of individuals.
+#' @param fitness Numeric matrix of fitness scores (columns: objectives).
 #' @param num_parents Number of individuals to select.
-#' @return Numeric matrix representing the selected individuals.
+#' @return Numeric matrix of selected individuals.
 #' @examples
-#' # example of usage
 #' genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
-#' population <- BioGA::initialize_population_cpp(genomic_data,
-#'                 population_size = 5)
-#' fitness <- BioGA::evaluate_fitness_cpp(genomic_data, population)
+#' population <- BioGA::initialize_population_cpp(genomic_data, population_size = 5)
+#' fitness <- BioGA::evaluate_fitness_cpp(genomic_data, population, c(1.0, 0.5))
 #' BioGA::selection_cpp(population, fitness, num_parents = 2)
 #' @export
 selection_cpp <- function(population, fitness, num_parents) {
