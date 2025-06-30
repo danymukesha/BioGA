@@ -11,14 +11,16 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // crossover_cpp
-NumericMatrix crossover_cpp(const NumericMatrix& selected_parents, int offspring_size);
-RcppExport SEXP _BioGA_crossover_cpp(SEXP selected_parentsSEXP, SEXP offspring_sizeSEXP) {
+NumericMatrix crossover_cpp(const NumericMatrix& selected_parents, int offspring_size, double crossover_rate, double eta_c);
+RcppExport SEXP _BioGA_crossover_cpp(SEXP selected_parentsSEXP, SEXP offspring_sizeSEXP, SEXP crossover_rateSEXP, SEXP eta_cSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const NumericMatrix& >::type selected_parents(selected_parentsSEXP);
     Rcpp::traits::input_parameter< int >::type offspring_size(offspring_sizeSEXP);
-    rcpp_result_gen = Rcpp::wrap(crossover_cpp(selected_parents, offspring_size));
+    Rcpp::traits::input_parameter< double >::type crossover_rate(crossover_rateSEXP);
+    Rcpp::traits::input_parameter< double >::type eta_c(eta_cSEXP);
+    rcpp_result_gen = Rcpp::wrap(crossover_cpp(selected_parents, offspring_size, crossover_rate, eta_c));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -87,7 +89,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_BioGA_crossover_cpp", (DL_FUNC) &_BioGA_crossover_cpp, 2},
+    {"_BioGA_crossover_cpp", (DL_FUNC) &_BioGA_crossover_cpp, 4},
     {"_BioGA_evaluate_fitness_cpp", (DL_FUNC) &_BioGA_evaluate_fitness_cpp, 3},
     {"_BioGA_initialize_population_cpp", (DL_FUNC) &_BioGA_initialize_population_cpp, 2},
     {"_BioGA_mutation_cpp", (DL_FUNC) &_BioGA_mutation_cpp, 2},
