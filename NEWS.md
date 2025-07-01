@@ -1,3 +1,18 @@
+# BioGA 0.99.10
+
+*Commit -m "Optimized mutation.cpp"*
+
+Improvements:
+
+* Add adaptive mutation rate based on iteration or fitness stagnation.
+* Incorporate gene network constraints (placeholder for user-provided network).
+
+Changes:
+
+* Added adaptive mutation rate based on iteration progress.
+* Included optional gene network constraints to ensure biologically relevant mutations.
+* Maintained compatibility with existing functionality.
+
 # BioGA 0.99.9
 
 *Commit -m "Optimized selection.cpp"*
