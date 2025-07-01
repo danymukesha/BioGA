@@ -1,3 +1,18 @@
+# BioGA 0.99.13
+
+*Commit -m "Optimized initialize_population.cpp"*
+
+Improvements:
+
+* Add option for biologically informed initialization using gene clusters.
+* Improve random seed handling for reproducibility.
+
+Changes:
+
+* Added optional random seed for reproducibility.
+* Included support for gene clustering to initialize biologically relevant populations.
+* Improved code readability and documentation.
+
 # BioGA 0.99.12
 
 *Commit -m "Optimized replacement.cpp"*
