@@ -1,3 +1,15 @@
+# BioGA 0.99.15
+
+*UPDATE: test_evaluate_fitness_cpp* 
+The test checks dimensions, values, and error-free execution.
+
+Changes:
+
+* Updated to test the new matrix output (multiple objectives).
+* Added checks for non-negative fitness values (appropriate for expression difference and sparsity).
+* Included edge case test for minimal input.
+* Removed redundant `tryCatch` and simplified error/warning checks.
+
 # BioGA 0.99.14
 
 *Commit -m "New Feature - Main GA Loop"*
