@@ -1,3 +1,16 @@
+# BioGA 0.99.14
+
+*Commit -m "New Feature - Main GA Loop"*
+
+adding a main GA loop function that integrates all components 
+and supports multi-objective optimization and parallelization.
+
+Features:
+
+* Integrates all optimized components into a cohesive GA loop.
+* Supports multi-objective optimization, gene networks, and clustering.
+* Returns both final population and fitness scores for analysis.
+
 # BioGA 0.99.13
 
 *Commit -m "Optimized initialize_population.cpp"*
