@@ -10,6 +10,29 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
+// bioga_main_cpp
+List bioga_main_cpp(const NumericMatrix& genomic_data, int population_size, int num_generations, double crossover_rate, double eta_c, double mutation_rate, int num_parents, int num_offspring, int num_to_replace, const NumericVector& weights, Nullable<int> seed, Nullable<IntegerVector> clusters, Nullable<NumericMatrix> network);
+RcppExport SEXP _BioGA_bioga_main_cpp(SEXP genomic_dataSEXP, SEXP population_sizeSEXP, SEXP num_generationsSEXP, SEXP crossover_rateSEXP, SEXP eta_cSEXP, SEXP mutation_rateSEXP, SEXP num_parentsSEXP, SEXP num_offspringSEXP, SEXP num_to_replaceSEXP, SEXP weightsSEXP, SEXP seedSEXP, SEXP clustersSEXP, SEXP networkSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const NumericMatrix& >::type genomic_data(genomic_dataSEXP);
+    Rcpp::traits::input_parameter< int >::type population_size(population_sizeSEXP);
+    Rcpp::traits::input_parameter< int >::type num_generations(num_generationsSEXP);
+    Rcpp::traits::input_parameter< double >::type crossover_rate(crossover_rateSEXP);
+    Rcpp::traits::input_parameter< double >::type eta_c(eta_cSEXP);
+    Rcpp::traits::input_parameter< double >::type mutation_rate(mutation_rateSEXP);
+    Rcpp::traits::input_parameter< int >::type num_parents(num_parentsSEXP);
+    Rcpp::traits::input_parameter< int >::type num_offspring(num_offspringSEXP);
+    Rcpp::traits::input_parameter< int >::type num_to_replace(num_to_replaceSEXP);
+    Rcpp::traits::input_parameter< const NumericVector& >::type weights(weightsSEXP);
+    Rcpp::traits::input_parameter< Nullable<int> >::type seed(seedSEXP);
+    Rcpp::traits::input_parameter< Nullable<IntegerVector> >::type clusters(clustersSEXP);
+    Rcpp::traits::input_parameter< Nullable<NumericMatrix> >::type network(networkSEXP);
+    rcpp_result_gen = Rcpp::wrap(bioga_main_cpp(genomic_data, population_size, num_generations, crossover_rate, eta_c, mutation_rate, num_parents, num_offspring, num_to_replace, weights, seed, clusters, network));
+    return rcpp_result_gen;
+END_RCPP
+}
 // crossover_cpp
 NumericMatrix crossover_cpp(const NumericMatrix& selected_parents, int offspring_size, double crossover_rate, double eta_c);
 RcppExport SEXP _BioGA_crossover_cpp(SEXP selected_parentsSEXP, SEXP offspring_sizeSEXP, SEXP crossover_rateSEXP, SEXP eta_cSEXP) {
@@ -96,6 +119,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_BioGA_bioga_main_cpp", (DL_FUNC) &_BioGA_bioga_main_cpp, 13},
     {"_BioGA_crossover_cpp", (DL_FUNC) &_BioGA_crossover_cpp, 4},
     {"_BioGA_evaluate_fitness_cpp", (DL_FUNC) &_BioGA_evaluate_fitness_cpp, 3},
     {"_BioGA_initialize_population_cpp", (DL_FUNC) &_BioGA_initialize_population_cpp, 4},
