@@ -1,3 +1,72 @@
+# BioGA 0.99.16
+
+*UPDATE: test_crossover_cpp*
+
+The test verifies dimensions, value ranges, and new parameters.
+
+Changes:
+- Added tests for new parameters (`crossover_rate`, `eta_c`).
+- Verified that offspring values lie within parent ranges (due to SBX).
+- Included edge case test for single parent and zero crossover rate.
+- Simplified error/warning checks.
+
+*UPDATE: test_selection_cpp*
+The test checks dimensions, parent selection, and compatibility with multi-objective fitness.
+
+Changes:
+- Updated to handle multi-objective fitness matrix.
+- Verified that selected parents are exact copies of population rows.
+- Added edge case test for single individual and single objective.
+- Removed redundant fitness evaluation test (already covered in `evaluate_fitness_cpp`).
+
+*UPDATE: test_mutation_cpp*
+The test checks dimensions, mutation effects, and new parameters.
+
+Changes:
+- Added tests for new parameters (`iteration`, `max_iterations`, `network`).
+- Verified that zero mutation rate preserves offspring.
+- Tested network constraints with extreme cases (zero and full constraints).
+- Simplified error/warning checks.
+
+*UPDATE/ADDED: test_replacement_cpp*
+
+The test checks dimensions, elite preservation, and diversity.
+
+Changes:
+- Added test for new function signature (requires fitness matrices).
+- Verified elite preservation based on first objective.
+- Included edge case test for zero replacements.
+- Added checks for dimensions and error-free execution.
+
+*UPDATE: test_initialize_population_cpp*
+
+The test checks dimensions, value validity, and new parameters.
+
+Changes:
+- Added test for `seed` parameter to ensure reproducibility.
+- Included test for `clusters` parameter to verify correct initialization.
+- Maintained tests for dimensions and value validity.
+- Added edge case test for minimal input.
+
+*UPDATE: test_bioga_main_cpp* {PROVISIONAL}
+
+New test file is created to verify the main GA loop.
+
+Feature:
+- Tests the output structure (list with population and fitness).
+- Verifies dimensions of population and fitness matrices.
+- Checks optional parameters (`clusters`, `network`).
+- Includes edge case test for minimal input.
+
+*Test for Package (test-BioGA-package.R)*
+
+Created a new version to test the overall package integrity and ensure all functions are exported correctly.
+
+Feature:
+- Tests package loading and function exports.
+- Verifies a complete GA workflow without errors.
+- Ensures compatibility with the optimized functions.
+
 # BioGA 0.99.15
 
 *UPDATE: test_evaluate_fitness_cpp* 
