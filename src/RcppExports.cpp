@@ -65,15 +65,17 @@ BEGIN_RCPP
 END_RCPP
 }
 // replacement_cpp
-NumericMatrix replacement_cpp(const NumericMatrix& population, const NumericMatrix& offspring, int num_to_replace);
-RcppExport SEXP _BioGA_replacement_cpp(SEXP populationSEXP, SEXP offspringSEXP, SEXP num_to_replaceSEXP) {
+NumericMatrix replacement_cpp(const NumericMatrix& population, const NumericMatrix& offspring, const NumericMatrix& fitness, const NumericMatrix& offspring_fitness, int num_to_replace);
+RcppExport SEXP _BioGA_replacement_cpp(SEXP populationSEXP, SEXP offspringSEXP, SEXP fitnessSEXP, SEXP offspring_fitnessSEXP, SEXP num_to_replaceSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const NumericMatrix& >::type population(populationSEXP);
     Rcpp::traits::input_parameter< const NumericMatrix& >::type offspring(offspringSEXP);
+    Rcpp::traits::input_parameter< const NumericMatrix& >::type fitness(fitnessSEXP);
+    Rcpp::traits::input_parameter< const NumericMatrix& >::type offspring_fitness(offspring_fitnessSEXP);
     Rcpp::traits::input_parameter< int >::type num_to_replace(num_to_replaceSEXP);
-    rcpp_result_gen = Rcpp::wrap(replacement_cpp(population, offspring, num_to_replace));
+    rcpp_result_gen = Rcpp::wrap(replacement_cpp(population, offspring, fitness, offspring_fitness, num_to_replace));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -96,7 +98,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_BioGA_evaluate_fitness_cpp", (DL_FUNC) &_BioGA_evaluate_fitness_cpp, 3},
     {"_BioGA_initialize_population_cpp", (DL_FUNC) &_BioGA_initialize_population_cpp, 2},
     {"_BioGA_mutation_cpp", (DL_FUNC) &_BioGA_mutation_cpp, 5},
-    {"_BioGA_replacement_cpp", (DL_FUNC) &_BioGA_replacement_cpp, 3},
+    {"_BioGA_replacement_cpp", (DL_FUNC) &_BioGA_replacement_cpp, 5},
     {"_BioGA_selection_cpp", (DL_FUNC) &_BioGA_selection_cpp, 3},
     {NULL, NULL, 0}
 };
