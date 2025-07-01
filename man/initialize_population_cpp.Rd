@@ -2,24 +2,31 @@
 % Please edit documentation in R/RcppExports.R
 \name{initialize_population_cpp}
 \alias{initialize_population_cpp}
-\title{Function to initialize the population from genomic data}
+\title{Function to initialize population with optional gene clustering}
 \usage{
-initialize_population_cpp(genomic_data, population_size)
+initialize_population_cpp(
+  genomic_data,
+  population_size,
+  seed = NULL,
+  clusters = NULL
+)
 }
 \arguments{
-\item{genomic_data}{Numeric matrix of genomic data where rows represent
-genes/features and columns represent samples.}
+\item{genomic_data}{Numeric matrix of genomic data (rows: genes, columns: samples).}
 
 \item{population_size}{Number of individuals in the population.}
+
+\item{seed}{Optional random seed for reproducibility.}
+
+\item{clusters}{Optional vector of gene cluster assignments.}
 }
 \value{
-Numeric matrix representing the initialized population.
+Numeric matrix of initialized population.
 }
 \description{
-Function to initialize the population from genomic data
+Function to initialize population with optional gene clustering
 }
 \examples{
-# example of usage
 genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
-BioGA::initialize_population_cpp(genomic_data, population_size = 5)
+BioGA::initialize_population_cpp(genomic_data, population_size = 5, seed = 123)
 }

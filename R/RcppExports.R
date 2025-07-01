@@ -35,19 +35,19 @@ evaluate_fitness_cpp <- function(genomic_data, population, weights) {
     .Call(`_BioGA_evaluate_fitness_cpp`, genomic_data, population, weights)
 }
 
-#' Function to initialize the population from genomic data
+#' Function to initialize population with optional gene clustering
 #'
-#' @param genomic_data Numeric matrix of genomic data where rows represent
-#' genes/features and columns represent samples.
+#' @param genomic_data Numeric matrix of genomic data (rows: genes, columns: samples).
 #' @param population_size Number of individuals in the population.
-#' @return Numeric matrix representing the initialized population.
+#' @param seed Optional random seed for reproducibility.
+#' @param clusters Optional vector of gene cluster assignments.
+#' @return Numeric matrix of initialized population.
 #' @examples
-#' # example of usage
 #' genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
-#' BioGA::initialize_population_cpp(genomic_data, population_size = 5)
+#' BioGA::initialize_population_cpp(genomic_data, population_size = 5, seed = 123)
 #' @export
-initialize_population_cpp <- function(genomic_data, population_size) {
-    .Call(`_BioGA_initialize_population_cpp`, genomic_data, population_size)
+initialize_population_cpp <- function(genomic_data, population_size, seed = NULL, clusters = NULL) {
+    .Call(`_BioGA_initialize_population_cpp`, genomic_data, population_size, seed, clusters)
 }
 
 #' Function to mutate offspring with adaptive mutation and network constraints

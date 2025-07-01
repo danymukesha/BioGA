@@ -38,14 +38,16 @@ BEGIN_RCPP
 END_RCPP
 }
 // initialize_population_cpp
-NumericMatrix initialize_population_cpp(const NumericMatrix& genomic_data, int population_size);
-RcppExport SEXP _BioGA_initialize_population_cpp(SEXP genomic_dataSEXP, SEXP population_sizeSEXP) {
+NumericMatrix initialize_population_cpp(const NumericMatrix& genomic_data, int population_size, Nullable<int> seed, Nullable<IntegerVector> clusters);
+RcppExport SEXP _BioGA_initialize_population_cpp(SEXP genomic_dataSEXP, SEXP population_sizeSEXP, SEXP seedSEXP, SEXP clustersSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const NumericMatrix& >::type genomic_data(genomic_dataSEXP);
     Rcpp::traits::input_parameter< int >::type population_size(population_sizeSEXP);
-    rcpp_result_gen = Rcpp::wrap(initialize_population_cpp(genomic_data, population_size));
+    Rcpp::traits::input_parameter< Nullable<int> >::type seed(seedSEXP);
+    Rcpp::traits::input_parameter< Nullable<IntegerVector> >::type clusters(clustersSEXP);
+    rcpp_result_gen = Rcpp::wrap(initialize_population_cpp(genomic_data, population_size, seed, clusters));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -96,7 +98,7 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_BioGA_crossover_cpp", (DL_FUNC) &_BioGA_crossover_cpp, 4},
     {"_BioGA_evaluate_fitness_cpp", (DL_FUNC) &_BioGA_evaluate_fitness_cpp, 3},
-    {"_BioGA_initialize_population_cpp", (DL_FUNC) &_BioGA_initialize_population_cpp, 2},
+    {"_BioGA_initialize_population_cpp", (DL_FUNC) &_BioGA_initialize_population_cpp, 4},
     {"_BioGA_mutation_cpp", (DL_FUNC) &_BioGA_mutation_cpp, 5},
     {"_BioGA_replacement_cpp", (DL_FUNC) &_BioGA_replacement_cpp, 5},
     {"_BioGA_selection_cpp", (DL_FUNC) &_BioGA_selection_cpp, 3},
