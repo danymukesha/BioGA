@@ -1,3 +1,18 @@
+# BioGA 0.99.11
+
+*Commit -m "Optimized replacement.cpp"*
+
+Improvements:
+
+* Implement elitism to preserve best individuals.
+* Add diversity-based replacement to avoid premature convergence.
+
+Changes:
+
+* Added elitism to preserve the best individual.
+* Included diversity-based replacement to maintain population diversity.
+* Updated to use multi-objective fitness matrix.
+
 # BioGA 0.99.10
 
 *Commit -m "Optimized mutation.cpp"*

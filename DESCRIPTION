@@ -1,7 +1,7 @@
 Type: Package
 Package: BioGA
 Title: Bioinformatics Genetic Algorithm (BioGA)
-Version: 0.99.10
+Version: 0.99.11
 Authors@R: 
     person("Dany", "Mukesha", , "danymukesha@gmail.com", 
             role = c("aut", "cre"),
