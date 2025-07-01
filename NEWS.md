@@ -1,3 +1,18 @@
+# BioGA 0.99.9
+
+*Commit -m "Optimized selection.cpp"*
+
+Improvements:
+
+* Implement NSGA-II non-dominated sorting for multi-objective optimization.
+* Add tournament selection for better diversity.
+
+Changes:
+
+* Implemented NSGA-II non-dominated sorting for multi-objective selection.
+* Added tournament selection to maintain diversity.
+* Updated to handle multi-objective fitness matrix.
+
 # BioGA 0.99.8
 
 *Commit -m "Optimized crossover.cpp"*
