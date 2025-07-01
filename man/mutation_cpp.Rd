@@ -2,29 +2,38 @@
 % Please edit documentation in R/RcppExports.R
 \name{mutation_cpp}
 \alias{mutation_cpp}
-\title{Function to mutate the offspring}
+\title{Function to mutate offspring with adaptive mutation and network constraints}
 \usage{
-mutation_cpp(offspring, mutation_rate)
+mutation_cpp(
+  offspring,
+  mutation_rate,
+  iteration,
+  max_iterations,
+  network = NULL
+)
 }
 \arguments{
-\item{offspring}{Numeric matrix representing the offspring.}
+\item{offspring}{Numeric matrix of offspring.}
 
-\item{mutation_rate}{Probability of mutation for each individual.}
+\item{mutation_rate}{Base probability of mutation.}
+
+\item{iteration}{Current GA iteration for adaptive mutation.}
+
+\item{max_iterations}{Maximum number of GA iterations.}
+
+\item{network}{Optional matrix of gene network constraints (rows: genes, cols: genes).}
 }
 \value{
-Numeric matrix representing the mutated offspring.
+Numeric matrix of mutated offspring.
 }
 \description{
-Function to mutate the offspring
+Function to mutate offspring with adaptive mutation and network constraints
 }
 \examples{
-# example of usage
 genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
-population <- BioGA::initialize_population_cpp(genomic_data,
-                population_size = 5)
-fitness <- BioGA::evaluate_fitness_cpp(genomic_data, population)
-selected_parents <- BioGA::selection_cpp(population,
-                fitness, num_parents = 2)
+population <- BioGA::initialize_population_cpp(genomic_data, population_size = 5)
+fitness <- BioGA::evaluate_fitness_cpp(genomic_data, population, c(1.0, 0.5))
+selected_parents <- BioGA::selection_cpp(population, fitness, num_parents = 2)
 offspring <- BioGA::crossover_cpp(selected_parents, offspring_size = 2)
-BioGA::mutation_cpp(offspring, mutation_rate = 0)
+BioGA::mutation_cpp(offspring, mutation_rate = 0.1, iteration = 1, max_iterations = 100)
 }

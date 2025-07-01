@@ -46,13 +46,18 @@ NumericMatrix selection_cpp(const NumericMatrix& population,
    }
  }
  
- // Assign fronts
+ // Assign/Build fronts
  std::vector<int> current_front;
  for (int i = 0; i < population_size; ++i) {
    if (dominated_count[i] == 0) {
      front[i] = 1;
      current_front.push_back(i);
    }
+ }
+ Rcpp::Rcout << "Current front size: " << current_front.size() << std::endl;
+ 
+ if (current_front.empty()) {
+    stop("No non-dominated individuals found in the current front.");
  }
  
  // Tournament selection from first front
@@ -64,6 +69,5 @@ NumericMatrix selection_cpp(const NumericMatrix& population,
      selected_parents(i, j) = population(selected_idx, j);
    }
  }
- 
  return selected_parents;
 }

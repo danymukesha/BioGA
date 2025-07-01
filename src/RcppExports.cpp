@@ -50,14 +50,17 @@ BEGIN_RCPP
 END_RCPP
 }
 // mutation_cpp
-NumericMatrix mutation_cpp(const NumericMatrix& offspring, double mutation_rate);
-RcppExport SEXP _BioGA_mutation_cpp(SEXP offspringSEXP, SEXP mutation_rateSEXP) {
+NumericMatrix mutation_cpp(const NumericMatrix& offspring, double mutation_rate, int iteration, int max_iterations, Nullable<NumericMatrix> network);
+RcppExport SEXP _BioGA_mutation_cpp(SEXP offspringSEXP, SEXP mutation_rateSEXP, SEXP iterationSEXP, SEXP max_iterationsSEXP, SEXP networkSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const NumericMatrix& >::type offspring(offspringSEXP);
     Rcpp::traits::input_parameter< double >::type mutation_rate(mutation_rateSEXP);
-    rcpp_result_gen = Rcpp::wrap(mutation_cpp(offspring, mutation_rate));
+    Rcpp::traits::input_parameter< int >::type iteration(iterationSEXP);
+    Rcpp::traits::input_parameter< int >::type max_iterations(max_iterationsSEXP);
+    Rcpp::traits::input_parameter< Nullable<NumericMatrix> >::type network(networkSEXP);
+    rcpp_result_gen = Rcpp::wrap(mutation_cpp(offspring, mutation_rate, iteration, max_iterations, network));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -92,7 +95,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_BioGA_crossover_cpp", (DL_FUNC) &_BioGA_crossover_cpp, 4},
     {"_BioGA_evaluate_fitness_cpp", (DL_FUNC) &_BioGA_evaluate_fitness_cpp, 3},
     {"_BioGA_initialize_population_cpp", (DL_FUNC) &_BioGA_initialize_population_cpp, 2},
-    {"_BioGA_mutation_cpp", (DL_FUNC) &_BioGA_mutation_cpp, 2},
+    {"_BioGA_mutation_cpp", (DL_FUNC) &_BioGA_mutation_cpp, 5},
     {"_BioGA_replacement_cpp", (DL_FUNC) &_BioGA_replacement_cpp, 3},
     {"_BioGA_selection_cpp", (DL_FUNC) &_BioGA_selection_cpp, 3},
     {NULL, NULL, 0}

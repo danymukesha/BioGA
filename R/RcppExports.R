@@ -50,24 +50,24 @@ initialize_population_cpp <- function(genomic_data, population_size) {
     .Call(`_BioGA_initialize_population_cpp`, genomic_data, population_size)
 }
 
-#' Function to mutate the offspring
+#' Function to mutate offspring with adaptive mutation and network constraints
 #'
-#' @param offspring Numeric matrix representing the offspring.
-#' @param mutation_rate Probability of mutation for each individual.
-#' @return Numeric matrix representing the mutated offspring.
+#' @param offspring Numeric matrix of offspring.
+#' @param mutation_rate Base probability of mutation.
+#' @param iteration Current GA iteration for adaptive mutation.
+#' @param max_iterations Maximum number of GA iterations.
+#' @param network Optional matrix of gene network constraints (rows: genes, cols: genes).
+#' @return Numeric matrix of mutated offspring.
 #' @examples
-#' # example of usage
 #' genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
-#' population <- BioGA::initialize_population_cpp(genomic_data,
-#'                 population_size = 5)
-#' fitness <- BioGA::evaluate_fitness_cpp(genomic_data, population)
-#' selected_parents <- BioGA::selection_cpp(population,
-#'                 fitness, num_parents = 2)
+#' population <- BioGA::initialize_population_cpp(genomic_data, population_size = 5)
+#' fitness <- BioGA::evaluate_fitness_cpp(genomic_data, population, c(1.0, 0.5))
+#' selected_parents <- BioGA::selection_cpp(population, fitness, num_parents = 2)
 #' offspring <- BioGA::crossover_cpp(selected_parents, offspring_size = 2)
-#' BioGA::mutation_cpp(offspring, mutation_rate = 0)
+#' BioGA::mutation_cpp(offspring, mutation_rate = 0.1, iteration = 1, max_iterations = 100)
 #' @export
-mutation_cpp <- function(offspring, mutation_rate) {
-    .Call(`_BioGA_mutation_cpp`, offspring, mutation_rate)
+mutation_cpp <- function(offspring, mutation_rate, iteration, max_iterations, network = NULL) {
+    .Call(`_BioGA_mutation_cpp`, offspring, mutation_rate, iteration, max_iterations, network)
 }
 
 #' Function to replace non-selected individuals in the population
