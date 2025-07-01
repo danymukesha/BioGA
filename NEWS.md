@@ -1,3 +1,9 @@
+# BioGA 0.99.12
+
+*Commit -m "Optimized replacement.cpp"*
+
+indentation adjustments
+
 # BioGA 0.99.11
 
 *Commit -m "Optimized replacement.cpp"*
