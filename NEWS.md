@@ -1,3 +1,13 @@
+# BioGA 0.99.17
+
+Added:
+- Demo vignette for BioGA.
+- Mathematical background vignette for BioGA.
+
+Updated:
+- BioGA vignettes with new examples and explanations.
+- `selection_cpp` function for improved performance and bug fixes.
+
 # BioGA 0.99.16
 
 *UPDATE: test_crossover_cpp*
