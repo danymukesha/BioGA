@@ -57,8 +57,17 @@ NumericMatrix selection_cpp(const NumericMatrix& population,
  Rcpp::Rcout << "Current front size: " << current_front.size() << std::endl;
  
  if (current_front.empty()) {
-    stop("No non-dominated individuals found in the current front.");
+    Rcpp::Rcout << "Warning: No non-dominated individuals found. \
+    Using full population for selection.\n";
+    // fallback: select from full population randomly
+    for (int i = 0; i < population_size; ++i) {
+       current_front.push_back(i);
+    }
  }
+ 
+ // if (current_front.empty()) {
+ //    stop("No non-dominated individuals found in the current front.");
+ // }
  
  // Tournament selection from first front
  for (int i = 0; i < num_parents; ++i) {
