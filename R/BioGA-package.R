@@ -1,7 +1,6 @@
 #' @keywords internal
 "_PACKAGE"
 
-
 ## usethis namespace: start
 #' @importFrom biocViews getBiocViews
 #' @importFrom ggplot2 ggtitle ggplot geom_line labs

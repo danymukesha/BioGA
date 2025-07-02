@@ -26,7 +26,23 @@ Imports:
     rlang,
     biocViews,
     sessioninfo,
-    BiocStyle
+    BiocStyle,
+    BiocParallel,
+    GEOquery,
+    caret,
+    caretEnsemble,
+    doParallel,
+    dplyr,
+    iml,
+    lattice,
+    lime,
+    pROC,
+    pheatmap,
+    randomForest,
+    survival,
+    survminer,
+    timeROC,
+    xgboost
 Depends: 
     R (>= 4.4)
 Suggests: 
