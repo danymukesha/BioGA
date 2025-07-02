@@ -54,7 +54,7 @@ List containing final population and fitness scores.
 Main genetic algorithm loop for genomic data optimization
 }
 \examples{
-\dontrun{
+\donttest{
 genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
 result <- BioGA::bioga_main_cpp(genomic_data, population_size = 50, num_generations = 100,
                                 crossover_rate = 0.9, eta_c = 20.0, mutation_rate = 0.1,

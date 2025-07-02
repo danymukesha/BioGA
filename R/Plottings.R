@@ -14,33 +14,31 @@
 #'
 #' @export
 plot_fitness_history <- function(fitness_history) {
-  # Extract fitness values
-  fitness_values <- unlist(fitness_history)
+    # Extract fitness values
+    fitness_values <- unlist(fitness_history)
 
-  # Create generation index
-  generations <-
-    rep(
-      seq_along(fitness_history),
-      vapply(fitness_history, length, integer(1))
+    # Create generation index
+    generations <-
+        rep(
+            seq_along(fitness_history),
+            vapply(fitness_history, length, integer(1))
+        )
+
+    # Create data frame
+    df <- data.frame(
+        Generation = generations,
+        Fitness = fitness_values
     )
 
-  # Create data frame
-  df <- data.frame(
-    Generation = generations,
-    Fitness = fitness_values
-  )
-
-  # Plot
-  ggplot2::ggplot(df, ggplot2::aes_string(
-    x = "Generation",
-    y = "Fitness"
-  )) +
-    geom_line() +
-    labs(x = "Generation", y = "Fitness") +
-    ggplot2::ggtitle("Fitness Change Over Generations")
+    # Plot
+    ggplot2::ggplot(df, ggplot2::aes_string(
+        x = "Generation",
+        y = "Fitness"
+    )) +
+        geom_line() +
+        labs(x = "Generation", y = "Fitness") +
+        ggplot2::ggtitle("Fitness Change Over Generations")
 }
-
-
 
 #' Plot Fitness Values
 #'
@@ -57,14 +55,13 @@ plot_fitness_history <- function(fitness_history) {
 #'
 #' @export
 plot_fitness <- function(fitness_values) {
-  generations <- seq_along(fitness_values)
-  plot(generations, fitness_values,
-       type = "l",
-       xlab = "Generations", ylab = "Fitness",
-       main = "Fitness Values Over Generations"
-  )
+    generations <- seq_along(fitness_values)
+    plot(generations, fitness_values,
+        type = "l",
+        xlab = "Generations", ylab = "Fitness",
+        main = "Fitness Values Over Generations"
+    )
 }
-
 
 #' Plot Population Distribution
 #'
@@ -82,7 +79,7 @@ plot_fitness <- function(fitness_values) {
 #'
 #' @export
 plot_population <- function(population) {
-  par(mfrow = c(1, 2))
-  boxplot(population, main = "Boxplot of Population")
-  hist(population, main = "Histogram of Population")
+    par(mfrow = c(1, 2))
+    boxplot(population, main = "Boxplot of Population")
+    hist(population, main = "Histogram of Population")
 }

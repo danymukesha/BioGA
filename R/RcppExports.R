@@ -18,7 +18,7 @@
 #' @param network Optional matrix of gene network constraints.
 #' @return List containing final population and fitness scores.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
 #' result <- BioGA::bioga_main_cpp(genomic_data, population_size = 50, num_generations = 100,
 #'                                 crossover_rate = 0.9, eta_c = 20.0, mutation_rate = 0.1,
@@ -48,15 +48,21 @@ crossover_cpp <- function(selected_parents, offspring_size, crossover_rate = 0.9
     .Call(`_BioGA_crossover_cpp`, selected_parents, offspring_size, crossover_rate, eta_c)
 }
 
-#' Function to evaluate fitness using genomic data with multi-objective support
+#' Function to evaluate fitness using genomic data with multi-objective 
+#' support
 #'
-#' @param genomic_data Numeric matrix of genomic data (rows: genes, columns: samples).
-#' @param population Numeric matrix representing the population of individuals.
-#' @param weights Numeric vector of weights for multi-objective fitness (e.g., expression difference, sparsity).
-#' @return Numeric matrix of fitness scores (columns: objectives, rows: individuals).
+#' @param genomic_data Numeric matrix of genomic data (rows: genes, 
+#' columns: samples).
+#' @param population Numeric matrix representing the population 
+#' of individuals.
+#' @param weights Numeric vector of weights for multi-objective fitness 
+#' (e.g., expression difference, sparsity).
+#' @return Numeric matrix of fitness scores (columns: objectives, 
+#' rows: individuals).
 #' @examples
 #' genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
-#' population <- BioGA::initialize_population_cpp(genomic_data, population_size = 5)
+#' population <- BioGA::initialize_population_cpp(genomic_data, 
+#'      population_size = 5)
 #' weights <- c(1.0, 0.5) # Weight for expression difference and sparsity
 #' BioGA::evaluate_fitness_cpp(genomic_data, population, weights)
 #' @export

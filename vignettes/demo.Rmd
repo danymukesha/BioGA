@@ -223,3 +223,13 @@ devtools::build_vignettes()
 
 👉 Contact me:
 [danymukesha\@gmail.com](mailto:danymukesha@gmail.com){.email}
+
+<details>
+
+<summary>**Session Info**</summary>
+
+```{r sessioninfo}
+sessioninfo::session_info()
+```
+
+</details>

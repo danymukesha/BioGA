@@ -345,3 +345,13 @@ This mathematical foundation shows that the BioGA package implements a
 theoretically sound multi-objective evolutionary algorithm for genomic
 data optimization, with proper attention to both computational
 efficiency and biological relevance.
+
+<details>
+
+<summary>**Session Info**</summary>
+
+```{r sessioninfo}
+sessioninfo::session_info()
+```
+
+</details>

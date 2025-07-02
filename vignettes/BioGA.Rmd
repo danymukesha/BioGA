@@ -440,8 +440,10 @@ cat("Selected gene names:", head(selected_gene_names), "...\n")
 
 # Machine Learning Pipeline {.tabset}
 
+```{=html}
 <!--<summary>**click to show Machine Learning Pipeline**</summary>
 -->
+```
 
 ⚠️ This part of machine learning might take a very long time to execute. However, we provide you few of examples of its pipeline code (`eval=FALSE`)
 
