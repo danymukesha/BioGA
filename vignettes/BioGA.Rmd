@@ -230,6 +230,7 @@ library(caret)
 library(xgboost)
 library(randomForest)
 library(pROC)
+library(parallel)
 library(doParallel)
 library(iml)
 library(lime)
@@ -246,7 +247,7 @@ library(timeROC)
 
 We use GEO GSE10072, a lung cancer dataset with gene expression profiles. Download and preprocess the data:
 
-```{r warning=FALSE}
+```{r}
 geo_data <- GEOquery::getGEO("GSE10072", GSEMatrix = TRUE)[[1]]
 se <- as(geo_data, "SummarizedExperiment")
 genomic_data <- assay(se) # expression matrix (genes x samples)
@@ -415,12 +416,11 @@ Apply mutation with the network constraint:
 mutated_with_net <- mutation_cpp(
   result$population, 
   mutation_rate, 
-  iteration=20, 
-  max_iterations=num_generations, 
-  network=network
-)
+  iteration = 20, 
+  max_iterations = num_generations, 
+  network = network)
 
-pheatmap(mutated_with_net, main="Population After Network-Constrained Mutation")
+pheatmap(mutated_with_net, main = "Population After Network-Constrained Mutation")
 ```
 
 # Feature Selection
@@ -440,9 +440,14 @@ cat("Selected gene names:", head(selected_gene_names), "...\n")
 
 # Machine Learning Pipeline {.tabset}
 
+<!--<summary>**click to show Machine Learning Pipeline**</summary>
+-->
+
+⚠️ This part of machine learning might take a very long time to execute. However, we provide you few of examples of its pipeline code (`eval=FALSE`)
+
 . Data Preparation
 
-```{r}
+```{r eval=FALSE}
 X <- t(genomic_data[selected_genes, ])
 y <- as.factor(pData(geo_data)$`source_name_ch1`)
 # y <- pheno$Stage  # other example outcome: cancer stage (categorical)
@@ -460,7 +465,7 @@ y_test <- y[-train_idx]
 
 ### Training and Evaluation
 
-```{r}
+```{r eval=FALSE}
 # This part performs parallelized training and ROC evaluation 
 # of Random Forest, XGBoost, and Logistic Regression models using caret.
 # It uses cross-validation with ROC as the performance metric 
@@ -470,47 +475,24 @@ cl <- makeCluster(parallel::detectCores() - 1)
 registerDoParallel(cl)
 
 ctrl <- trainControl(
-  method = "repeatedcv",
-  number = 5,
-  repeats = 3,
-  classProbs = TRUE,
-  summaryFunction = twoClassSummary,
-  allowParallel = TRUE
-)
+  method = "repeatedcv", number = 5, repeats = 3, classProbs = TRUE,
+  summaryFunction = twoClassSummary, allowParallel = TRUE)
 
 set.seed(123)
 models <- list(
-  rf = train(
-    X_train,
-    y_train,
-    method = "rf",
-    trControl = ctrl,
-    metric = "ROC"
-  ),
-  xgb = train(
-    X_train,
-    y_train,
-    method = "xgbTree",
-    trControl = ctrl,
-    metric = "ROC"
-  ),
-  glm = train(
-    X_train,
-    y_train,
-    method = "glm",
-    family = "binomial",
-    trControl = ctrl,
-    metric = "ROC"
-  )
+  rf = train(X_train, y_train, method = "rf",
+    trControl = ctrl, metric = "ROC"),
+  xgb = train(X_train, y_train, method = "xgbTree",
+    trControl = ctrl, metric = "ROC"),
+  glm = train(X_train, y_train, method = "glm",
+    family = "binomial", trControl = ctrl, metric = "ROC")
 )
 
 train_probs <- lapply(models, predict, newdata = X_train, type = "prob")
 test_probs  <- lapply(models, predict, newdata = X_test, type = "prob")
 
-roc_train <- lapply(train_probs, function(p)
-  roc(y_train, p[, 2]))
-roc_test  <- lapply(test_probs, function(p)
-  roc(y_test, p[, 2]))
+roc_train <- lapply(train_probs, function(p) roc(y_train, p[, 2]))
+roc_test  <- lapply(test_probs, function(p) roc(y_test, p[, 2]))
 
 plot(roc_train$rf, col = "darkred", main = "Train ROC Curves")
 plot(roc_train$xgb, add = TRUE, col = "darkgreen")
@@ -528,14 +510,14 @@ stopCluster(cl)
 registerDoSEQ()
 ```
 
-```{r}
+```{r eval=FALSE}
 varImpPlot(models$rf$finalModel, n.var = 20, 
            main = "Top 20 Optimized Features (Random Forest)")
 ```
 
 ### Confusion Matrix
 
-```{r}
+```{r eval=FALSE}
 pred_rf <- predict(models$rf, X_test)
 cm <- confusionMatrix(pred_rf, y_test)
 cm$table
@@ -546,7 +528,7 @@ fourfoldplot(cm$table, color = c("#99d8c9", "#fc9272"),
 
 ## Ensemble Stacking
 
-```{r}
+```{r eval=FALSE}
 cl <- makeCluster(parallel::detectCores() - 1)
 registerDoParallel(cl)
 models_list <- caretList(
@@ -572,12 +554,12 @@ stopCluster(cl)
 registerDoSEQ()
 ```
 
-```{r }
+```{r eval=FALSE}
 plot(models_list)
 ggplot2::autoplot(ensemble_model)
 ```
 
-```{r}
+```{r eval=FALSE}
 lattice::xyplot(caret::resamples(models_list))
 ```
 
@@ -660,6 +642,8 @@ calib <- caret::calibration(y_test ~ pred_prob_xgb, class = TRUE)
 xyplot(calib)
 ```
 
+</details>
+
 # Survival Analysis
 
 Mentioned as `Stage:ch1`, the higher stage is treated as “bad outcome” in a quick Cox model. Survival analysis for clinical outcome prediction Using Selected Genes:
@@ -690,8 +674,8 @@ time_roc <- timeROC(
   delta = surv_data$status,
   marker = surv_data$risk_score,
   cause = 1,
-  times = c(365, 730, 1095)
-)
+  times = c(365, 730, 1095))
+
 plot(time_roc, time = 365)
 
 ```
@@ -702,7 +686,7 @@ plot(time_roc, time = 365)
 
 ## Performance Benchmarking
 
-To evaluate BioGA's efficiency and accuracy, we conducted benchmarking experiments against two widely used R packages: **GA** and **genalg**. These comparisons focused on both runtime and solution quality across different genomic datasets. Two representative datasets were used: the **TCGA-BRCA** dataset, which contains high-dimensional RNA-seq data from breast cancer patients, and the **GEO-GSE10072** dataset, a smaller lung cancer gene expression set.
+To evaluate `r Biocpkg("BioGA")`'s efficiency and accuracy, we conducted benchmarking experiments against two widely used R packages: **GA** and **genalg**. These comparisons focused on both runtime and solution quality across different genomic datasets. Two representative datasets were used: the **TCGA-BRCA** dataset, which contains high-dimensional RNA-seq data from breast cancer patients, and the **GEO-GSE10072** dataset, a smaller lung cancer gene expression set.
 
 All methods were configured with identical hyperparameters—population size, number of generations, and fitness evaluation criteria—to ensure fairness. Execution was performed on a 16-core Intel Xeon workstation to assess scalability and parallelization benefits.
 

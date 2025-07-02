@@ -17,6 +17,7 @@
 #' @importFrom lattice xyplot bwplot histogram
 #' @importFrom BiocParallel bplapply bpmapply register
 #' @importFrom caretEnsemble caretList caretEnsemble
+#' @importFrom parallel detectCores makeCluster
 #' @importFrom doParallel registerDoParallel stopImplicitCluster
 #' @importFrom dplyr filter select mutate arrange summarise rename distinct
 #' @importFrom iml Predictor FeatureImp
