@@ -112,7 +112,7 @@ These biologically inspired innovations make `r Biocpkg("BioGA")` particularly s
 
 ![*Biologically Informed Evolutionary Framework in* *`r Biocpkg("BioGA")`* *for Gene Signature Optimization*](../man/figures/framework.png)
 
-***Figure 1:*** Workflow of the `r Biocpkg("BioGA")` algorithm. Gene expression data, supported by gene networks and pathways (e.g., STRINGdb, WGCNA), initiates biologically informed population initialization. This feeds into a modified NSGA-II evolutionary algorithm featuring a multi-objective fitness function (balancing classification accuracy against gene set sparsity) and a parallelized C++ backend (Rcpp, OpenMP) for efficiency. The result is optimized gene signatures and clustering models that preserve biological plausibility and interpretability. See Section [Implementation](#12_Implementation) for details.
+***Figure 1:*** Workflow of the `r Biocpkg("BioGA")` algorithm. Gene expression data, supported by gene networks and pathways (e.g., STRINGdb, WGCNA), initiates biologically informed population initialization. This feeds into a modified NSGA-II evolutionary algorithm featuring a multi-objective fitness function (balancing classification accuracy against gene set sparsity) and a parallelized C++ backend (Rcpp, OpenMP) for efficiency. The result is optimized gene signatures and clustering models that preserve biological plausibility and interpretability. See Section [Implementation](#12-Implementation) for details.
 
 ------------------------------------------------------------------------
 
@@ -278,7 +278,7 @@ Let’s set up the GA parameters:
 
 ```{r}
 population_size <- 30
-num_generations <- 50
+num_generations <- 25
 crossover_rate <- 0.9
 eta_c <- 20
 mutation_rate <- 0.05
@@ -316,7 +316,7 @@ df <- data.frame(
 ggplot(df, aes(x = Expression_Diff, y = Sparsity)) +
     geom_point(color = "steelblue") +
     labs(title = "BioGA Pareto Front", x = "Expression Difference", y = "Sparsity") +
-    theme_minimal()
+    theme_classic()
 ```
 
 ------------------------------------------------------------------------
@@ -343,13 +343,13 @@ track_fitness <- function(genomic_data, population_size, seed) {
 
 fitness_trace <- track_fitness(genomic_data, population_size, 2025)
 
-ggplot(data.frame(Generation = 1:50, Fitness = fitness_trace),
+ggplot(data.frame(Generation = 1:num_generations, Fitness = fitness_trace),
     aes(x = Generation, y = Fitness)) +
     geom_line(color = "steelblue", linewidth = 1) +
     labs(title = "Best Fitness Convergence Across Generations",
         y = "Best Fitness (Expression Difference)",
         x = "Generation") +
-    theme_minimal()
+    theme_classic()
 ```
 
 ------------------------------------------------------------------------
@@ -645,8 +645,7 @@ ggsurvplot(fit, data = surv_data, pval = TRUE, risk.table = TRUE)
 # Time-dependent ROC for Survival
 
 ```{r}
-time_roc <- timeROC(
-    T = surv_data$time, delta = surv_data$status,
+time_roc <- timeROC(T = surv_data$time, delta = surv_data$status,
     marker = surv_data$risk_score, cause = 1, times = c(365, 730, 1095))
 plot(time_roc, time = 365)
 
