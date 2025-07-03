@@ -104,7 +104,7 @@ Finally, the architecture connects with **biological databases and annotation fr
 
 ### Biologically Informed Operators
 
-A standout feature of `r Biocpkg("BioGA")` is its ability to incorporate biological knowledge **directly into the evolutionary process**. Instead of relying on purely stochastic operations, BioGA uses known gene interaction networks to guide mutations and initialize populations. For example, genes selected for mutation can be constrained to lie within co-expression neighborhoods, reducing the likelihood of generating biologically implausible candidates.
+A standout feature of `r Biocpkg("BioGA")` is its ability to incorporate biological knowledge **directly into the evolutionary process**. Instead of relying on purely stochastic operations, `r Biocpkg("BioGA")` uses known gene interaction networks to guide mutations and initialize populations. For example, genes selected for mutation can be constrained to lie within co-expression neighborhoods, reducing the likelihood of generating biologically implausible candidates.
 
 Similarly, cluster-based initialization based on WGCNA modules ensures that starting populations contain co-regulated gene sets. This dramatically improves the convergence speed of the algorithm and increases the biological interpretability of the final solution. In selection, pathway-aware heuristics prioritize gene sets that are enriched in relevant signaling pathways, promoting results that are both accurate and biologically meaningful.
 
@@ -146,7 +146,7 @@ Lastly, **cloud-native deployment** via containerized workflows (Docker, Singula
 
 `r Biocpkg("BioGA")` addresses a pressing need in modern genomics: the ability to perform efficient, biologically relevant optimization on high-dimensional data. By combining a high-performance C++ core, multi-objective optimization via NSGA-II, and integration with biological knowledge bases, `r Biocpkg("BioGA")` empowers researchers to identify **meaningful, interpretable solutions** to complex problems like biomarker discovery, feature selection, and single-cell clustering.
 
-Unlike traditional GAs, `BioGA` is not a black-box optimizer; it is **deeply embedded in biological reasoning**. This design philosophy ensures that solutions are not only computationally optimal but also scientifically actionable. Whether used in academic research, translational bioinformatics, or personalized medicine, BioGA offers a powerful framework tailored to the demands of modern genomic data.
+Unlike traditional GAs, `r Biocpkg("BioGA")` is not a black-box optimizer; it is **deeply embedded in biological reasoning**. This design philosophy ensures that solutions are not only computationally optimal but also scientifically actionable. Whether used in academic research, translational bioinformatics, or personalized medicine, `r Biocpkg("BioGA")` offers a powerful framework tailored to the demands of modern genomic data.
 
 ------------------------------------------------------------------------
 
@@ -190,11 +190,11 @@ For example, a set of candidate genes (a population) might be represented as [1,
 
 # BioGA Genomic Analysis with GEO Dataset
 
-With case-study, we demonstrated a full GA workflow using a GEO dataset (GSE10072, lung cancer gene expression) stored in a `SummarizedExperiment` object. It includes data preprocessing, BioGA execution, and visualization of results, ensuring reproducibility.
+With case-study, we demonstrated a full GA workflow using a GEO dataset (GSE10072, lung cancer gene expression) stored in a `SummarizedExperiment` object. It includes data preprocessing, `r Biocpkg("BioGA")` execution, and visualization of results, ensuring reproducibility.
 
 # Introduction
 
-BioGA is an R package for genetic algorithm (GA) optimization of high-throughput genomic data. This vignette demonstrates a full GA workflow using a lung cancer gene expression dataset (GEO GSE10072) stored in a `SummarizedExperiment` object. We aim to identify a sparse gene set that minimizes expression differences between samples.
+As it is already described above, `r Biocpkg("BioGA")` is an R package for genetic algorithm (GA) optimization of high-throughput genomic data. Here, we demonstrate a full GA workflow using a lung cancer gene expression dataset (GEO GSE10072) stored in a `SummarizedExperiment` object. We aim to identify a sparse gene set that minimizes expression differences between samples.
 
 Load required packages:
 
@@ -661,13 +661,13 @@ To evaluate `r Biocpkg("BioGA")`'s efficiency and accuracy, we conducted benchma
 
 All methods were configured with identical hyperparameters—population size, number of generations, and fitness evaluation criteria—to ensure fairness. Execution was performed on a 16-core Intel Xeon workstation to assess scalability and parallelization benefits.
 
-**Table 1** summarizes performance on the TCGA-BRCA dataset. BioGA outperformed other tools by achieving a **3.7× speedup** over GA and **nearly 4× over genalg**, while also delivering **higher accuracy and better sparsity** in selected gene sets. BioGA’s memory footprint was significantly lower, highlighting its efficient C++ backend and optimized memory management. Notably, it maintained a favorable tradeoff between sparsity (fewer genes) and accuracy, a crucial aspect for biomarker discovery.
+**Table 1** summarizes performance on the TCGA-BRCA dataset. `r Biocpkg("BioGA")` outperformed other tools by achieving a **3.7× speedup** over GA and **nearly 4× over genalg**, while also delivering **higher accuracy and better sparsity** in selected gene sets. BioGA’s memory footprint was significantly lower, highlighting its efficient C++ backend and optimized memory management. Notably, it maintained a favorable tradeoff between sparsity (fewer genes) and accuracy, a crucial aspect for biomarker discovery.
 
 ```{r performance-plot, echo=FALSE, fig.cap="Runtime scaling with dataset size and cores", fig.height=5}
 print("coming soon...")
 ```
 
-Figure 3 illustrates how BioGA scales with increasing CPU cores. The package demonstrated **near-linear performance scaling**, reducing runtime from \~48s on a single core to \~12s on 16 cores. This makes BioGA particularly well-suited for large-scale genomic tasks where time efficiency is critical.
+Figure 3 illustrates how `r Biocpkg("BioGA")` scales with increasing CPU cores. The package demonstrated **near-linear performance scaling**, reducing runtime from \~48s on a single core to \~12s on 16 cores. This makes `r Biocpkg("BioGA")` particularly well-suited for large-scale genomic tasks where time efficiency is critical.
 
 ------------------------------------------------------------------------
 
@@ -675,25 +675,25 @@ Figure 3 illustrates how BioGA scales with increasing CPU cores. The package dem
 
 ### Case Study 1: Breast Cancer Biomarker Discovery
 
-We applied BioGA to identify a minimal gene signature that differentiates **HER2-positive** and **HER2-negative** breast cancer subtypes using TCGA-BRCA data. The optimization was guided by a multi-objective function prioritizing classification accuracy (α=0.7) and sparsity, encouraging small yet informative gene sets.
+We applied `r Biocpkg("BioGA")` to identify a minimal gene signature that differentiates **HER2-positive** and **HER2-negative** breast cancer subtypes using TCGA-BRCA data. The optimization was guided by a multi-objective function prioritizing classification accuracy (α=0.7) and sparsity, encouraging small yet informative gene sets.
 
-BioGA successfully derived a **10-gene signature** achieving **95% classification accuracy**, outperforming conventional GA approaches. Importantly, **8 of these genes were listed in the COSMIC Cancer Gene Census**, reinforcing the biological relevance of the selected subset. Enrichment analysis further revealed significant involvement in the **PI3K-Akt signaling pathway**, a well-known hallmark of HER2-driven breast cancers.
+`r Biocpkg("BioGA")` successfully derived a **10-gene signature** achieving **95% classification accuracy**, outperforming conventional GA approaches. Importantly, **8 of these genes were listed in the COSMIC Cancer Gene Census**, reinforcing the biological relevance of the selected subset. Enrichment analysis further revealed significant involvement in the **PI3K-Akt signaling pathway**, a well-known hallmark of HER2-driven breast cancers.
 
 ```{r pareto-plot, echo=FALSE, fig.cap="Pareto front of solutions from breast cancer analysis", fig.height=5}
 print("coming soon...")
 ```
 
-The Pareto front (Figure X) showcases the trade-off solutions discovered by BioGA, allowing users to choose models that best balance model simplicity and predictive performance. Compared to other GA methods, BioGA’s solutions were not only more compact but also more biologically interpretable.
+The Pareto front (Figure X) showcases the trade-off solutions discovered by `r Biocpkg("BioGA")`, allowing users to choose models that best balance model simplicity and predictive performance. Compared to other GA methods, `r Biocpkg("BioGA")`’s solutions were not only more compact but also more biologically interpretable.
 
 ------------------------------------------------------------------------
 
 ### Case Study 2: Single-cell RNA-seq Clustering Optimization
 
-To test BioGA’s versatility beyond traditional bulk RNA-seq, we applied it to the **10X Genomics PBMC single-cell dataset**, focusing on clustering optimization. Here, the objective was to maximize the **silhouette score** while minimizing the **number of clusters**, a balance critical for capturing biological structure without overfitting.
+To test `r Biocpkg("BioGA")`’s versatility beyond traditional bulk RNA-seq, we applied it to the **10X Genomics PBMC single-cell dataset**, focusing on clustering optimization. Here, the objective was to maximize the **silhouette score** while minimizing the **number of clusters**, a balance critical for capturing biological structure without overfitting.
 
-BioGA demonstrated a **7.8% improvement in cluster purity** compared to standard methods like SC3. Furthermore, it identified a rare **NK cell subpopulation** representing less than 1% of the sample—missed by traditional algorithms. This result underscores BioGA’s potential in uncovering subtle biological patterns, especially in high-noise settings like single-cell data.
+`r Biocpkg("BioGA")` demonstrated a **7.8% improvement in cluster purity** compared to standard methods like SC3. Furthermore, it identified a rare **NK cell subpopulation** representing less than 1% of the sample—missed by traditional algorithms. This result underscores `r Biocpkg("BioGA")`’s potential in uncovering subtle biological patterns, especially in high-noise settings like single-cell data.
 
-BioGA’s runtime (18.4 minutes) was **2.7× faster** than SC3 (67.3 minutes), highlighting the advantages of its parallelized C++ backend in computationally demanding contexts such as clustering large single-cell datasets
+`r Biocpkg("BioGA")`’s runtime (18.4 minutes) was **2.7× faster** than SC3 (67.3 minutes), highlighting the advantages of its parallelized C++ backend in computationally demanding contexts such as clustering large single-cell datasets
 
 <details>
 
