@@ -3,14 +3,16 @@ using namespace Rcpp;
 
 //' Function to initialize population with optional gene clustering
 //'
-//' @param genomic_data Numeric matrix of genomic data (rows: genes, columns: samples).
+//' @param genomic_data Numeric matrix of genomic data (rows: genes, 
+//' columns: samples).
 //' @param population_size Number of individuals in the population.
 //' @param seed Optional random seed for reproducibility.
 //' @param clusters Optional vector of gene cluster assignments.
 //' @return Numeric matrix of initialized population.
 //' @examples
 //' genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
-//' BioGA::initialize_population_cpp(genomic_data, population_size = 5, seed = 123)
+//' BioGA::initialize_population_cpp(genomic_data, population_size = 5, 
+//' seed = 123)
 //' @export
 // [[Rcpp::export]]
 NumericMatrix initialize_population_cpp(const NumericMatrix& genomic_data, 

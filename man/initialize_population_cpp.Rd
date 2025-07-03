@@ -12,7 +12,8 @@ initialize_population_cpp(
 )
 }
 \arguments{
-\item{genomic_data}{Numeric matrix of genomic data (rows: genes, columns: samples).}
+\item{genomic_data}{Numeric matrix of genomic data (rows: genes,
+columns: samples).}
 
 \item{population_size}{Number of individuals in the population.}
 
@@ -28,5 +29,6 @@ Function to initialize population with optional gene clustering
 }
 \examples{
 genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
-BioGA::initialize_population_cpp(genomic_data, population_size = 5, seed = 123)
+BioGA::initialize_population_cpp(genomic_data, population_size = 5, 
+seed = 123)
 }

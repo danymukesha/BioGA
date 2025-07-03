@@ -14,15 +14,10 @@ vignette: >
 #     wrap: 72
 ---
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
-
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+knitr::opts_chunk$set(
+    collapse = TRUE, comment = "#>", echo = TRUE, warning = FALSE, 
+    message = FALSE)
 library(BioGA)
 library(ggplot2)
 library(pheatmap)
@@ -65,17 +60,19 @@ n_samples <- 20
 
 # Simulate two classes: cases and controls
 class_labels <- rep(c("Control", "Case"), each = 10)
-genomic_data <- matrix(rnorm(n_genes * n_samples, mean = 5, sd = 2), 
-                       nrow = n_genes, ncol = n_samples)
+genomic_data <- matrix(rnorm(n_genes * n_samples, mean = 5, sd = 2),
+    nrow = n_genes, ncol = n_samples)
 
 # Introduce differential expression in 10 genes for "Case"
-genomic_data[1:10, class_labels == "Case"] <- genomic_data[1:10, class_labels == "Case"] + 3
+genomic_data[1:10, class_labels == "Case"] <-
+    genomic_data[1:10, class_labels == "Case"] + 3
 
 rownames(genomic_data) <- paste0("Gene", 1:n_genes)
 colnames(genomic_data) <- paste0("Sample", 1:n_samples)
 
-pheatmap(genomic_data, cluster_rows = TRUE, cluster_cols = TRUE, 
-         main = "Simulated Gene Expression Data")
+pheatmap(genomic_data,
+    cluster_rows = TRUE, cluster_cols = TRUE,
+    main = "Simulated Gene Expression Data")
 ```
 
 ------------------------------------------------------------------------
@@ -86,17 +83,17 @@ We define parameters and run BioGA:
 
 ```{r}
 result <- bioga_main_cpp(
-  genomic_data = genomic_data,
-  population_size = 30,
-  num_generations = 50,
-  crossover_rate = 0.9,
-  eta_c = 20.0,
-  mutation_rate = 0.1,
-  num_parents = 20,
-  num_offspring = 20,
-  num_to_replace = 10,
-  weights = c(1.0, 0.5),
-  seed = 42
+    genomic_data = genomic_data,
+    population_size = 30,
+    num_generations = 50,
+    crossover_rate = 0.9,
+    eta_c = 20.0,
+    mutation_rate = 0.1,
+    num_parents = 20,
+    num_offspring = 20,
+    num_to_replace = 10,
+    weights = c(1.0, 0.5),
+    seed = 42
 )
 ```
 
@@ -111,25 +108,25 @@ Let’s compute and plot how the best fitness evolved.
 # let’s re-run manually to track convergence:
 
 track_fitness <- function(...) {
-  pop <- initialize_population_cpp(...)
-  best_fit <- c()
-  for (g in 1:50) {
-    fit <- evaluate_fitness_cpp(genomic_data, pop, weights = c(1.0, 0.5))
-    best_fit <- c(best_fit, min(fit[, 1]))  # Track expression objective
-    parents <- selection_cpp(pop, fit, 20)
-    offspring <- crossover_cpp(parents, 20)
-    mutated <- mutation_cpp(offspring, 0.1, g, 50)
-    fit_off <- evaluate_fitness_cpp(genomic_data, mutated, c(1.0, 0.5))
-    pop <- replacement_cpp(pop, mutated, fit, fit_off, 10)
-  }
-  best_fit
+    pop <- initialize_population_cpp(...)
+    best_fit <- c()
+    for (g in 1:50) {
+        fit <- evaluate_fitness_cpp(genomic_data, pop, weights = c(1.0, 0.5))
+        best_fit <- c(best_fit, min(fit[, 1])) # Track expression objective
+        parents <- selection_cpp(pop, fit, 20)
+        offspring <- crossover_cpp(parents, 20)
+        mutated <- mutation_cpp(offspring, 0.1, g, 50)
+        fit_off <- evaluate_fitness_cpp(genomic_data, mutated, c(1.0, 0.5))
+        pop <- replacement_cpp(pop, mutated, fit, fit_off, 10)
+    }
+    best_fit
 }
 
 fitness_trace <- track_fitness(genomic_data, 30, 42)
 
 qplot(1:50, fitness_trace, geom = "line") +
-  labs(x = "Generation", y = "Best Fitness (Expression Diff.)", 
-       title = "Convergence of Best Fitness Across Generations")
+    labs(x = "Generation", y = "Best Fitness (Expression Diff.)",
+        title = "Convergence of Best Fitness Across Generations")
 ```
 
 ------------------------------------------------------------------------
@@ -139,9 +136,9 @@ qplot(1:50, fitness_trace, geom = "line") +
 Visualize population at final generation
 
 ```{r}
-pheatmap(result$population, 
-         main = "Final Population of Individuals",
-         cluster_rows = TRUE, cluster_cols = TRUE)
+pheatmap(result$population,
+    main = "Final Population of Individuals",
+    cluster_rows = TRUE, cluster_cols = TRUE)
 ```
 
 ------------------------------------------------------------------------
@@ -166,14 +163,14 @@ If you had a network, e.g. co-expression network:
 network_mat <- matrix(runif(n_genes^2, 0, 1), nrow = n_genes)
 diag(network_mat) <- 0
 
-mutated_with_net <- mutation_cpp(result$population, 
-                                 mutation_rate = 0.1, 
-                                 iteration = 10, 
-                                 max_iterations = 50, 
-                                 network = network_mat)
+mutated_with_net <- mutation_cpp(result$population,
+    mutation_rate = 0.1,
+    iteration = 10,
+    max_iterations = 50,
+    network = network_mat)
 
-pheatmap(mutated_with_net, 
-         main = "Population After Mutation with Network Constraint")
+pheatmap(mutated_with_net,
+    main = "Population After Mutation with Network Constraint")
 ```
 
 ------------------------------------------------------------------------

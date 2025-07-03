@@ -4,7 +4,8 @@ using namespace Rcpp;
 
 //' Main genetic algorithm loop for genomic data optimization
 //'
-//' @param genomic_data Numeric matrix of genomic data (rows: genes, columns: samples).
+//' @param genomic_data Numeric matrix of genomic data (rows: genes, 
+//' columns: samples).
 //' @param population_size Number of individuals in the population.
 //' @param num_generations Number of generations to run.
 //' @param crossover_rate Probability of crossover.
@@ -19,13 +20,12 @@ using namespace Rcpp;
 //' @param network Optional matrix of gene network constraints.
 //' @return List containing final population and fitness scores.
 //' @examples
-//' \donttest{
 //' genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
-//' result <- BioGA::bioga_main_cpp(genomic_data, population_size = 50, num_generations = 100,
-//'                                 crossover_rate = 0.9, eta_c = 20.0, mutation_rate = 0.1,
-//'                                 num_parents = 20, num_offspring = 20, num_to_replace = 10,
-//'                                 weights = c(1.0, 0.5), seed = 123,)
-//' }
+//' result <- BioGA::bioga_main_cpp(genomic_data,
+//' population_size = 50, num_generations = 10,
+//'         crossover_rate = 0.9, eta_c = 20.0, mutation_rate = 0.1,
+//'         num_parents = 20, num_offspring = 20, num_to_replace = 10,
+//'         weights = c(1.0, 0.5), seed = 123)
 //' @export
 // [[Rcpp::export]]
 List bioga_main_cpp(const NumericMatrix& genomic_data,

@@ -31,10 +31,15 @@ Function to replace population with elitism and diversity preservation
 }
 \examples{
 genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
-population <- BioGA::initialize_population_cpp(genomic_data, population_size = 5)
-fitness <- BioGA::evaluate_fitness_cpp(genomic_data, population, c(1.0, 0.5))
-selected_parents <- BioGA::selection_cpp(population, fitness, num_parents = 2)
+population <- BioGA::initialize_population_cpp(genomic_data, 
+population_size = 5)
+fitness <- BioGA::evaluate_fitness_cpp(genomic_data, population, 
+c(1.0, 0.5))
+selected_parents <- BioGA::selection_cpp(population, fitness, 
+num_parents = 2)
 offspring <- BioGA::crossover_cpp(selected_parents, offspring_size = 2)
-offspring_fitness <- BioGA::evaluate_fitness_cpp(genomic_data, offspring, c(1.0, 0.5))
-BioGA::replacement_cpp(population, offspring, fitness, offspring_fitness, num_to_replace = 1)
+offspring_fitness <- BioGA::evaluate_fitness_cpp(genomic_data, offspring, 
+c(1.0, 0.5))
+BioGA::replacement_cpp(population, offspring, fitness, offspring_fitness, 
+num_to_replace = 1)
 }

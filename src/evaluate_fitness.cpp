@@ -5,13 +5,17 @@ using namespace RcppParallel;
 
 //' Function to evaluate fitness using genomic data with multi-objective support
 //'
-//' @param genomic_data Numeric matrix of genomic data (rows: genes, columns: samples).
+//' @param genomic_data Numeric matrix of genomic data (rows: genes, 
+//' columns: samples).
 //' @param population Numeric matrix representing the population of individuals.
-//' @param weights Numeric vector of weights for multi-objective fitness (e.g., expression difference, sparsity).
-//' @return Numeric matrix of fitness scores (columns: objectives, rows: individuals).
+//' @param weights Numeric vector of weights for multi-objective fitness 
+//' (e.g., expression difference, sparsity).
+//' @return Numeric matrix of fitness scores (columns: objectives, 
+//' rows: individuals).
 //' @examples
 //' genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
-//' population <- BioGA::initialize_population_cpp(genomic_data, population_size = 5)
+//' population <- BioGA::initialize_population_cpp(genomic_data, 
+//' population_size = 5)
 //' weights <- c(1.0, 0.5) # Weight for expression difference and sparsity
 //' BioGA::evaluate_fitness_cpp(genomic_data, population, weights)
 //' @export

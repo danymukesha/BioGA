@@ -3,7 +3,8 @@
 
 #' Main genetic algorithm loop for genomic data optimization
 #'
-#' @param genomic_data Numeric matrix of genomic data (rows: genes, columns: samples).
+#' @param genomic_data Numeric matrix of genomic data (rows: genes, 
+#' columns: samples).
 #' @param population_size Number of individuals in the population.
 #' @param num_generations Number of generations to run.
 #' @param crossover_rate Probability of crossover.
@@ -18,13 +19,12 @@
 #' @param network Optional matrix of gene network constraints.
 #' @return List containing final population and fitness scores.
 #' @examples
-#' \donttest{
 #' genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
-#' result <- BioGA::bioga_main_cpp(genomic_data, population_size = 50, num_generations = 100,
-#'                                 crossover_rate = 0.9, eta_c = 20.0, mutation_rate = 0.1,
-#'                                 num_parents = 20, num_offspring = 20, num_to_replace = 10,
-#'                                 weights = c(1.0, 0.5), seed = 123,)
-#' }
+#' result <- BioGA::bioga_main_cpp(genomic_data,
+#' population_size = 50, num_generations = 10,
+#'         crossover_rate = 0.9, eta_c = 20.0, mutation_rate = 0.1,
+#'         num_parents = 20, num_offspring = 20, num_to_replace = 10,
+#'         weights = c(1.0, 0.5), seed = 123)
 #' @export
 bioga_main_cpp <- function(genomic_data, population_size, num_generations, crossover_rate, eta_c, mutation_rate, num_parents, num_offspring, num_to_replace, weights, seed = NULL, clusters = NULL, network = NULL) {
     .Call(`_BioGA_bioga_main_cpp`, genomic_data, population_size, num_generations, crossover_rate, eta_c, mutation_rate, num_parents, num_offspring, num_to_replace, weights, seed, clusters, network)
@@ -39,22 +39,23 @@ bioga_main_cpp <- function(genomic_data, population_size, num_generations, cross
 #' @return Numeric matrix of offspring.
 #' @examples
 #' genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
-#' population <- BioGA::initialize_population_cpp(genomic_data, population_size = 5)
-#' fitness <- BioGA::evaluate_fitness_cpp(genomic_data, population, c(1.0, 0.5))
-#' selected_parents <- BioGA::selection_cpp(population, fitness, num_parents = 2)
+#' population <- BioGA::initialize_population_cpp(genomic_data, 
+#' population_size = 5)
+#' fitness <- BioGA::evaluate_fitness_cpp(genomic_data, population, 
+#' c(1.0, 0.5))
+#' selected_parents <- BioGA::selection_cpp(population, fitness, 
+#' num_parents = 2)
 #' BioGA::crossover_cpp(selected_parents, offspring_size = 2)
 #' @export
 crossover_cpp <- function(selected_parents, offspring_size, crossover_rate = 0.9, eta_c = 20.0) {
     .Call(`_BioGA_crossover_cpp`, selected_parents, offspring_size, crossover_rate, eta_c)
 }
 
-#' Function to evaluate fitness using genomic data with multi-objective 
-#' support
+#' Function to evaluate fitness using genomic data with multi-objective support
 #'
 #' @param genomic_data Numeric matrix of genomic data (rows: genes, 
 #' columns: samples).
-#' @param population Numeric matrix representing the population 
-#' of individuals.
+#' @param population Numeric matrix representing the population of individuals.
 #' @param weights Numeric vector of weights for multi-objective fitness 
 #' (e.g., expression difference, sparsity).
 #' @return Numeric matrix of fitness scores (columns: objectives, 
@@ -62,7 +63,7 @@ crossover_cpp <- function(selected_parents, offspring_size, crossover_rate = 0.9
 #' @examples
 #' genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
 #' population <- BioGA::initialize_population_cpp(genomic_data, 
-#'      population_size = 5)
+#' population_size = 5)
 #' weights <- c(1.0, 0.5) # Weight for expression difference and sparsity
 #' BioGA::evaluate_fitness_cpp(genomic_data, population, weights)
 #' @export
@@ -72,14 +73,16 @@ evaluate_fitness_cpp <- function(genomic_data, population, weights) {
 
 #' Function to initialize population with optional gene clustering
 #'
-#' @param genomic_data Numeric matrix of genomic data (rows: genes, columns: samples).
+#' @param genomic_data Numeric matrix of genomic data (rows: genes, 
+#' columns: samples).
 #' @param population_size Number of individuals in the population.
 #' @param seed Optional random seed for reproducibility.
 #' @param clusters Optional vector of gene cluster assignments.
 #' @return Numeric matrix of initialized population.
 #' @examples
 #' genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
-#' BioGA::initialize_population_cpp(genomic_data, population_size = 5, seed = 123)
+#' BioGA::initialize_population_cpp(genomic_data, population_size = 5, 
+#' seed = 123)
 #' @export
 initialize_population_cpp <- function(genomic_data, population_size, seed = NULL, clusters = NULL) {
     .Call(`_BioGA_initialize_population_cpp`, genomic_data, population_size, seed, clusters)
@@ -91,15 +94,21 @@ initialize_population_cpp <- function(genomic_data, population_size, seed = NULL
 #' @param mutation_rate Base probability of mutation.
 #' @param iteration Current GA iteration for adaptive mutation.
 #' @param max_iterations Maximum number of GA iterations.
-#' @param network Optional matrix of gene network constraints (rows: genes, cols: genes).
+#' @param network Optional matrix of gene network constraints (rows: genes, 
+#' cols: genes).
 #' @return Numeric matrix of mutated offspring.
 #' @examples
 #' genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
-#' population <- BioGA::initialize_population_cpp(genomic_data, population_size = 5)
-#' fitness <- BioGA::evaluate_fitness_cpp(genomic_data, population, c(1.0, 0.5))
-#' selected_parents <- BioGA::selection_cpp(population, fitness, num_parents = 2)
-#' offspring <- BioGA::crossover_cpp(selected_parents, offspring_size = 2)
-#' BioGA::mutation_cpp(offspring, mutation_rate = 0.1, iteration = 1, max_iterations = 100)
+#' population <- BioGA::initialize_population_cpp(genomic_data, 
+#' population_size = 5)
+#' fitness <- BioGA::evaluate_fitness_cpp(genomic_data, population, 
+#' c(1.0, 0.5))
+#' selected_parents <- BioGA::selection_cpp(population, fitness, 
+#' num_parents = 2)
+#' offspring <- BioGA::crossover_cpp(selected_parents, 
+#' offspring_size = 2)
+#' BioGA::mutation_cpp(offspring, mutation_rate = 0.1, iteration = 1, 
+#' max_iterations = 100)
 #' @export
 mutation_cpp <- function(offspring, mutation_rate, iteration, max_iterations, network = NULL) {
     .Call(`_BioGA_mutation_cpp`, offspring, mutation_rate, iteration, max_iterations, network)
@@ -115,12 +124,17 @@ mutation_cpp <- function(offspring, mutation_rate, iteration, max_iterations, ne
 #' @return Numeric matrix of updated population.
 #' @examples
 #' genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
-#' population <- BioGA::initialize_population_cpp(genomic_data, population_size = 5)
-#' fitness <- BioGA::evaluate_fitness_cpp(genomic_data, population, c(1.0, 0.5))
-#' selected_parents <- BioGA::selection_cpp(population, fitness, num_parents = 2)
+#' population <- BioGA::initialize_population_cpp(genomic_data, 
+#' population_size = 5)
+#' fitness <- BioGA::evaluate_fitness_cpp(genomic_data, population, 
+#' c(1.0, 0.5))
+#' selected_parents <- BioGA::selection_cpp(population, fitness, 
+#' num_parents = 2)
 #' offspring <- BioGA::crossover_cpp(selected_parents, offspring_size = 2)
-#' offspring_fitness <- BioGA::evaluate_fitness_cpp(genomic_data, offspring, c(1.0, 0.5))
-#' BioGA::replacement_cpp(population, offspring, fitness, offspring_fitness, num_to_replace = 1)
+#' offspring_fitness <- BioGA::evaluate_fitness_cpp(genomic_data, offspring, 
+#' c(1.0, 0.5))
+#' BioGA::replacement_cpp(population, offspring, fitness, offspring_fitness, 
+#' num_to_replace = 1)
 #' @export
 replacement_cpp <- function(population, offspring, fitness, offspring_fitness, num_to_replace) {
     .Call(`_BioGA_replacement_cpp`, population, offspring, fitness, offspring_fitness, num_to_replace)
@@ -134,8 +148,10 @@ replacement_cpp <- function(population, offspring, fitness, offspring_fitness, n
 #' @return Numeric matrix of selected individuals.
 #' @examples
 #' genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
-#' population <- BioGA::initialize_population_cpp(genomic_data, population_size = 5)
-#' fitness <- BioGA::evaluate_fitness_cpp(genomic_data, population, c(1.0, 0.5))
+#' population <- BioGA::initialize_population_cpp(genomic_data, 
+#'      population_size = 5)
+#' fitness <- BioGA::evaluate_fitness_cpp(genomic_data, population, 
+#'      c(1.0, 0.5))
 #' BioGA::selection_cpp(population, fitness, num_parents = 2)
 #' @export
 selection_cpp <- function(population, fitness, num_parents) {
