@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">BioGA</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.99.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.99.17</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,6 +17,11 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../articles/BioGA.html">Get started</a></li>
 <li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/demo.html">📄 Usage demonstration</a></li>
+    <li><a class="dropdown-item" href="../articles/math.html">📐 Mathematical Behind</a></li>
+  </ul></li>
 <li class="active nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
@@ -38,6 +43,123 @@
       <small>Source: <a href="https://github.com/danymukesha/BioGA/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.99.17" id="bioga-09917">BioGA 0.99.17<a class="anchor" aria-label="anchor" href="#bioga-09917"></a></h2>
+<p>Added: - Demo vignette for BioGA. - Mathematical background vignette for BioGA.</p>
+<p>Updated: - BioGA vignettes with new examples and explanations. - <code>selection_cpp</code> function for improved performance and bug fixes.</p>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.99.16" id="bioga-09916">BioGA 0.99.16<a class="anchor" aria-label="anchor" href="#bioga-09916"></a></h2>
+<p><em>UPDATE: test_crossover_cpp</em></p>
+<p>The test verifies dimensions, value ranges, and new parameters.</p>
+<p>Changes: - Added tests for new parameters (<code>crossover_rate</code>, <code>eta_c</code>). - Verified that offspring values lie within parent ranges (due to SBX). - Included edge case test for single parent and zero crossover rate. - Simplified error/warning checks.</p>
+<p><em>UPDATE: test_selection_cpp</em> The test checks dimensions, parent selection, and compatibility with multi-objective fitness.</p>
+<p>Changes: - Updated to handle multi-objective fitness matrix. - Verified that selected parents are exact copies of population rows. - Added edge case test for single individual and single objective. - Removed redundant fitness evaluation test (already covered in <code>evaluate_fitness_cpp</code>).</p>
+<p><em>UPDATE: test_mutation_cpp</em> The test checks dimensions, mutation effects, and new parameters.</p>
+<p>Changes: - Added tests for new parameters (<code>iteration</code>, <code>max_iterations</code>, <code>network</code>). - Verified that zero mutation rate preserves offspring. - Tested network constraints with extreme cases (zero and full constraints). - Simplified error/warning checks.</p>
+<p><em>UPDATE/ADDED: test_replacement_cpp</em></p>
+<p>The test checks dimensions, elite preservation, and diversity.</p>
+<p>Changes: - Added test for new function signature (requires fitness matrices). - Verified elite preservation based on first objective. - Included edge case test for zero replacements. - Added checks for dimensions and error-free execution.</p>
+<p><em>UPDATE: test_initialize_population_cpp</em></p>
+<p>The test checks dimensions, value validity, and new parameters.</p>
+<p>Changes: - Added test for <code>seed</code> parameter to ensure reproducibility. - Included test for <code>clusters</code> parameter to verify correct initialization. - Maintained tests for dimensions and value validity. - Added edge case test for minimal input.</p>
+<p><em>UPDATE: test_bioga_main_cpp</em> {PROVISIONAL}</p>
+<p>New test file is created to verify the main GA loop.</p>
+<p>Feature: - Tests the output structure (list with population and fitness). - Verifies dimensions of population and fitness matrices. - Checks optional parameters (<code>clusters</code>, <code>network</code>). - Includes edge case test for minimal input.</p>
+<p><em>Test for Package (test-BioGA-package.R)</em></p>
+<p>Created a new version to test the overall package integrity and ensure all functions are exported correctly.</p>
+<p>Feature: - Tests package loading and function exports. - Verifies a complete GA workflow without errors. - Ensures compatibility with the optimized functions.</p>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.99.15" id="bioga-09915">BioGA 0.99.15<a class="anchor" aria-label="anchor" href="#bioga-09915"></a></h2>
+<p><em>UPDATE: test_evaluate_fitness_cpp</em> The test checks dimensions, values, and error-free execution.</p>
+<p>Changes:</p>
+<ul><li>Updated to test the new matrix output (multiple objectives).</li>
+<li>Added checks for non-negative fitness values (appropriate for expression difference and sparsity).</li>
+<li>Included edge case test for minimal input.</li>
+<li>Removed redundant <code>tryCatch</code> and simplified error/warning checks.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.99.14" id="bioga-09914">BioGA 0.99.14<a class="anchor" aria-label="anchor" href="#bioga-09914"></a></h2>
+<p><em>Commit -m “New Feature - Main GA Loop”</em></p>
+<p>adding a main GA loop function that integrates all components and supports multi-objective optimization and parallelization.</p>
+<p>Features:</p>
+<ul><li>Integrates all optimized components into a cohesive GA loop.</li>
+<li>Supports multi-objective optimization, gene networks, and clustering.</li>
+<li>Returns both final population and fitness scores for analysis.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.99.13" id="bioga-09913">BioGA 0.99.13<a class="anchor" aria-label="anchor" href="#bioga-09913"></a></h2>
+<p><em>Commit -m “Optimized initialize_population.cpp”</em></p>
+<p>Improvements:</p>
+<ul><li>Add option for biologically informed initialization using gene clusters.</li>
+<li>Improve random seed handling for reproducibility.</li>
+</ul><p>Changes:</p>
+<ul><li>Added optional random seed for reproducibility.</li>
+<li>Included support for gene clustering to initialize biologically relevant populations.</li>
+<li>Improved code readability and documentation.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.99.12" id="bioga-09912">BioGA 0.99.12<a class="anchor" aria-label="anchor" href="#bioga-09912"></a></h2>
+<p><em>Commit -m “Optimized replacement.cpp”</em></p>
+<p>indentation adjustments</p>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.99.11" id="bioga-09911">BioGA 0.99.11<a class="anchor" aria-label="anchor" href="#bioga-09911"></a></h2>
+<p><em>Commit -m “Optimized replacement.cpp”</em></p>
+<p>Improvements:</p>
+<ul><li>Implement elitism to preserve best individuals.</li>
+<li>Add diversity-based replacement to avoid premature convergence.</li>
+</ul><p>Changes:</p>
+<ul><li>Added elitism to preserve the best individual.</li>
+<li>Included diversity-based replacement to maintain population diversity.</li>
+<li>Updated to use multi-objective fitness matrix.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.99.10" id="bioga-09910">BioGA 0.99.10<a class="anchor" aria-label="anchor" href="#bioga-09910"></a></h2>
+<p><em>Commit -m “Optimized mutation.cpp”</em></p>
+<p>Improvements:</p>
+<ul><li>Add adaptive mutation rate based on iteration or fitness stagnation.</li>
+<li>Incorporate gene network constraints (placeholder for user-provided network).</li>
+</ul><p>Changes:</p>
+<ul><li>Added adaptive mutation rate based on iteration progress.</li>
+<li>Included optional gene network constraints to ensure biologically relevant mutations.</li>
+<li>Maintained compatibility with existing functionality.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.99.9" id="bioga-0999">BioGA 0.99.9<a class="anchor" aria-label="anchor" href="#bioga-0999"></a></h2>
+<p><em>Commit -m “Optimized selection.cpp”</em></p>
+<p>Improvements:</p>
+<ul><li>Implement NSGA-II non-dominated sorting for multi-objective optimization.</li>
+<li>Add tournament selection for better diversity.</li>
+</ul><p>Changes:</p>
+<ul><li>Implemented NSGA-II non-dominated sorting for multi-objective selection.</li>
+<li>Added tournament selection to maintain diversity.</li>
+<li>Updated to handle multi-objective fitness matrix.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.99.8" id="bioga-0998">BioGA 0.99.8<a class="anchor" aria-label="anchor" href="#bioga-0998"></a></h2>
+<p><em>Commit -m “Optimized crossover.cpp”</em> ” Improvements:</p>
+<ul><li>Implement simulated binary crossover (SBX) for better exploration.</li>
+<li>Add adaptive crossover rate based on population diversity.</li>
+</ul><p>Changes:</p>
+<ul><li>Replaced simple averaging with SBX crossover for better exploration.</li>
+<li>Added adaptive crossover rate based on population diversity.</li>
+<li>Included parameters for crossover rate and distribution index.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.99.7" id="bioga-0997">BioGA 0.99.7<a class="anchor" aria-label="anchor" href="#bioga-0997"></a></h2>
+<p><em>Commit -m “Optimized evaluate_fitness.cpp”</em></p>
+<p>Improvements:</p>
+<ul><li>Add multi-objective fitness evaluation (e.g., minimize expression difference and maximize gene sparsity).</li>
+<li>Use vectorized operations for faster computation.</li>
+<li>Add parallelization with RcppParallel for large datasets.</li>
+</ul><p>Changes:</p>
+<ul><li>Added multi-objective support (expression difference and sparsity).</li>
+<li>Used <code>RcppParallel</code> for parallel computation.</li>
+<li>Returned a matrix of fitness scores for each objective.</li>
+<li>Added weights parameter for flexible objective prioritization.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.99.6" id="bioga-0996">BioGA 0.99.6<a class="anchor" aria-label="anchor" href="#bioga-0996"></a></h2>
 <ul><li>add the authors and date in the vignettes?</li>
@@ -73,7 +195,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>

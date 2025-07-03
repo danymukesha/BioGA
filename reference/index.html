@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">BioGA</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.99.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.99.17</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,6 +17,11 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../articles/BioGA.html">Get started</a></li>
 <li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/demo.html">📄 Usage demonstration</a></li>
+    <li><a class="dropdown-item" href="../articles/math.html">📐 Mathematical Behind</a></li>
+  </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
@@ -50,28 +55,34 @@
 
       <dl><dt>
 
+          <code><a href="bioga_main_cpp.html">bioga_main_cpp()</a></code>
+
+        </dt>
+        <dd>Main genetic algorithm loop for genomic data optimization</dd>
+      </dl><dl><dt>
+
           <code><a href="crossover_cpp.html">crossover_cpp()</a></code>
 
         </dt>
-        <dd>Function to perform crossover between selected individuals</dd>
+        <dd>Function to perform simulated binary crossover (SBX)</dd>
       </dl><dl><dt>
 
           <code><a href="evaluate_fitness_cpp.html">evaluate_fitness_cpp()</a></code>
 
         </dt>
-        <dd>Function to evaluate fitness using genomic data</dd>
+        <dd>Function to evaluate fitness using genomic data with multi-objective support</dd>
       </dl><dl><dt>
 
           <code><a href="initialize_population_cpp.html">initialize_population_cpp()</a></code>
 
         </dt>
-        <dd>Function to initialize the population from genomic data</dd>
+        <dd>Function to initialize population with optional gene clustering</dd>
       </dl><dl><dt>
 
           <code><a href="mutation_cpp.html">mutation_cpp()</a></code>
 
         </dt>
-        <dd>Function to mutate the offspring</dd>
+        <dd>Function to mutate offspring with adaptive mutation and network constraints</dd>
       </dl><dl><dt>
 
           <code><a href="plot_fitness.html">plot_fitness()</a></code>
@@ -95,13 +106,13 @@
           <code><a href="replacement_cpp.html">replacement_cpp()</a></code>
 
         </dt>
-        <dd>Function to replace non-selected individuals in the population</dd>
+        <dd>Function to replace population with elitism and diversity preservation</dd>
       </dl><dl><dt>
 
           <code><a href="selection_cpp.html">selection_cpp()</a></code>
 
         </dt>
-        <dd>Function to select individuals based on fitness scores</dd>
+        <dd>Function to select individuals using NSGA-II non-dominated sorting</dd>
       </dl></div>
   </main></div>
 
@@ -111,7 +122,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>
