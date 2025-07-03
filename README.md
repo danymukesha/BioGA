@@ -4,7 +4,7 @@
 
 [![R-CMD-check](https://github.com/danymukesha/BioGA/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/danymukesha/BioGA/actions/workflows/R-CMD-check.yaml)
 [![](https://img.shields.io/badge/devel%20version-0.99.6-blue.svg)](https://github.com/danymukesha/BioGA)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13911246.svg)](https://doi.org/10.5281/zenodo.13911246)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13911246.svg)](https://doi.org/10.5281/zenodo.15801072)
 
 <!-- badges: end -->
 
