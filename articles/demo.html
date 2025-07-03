@@ -119,7 +119,7 @@ expression data and demonstrates:</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">genomic_data</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Gene"</span>, <span class="fl">1</span><span class="op">:</span><span class="va">n_genes</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">genomic_data</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Sample"</span>, <span class="fl">1</span><span class="op">:</span><span class="va">n_samples</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">pheatmap</span><span class="op">(</span><span class="va">genomic_data</span>,</span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/pheatmap/man/pheatmap.html" class="external-link">pheatmap</a></span><span class="op">(</span><span class="va">genomic_data</span>,</span>
 <span>    cluster_rows <span class="op">=</span> <span class="cn">TRUE</span>, cluster_cols <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>    main <span class="op">=</span> <span class="st">"Simulated Gene Expression Data"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="demo_files/figure-html/unnamed-chunk-1-1.png" width="700"></p>
@@ -271,8 +271,8 @@ expression data and demonstrates:</p>
 <span><span class="co">#&gt; Current front size: 1</span></span>
 <span><span class="co">#&gt; Current front size: 1</span></span>
 <span></span>
-<span><span class="fu">qplot</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">50</span>, <span class="va">fitness_trace</span>, geom <span class="op">=</span> <span class="st">"line"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Generation"</span>, y <span class="op">=</span> <span class="st">"Best Fitness (Expression Diff.)"</span>,</span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">50</span>, <span class="va">fitness_trace</span>, geom <span class="op">=</span> <span class="st">"line"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Generation"</span>, y <span class="op">=</span> <span class="st">"Best Fitness (Expression Diff.)"</span>,</span>
 <span>        title <span class="op">=</span> <span class="st">"Convergence of Best Fitness Across Generations"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="demo_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 <hr>
@@ -282,7 +282,7 @@ expression data and demonstrates:</p>
 </h2>
 <p>Visualize population at final generation</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">pheatmap</span><span class="op">(</span><span class="va">result</span><span class="op">$</span><span class="va">population</span>,</span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/pheatmap/man/pheatmap.html" class="external-link">pheatmap</a></span><span class="op">(</span><span class="va">result</span><span class="op">$</span><span class="va">population</span>,</span>
 <span>    main <span class="op">=</span> <span class="st">"Final Population of Individuals"</span>,</span>
 <span>    cluster_rows <span class="op">=</span> <span class="cn">TRUE</span>, cluster_cols <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="demo_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
@@ -292,7 +292,7 @@ expression data and demonstrates:</p>
 <h2 id="compare-gene-selection-frequency">🧬 <strong>Compare gene selection frequency</strong><a class="anchor" aria-label="anchor" href="#compare-gene-selection-frequency"></a>
 </h2>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">gene_selection_freq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">colMeans</a></span><span class="op">(</span><span class="va">result</span><span class="op">$</span><span class="va">population</span> <span class="op">!=</span> <span class="fl">0</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">gene_selection_freq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MatrixGenerics/man/rowMeans.html" class="external-link">colMeans</a></span><span class="op">(</span><span class="va">result</span><span class="op">$</span><span class="va">population</span> <span class="op">!=</span> <span class="fl">0</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html" class="external-link">barplot</a></span><span class="op">(</span><span class="va">gene_selection_freq</span>, las <span class="op">=</span> <span class="fl">2</span>, </span>
 <span>        main <span class="op">=</span> <span class="st">"Frequency of Gene Selection in Final Population"</span>,</span>
@@ -314,7 +314,7 @@ expression data and demonstrates:</p>
 <span>    max_iterations <span class="op">=</span> <span class="fl">50</span>,</span>
 <span>    network <span class="op">=</span> <span class="va">network_mat</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">pheatmap</span><span class="op">(</span><span class="va">mutated_with_net</span>,</span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/pheatmap/man/pheatmap.html" class="external-link">pheatmap</a></span><span class="op">(</span><span class="va">mutated_with_net</span>,</span>
 <span>    main <span class="op">=</span> <span class="st">"Population After Mutation with Network Constraint"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="demo_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
 <hr>

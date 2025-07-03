@@ -213,149 +213,255 @@ accurate and biologically meaningful.</p>
 particularly suited for applications in <strong>precision
 medicine</strong>, where model interpretability and biological validity
 are just as important as statistical performance.</p>
-<p>```mermaid, eval=FALSE, include=FALSE flowchart TD A[Gene Expression
-Data] –&gt; B[Biologically Informed Initialization] B –&gt; C[NSGA-II
-Evolutionary Algorithm] C –&gt; D1[Multi-objective Fitness<br>Accuracy
-vs. Sparsity] C –&gt; D2[Parallelized C++ Core<br>Rcpp, OpenMP] A –&gt;
-E[Gene Networks &amp; Pathways<br>STRINGdb, WGCNA] E –&gt; B E –&gt; D1
-D1 –&gt; F[Optimized Gene Signatures<br>&amp; Clustering Models] D2
-–&gt; F</p>
-<pre><code>style A fill:#56B4E9,color:#fff
-style B fill:#009E73,color:#fff
-style C fill:#F0E442,color:#000
-style D1 fill:#D55E00,color:#fff
-style D2 fill:#CC79A7,color:#fff
-style E fill:#999999,color:#fff
-style F fill:#0072B2,color:#fff</code></pre>
-<pre><code>
-------------------------------------------------------------------------
-
-### Advantages Over Existing Approaches
-
-*[BioGA](https://bioconductor.org/packages/3.21/BioGA)* represents a significant leap forward in applying genetic algorithms to genomic data analysis. Its **multi-objective optimization** capability allows researchers to visualize the full spectrum of solutions; ranging from sparse, interpretable models to dense, highly predictive ones. This is crucial in contexts like biomarker discovery or feature selection, where trade-offs between simplicity and accuracy must be carefully balanced.
-
-Additionally, *[BioGA](https://bioconductor.org/packages/3.21/BioGA)*’s **C++ backend and parallel processing support** dramatically outperform R-based tools like `GA`, `genalg`, or `rgenoud`. By leveraging OpenMP and memory-efficient data structures, it processes genome-wide datasets in minutes rather than hours. This efficiency unlocks new use cases such as iterative tuning, real-time interactive analysis, or single-cell datasets with hundreds of thousands of cells.
-
-Equally important is *[BioGA](https://bioconductor.org/packages/3.21/BioGA)*’s **biological relevance**. By embedding knowledge of gene networks and pathways into the optimization process, it ensures that discovered features are not only predictive but also **interpretable within a biological context**. This is particularly valuable for downstream tasks like experimental validation, clinical translation, and pathway enrichment analysis.
-
-------------------------------------------------------------------------
-
-### Comparison with Related Tools
-
-To put *[BioGA](https://bioconductor.org/packages/3.21/BioGA)*’s capabilities into perspective, Table 2 compares its features with other common GA packages. Notably, *[BioGA](https://bioconductor.org/packages/3.21/BioGA)* is the **only package that supports all four critical features**: multi-objective optimization, biological constraints, parallel computing, and Bioconductor integration. While some tools offer parallelism or flexible fitness functions, none combine these with the domain-specific biological awareness necessary for modern genomics.
-
-This unique positioning makes *[BioGA](https://bioconductor.org/packages/3.21/BioGA)* especially well-suited for bioinformatics labs seeking robust, scalable, and biologically informed optimization frameworks.
-
-------------------------------------------------------------------------
-
-### Limitations and Future Directions
-
-Despite its strengths, *[BioGA](https://bioconductor.org/packages/3.21/BioGA)* has several current limitations that present opportunities for future work. One such area is **GPU acceleration**. Preliminary CUDA support shows promising speedups for the fitness evaluation function, and further development could enable real-time genomic optimization on large-scale datasets or in clinical settings.
-
-Another direction is **multi-omics integration**. While *[BioGA](https://bioconductor.org/packages/3.21/BioGA)* currently supports gene expression data, future versions will allow users to integrate methylation, copy number variation, and proteomics data as additional constraints or objectives. This would enable comprehensive molecular profiling and more holistic biomarker discovery.
-
-Lastly, **cloud-native deployment** via containerized workflows (Docker, Singularity) is in development, along with prebuilt pipelines for AWS Batch and Google Cloud Life Sciences. This will allow *[BioGA](https://bioconductor.org/packages/3.21/BioGA)* to scale efficiently across cloud computing resources for larger collaborative projects or high-throughput pipelines.
-
-------------------------------------------------------------------------
-
-*[BioGA](https://bioconductor.org/packages/3.21/BioGA)* addresses a pressing need in modern genomics: the ability to perform efficient, biologically relevant optimization on high-dimensional data. By combining a high-performance C++ core, multi-objective optimization via NSGA-II, and integration with biological knowledge bases, *[BioGA](https://bioconductor.org/packages/3.21/BioGA)* empowers researchers to identify **meaningful, interpretable solutions** to complex problems like biomarker discovery, feature selection, and single-cell clustering.
-
-Unlike traditional GAs, `BioGA` is not a black-box optimizer; it is **deeply embedded in biological reasoning**. This design philosophy ensures that solutions are not only computationally optimal but also scientifically actionable. Whether used in academic research, translational bioinformatics, or personalized medicine, BioGA offers a powerful framework tailored to the demands of modern genomic data.
-
-------------------------------------------------------------------------
-
-## Overview
-
-Genomic data generally refers to the genetic information stored in a DNA of an organism. The DNA molecules are basically mmade up of sequence of nucleotides (adenine, thymine, cytosine, and guanine).
-
-The genetic information likely provides clear understanding into various biological processes, such as gene expression, genetic variation, and evolutionary relationships.
-
-In this context, genomic data could consist of gene expression profiles measured across different individuals (e.g., patients).
-
-Where:
-
--   Each row in the `genomic_data` matrix represents a gene, and each column represents a patient sample.
-
-and
-
--   Values in the matrix represent the expression levels of each gene in each patient sample.
-
-As an example of genomic data, let's consider have a table similar to the following:
-
-|Gene  | Sample.1| Sample.2| Sample.3| Sample.4|
-|:-----|--------:|--------:|--------:|--------:|
-|Gene1 |      0.1|      0.2|      0.3|      0.4|
-|Gene2 |      1.2|      1.3|      1.4|      1.5|
-|Gene3 |      2.3|      2.2|      2.1|      2.0|
-
-In the table above, each row represents a gene (or genomic feature), and each column represents a sample. The values in the matrix represent some measurement of gene expression, such as mRNA levels or protein abundance, in each sample.
-
-For instance, the value `0.1` in "Sample 1" for *Gene1* indicates the expression level of *Gene1* in "Sample 1". Similarly, the value `2.2` in "Sample 2" for *Gene3* indicates the expression level of *Gene3* in "Sample 2".
-
-Genomic data can be used in various analyses, including genetic association studies, gene expression analysis, and comparative genomics. In the context of the `evaluate_fitness_cpp` function, genomic data is used to calculate fitness scores for individuals in a population.
-
-| Just to clarify, an individual is "feature" typically in the context of genetic algorithm optimization.
-
-The population represents a set of candidate combinations of genes that could be predictive of the trait (a specific characteristic of an individual, which is determined by the genes).
-
-The important information that we need to know is if a gene is part of this set or not. To do so, each individual in the population is represented by a binary vector indicating the presence or absence of each gene.
-
-For example, a set of candidate genes (a population) might be represented as [1, 0, 1], indicating the presence of *Gene1* and *Gene3* but the absence of *Gene2*. The population undergoes genetic algorithm operations such as selection, crossover, mutation, and replacement to evolve towards individuals with higher predictive power for the trait.
-
-# BioGA Genomic Analysis with GEO Dataset
-
-With case-study, we demonstrated a full GA workflow using a GEO dataset (GSE10072, lung cancer gene expression) stored in a `SummarizedExperiment` object. It includes data preprocessing, BioGA execution, and visualization of results, ensuring reproducibility.
-
-# Introduction
-
-BioGA is an R package for genetic algorithm (GA) optimization of high-throughput genomic data. This vignette demonstrates a full GA workflow using a lung cancer gene expression dataset (GEO GSE10072) stored in a `SummarizedExperiment` object. We aim to identify a sparse gene set that minimizes expression differences between samples.
-
-Load required packages:
-
-
-``` r
-library(BioGA)
-library(SummarizedExperiment)
-library(GEOquery)
-library(BiocParallel)
-library(ggplot2)
-library(pheatmap)
-library(dplyr)
-
-library(caret)
-library(xgboost)
-library(randomForest)
-library(pROC)
-library(parallel)
-library(doParallel)
-library(iml)
-library(lime)
-library(caretEnsemble)
-
-library(survminer)
-library(survival)
-library(timeROC)</code></pre>
+<div class="float">
+<img src="../reference/figures/framework.png" alt="Biologically Informed Evolutionary Framework in BioGA for Gene Signature Optimization"><div class="figcaption">
+<em>Biologically Informed Evolutionary Framework
+in</em> <strong><a href="https://bioconductor.org/packages/3.21/BioGA" class="external-link">BioGA</a></strong>
+<em>for Gene Signature Optimization</em>
+</div>
+</div>
+<p><strong><em>Figure 1:</em></strong> Workflow of the <em><a href="https://bioconductor.org/packages/3.21/BioGA" class="external-link">BioGA</a></em>
+algorithm. Gene expression data, supported by gene networks and pathways
+(e.g., STRINGdb, WGCNA), initiates biologically informed population
+initialization. This feeds into a modified NSGA-II evolutionary
+algorithm featuring a multi-objective fitness function (balancing
+classification accuracy against gene set sparsity) and a parallelized
+C++ backend (Rcpp, OpenMP) for efficiency. The result is optimized gene
+signatures and clustering models that preserve biological plausibility
+and interpretability. See Section <a href="#id_12_Implementation">Implementation</a> for details.</p>
+<hr>
+</div>
+<div class="section level4">
+<h4 id="advantages-over-existing-approaches">Advantages Over Existing Approaches<a class="anchor" aria-label="anchor" href="#advantages-over-existing-approaches"></a>
+</h4>
+<p><em><a href="https://bioconductor.org/packages/3.21/BioGA" class="external-link">BioGA</a></em>
+represents a significant leap forward in applying genetic algorithms to
+genomic data analysis. Its <strong>multi-objective optimization</strong>
+capability allows researchers to visualize the full spectrum of
+solutions; ranging from sparse, interpretable models to dense, highly
+predictive ones. This is crucial in contexts like biomarker discovery or
+feature selection, where trade-offs between simplicity and accuracy must
+be carefully balanced.</p>
+<p>Additionally, <em><a href="https://bioconductor.org/packages/3.21/BioGA" class="external-link">BioGA</a></em>’s
+<strong>C++ backend and parallel processing support</strong>
+dramatically outperform R-based tools like <code>GA</code>,
+<code>genalg</code>, or <code>rgenoud</code>. By leveraging OpenMP and
+memory-efficient data structures, it processes genome-wide datasets in
+minutes rather than hours. This efficiency unlocks new use cases such as
+iterative tuning, real-time interactive analysis, or single-cell
+datasets with hundreds of thousands of cells.</p>
+<p>Equally important is <em><a href="https://bioconductor.org/packages/3.21/BioGA" class="external-link">BioGA</a></em>’s
+<strong>biological relevance</strong>. By embedding knowledge of gene
+networks and pathways into the optimization process, it ensures that
+discovered features are not only predictive but also
+<strong>interpretable within a biological context</strong>. This is
+particularly valuable for downstream tasks like experimental validation,
+clinical translation, and pathway enrichment analysis.</p>
+<hr>
+</div>
+<div class="section level4">
+<h4 id="comparison-with-related-tools">Comparison with Related Tools<a class="anchor" aria-label="anchor" href="#comparison-with-related-tools"></a>
+</h4>
+<p>To put <em><a href="https://bioconductor.org/packages/3.21/BioGA" class="external-link">BioGA</a></em>’s
+capabilities into perspective, Table 2 compares its features with other
+common GA packages. Notably, <em><a href="https://bioconductor.org/packages/3.21/BioGA" class="external-link">BioGA</a></em> is
+the <strong>only package that supports all four critical
+features</strong>: multi-objective optimization, biological constraints,
+parallel computing, and Bioconductor integration. While some tools offer
+parallelism or flexible fitness functions, none combine these with the
+domain-specific biological awareness necessary for modern genomics.</p>
+<p>This unique positioning makes <em><a href="https://bioconductor.org/packages/3.21/BioGA" class="external-link">BioGA</a></em>
+especially well-suited for bioinformatics labs seeking robust, scalable,
+and biologically informed optimization frameworks.</p>
+<hr>
+</div>
+<div class="section level4">
+<h4 id="limitations-and-future-directions">Limitations and Future Directions<a class="anchor" aria-label="anchor" href="#limitations-and-future-directions"></a>
+</h4>
+<p>Despite its strengths, <em><a href="https://bioconductor.org/packages/3.21/BioGA" class="external-link">BioGA</a></em> has
+several current limitations that present opportunities for future work.
+One such area is <strong>GPU acceleration</strong>. Preliminary CUDA
+support shows promising speedups for the fitness evaluation function,
+and further development could enable real-time genomic optimization on
+large-scale datasets or in clinical settings.</p>
+<p>Another direction is <strong>multi-omics integration</strong>. While
+<em><a href="https://bioconductor.org/packages/3.21/BioGA" class="external-link">BioGA</a></em>
+currently supports gene expression data, future versions will allow
+users to integrate methylation, copy number variation, and proteomics
+data as additional constraints or objectives. This would enable
+comprehensive molecular profiling and more holistic biomarker
+discovery.</p>
+<p>Lastly, <strong>cloud-native deployment</strong> via containerized
+workflows (Docker, Singularity) is in development, along with prebuilt
+pipelines for AWS Batch and Google Cloud Life Sciences. This will allow
+<em><a href="https://bioconductor.org/packages/3.21/BioGA" class="external-link">BioGA</a></em> to
+scale efficiently across cloud computing resources for larger
+collaborative projects or high-throughput pipelines.</p>
+<hr>
+<p><em><a href="https://bioconductor.org/packages/3.21/BioGA" class="external-link">BioGA</a></em>
+addresses a pressing need in modern genomics: the ability to perform
+efficient, biologically relevant optimization on high-dimensional data.
+By combining a high-performance C++ core, multi-objective optimization
+via NSGA-II, and integration with biological knowledge bases, <em><a href="https://bioconductor.org/packages/3.21/BioGA" class="external-link">BioGA</a></em>
+empowers researchers to identify <strong>meaningful, interpretable
+solutions</strong> to complex problems like biomarker discovery, feature
+selection, and single-cell clustering.</p>
+<p>Unlike traditional GAs, <code>BioGA</code> is not a black-box
+optimizer; it is <strong>deeply embedded in biological
+reasoning</strong>. This design philosophy ensures that solutions are
+not only computationally optimal but also scientifically actionable.
+Whether used in academic research, translational bioinformatics, or
+personalized medicine, BioGA offers a powerful framework tailored to the
+demands of modern genomic data.</p>
 <hr>
 </div>
 </div>
+<div class="section level3">
+<h3 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h3>
+<p>Genomic data generally refers to the genetic information stored in a
+DNA of an organism. The DNA molecules are basically mmade up of sequence
+of nucleotides (adenine, thymine, cytosine, and guanine).</p>
+<p>The genetic information likely provides clear understanding into
+various biological processes, such as gene expression, genetic
+variation, and evolutionary relationships.</p>
+<p>In this context, genomic data could consist of gene expression
+profiles measured across different individuals (e.g., patients).</p>
+<p>Where:</p>
+<ul>
+<li>Each row in the <code>genomic_data</code> matrix represents a gene,
+and each column represents a patient sample.</li>
+</ul>
+<p>and</p>
+<ul>
+<li>Values in the matrix represent the expression levels of each gene in
+each patient sample.</li>
+</ul>
+<p>As an example of genomic data, let’s consider have a table similar to
+the following:</p>
+<table class="table">
+<thead><tr class="header">
+<th align="left">Gene</th>
+<th align="right">Sample.1</th>
+<th align="right">Sample.2</th>
+<th align="right">Sample.3</th>
+<th align="right">Sample.4</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Gene1</td>
+<td align="right">0.1</td>
+<td align="right">0.2</td>
+<td align="right">0.3</td>
+<td align="right">0.4</td>
+</tr>
+<tr class="even">
+<td align="left">Gene2</td>
+<td align="right">1.2</td>
+<td align="right">1.3</td>
+<td align="right">1.4</td>
+<td align="right">1.5</td>
+</tr>
+<tr class="odd">
+<td align="left">Gene3</td>
+<td align="right">2.3</td>
+<td align="right">2.2</td>
+<td align="right">2.1</td>
+<td align="right">2.0</td>
+</tr>
+</tbody>
+</table>
+<p>In the table above, each row represents a gene (or genomic feature),
+and each column represents a sample. The values in the matrix represent
+some measurement of gene expression, such as mRNA levels or protein
+abundance, in each sample.</p>
+<p>For instance, the value <code>0.1</code> in “Sample 1” for
+<em>Gene1</em> indicates the expression level of <em>Gene1</em> in
+“Sample 1”. Similarly, the value <code>2.2</code> in “Sample 2” for
+<em>Gene3</em> indicates the expression level of <em>Gene3</em> in
+“Sample 2”.</p>
+<p>Genomic data can be used in various analyses, including genetic
+association studies, gene expression analysis, and comparative genomics.
+In the context of the <code>evaluate_fitness_cpp</code> function,
+genomic data is used to calculate fitness scores for individuals in a
+population.</p>
+<p>Just to clarify, an individual is “feature” typically in the context
+of genetic algorithm optimization.</p>
+<p>The population represents a set of candidate combinations of genes
+that could be predictive of the trait (a specific characteristic of an
+individual, which is determined by the genes).</p>
+<p>The important information that we need to know is if a gene is part
+of this set or not. To do so, each individual in the population is
+represented by a binary vector indicating the presence or absence of
+each gene.</p>
+<p>For example, a set of candidate genes (a population) might be
+represented as [1, 0, 1], indicating the presence of <em>Gene1</em> and
+<em>Gene3</em> but the absence of <em>Gene2</em>. The population
+undergoes genetic algorithm operations such as selection, crossover,
+mutation, and replacement to evolve towards individuals with higher
+predictive power for the trait.</p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="bioga-genomic-analysis-with-geo-dataset">BioGA Genomic Analysis with GEO Dataset<a class="anchor" aria-label="anchor" href="#bioga-genomic-analysis-with-geo-dataset"></a>
+</h2>
+<p>With case-study, we demonstrated a full GA workflow using a GEO
+dataset (GSE10072, lung cancer gene expression) stored in a
+<code>SummarizedExperiment</code> object. It includes data
+preprocessing, BioGA execution, and visualization of results, ensuring
+reproducibility.</p>
+</div>
+<div class="section level2">
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
+<p>BioGA is an R package for genetic algorithm (GA) optimization of
+high-throughput genomic data. This vignette demonstrates a full GA
+workflow using a lung cancer gene expression dataset (GEO GSE10072)
+stored in a <code>SummarizedExperiment</code> object. We aim to identify
+a sparse gene set that minimizes expression differences between
+samples.</p>
+<p>Load required packages:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://danymukesha.github.io/BioGA/">BioGA</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/SummarizedExperiment" class="external-link">SummarizedExperiment</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/seandavi/GEOquery" class="external-link">GEOquery</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Bioconductor/BiocParallel" class="external-link">BiocParallel</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">pheatmap</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/topepo/caret/" class="external-link">caret</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dmlc/xgboost" class="external-link">xgboost</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://www.stat.berkeley.edu/~breiman/RandomForests/" class="external-link">randomForest</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://xrobin.github.io/pROC/" class="external-link">pROC</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">parallel</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/RevolutionAnalytics/doparallel" class="external-link">doParallel</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://giuseppec.github.io/iml/" class="external-link">iml</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lime.data-imaginist.com" class="external-link">lime</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://zachmayer.github.io/caretEnsemble/" class="external-link">caretEnsemble</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/survminer/index.html" class="external-link">survminer</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/therneau/survival" class="external-link">survival</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">timeROC</span><span class="op">)</span></span></code></pre></div>
+<hr>
 </div>
 <div class="section level2">
 <h2 id="data-preparation">Data Preparation<a class="anchor" aria-label="anchor" href="#data-preparation"></a>
 </h2>
 <p>We use GEO GSE10072, a lung cancer dataset with gene expression
 profiles. Download and preprocess the data:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">geo_data</span> <span class="op">&lt;-</span> <span class="fu">GEOquery</span><span class="fu">::</span><span class="fu"><a href="http://seandavi.github.io/GEOquery/reference/getGEO.html" class="external-link">getGEO</a></span><span class="op">(</span><span class="st">"GSE10072"</span>, GSEMatrix <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
 <span><span class="co">#&gt; Found 1 file(s)</span></span>
 <span><span class="co">#&gt; GSE10072_series_matrix.txt.gz</span></span>
-<span><span class="va">se</span> <span class="op">&lt;-</span> <span class="fu">as</span><span class="op">(</span><span class="va">geo_data</span>, <span class="st">"SummarizedExperiment"</span><span class="op">)</span></span>
-<span><span class="va">genomic_data</span> <span class="op">&lt;-</span> <span class="fu">assay</span><span class="op">(</span><span class="va">se</span><span class="op">)</span> <span class="co"># expression matrix (genes x samples)</span></span>
+<span><span class="va">se</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/methods/as.html" class="external-link">as</a></span><span class="op">(</span><span class="va">geo_data</span>, <span class="st">"SummarizedExperiment"</span><span class="op">)</span></span>
+<span><span class="va">genomic_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">assay</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span> <span class="co"># expression matrix (genes x samples)</span></span>
 <span><span class="va">genomic_data</span> <span class="op">&lt;-</span> <span class="va">genomic_data</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>, <span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">genomic_data</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 1000  107</span></span></code></pre></div>
 <p>Phenotype data:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">pheno</span> <span class="op">&lt;-</span> <span class="fu">pData</span><span class="op">(</span><span class="va">geo_data</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">pheno</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biobase/man/phenoData.html" class="external-link">pData</a></span><span class="op">(</span><span class="va">geo_data</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">pheno</span><span class="op">$</span><span class="va">Age</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">pheno</span><span class="op">$</span><span class="va">`Age at Diagnosis:ch1`</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">pheno</span><span class="op">$</span><span class="va">Gender</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">pheno</span><span class="op">$</span><span class="va">`Gender:ch1`</span><span class="op">)</span></span>
@@ -370,7 +476,7 @@ profiles. Download and preprocess the data:</p>
 <h2 id="gene-clustering-optional">Gene Clustering (Optional)<a class="anchor" aria-label="anchor" href="#gene-clustering-optional"></a>
 </h2>
 <p>We can cluster genes to exploit co-expression structure:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cor_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">genomic_data</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">hc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html" class="external-link">hclust</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">as.dist</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">cor_matrix</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"average"</span><span class="op">)</span></span>
 <span><span class="va">clusters</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cutree.html" class="external-link">cutree</a></span><span class="op">(</span><span class="va">hc</span>, k <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span>
@@ -380,7 +486,7 @@ profiles. Download and preprocess the data:</p>
 <span><span class="co">#&gt;   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20 </span></span>
 <span><span class="co">#&gt; 444   7  30   2 141  81 177  19   3  26   2  19   2   5  13  10   2   7   4   6</span></span></code></pre></div>
 <p>Plot dendrogram of genes:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">hc</span>, labels <span class="op">=</span> <span class="cn">FALSE</span>, main <span class="op">=</span> <span class="st">"Hierarchical Gene Clustering Dendrogram"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="BioGA_files/figure-html/unnamed-chunk-6-1.png" width="80%" style="display: block; margin: auto;"></p>
 <hr>
@@ -389,7 +495,7 @@ profiles. Download and preprocess the data:</p>
 <h2 id="running-bioga">Running BioGA<a class="anchor" aria-label="anchor" href="#running-bioga"></a>
 </h2>
 <p>Let’s set up the GA parameters:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">population_size</span> <span class="op">&lt;-</span> <span class="fl">30</span></span>
 <span><span class="va">num_generations</span> <span class="op">&lt;-</span> <span class="fl">50</span></span>
 <span><span class="va">crossover_rate</span> <span class="op">&lt;-</span> <span class="fl">0.9</span></span>
@@ -400,7 +506,7 @@ profiles. Download and preprocess the data:</p>
 <span><span class="va">num_to_replace</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
 <span><span class="va">weights</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.0</span>, <span class="fl">0.3</span><span class="op">)</span> <span class="co"># expression difference and sparsity weight</span></span></code></pre></div>
 <p>We run the GA:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bioga_main_cpp.html">bioga_main_cpp</a></span><span class="op">(</span></span>
 <span>    genomic_data <span class="op">=</span> <span class="va">genomic_data</span>,</span>
 <span>    population_size <span class="op">=</span> <span class="va">population_size</span>,</span>
@@ -478,15 +584,15 @@ profiles. Download and preprocess the data:</p>
 <span><span class="co">#&gt; Current front size: 1</span></span>
 <span><span class="co">#&gt; Current front size: 1</span></span></code></pre></div>
 <p>Pareto Visualization</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fitness</span> <span class="op">&lt;-</span> <span class="va">result</span><span class="op">$</span><span class="va">fitness</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>    Expression_Diff <span class="op">=</span> <span class="va">fitness</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>,</span>
 <span>    Sparsity <span class="op">=</span> <span class="va">fitness</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">df</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">Expression_Diff</span>, y <span class="op">=</span> <span class="va">Sparsity</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu">geom_point</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"steelblue"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"BioGA Pareto Front"</span>, x <span class="op">=</span> <span class="st">"Expression Difference"</span>, y <span class="op">=</span> <span class="st">"Sparsity"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Expression_Diff</span>, y <span class="op">=</span> <span class="va">Sparsity</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"steelblue"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"BioGA Pareto Front"</span>, x <span class="op">=</span> <span class="st">"Expression Difference"</span>, y <span class="op">=</span> <span class="st">"Sparsity"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="BioGA_files/figure-html/unnamed-chunk-9-1.png" width="80%" style="display: block; margin: auto;"></p>
 <hr>
 </div>
@@ -495,7 +601,7 @@ profiles. Download and preprocess the data:</p>
 </h2>
 <p>Currently, <code>bioga_main_cpp</code> does not track fitness history
 directly, so let’s re-run to capture best fitness per generation:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">track_fitness</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">genomic_data</span>, <span class="va">population_size</span>, <span class="va">seed</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">pop</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/initialize_population_cpp.html">initialize_population_cpp</a></span><span class="op">(</span><span class="va">genomic_data</span>, <span class="va">population_size</span>, <span class="va">seed</span><span class="op">)</span></span>
 <span>    <span class="va">best_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -573,13 +679,13 @@ directly, so let’s re-run to capture best fitness per generation:</p>
 <span><span class="co">#&gt; Current front size: 1</span></span>
 <span><span class="co">#&gt; Current front size: 1</span></span>
 <span></span>
-<span><span class="fu">ggplot</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>Generation <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">50</span>, Fitness <span class="op">=</span> <span class="va">fitness_trace</span><span class="op">)</span>,</span>
-<span>    <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">Generation</span>, y <span class="op">=</span> <span class="va">Fitness</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu">geom_line</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"steelblue"</span>, linewidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Best Fitness Convergence Across Generations"</span>,</span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>Generation <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">50</span>, Fitness <span class="op">=</span> <span class="va">fitness_trace</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Generation</span>, y <span class="op">=</span> <span class="va">Fitness</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"steelblue"</span>, linewidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Best Fitness Convergence Across Generations"</span>,</span>
 <span>        y <span class="op">=</span> <span class="st">"Best Fitness (Expression Difference)"</span>,</span>
 <span>        x <span class="op">=</span> <span class="st">"Generation"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="BioGA_files/figure-html/unnamed-chunk-10-1.png" width="80%" style="display: block; margin: auto;"></p>
 <hr>
 </div>
@@ -587,8 +693,8 @@ directly, so let’s re-run to capture best fitness per generation:</p>
 <h2 id="visualize-final-population">Visualize Final Population<a class="anchor" aria-label="anchor" href="#visualize-final-population"></a>
 </h2>
 <p>Let’s see the last generation’s population diversity:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">pheatmap</span><span class="op">(</span><span class="va">result</span><span class="op">$</span><span class="va">population</span>,cluster_rows <span class="op">=</span> <span class="cn">TRUE</span>,cluster_cols <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/pheatmap/man/pheatmap.html" class="external-link">pheatmap</a></span><span class="op">(</span><span class="va">result</span><span class="op">$</span><span class="va">population</span>,cluster_rows <span class="op">=</span> <span class="cn">TRUE</span>,cluster_cols <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>    main <span class="op">=</span> <span class="st">"Final Population of Individuals"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="BioGA_files/figure-html/unnamed-chunk-11-1.png" width="80%" style="display: block; margin: auto;"></p>
 <hr>
@@ -597,8 +703,8 @@ directly, so let’s re-run to capture best fitness per generation:</p>
 <h2 id="gene-selection-frequency">Gene Selection Frequency<a class="anchor" aria-label="anchor" href="#gene-selection-frequency"></a>
 </h2>
 <p>See which genes are frequently included across individuals:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">gene_freq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">colMeans</a></span><span class="op">(</span><span class="va">result</span><span class="op">$</span><span class="va">population</span> <span class="op">!=</span> <span class="fl">0</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">gene_freq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MatrixGenerics/man/rowMeans.html" class="external-link">colMeans</a></span><span class="op">(</span><span class="va">result</span><span class="op">$</span><span class="va">population</span> <span class="op">!=</span> <span class="fl">0</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html" class="external-link">barplot</a></span><span class="op">(</span><span class="va">gene_freq</span>, las <span class="op">=</span> <span class="fl">2</span>, </span>
 <span>        main <span class="op">=</span> <span class="st">"Frequency of Gene Selection in Final Population"</span>,</span>
@@ -611,16 +717,16 @@ directly, so let’s re-run to capture best fitness per generation:</p>
 </h2>
 <p>We could incorporate a network if available. For demonstration, build
 a random network:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">network</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">^</span><span class="fl">2</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">1000</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="va">network</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">0</span></span></code></pre></div>
 <p>Apply mutation with the network constraint:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mutated_with_net</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mutation_cpp.html">mutation_cpp</a></span><span class="op">(</span></span>
 <span>    <span class="va">result</span><span class="op">$</span><span class="va">population</span>, <span class="va">mutation_rate</span>, iteration <span class="op">=</span> <span class="fl">20</span>,</span>
 <span>    max_iterations <span class="op">=</span> <span class="va">num_generations</span>, network <span class="op">=</span> <span class="va">network</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">pheatmap</span><span class="op">(</span><span class="va">mutated_with_net</span>,</span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/pheatmap/man/pheatmap.html" class="external-link">pheatmap</a></span><span class="op">(</span><span class="va">mutated_with_net</span>,</span>
 <span>    main <span class="op">=</span> <span class="st">"Population After Network-Constrained Mutation"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="BioGA_files/figure-html/unnamed-chunk-14-1.png" width="80%" style="display: block; margin: auto;"></p>
 </div>
@@ -628,7 +734,7 @@ a random network:</p>
 <h2 id="feature-selection">Feature Selection<a class="anchor" aria-label="anchor" href="#feature-selection"></a>
 </h2>
 <p>Select best individual and extract features</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">best_idx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.min.html" class="external-link">which.min</a></span><span class="op">(</span><span class="va">fitness</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="va">best_individual</span> <span class="op">&lt;-</span> <span class="va">result</span><span class="op">$</span><span class="va">population</span><span class="op">[</span><span class="va">best_idx</span>, <span class="op">]</span></span>
 <span><span class="va">selected_genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">best_individual</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1e-6</span><span class="op">)</span></span>
@@ -648,14 +754,14 @@ a random network:</p>
 execute. However, we provide you few of examples of its pipeline code
 (<code>eval=FALSE</code>)</p>
 <p>. Data Preparation</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">genomic_data</span><span class="op">[</span><span class="va">selected_genes</span>, <span class="op">]</span><span class="op">)</span></span>
-<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="fu">pData</span><span class="op">(</span><span class="va">geo_data</span><span class="op">)</span><span class="op">$</span><span class="va">`source_name_ch1`</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/Biobase/man/phenoData.html" class="external-link">pData</a></span><span class="op">(</span><span class="va">geo_data</span><span class="op">)</span><span class="op">$</span><span class="va">`source_name_ch1`</span><span class="op">)</span></span>
 <span><span class="co"># y &lt;- pheno$Stage  # other example outcome: cancer stage (categorical)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/make.names.html" class="external-link">make.names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
-<span><span class="va">train_idx</span> <span class="op">&lt;-</span> <span class="fu">createDataPartition</span><span class="op">(</span><span class="va">y</span>, p <span class="op">=</span> <span class="fl">0.7</span>, list <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">train_idx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/caret/man/createDataPartition.html" class="external-link">createDataPartition</a></span><span class="op">(</span><span class="va">y</span>, p <span class="op">=</span> <span class="fl">0.7</span>, list <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">X_train</span> <span class="op">&lt;-</span> <span class="va">X</span><span class="op">[</span><span class="va">train_idx</span>, <span class="op">]</span></span>
 <span><span class="va">X_test</span> <span class="op">&lt;-</span> <span class="va">X</span><span class="op">[</span><span class="op">-</span><span class="va">train_idx</span>, <span class="op">]</span></span>
 <span><span class="va">y_train</span> <span class="op">&lt;-</span> <span class="va">y</span><span class="op">[</span><span class="va">train_idx</span><span class="op">]</span></span>
@@ -666,33 +772,33 @@ execute. However, we provide you few of examples of its pipeline code
 <div class="section level4">
 <h4 id="training-and-evaluation">Training and Evaluation<a class="anchor" aria-label="anchor" href="#training-and-evaluation"></a>
 </h4>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># This part performs parallelized training and ROC evaluation </span></span>
 <span><span class="co"># of Random Forest, XGBoost, and Logistic Regression models using caret.</span></span>
 <span><span class="co"># It uses cross-validation with ROC as the performance metric </span></span>
 <span><span class="co"># and plots ROC curves for both training and testing sets.</span></span>
 <span></span>
-<span><span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu">makeCluster</span><span class="op">(</span><span class="fu">parallel</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/parallel/detectCores.html" class="external-link">detectCores</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span>
-<span><span class="fu">registerDoParallel</span><span class="op">(</span><span class="va">cl</span><span class="op">)</span></span>
+<span><span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html" class="external-link">makeCluster</a></span><span class="op">(</span><span class="fu">parallel</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/parallel/detectCores.html" class="external-link">detectCores</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/doParallel/man/registerDoParallel.html" class="external-link">registerDoParallel</a></span><span class="op">(</span><span class="va">cl</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">ctrl</span> <span class="op">&lt;-</span> <span class="fu">trainControl</span><span class="op">(</span></span>
+<span><span class="va">ctrl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/caret/man/trainControl.html" class="external-link">trainControl</a></span><span class="op">(</span></span>
 <span>    method <span class="op">=</span> <span class="st">"repeatedcv"</span>, number <span class="op">=</span> <span class="fl">5</span>, repeats <span class="op">=</span> <span class="fl">3</span>, classProbs <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>    summaryFunction <span class="op">=</span> <span class="va">twoClassSummary</span>, allowParallel <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
 <span><span class="va">models</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>    rf <span class="op">=</span> <span class="fu">train</span><span class="op">(</span><span class="va">X_train</span>, <span class="va">y_train</span>, method <span class="op">=</span> <span class="st">"rf"</span>,</span>
+<span>    rf <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/caret/man/train.html" class="external-link">train</a></span><span class="op">(</span><span class="va">X_train</span>, <span class="va">y_train</span>, method <span class="op">=</span> <span class="st">"rf"</span>,</span>
 <span>        trControl <span class="op">=</span> <span class="va">ctrl</span>, metric <span class="op">=</span> <span class="st">"ROC"</span><span class="op">)</span>,</span>
-<span>    xgb <span class="op">=</span> <span class="fu">train</span><span class="op">(</span><span class="va">X_train</span>, <span class="va">y_train</span>, method <span class="op">=</span> <span class="st">"xgbTree"</span>,</span>
+<span>    xgb <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/caret/man/train.html" class="external-link">train</a></span><span class="op">(</span><span class="va">X_train</span>, <span class="va">y_train</span>, method <span class="op">=</span> <span class="st">"xgbTree"</span>,</span>
 <span>        trControl <span class="op">=</span> <span class="va">ctrl</span>, metric <span class="op">=</span> <span class="st">"ROC"</span><span class="op">)</span>,</span>
-<span>    glm <span class="op">=</span> <span class="fu">train</span><span class="op">(</span><span class="va">X_train</span>, <span class="va">y_train</span>, method <span class="op">=</span> <span class="st">"glm"</span>,</span>
+<span>    glm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/caret/man/train.html" class="external-link">train</a></span><span class="op">(</span><span class="va">X_train</span>, <span class="va">y_train</span>, method <span class="op">=</span> <span class="st">"glm"</span>,</span>
 <span>        family <span class="op">=</span> <span class="st">"binomial"</span>, trControl <span class="op">=</span> <span class="va">ctrl</span>, metric <span class="op">=</span> <span class="st">"ROC"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">train_probs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">models</span>, <span class="va">predict</span>, newdata <span class="op">=</span> <span class="va">X_train</span>, type <span class="op">=</span> <span class="st">"prob"</span><span class="op">)</span></span>
 <span><span class="va">test_probs</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">models</span>, <span class="va">predict</span>, newdata <span class="op">=</span> <span class="va">X_test</span>, type <span class="op">=</span> <span class="st">"prob"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">roc_train</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">train_probs</span>, <span class="kw">function</span><span class="op">(</span><span class="va">p</span><span class="op">)</span> <span class="fu">roc</span><span class="op">(</span><span class="va">y_train</span>, <span class="va">p</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">roc_test</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">test_probs</span>, <span class="kw">function</span><span class="op">(</span><span class="va">p</span><span class="op">)</span> <span class="fu">roc</span><span class="op">(</span><span class="va">y_test</span>, <span class="va">p</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">roc_train</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">train_probs</span>, <span class="kw">function</span><span class="op">(</span><span class="va">p</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/pkg/pROC/man/roc.html" class="external-link">roc</a></span><span class="op">(</span><span class="va">y_train</span>, <span class="va">p</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">roc_test</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">test_probs</span>, <span class="kw">function</span><span class="op">(</span><span class="va">p</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/pkg/pROC/man/roc.html" class="external-link">roc</a></span><span class="op">(</span><span class="va">y_test</span>, <span class="va">p</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">roc_train</span><span class="op">$</span><span class="va">rf</span>, col <span class="op">=</span> <span class="st">"darkred"</span>, main <span class="op">=</span> <span class="st">"Train ROC Curves"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">roc_train</span><span class="op">$</span><span class="va">xgb</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, col <span class="op">=</span> <span class="st">"darkgreen"</span><span class="op">)</span></span>
@@ -706,18 +812,18 @@ execute. However, we provide you few of examples of its pipeline code
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html" class="external-link">legend</a></span><span class="op">(</span><span class="st">"bottomright"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"RF"</span>,<span class="st">"XGB"</span>,<span class="st">"GLM"</span><span class="op">)</span>, </span>
 <span>    col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"darkred"</span>,<span class="st">"darkgreen"</span>,<span class="st">"blue"</span><span class="op">)</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">stopCluster</span><span class="op">(</span><span class="va">cl</span><span class="op">)</span></span>
-<span><span class="fu">registerDoSEQ</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">varImpPlot</span><span class="op">(</span><span class="va">models</span><span class="op">$</span><span class="va">rf</span><span class="op">$</span><span class="va">finalModel</span>, n.var <span class="op">=</span> <span class="fl">20</span>,</span>
+<span><span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html" class="external-link">stopCluster</a></span><span class="op">(</span><span class="va">cl</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/foreach/man/registerDoSEQ.html" class="external-link">registerDoSEQ</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/randomForest/man/varImpPlot.html" class="external-link">varImpPlot</a></span><span class="op">(</span><span class="va">models</span><span class="op">$</span><span class="va">rf</span><span class="op">$</span><span class="va">finalModel</span>, n.var <span class="op">=</span> <span class="fl">20</span>,</span>
 <span>    main <span class="op">=</span> <span class="st">"Top 20 Optimized Features (Random Forest)"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="confusion-matrix">Confusion Matrix<a class="anchor" aria-label="anchor" href="#confusion-matrix"></a>
 </h4>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pred_rf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">models</span><span class="op">$</span><span class="va">rf</span>, <span class="va">X_test</span><span class="op">)</span></span>
-<span><span class="va">cm</span> <span class="op">&lt;-</span> <span class="fu">confusionMatrix</span><span class="op">(</span><span class="va">pred_rf</span>, <span class="va">y_test</span><span class="op">)</span></span>
+<span><span class="va">cm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/caret/man/confusionMatrix.html" class="external-link">confusionMatrix</a></span><span class="op">(</span><span class="va">pred_rf</span>, <span class="va">y_test</span><span class="op">)</span></span>
 <span><span class="va">cm</span><span class="op">$</span><span class="va">table</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/fourfoldplot.html" class="external-link">fourfoldplot</a></span><span class="op">(</span><span class="va">cm</span><span class="op">$</span><span class="va">table</span>, color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#99d8c9"</span>, <span class="st">"#fc9272"</span><span class="op">)</span>,</span>
@@ -727,56 +833,56 @@ execute. However, we provide you few of examples of its pipeline code
 <div class="section level3">
 <h3 id="ensemble-stacking">Ensemble Stacking<a class="anchor" aria-label="anchor" href="#ensemble-stacking"></a>
 </h3>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu">makeCluster</span><span class="op">(</span><span class="fu">parallel</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/parallel/detectCores.html" class="external-link">detectCores</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span>
-<span><span class="fu">registerDoParallel</span><span class="op">(</span><span class="va">cl</span><span class="op">)</span></span>
-<span><span class="va">models_list</span> <span class="op">&lt;-</span> <span class="fu">caretList</span><span class="op">(</span></span>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html" class="external-link">makeCluster</a></span><span class="op">(</span><span class="fu">parallel</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/parallel/detectCores.html" class="external-link">detectCores</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/doParallel/man/registerDoParallel.html" class="external-link">registerDoParallel</a></span><span class="op">(</span><span class="va">cl</span><span class="op">)</span></span>
+<span><span class="va">models_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://zachmayer.github.io/caretEnsemble/reference/caretList.html" class="external-link">caretList</a></span><span class="op">(</span></span>
 <span>    x <span class="op">=</span> <span class="va">X_train</span>,</span>
 <span>    y <span class="op">=</span> <span class="va">y_train</span>,</span>
-<span>    trControl <span class="op">=</span> <span class="fu">trainControl</span><span class="op">(</span></span>
+<span>    trControl <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/caret/man/trainControl.html" class="external-link">trainControl</a></span><span class="op">(</span></span>
 <span>        method <span class="op">=</span> <span class="st">"repeatedcv"</span>, number <span class="op">=</span> <span class="fl">5</span>, repeats <span class="op">=</span> <span class="fl">3</span>, classProbs <span class="op">=</span> <span class="cn">TRUE</span>, </span>
 <span>        summaryFunction <span class="op">=</span> <span class="va">twoClassSummary</span>, allowParallel <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, </span>
 <span>    methodList <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"glm"</span>, <span class="st">"xgbTree"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">ensemble_model</span> <span class="op">&lt;-</span> <span class="fu">caretEnsemble</span><span class="op">(</span><span class="va">models_list</span><span class="op">)</span></span>
+<span><span class="va">ensemble_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://zachmayer.github.io/caretEnsemble/reference/caretEnsemble.html" class="external-link">caretEnsemble</a></span><span class="op">(</span><span class="va">models_list</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">ensemble_model</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># pred_ensemble &lt;- predict(ensemble_model, newdata =head(X_test))</span></span>
 <span><span class="co"># confusionMatrix(pred_ensemble, y_test)</span></span>
-<span><span class="fu">stopCluster</span><span class="op">(</span><span class="va">cl</span><span class="op">)</span></span>
-<span><span class="fu">registerDoSEQ</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<span><span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html" class="external-link">stopCluster</a></span><span class="op">(</span><span class="va">cl</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/foreach/man/registerDoSEQ.html" class="external-link">registerDoSEQ</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">models_list</span><span class="op">)</span></span>
 <span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">ensemble_model</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">lattice</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/xyplot.html" class="external-link">xyplot</a></span><span class="op">(</span><span class="fu">caret</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/caret/man/resamples.html" class="external-link">resamples</a></span><span class="op">(</span><span class="va">models_list</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="alternative">Alternative<a class="anchor" aria-label="anchor" href="#alternative"></a>
 </h3>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu">makeCluster</span><span class="op">(</span><span class="fu">parallel</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/parallel/detectCores.html" class="external-link">detectCores</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span>
-<span><span class="fu">registerDoParallel</span><span class="op">(</span><span class="va">cl</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html" class="external-link">makeCluster</a></span><span class="op">(</span><span class="fu">parallel</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/parallel/detectCores.html" class="external-link">detectCores</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/doParallel/man/registerDoParallel.html" class="external-link">registerDoParallel</a></span><span class="op">(</span><span class="va">cl</span><span class="op">)</span></span>
 <span><span class="va">glm_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">Stage</span> <span class="op">~</span> <span class="va">.</span>,</span>
 <span>    data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>Stage <span class="op">=</span> <span class="va">y_train</span>, <span class="va">X_train</span><span class="op">)</span>,</span>
 <span>    family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html" class="external-link">binomial</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">label_train</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">y_train</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span></span>
 <span><span class="va">label_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">y_test</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span></span>
-<span><span class="va">dtrain</span> <span class="op">&lt;-</span> <span class="fu">xgb.DMatrix</span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">X_train</span><span class="op">)</span>, label <span class="op">=</span> <span class="va">label_train</span><span class="op">)</span></span>
-<span><span class="va">dtest</span> <span class="op">&lt;-</span> <span class="fu">xgb.DMatrix</span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">X_test</span><span class="op">)</span>, label <span class="op">=</span> <span class="va">label_test</span><span class="op">)</span></span>
+<span><span class="va">dtrain</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/xgboost/man/xgb.DMatrix.html" class="external-link">xgb.DMatrix</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">X_train</span><span class="op">)</span>, label <span class="op">=</span> <span class="va">label_train</span><span class="op">)</span></span>
+<span><span class="va">dtest</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/xgboost/man/xgb.DMatrix.html" class="external-link">xgb.DMatrix</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">X_test</span><span class="op">)</span>, label <span class="op">=</span> <span class="va">label_test</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>    objective <span class="op">=</span> <span class="st">"binary:logistic"</span>, eval_metric <span class="op">=</span> <span class="st">"auc"</span>,</span>
 <span>    max_depth <span class="op">=</span> <span class="fl">6</span>, eta <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">xgb_model</span> <span class="op">&lt;-</span> <span class="fu">xgb.train</span><span class="op">(</span><span class="va">params</span>, <span class="va">dtrain</span>,</span>
+<span><span class="va">xgb_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/xgboost/man/xgb.train.html" class="external-link">xgb.train</a></span><span class="op">(</span><span class="va">params</span>, <span class="va">dtrain</span>,</span>
 <span>    nrounds <span class="op">=</span> <span class="fl">100</span>,</span>
 <span>    watchlist <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>train <span class="op">=</span> <span class="va">dtrain</span><span class="op">)</span>, verbose <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">stopCluster</span><span class="op">(</span><span class="va">cl</span><span class="op">)</span></span>
-<span><span class="fu">registerDoSEQ</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<span><span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html" class="external-link">stopCluster</a></span><span class="op">(</span><span class="va">cl</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/foreach/man/registerDoSEQ.html" class="external-link">registerDoSEQ</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pred_prob_xgb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">xgb_model</span>, <span class="va">dtest</span><span class="op">)</span></span>
 <span><span class="va">pred_prob_glm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">glm_model</span>, newdata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">X_test</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span></span>
 <span></span>
@@ -786,7 +892,7 @@ execute. However, we provide you few of examples of its pipeline code
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">roc_xgb</span>, col <span class="op">=</span> <span class="st">"blue"</span>, main <span class="op">=</span> <span class="st">"ROC Curves"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">roc_glm</span>, col <span class="op">=</span> <span class="st">"red"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html" class="external-link">legend</a></span><span class="op">(</span><span class="st">"bottomright"</span>, legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"XGBoost"</span>, <span class="st">"Logistic Regression"</span><span class="op">)</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
-<span><span class="va">cutoff_xgb</span> <span class="op">&lt;-</span> <span class="fu">coords</span><span class="op">(</span><span class="va">roc_xgb</span>, <span class="st">"best"</span>, ret <span class="op">=</span> <span class="st">"threshold"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">cutoff_xgb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/pROC/man/coords.html" class="external-link">coords</a></span><span class="op">(</span><span class="va">roc_xgb</span>, <span class="st">"best"</span>, ret <span class="op">=</span> <span class="st">"threshold"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">pred_class_xgb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">pred_prob_xgb</span> <span class="op">&gt;</span> <span class="va">cutoff_xgb</span>, <span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, <span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">conf_mat</span> <span class="op">&lt;-</span> <span class="fu">caret</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/caret/man/confusionMatrix.html" class="external-link">confusionMatrix</a></span><span class="op">(</span><span class="va">pred_class_xgb</span>, <span class="va">y_test</span><span class="op">)</span></span>
@@ -796,36 +902,36 @@ execute. However, we provide you few of examples of its pipeline code
 <div class="section level4">
 <h4 id="shap-and-lime-explanation-of-xgboost-model">SHAP and LIME Explanation of XGBoost Model<a class="anchor" aria-label="anchor" href="#shap-and-lime-explanation-of-xgboost-model"></a>
 </h4>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu">makeCluster</span><span class="op">(</span><span class="fu">parallel</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/parallel/detectCores.html" class="external-link">detectCores</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span>
-<span><span class="fu">registerDoParallel</span><span class="op">(</span><span class="va">cl</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html" class="external-link">makeCluster</a></span><span class="op">(</span><span class="fu">parallel</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/parallel/detectCores.html" class="external-link">detectCores</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/doParallel/man/registerDoParallel.html" class="external-link">registerDoParallel</a></span><span class="op">(</span><span class="va">cl</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># SHAP</span></span>
 <span><span class="va">X_test_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">X_test</span><span class="op">)</span></span>
-<span><span class="va">predictor</span> <span class="op">&lt;-</span> <span class="va">Predictor</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">xgb_model</span>, data <span class="op">=</span> <span class="va">X_test_df</span>, y <span class="op">=</span> <span class="va">label_test</span>,</span>
+<span><span class="va">predictor</span> <span class="op">&lt;-</span> <span class="va"><a href="https://giuseppec.github.io/iml/reference/Predictor.html" class="external-link">Predictor</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">xgb_model</span>, data <span class="op">=</span> <span class="va">X_test_df</span>, y <span class="op">=</span> <span class="va">label_test</span>,</span>
 <span>    predict.function <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">model</span>, <span class="va">newdata</span><span class="op">)</span> <span class="op">{</span></span>
-<span>        <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">model</span>, <span class="fu">xgb.DMatrix</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">newdata</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">}</span><span class="op">)</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">model</span>, <span class="fu"><a href="https://rdrr.io/pkg/xgboost/man/xgb.DMatrix.html" class="external-link">xgb.DMatrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">newdata</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">}</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">shap</span> <span class="op">&lt;-</span> <span class="va">Shapley</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">predictor</span>, x.interest <span class="op">=</span> <span class="va">X_test_df</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">shap</span> <span class="op">&lt;-</span> <span class="va"><a href="https://giuseppec.github.io/iml/reference/Shapley.html" class="external-link">Shapley</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">predictor</span>, x.interest <span class="op">=</span> <span class="va">X_test_df</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">shap</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">shap_values</span> <span class="op">&lt;-</span> <span class="va">shap</span><span class="op">$</span><span class="va">results</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html" class="external-link">barplot</a></span><span class="op">(</span><span class="va">shap_values</span><span class="op">$</span><span class="va">phi</span>, names.arg <span class="op">=</span> <span class="va">shap_values</span><span class="op">$</span><span class="va">feature</span>, las <span class="op">=</span> <span class="fl">2</span>, main <span class="op">=</span> <span class="st">"SHAP Values Waterfall"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># LIME explanation</span></span>
-<span><span class="va">explainer</span> <span class="op">&lt;-</span> <span class="fu">lime</span><span class="op">(</span><span class="va">X_train</span>, <span class="va">xgb_model</span>, bin_continuous <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="va">explanation</span> <span class="op">&lt;-</span> <span class="fu">explain</span><span class="op">(</span><span class="va">X_test_df</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="op">]</span>, <span class="va">explainer</span>, n_features <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
-<span><span class="fu">plot_features</span><span class="op">(</span><span class="va">explanation</span><span class="op">)</span></span>
+<span><span class="va">explainer</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://lime.data-imaginist.com/reference/lime.html" class="external-link">lime</a></span><span class="op">(</span><span class="va">X_train</span>, <span class="va">xgb_model</span>, bin_continuous <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">explanation</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/explain.html" class="external-link">explain</a></span><span class="op">(</span><span class="va">X_test_df</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="op">]</span>, <span class="va">explainer</span>, n_features <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://lime.data-imaginist.com/reference/plot_features.html" class="external-link">plot_features</a></span><span class="op">(</span><span class="va">explanation</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">stopCluster</span><span class="op">(</span><span class="va">cl</span><span class="op">)</span></span>
-<span><span class="fu">registerDoSEQ</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html" class="external-link">stopCluster</a></span><span class="op">(</span><span class="va">cl</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/foreach/man/registerDoSEQ.html" class="external-link">registerDoSEQ</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="calibration-plots">Calibration Plots<a class="anchor" aria-label="anchor" href="#calibration-plots"></a>
 </h4>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">calib</span> <span class="op">&lt;-</span> <span class="fu">caret</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/caret/man/calibration.html" class="external-link">calibration</a></span><span class="op">(</span><span class="va">y_test</span> <span class="op">~</span> <span class="va">pred_prob_xgb</span>, class <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="fu">xyplot</span><span class="op">(</span><span class="va">calib</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/xyplot.html" class="external-link">xyplot</a></span><span class="op">(</span><span class="va">calib</span><span class="op">)</span></span></code></pre></div>
 
 </div>
 </div>
@@ -836,7 +942,7 @@ execute. However, we provide you few of examples of its pipeline code
 <p>Mentioned as <code>Stage:ch1</code>, the higher stage is treated as
 “bad outcome” in a quick Cox model. Survival analysis for clinical
 outcome prediction Using Selected Genes:</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>expressions <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span></span>
 <span><span class="va">surv_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>    time <span class="op">=</span> <span class="va">pheno</span><span class="op">$</span><span class="va">time</span>, status <span class="op">=</span> <span class="va">pheno</span><span class="op">$</span><span class="va">status</span>,</span>
@@ -844,7 +950,7 @@ outcome prediction Using Selected Genes:</p>
 <span><span class="va">cox_formula</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/formula.html" class="external-link">as.formula</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span></span>
 <span>    <span class="st">"Surv(time, status) ~"</span>,</span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">surv_data</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">]</span>, collapse <span class="op">=</span> <span class="st">"+"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">cox_model</span> <span class="op">&lt;-</span> <span class="fu">coxph</span><span class="op">(</span><span class="va">cox_formula</span>, data <span class="op">=</span> <span class="va">surv_data</span><span class="op">)</span></span>
+<span><span class="va">cox_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/coxph.html" class="external-link">coxph</a></span><span class="op">(</span><span class="va">cox_formula</span>, data <span class="op">=</span> <span class="va">surv_data</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in coxph.fit(X, Y, istrat, offset, init, control, weights = weights, :</span></span>
 <span><span class="co">#&gt; Ran out of iterations and did not converge</span></span>
 <span><span class="co">#&gt; Warning in coxph.fit(X, Y, istrat, offset, init, control, weights = weights, :</span></span>
@@ -857,15 +963,15 @@ outcome prediction Using Selected Genes:</p>
 <span><span class="va">median_risk</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">(</span><span class="va">surv_data</span><span class="op">$</span><span class="va">risk_score</span><span class="op">)</span></span>
 <span><span class="va">surv_data</span><span class="op">$</span><span class="va">risk_group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">surv_data</span><span class="op">$</span><span class="va">risk_score</span> <span class="op">&gt;</span> <span class="va">median_risk</span>,</span>
 <span>    <span class="st">"High Risk"</span>, <span class="st">"Low Risk"</span><span class="op">)</span></span>
-<span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu">survfit</span><span class="op">(</span><span class="fu">Surv</span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">risk_group</span>, data <span class="op">=</span> <span class="va">surv_data</span><span class="op">)</span></span>
-<span><span class="fu">ggsurvplot</span><span class="op">(</span><span class="va">fit</span>, data <span class="op">=</span> <span class="va">surv_data</span>, pval <span class="op">=</span> <span class="cn">TRUE</span>, risk.table <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">risk_group</span>, data <span class="op">=</span> <span class="va">surv_data</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/survminer/man/ggsurvplot.html" class="external-link">ggsurvplot</a></span><span class="op">(</span><span class="va">fit</span>, data <span class="op">=</span> <span class="va">surv_data</span>, pval <span class="op">=</span> <span class="cn">TRUE</span>, risk.table <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="BioGA_files/figure-html/unnamed-chunk-27-1.png" width="80%" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level2">
 <h2 id="time-dependent-roc-for-survival">Time-dependent ROC for Survival<a class="anchor" aria-label="anchor" href="#time-dependent-roc-for-survival"></a>
 </h2>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">time_roc</span> <span class="op">&lt;-</span> <span class="fu">timeROC</span><span class="op">(</span></span>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">time_roc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/timeROC/man/timeROC.html" class="external-link">timeROC</a></span><span class="op">(</span></span>
 <span>    T <span class="op">=</span> <span class="va">surv_data</span><span class="op">$</span><span class="va">time</span>, delta <span class="op">=</span> <span class="va">surv_data</span><span class="op">$</span><span class="va">status</span>,</span>
 <span>    marker <span class="op">=</span> <span class="va">surv_data</span><span class="op">$</span><span class="va">risk_score</span>, cause <span class="op">=</span> <span class="fl">1</span>, times <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">365</span>, <span class="fl">730</span>, <span class="fl">1095</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">time_roc</span>, time <span class="op">=</span> <span class="fl">365</span><span class="op">)</span></span></code></pre></div>
@@ -956,7 +1062,7 @@ SC3 (67.3 minutes), highlighting the advantages of its parallelized C++
 backend in computationally demanding contexts such as clustering large
 single-cell datasets</p>
 <details><summary><strong>Session Info</strong>
-</summary><div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+</summary><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">sessioninfo</span><span class="fu">::</span><span class="fu"><a href="https://sessioninfo.r-lib.org/reference/session_info.html" class="external-link">session_info</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">─ Session info ───────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt;  <span style="color: #555555; font-style: italic;">setting </span> <span style="color: #555555; font-style: italic;">value</span></span></span>
