@@ -1,5 +1,5 @@
 ---
-title: "📐 Mathematical Behind"
+title: "📐 Mathematics Behind"
 author: "Dany Mukesha"
 date: "`r Sys.Date()`"
 output: 
@@ -22,25 +22,25 @@ knitr::opts_chunk$set(
 
 # Introduction
 
-This report provides a detailed mathematical analysis of the BioGA R
+This part reports a detailed mathematical analysis of the BioGA R
 package, which implements a multi-objective genetic algorithm (GA) for
 genomic data optimization. The analysis covers all major components of
 the algorithm with formal mathematical notation and proofs where
 applicable.
 
-# Genetic Algorithm Framework
+# GA framework
 
 The package implements a standard generational GA with the following
 components:
 
-1.  Population Initialization
-2.  Fitness Evaluation
+1.  Population initialization
+2.  Fitness evaluation
 3.  Selection (NSGA-II inspired)
 4.  Crossover (SBX)
 5.  Mutation (Adaptive)
 6.  Replacement (Elitism + Diversity Preservation)
 
-## Mathematical Representation
+## Mathematical representation
 
 Let:
 
@@ -69,9 +69,9 @@ Where:
 
 -   $R$: Replacement operator
 
-# Population Initialization
+# Population initialization
 
-## Mathematical Formulation
+## Mathematical formulation
 
 Given genomic data $X \in \mathbb{R}^{n \times m}$ and population size
 $p$:
@@ -92,12 +92,12 @@ $$
 2.  Preserves cluster structure if provided
 3.  Expected value: $\mathbb{E}[P_0[i,j]] = \mu_j$ (mean of gene $j$)
 
-# Fitness Evaluation
+# Fitness evaluation
 
 The package implements a multi-objective fitness function with two
 components:
 
-## Objective 1: Expression Difference
+## Objective 1: Expression difference
 
 $$
 f_1(i) = \sum_j \sum_k (X_{jk} - P_{ij})^2
@@ -129,7 +129,7 @@ Where $I$ is the indicator function and $\epsilon$ is a small constant
 
 3.  Range: $[0, 1]$
 
-## Combined Fitness
+## Combined fitness
 
 $$
 F(i) = w_1f_1(i) + w_2f_2(i)
@@ -137,12 +137,12 @@ $$
 
 Where $w$ are user-provided weights.
 
-# Selection (NSGA-II Inspired)
+# Selection (NSGA-II inspired)
 
 The selection implements a simplified version of NSGA-II's non-dominated
 sorting:
 
-## Domination Criteria
+## Domination criteria
 
 Individual $i$ dominates $j$ iff:
 
@@ -150,7 +150,7 @@ $$
 \forall k: f_k(i) \leq f_k(j) \quad \text{and} \quad \exists k: f_k(i) < f_k(j)
 $$
 
-**Proof of Partial Order**:
+**Proof of partial order**:
 
 1.  Reflexive: No individual dominates itself
 
@@ -159,7 +159,7 @@ $$
 3.  Transitive: If $i$ dominates $j$ and $j$ dominates $k$, then $i$
     dominates $k$
 
-## Front Construction
+## Front construction
 
 1.  Compute domination counts and dominated sets
 2.  First front: Individuals with domination count $= 0$
@@ -249,7 +249,7 @@ population diversity.
 2.  Expected diversity is non-decreasing since replacements only occur
     when diversity increases
 
-# Convergence Analysis
+# Convergence analysis
 
 The algorithm can be shown to converge under certain conditions:
 
@@ -261,7 +261,7 @@ The algorithm can be shown to converge under certain conditions:
 
 **Theorem**: The algorithm converges in probability to the Pareto front.
 
-**Proof Sketch**:
+**Proof sketch**:
 
 1.  The selection and replacement strategies preserve Pareto optimal
     solutions (elitism)
@@ -271,16 +271,16 @@ The algorithm can be shown to converge under certain conditions:
 3.  By the multi-objective GA convergence theorems (Rudolph 1998), the
     algorithm converges to the Pareto front
 
-# Computational Complexity
+# Computational complexity
 
 Let: - $p$ = population size - $n$ = number of genes - $m$ = number of
 samples - $o$ = number of objectives - $T$ = number of generations
 
-**Component Complexities**:
+**Component complexities**:
 
 1.  Initialization: $O(pn)$
 
-2.  Fitness Evaluation: $O(Tpmn)$ (parallelized)
+2.  Fitness evaluation: $O(Tpmn)$ (parallelized)
 
 3.  Selection: $O(Tp^2o)$ worst case
 
@@ -290,9 +290,9 @@ samples - $o$ = number of objectives - $T$ = number of generations
 
 6.  Replacement: $O(Tpn)$
 
-**Total Complexity**: $O(Tp(po + mn))$
+**Total complexity**: $O(Tp(po + mn))$
 
-# Mathematical Optimization Interpretation
+# Mathematical optimization interpretation
 
 The algorithm can be viewed as a stochastic optimization method for:
 
@@ -317,7 +317,7 @@ The GA approach is particularly suitable because:
 
 # Special Cases and Relationships
 
-1.  **Single Objective Case** ($w_2 = 0$):
+1.  **Single objective case** ($w_2 = 0$):
     -   Reduces to nonlinear least squares optimization
     -   GA serves as global optimizer avoiding local minima
 2.  **No Network Constraints**:
@@ -327,7 +327,7 @@ The GA approach is particularly suitable because:
     -   Approaches a recombination-based search
     -   Faster convergence but reduced diversity
 
-# Biological Interpretation
+# Biological interpretation
 
 The mathematical operations correspond to biological concepts:
 
