@@ -1,0 +1,22 @@
+citHeader("To cite this package in publications, use:")
+
+bibentry(
+  bibtype = "Article",
+  title = "Scalable and Interpretable Genetic Algorithm Framework for High-Throughput Genomic Data",
+  author = person("Dany", "Mukesha"),
+  year = "2024",
+  note = "Zenodo",
+  doi = "10.5281/zenodo.15801072",
+  url = "https://doi.org/10.5281/zenodo.15801072"
+)
+
+bibentry(
+  bibtype = "Manual",
+  title = "BioGA: Bioinformatics Genetic Algorithm (BioGA)",
+  author = person("Dany", "Mukesha"),
+  year = "2024",
+  organization = "Bioconductor",
+  note = "R package version 1.0.0",
+  doi = "10.18129/B9.bioc.BioGA",
+  url = "https://danymukesha.github.io/BioGA/"
+)
