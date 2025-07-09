@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>📐 Mathematical Behind • BioGA</title>
+<title>📐 Mathematics Behind • BioGA</title>
 <script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="📐 Mathematical Behind">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="📐 Mathematics Behind">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -35,7 +35,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="../articles/demo.html">📄 Usage demonstration</a></li>
-    <li><a class="dropdown-item" href="../articles/math.html">📐 Mathematical Behind</a></li>
+    <li><a class="dropdown-item" href="../articles/math.html">📐 Mathematics Behind</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -65,7 +65,7 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1>📐 Mathematical Behind</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>📐 Mathematics Behind</h1>
                         <h4 data-toc-skip class="author">Dany
 Mukesha</h4>
             
@@ -80,27 +80,27 @@ Mukesha</h4>
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<p>This report provides a detailed mathematical analysis of the BioGA R
+<p>This part reports a detailed mathematical analysis of the BioGA R
 package, which implements a multi-objective genetic algorithm (GA) for
 genomic data optimization. The analysis covers all major components of
 the algorithm with formal mathematical notation and proofs where
 applicable.</p>
 </div>
 <div class="section level2">
-<h2 id="genetic-algorithm-framework">Genetic Algorithm Framework<a class="anchor" aria-label="anchor" href="#genetic-algorithm-framework"></a>
+<h2 id="ga-framework">GA framework<a class="anchor" aria-label="anchor" href="#ga-framework"></a>
 </h2>
 <p>The package implements a standard generational GA with the following
 components:</p>
 <ol style="list-style-type: decimal">
-<li>Population Initialization</li>
-<li>Fitness Evaluation</li>
+<li>Population initialization</li>
+<li>Fitness evaluation</li>
 <li>Selection (NSGA-II inspired)</li>
 <li>Crossover (SBX)</li>
 <li>Mutation (Adaptive)</li>
 <li>Replacement (Elitism + Diversity Preservation)</li>
 </ol>
 <div class="section level3">
-<h3 id="mathematical-representation">Mathematical Representation<a class="anchor" aria-label="anchor" href="#mathematical-representation"></a>
+<h3 id="mathematical-representation">Mathematical representation<a class="anchor" aria-label="anchor" href="#mathematical-representation"></a>
 </h3>
 <p>Let:</p>
 <ul>
@@ -145,10 +145,10 @@ Replacement operator</p></li>
 </div>
 </div>
 <div class="section level2">
-<h2 id="population-initialization">Population Initialization<a class="anchor" aria-label="anchor" href="#population-initialization"></a>
+<h2 id="population-initialization">Population initialization<a class="anchor" aria-label="anchor" href="#population-initialization"></a>
 </h2>
 <div class="section level3">
-<h3 id="mathematical-formulation">Mathematical Formulation<a class="anchor" aria-label="anchor" href="#mathematical-formulation"></a>
+<h3 id="mathematical-formulation">Mathematical formulation<a class="anchor" aria-label="anchor" href="#mathematical-formulation"></a>
 </h3>
 <p>Given genomic data
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>∈</mo><msup><mi>ℝ</mi><mrow><mi>n</mi><mo>×</mo><mi>m</mi></mrow></msup></mrow><annotation encoding="application/x-tex">X \in \mathbb{R}^{n \times m}</annotation></semantics></math>
@@ -177,12 +177,12 @@ P_0[i,j] = X[j, k] \quad \forall j \in c, \quad k \sim \text{Uniform}\{1, \ldots
 </div>
 </div>
 <div class="section level2">
-<h2 id="fitness-evaluation">Fitness Evaluation<a class="anchor" aria-label="anchor" href="#fitness-evaluation"></a>
+<h2 id="fitness-evaluation">Fitness evaluation<a class="anchor" aria-label="anchor" href="#fitness-evaluation"></a>
 </h2>
 <p>The package implements a multi-objective fitness function with two
 components:</p>
 <div class="section level3">
-<h3 id="objective-1-expression-difference">Objective 1: Expression Difference<a class="anchor" aria-label="anchor" href="#objective-1-expression-difference"></a>
+<h3 id="objective-1-expression-difference">Objective 1: Expression difference<a class="anchor" aria-label="anchor" href="#objective-1-expression-difference"></a>
 </h3>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mn>1</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><munder><mo>∑</mo><mi>j</mi></munder><munder><mo>∑</mo><mi>k</mi></munder><msup><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>X</mi><mrow><mi>j</mi><mi>k</mi></mrow></msub><mo>−</mo><msub><mi>P</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">
 f_1(i) = \sum_j \sum_k (X_{jk} - P_{ij})^2
@@ -218,7 +218,7 @@ is a small constant
 </ol>
 </div>
 <div class="section level3">
-<h3 id="combined-fitness">Combined Fitness<a class="anchor" aria-label="anchor" href="#combined-fitness"></a>
+<h3 id="combined-fitness">Combined fitness<a class="anchor" aria-label="anchor" href="#combined-fitness"></a>
 </h3>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msub><mi>w</mi><mn>1</mn></msub><msub><mi>f</mi><mn>1</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><msub><mi>w</mi><mn>2</mn></msub><msub><mi>f</mi><mn>2</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
 F(i) = w_1f_1(i) + w_2f_2(i)
@@ -229,12 +229,12 @@ are user-provided weights.</p>
 </div>
 </div>
 <div class="section level2">
-<h2 id="selection-nsga-ii-inspired">Selection (NSGA-II Inspired)<a class="anchor" aria-label="anchor" href="#selection-nsga-ii-inspired"></a>
+<h2 id="selection-nsga-ii-inspired">Selection (NSGA-II inspired)<a class="anchor" aria-label="anchor" href="#selection-nsga-ii-inspired"></a>
 </h2>
 <p>The selection implements a simplified version of NSGA-II’s
 non-dominated sorting:</p>
 <div class="section level3">
-<h3 id="domination-criteria">Domination Criteria<a class="anchor" aria-label="anchor" href="#domination-criteria"></a>
+<h3 id="domination-criteria">Domination criteria<a class="anchor" aria-label="anchor" href="#domination-criteria"></a>
 </h3>
 <p>Individual
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
@@ -244,7 +244,7 @@ iff:</p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∀</mo><mi>k</mi><mo>:</mo><msub><mi>f</mi><mi>k</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>≤</mo><msub><mi>f</mi><mi>k</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>j</mi><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="1.0em"></mspace><mtext mathvariant="normal">and</mtext><mspace width="1.0em"></mspace><mo>∃</mo><mi>k</mi><mo>:</mo><msub><mi>f</mi><mi>k</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>&lt;</mo><msub><mi>f</mi><mi>k</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>j</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
 \forall k: f_k(i) \leq f_k(j) \quad \text{and} \quad \exists k: f_k(i) &lt; f_k(j)
 </annotation></semantics></math></p>
-<p><strong>Proof of Partial Order</strong>:</p>
+<p><strong>Proof of partial order</strong>:</p>
 <ol style="list-style-type: decimal">
 <li><p>Reflexive: No individual dominates itself</p></li>
 <li><p>Antisymmetric: If
@@ -269,7 +269,7 @@ dominates
 </ol>
 </div>
 <div class="section level3">
-<h3 id="front-construction">Front Construction<a class="anchor" aria-label="anchor" href="#front-construction"></a>
+<h3 id="front-construction">Front construction<a class="anchor" aria-label="anchor" href="#front-construction"></a>
 </h3>
 <ol style="list-style-type: decimal">
 <li>Compute domination counts and dominated sets</li>
@@ -406,7 +406,7 @@ occur when diversity increases</p></li>
 </ol>
 </div>
 <div class="section level2">
-<h2 id="convergence-analysis">Convergence Analysis<a class="anchor" aria-label="anchor" href="#convergence-analysis"></a>
+<h2 id="convergence-analysis">Convergence analysis<a class="anchor" aria-label="anchor" href="#convergence-analysis"></a>
 </h2>
 <p>The algorithm can be shown to converge under certain conditions:</p>
 <p><strong>Assumptions</strong>:</p>
@@ -417,7 +417,7 @@ maintained</p></li>
 </ol>
 <p><strong>Theorem</strong>: The algorithm converges in probability to
 the Pareto front.</p>
-<p><strong>Proof Sketch</strong>:</p>
+<p><strong>Proof sketch</strong>:</p>
 <ol style="list-style-type: decimal">
 <li><p>The selection and replacement strategies preserve Pareto optimal
 solutions (elitism)</p></li>
@@ -427,7 +427,7 @@ the algorithm converges to the Pareto front</p></li>
 </ol>
 </div>
 <div class="section level2">
-<h2 id="computational-complexity">Computational Complexity<a class="anchor" aria-label="anchor" href="#computational-complexity"></a>
+<h2 id="computational-complexity">Computational complexity<a class="anchor" aria-label="anchor" href="#computational-complexity"></a>
 </h2>
 <p>Let: -
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>
@@ -440,11 +440,11 @@ the algorithm converges to the Pareto front</p></li>
 = number of objectives -
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>T</mi><annotation encoding="application/x-tex">T</annotation></semantics></math>
 = number of generations</p>
-<p><strong>Component Complexities</strong>:</p>
+<p><strong>Component complexities</strong>:</p>
 <ol style="list-style-type: decimal">
 <li><p>Initialization:
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>p</mi><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(pn)</annotation></semantics></math></p></li>
-<li><p>Fitness Evaluation:
+<li><p>Fitness evaluation:
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>T</mi><mi>p</mi><mi>m</mi><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(Tpmn)</annotation></semantics></math>
 (parallelized)</p></li>
 <li><p>Selection:
@@ -457,11 +457,11 @@ worst case</p></li>
 <li><p>Replacement:
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>T</mi><mi>p</mi><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(Tpn)</annotation></semantics></math></p></li>
 </ol>
-<p><strong>Total Complexity</strong>:
+<p><strong>Total complexity</strong>:
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>T</mi><mi>p</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>p</mi><mi>o</mi><mo>+</mo><mi>m</mi><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(Tp(po + mn))</annotation></semantics></math></p>
 </div>
 <div class="section level2">
-<h2 id="mathematical-optimization-interpretation">Mathematical Optimization Interpretation<a class="anchor" aria-label="anchor" href="#mathematical-optimization-interpretation"></a>
+<h2 id="mathematical-optimization-interpretation">Mathematical optimization interpretation<a class="anchor" aria-label="anchor" href="#mathematical-optimization-interpretation"></a>
 </h2>
 <p>The algorithm can be viewed as a stochastic optimization method
 for:</p>
@@ -489,7 +489,7 @@ measures sparsity</p>
 </h2>
 <ol style="list-style-type: decimal">
 <li>
-<strong>Single Objective Case</strong>
+<strong>Single objective case</strong>
 (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>w</mi><mn>2</mn></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">w_2 = 0</annotation></semantics></math>):
 <ul>
 <li>Reduces to nonlinear least squares optimization</li>
@@ -513,7 +513,7 @@ measures sparsity</p>
 </ol>
 </div>
 <div class="section level2">
-<h2 id="biological-interpretation">Biological Interpretation<a class="anchor" aria-label="anchor" href="#biological-interpretation"></a>
+<h2 id="biological-interpretation">Biological interpretation<a class="anchor" aria-label="anchor" href="#biological-interpretation"></a>
 </h2>
 <p>The mathematical operations correspond to biological concepts:</p>
 <ol style="list-style-type: decimal">
