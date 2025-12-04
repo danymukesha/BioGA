@@ -7,7 +7,7 @@ output:
   bookdown::html_document2:
     toc_float: true
     number_sections: true
-    css: style.css
+    #css: style.css
 vignette: >
   %\VignetteIndexEntry{Math_behind_BioGA}
   %\VignetteEncoding{UTF-8}
