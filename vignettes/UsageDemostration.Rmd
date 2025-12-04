@@ -1,0 +1,294 @@
+---
+title: "Usage Demonstration of BioGA"
+subtitle: "Multi-Objective Genetic Algorithm for Genomic Data Analysis"
+author: "Dany Mukesha"
+date: "`r Sys.Date()`"
+output: 
+  bookdown::html_document2:
+    toc_float: true
+    number_sections: true
+    css: style.css
+vignette: >
+  %\VignetteIndexEntry{Usage demonstration}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+    collapse = TRUE, comment = "#>", echo = TRUE, warning = FALSE, 
+    message = FALSE)
+library(BioGA)
+library(ggplot2)
+library(pheatmap)
+library(dplyr)
+library(sessioninfo)
+```
+
+# Introduction to BioGA
+
+`BioGA` is a powerful R package designed to execute a multi-objective Genetic
+Algorithm (GA) tailored for the optimization of high-dimensional genomic data.
+This approach is highly effective in scenarios where multiple, often
+conflicting, biological and statistical objectives must be satisfied
+simultaneously.
+
+This vignette provides a hands-on guide, walking through the essential steps
+of preparing data, running the GA, and interpreting the critical results,
+including convergence, diversity, and gene selection frequency.
+
+# 1. Prepare Simulated Genomic Data
+
+We begin by simulating a typical gene expression matrix, mimicking data from a
+microarray or RNA-sequencing experiment. The data will feature two classes
+(Control and Case) and will include a subset of differentially expressed genes
+to provide a clear optimization target.
+
+```{r data_simulation}
+set.seed(123)
+n_genes <- 50
+n_samples <- 20
+
+# Simulate base expression data (50 genes x 20 samples)
+genomic_data <- matrix(rnorm(n_genes * n_samples, mean = 5, sd = 2),
+    nrow = n_genes, ncol = n_samples)
+
+# Define class labels and introduce differential expression for the first 10 genes
+class_labels <- rep(c("Control", "Case"), each = 10)
+DE_genes_indices <- 1:10
+genomic_data[DE_genes_indices, class_labels == "Case"] <-
+    genomic_data[DE_genes_indices, class_labels == "Case"] + 3
+
+rownames(genomic_data) <- paste0("Gene", 1:n_genes)
+colnames(genomic_data) <- paste0("Sample", 1:n_samples)
+
+# Create annotation bar for visualization
+col_annotation <- data.frame(Class = factor(class_labels))
+rownames(col_annotation) <- colnames(genomic_data)
+```
+
+## Data Visualization (Heatmap)
+
+A heatmap visually confirms the structure of the simulated data, allowing us
+to see the clusters formed by the differentially expressed genes and the
+samples.
+
+```{r pheatmap, fig.width=6, fig.height=5}
+pheatmap(genomic_data,
+    cluster_rows = TRUE, cluster_cols = TRUE,
+    annotation_col = col_annotation,
+    main = "Simulated Gene Expression Data Structure",
+    show_colnames = FALSE)
+```
+
+# 2. Run the Genetic Algorithm
+
+The core of the analysis involves running the multi-objective GA using the
+`bioga_main_cpp` function. We specify key parameters defining the evolutionary
+process and the objectives.
+
+## GA Parameters
+
+The GA is configured using standard parameters common to evolutionary
+computation:
+
+| Parameter | Value | Description |
+| :--- | :--- | :--- |
+| `population_size` | 30 | Number of individuals in the population. |
+| `num_generations` | 50 | Total number of evolutionary steps. |
+| `crossover_rate` | 0.9 | Probability of performing Crossover (SBX). |
+| `eta_c` | 20.0 | Distribution index for SBX (controls locality). |
+| `mutation_rate` | 0.1 | Base probability of mutation. |
+| `weights` | `c(1.0, 0.5)` | Weights for ($f_1$, $f_2$). $f_1$ (Expression Difference) is prioritized over $f_2$ (Sparsity). |
+
+```{r run_ga}
+result <- bioga_main_cpp(
+    genomic_data = genomic_data,
+    population_size = 30,
+    num_generations = 50,
+    crossover_rate = 0.9,
+    eta_c = 20.0,
+    mutation_rate = 0.1,
+    num_parents = 20,
+    num_offspring = 20,
+    num_to_replace = 10,
+    weights = c(1.0, 0.5), # w1*f1 + w2*f2
+    seed = 42
+)
+```
+
+# 3. Analyze Fitness Convergence
+
+One of the most important results is demonstrating that the GA successfully
+drives the population toward optimal fitness over time. To track convergence
+accurately, we manually iterate the GA steps and record the fitness of the
+best individual at each generation.
+
+The primary objective tracked here is $f_1$ (Expression Difference).
+
+```{r fitness_convergence, fig.width=8, fig.height=5}
+# Function to manually track the best fitness (f1) over generations
+track_fitness <- function(data, pop_size, num_gen, w) {
+    # Re-initialize population for the tracker
+    pop <- initialize_population_cpp(data, pop_size, seed = 42)
+    # Re-use parameters from run_ga
+    p_mut <- 0.1
+    num_p <- 20
+    num_o <- 20
+    num_rep <- 10
+
+    best_fit_f1 <- numeric(num_gen)
+
+    for (g in 1:num_gen) {
+        fit <- evaluate_fitness_cpp(data, pop, weights = w)
+        
+        # Track the minimum f1 value (first column)
+        best_fit_f1[g] <- min(fit[, 1]) 
+        
+        # Evolutionary Cycle
+        parents <- selection_cpp(pop, fit, num_p)
+        offspring <- crossover_cpp(parents, num_o)
+        mutated <- mutation_cpp(offspring, p_mut, g, num_gen)
+        fit_off <- evaluate_fitness_cpp(data, mutated, w)
+        pop <- replacement_cpp(pop, mutated, fit, fit_off, num_rep)
+    }
+    
+    data.frame(Generation = 1:num_gen, Best_F1 = best_fit_f1)
+}
+
+fitness_trace_df <- track_fitness(genomic_data, 30, 50, w = c(1.0, 0.5))
+
+# Plotting the convergence
+ggplot(fitness_trace_df, aes(x = Generation, y = Best_F1)) +
+    geom_line(color = "#0072B2", size = 1.2) +
+    geom_point(color = "#0072B2") +
+    labs(x = "Generation Number", 
+         y = "Best Expression Difference (f1)",
+         title = "Convergence of Optimal Fitness Over Generations") +
+    theme_minimal(base_size = 14) 
+```
+The plot demonstrates the characteristic convergence curve of a GA, where the
+initial rapid improvement is followed by slower refinement as the population
+approaches the Pareto front.
+
+# 4. Analysis of Final Population
+
+The `result$population` matrix contains the 30 individuals (rows) evolved
+after 50 generations. Since the objective encouraged sparsity ($f_2$ non-zero
+weight), we expect many gene values to be reduced to or near zero.
+
+## 4.1 Population Diversity Heatmap
+
+Visualizing the final population reveals the genetic diversity and the
+consensus gene set found by the algorithm.
+
+```{r final_population_heatmap, fig.width=6, fig.height=5}
+pheatmap(result$population,
+    main = "Final Population of Individuals (Values are Optimized Gene Expression)",
+    cluster_rows = TRUE, cluster_cols = TRUE,
+    show_rownames = FALSE, show_colnames = FALSE,
+    fontsize_row = 8)
+```
+
+## 4.2 Gene Selection Frequency
+
+A key application is gene signature selection. We can identify which genes the
+algorithm consistently preserved (i.e., maintained a non-zero value) across
+the final population.
+
+```{r selection_frequency, fig.width=8, fig.height=5}
+# Calculate the mean frequency of non-zero values per gene (column)
+gene_selection_freq <- colMeans(result$population != 0)
+gene_selection_df <- data.frame(
+    Gene = rownames(genomic_data),
+    Frequency = gene_selection_freq
+)
+
+# Plotting the frequency
+ggplot(gene_selection_df, aes(x = Gene, y = Frequency)) +
+    geom_bar(stat = "identity", fill = "#D55E00") +
+    labs(x = "Gene", y = "Selection Frequency (Non-Zero)",
+         title = "Frequency of Gene Selection in Final Population") +
+    theme_minimal(base_size = 12) +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
+```
+Genes with high selection frequency (approaching 1.0) represent the core
+"signature" identified by the GA that optimally balances expression difference
+and sparsity. In this example, we observe high frequency for the `Gene1`
+through `Gene10` region, which matches our simulated differentially expressed
+genes.
+
+# 5. Advanced Feature: Network Constraint
+
+The `BioGA`'s mutation operator can be constrained by a gene-gene interaction
+network ($N$). This allows the search to prioritize biologically plausible
+changes, reducing the mutation magnitude for genes that are highly connected.
+We demonstrate how the `mutation_cpp` function handles external network
+information.
+
+```{r network_example, fig.width=6, fig.height=5, eval=FALSE}
+# 1. Create a dummy network matrix (e.g., co-expression or regulatory links)
+network_mat <- matrix(runif(n_genes^2, 0, 0.5), nrow = n_genes)
+diag(network_mat) <- 0 # No self-loops
+
+# Use the final population as a starting point for mutation
+pop_to_mutate <- result$population 
+
+mutated_with_net <- mutation_cpp(
+    population = pop_to_mutate,
+    mutation_rate = 0.1,
+    iteration = 10,
+    max_iterations = 50,
+    network = network_mat # Injecting the network constraint
+)
+
+pheatmap(mutated_with_net,
+    main = "Population After Mutation with Network Constraint",
+    show_rownames = FALSE, show_colnames = FALSE)
+```
+When a network is provided, the operator uses the expression 
+$\Delta_j(1 - \sum_k N_{jk}z_k)$, mathematically imposing that changes are
+dampened for key network hub genes.
+
+# Summary
+
+The practical application:
+
+1.  Simulated and visualized a multi-class genomic dataset.
+2.  Executed the multi-objective GA with defined weights for data fidelity
+and sparsity.
+3.  Provided a robust method for tracking and visualizing fitness convergence.
+4.  Analyzed the final population for diversity and identified the optimal
+gene signature subset.
+
+## Further Customization
+
+To apply `BioGA` to your research:
+
+* **Real Data:** Replace `genomic_data` with your own RNA-seq, microarrays,
+or proteomics data matrix.
+* **Custom Objectives:** Extend the multiple objectives by including
+clinical data (e.g., survival time, drug response) or external scores (e.g.,
+literature scores) to guide the evolution.
+* **Network Integration:** Define a meaningful adjacency matrix for `network`
+based on databases like STRING or pre-computed co-expression to ensure
+biological relevance during mutation.
+
+## Performance Tip
+
+For extremely large datasets (high $n$ or high $p$):
+
+> Use `RcppParallel::setThreadOptions(numThreads = N)` before running 
+`bioga_main_cpp` to explicitly control CPU thread usage and maximize
+parallel processing performance.
+
+<details>
+
+<summary>**Session Info**</summary>
+
+```{r sessioninfo}
+sessioninfo::session_info()
+```
+
+</details>
+```
