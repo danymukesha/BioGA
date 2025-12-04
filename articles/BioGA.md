@@ -1139,7 +1139,7 @@ sessioninfo::session_info()
 #>  rpart                  4.1.24     2025-01-07 [3] CRAN (R 4.5.2)
 #>  rstatix                0.7.3      2025-10-18 [1] RSPM
 #>  RUnit                  0.4.33.1   2025-06-17 [1] RSPM
-#>  S4Arrays               1.10.0     2025-10-29 [1] Bioconduc~
+#>  S4Arrays               1.10.1     2025-12-01 [1] Bioconduc~
 #>  S4Vectors            * 0.48.0     2025-10-29 [1] Bioconduc~
 #>  S7                     0.2.1      2025-11-14 [1] RSPM
 #>  sass                   0.4.10     2025-04-11 [1] RSPM
@@ -1147,7 +1147,7 @@ sessioninfo::session_info()
 #>  Seqinfo              * 1.0.0      2025-10-29 [1] Bioconduc~
 #>  sessioninfo            1.2.3      2025-02-05 [1] RSPM
 #>  shape                  1.4.6.1    2024-02-23 [1] RSPM
-#>  SparseArray            1.10.3     2025-11-25 [1] Bioconduc~
+#>  SparseArray            1.10.4     2025-12-01 [1] Bioconduc~
 #>  statmod                1.5.1      2025-10-09 [1] RSPM
 #>  stringi                1.8.7      2025-03-27 [1] RSPM
 #>  stringr                1.6.0      2025-11-04 [1] RSPM
