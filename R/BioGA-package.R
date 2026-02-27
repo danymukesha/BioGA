@@ -28,7 +28,7 @@
 #' @importFrom survival cluster Surv coxph survfit
 #' @importFrom survminer ggsurvplot
 #' @importFrom timeROC timeROC
-#' @importFrom xgboost slice xgb.DMatrix xgb.train
+#' @importFrom xgboost xgb.DMatrix xgb.train
 #' @useDynLib BioGA, .registration = TRUE
 ## usethis namespace: end
 NULL

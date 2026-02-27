@@ -195,7 +195,8 @@ condition ($\exists k: f_k(i) < f_k(j)$) is false.
 If $i$ is strictly better on at least one objective, $j$ must be strictly 
 worse ($\forall k: f_k(j) \not\leq f_k(i)$).
 3.  **Transitive:** If $i \succ j$ and $j \succ k$, then $i \succ k$. This
-follows directly from the transitivity of the combined $\leq$ and $<$ relations.
+follows directly from the transitivity of the combined $\leq$ and $<$ 
+relations.
 
 ## Front Construction
 

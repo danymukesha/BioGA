@@ -53,7 +53,8 @@ n_samples <- 20
 genomic_data <- matrix(rnorm(n_genes * n_samples, mean = 5, sd = 2),
     nrow = n_genes, ncol = n_samples)
 
-# Define class labels and introduce differential expression for the first 10 genes
+# Define class labels and introduce differential expression 
+# for the first 10 genes
 class_labels <- rep(c("Control", "Case"), each = 10)
 DE_genes_indices <- 1:10
 genomic_data[DE_genes_indices, class_labels == "Case"] <-
@@ -127,6 +128,9 @@ best individual at each generation.
 The primary objective tracked here is $f_1$ (Expression Difference).
 
 ```{r fitness_convergence, fig.width=8, fig.height=5}
+# Since BioGA currently does not return fitness history,
+# let’s re-run manually to track convergence:
+
 # Function to manually track the best fitness (f1) over generations
 track_fitness <- function(data, pop_size, num_gen, w) {
     # Re-initialize population for the tracker
@@ -162,10 +166,12 @@ fitness_trace_df <- track_fitness(genomic_data, 30, 50, w = c(1.0, 0.5))
 ggplot(fitness_trace_df, aes(x = Generation, y = Best_F1)) +
     geom_line(color = "#0072B2", size = 1.2) +
     geom_point(color = "#0072B2") +
-    labs(x = "Generation Number", 
-         y = "Best Expression Difference (f1)",
-         title = "Convergence of Optimal Fitness Over Generations") +
-    theme_minimal(base_size = 14) 
+    labs(
+        x = "Generation Number",
+        y = "Best Expression Difference (f1)",
+        title = "Convergence of Optimal Fitness Over Generations"
+    ) +
+    theme_minimal(base_size = 14)
 ```
 The plot demonstrates the characteristic convergence curve of a GA, where the
 initial rapid improvement is followed by slower refinement as the population
@@ -207,10 +213,12 @@ gene_selection_df <- data.frame(
 # Plotting the frequency
 ggplot(gene_selection_df, aes(x = Gene, y = Frequency)) +
     geom_bar(stat = "identity", fill = "#D55E00") +
-    labs(x = "Gene", y = "Selection Frequency (Non-Zero)",
-         title = "Frequency of Gene Selection in Final Population") +
+    labs(
+        x = "Gene", y = "Selection Frequency (Non-Zero)",
+        title = "Frequency of Gene Selection in Final Population"
+    ) +
     theme_minimal(base_size = 12) +
-    theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
+    theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
 Genes with high selection frequency (approaching 1.0) represent the core
 "signature" identified by the GA that optimally balances expression difference
@@ -226,16 +234,16 @@ changes, reducing the mutation magnitude for genes that are highly connected.
 We demonstrate how the `mutation_cpp` function handles external network
 information.
 
-```{r network_example, fig.width=6, fig.height=5, eval=FALSE}
+```{r network_example, fig.width=6, fig.height=5}
 # 1. Create a dummy network matrix (e.g., co-expression or regulatory links)
-network_mat <- matrix(runif(n_genes^2, 0, 0.5), nrow = n_genes)
+network_mat <- matrix(runif(n_genes^2, 0, 1), nrow = n_genes)
 diag(network_mat) <- 0 # No self-loops
 
 # Use the final population as a starting point for mutation
 pop_to_mutate <- result$population 
 
 mutated_with_net <- mutation_cpp(
-    population = pop_to_mutate,
+    offspring = pop_to_mutate,
     mutation_rate = 0.1,
     iteration = 10,
     max_iterations = 50,
@@ -291,4 +299,3 @@ sessioninfo::session_info()
 ```
 
 </details>
-```

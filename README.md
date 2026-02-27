@@ -36,3 +36,9 @@ You can also install the package directly from GitHub using the
 ``` r
 devtools::install_github("danymukesha/BioGA")
 ```
+
+Citation:
+
+The Bioconductor package \[@Mukesha2024BioGA\]
+
+The Zenodo record describing the framework \[@Mukesha2024Zenodo\]
