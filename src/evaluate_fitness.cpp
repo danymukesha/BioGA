@@ -1,7 +1,48 @@
 #include <RcppParallel.h>
 #include <Rcpp.h>
+
 using namespace Rcpp;
 using namespace RcppParallel;
+
+struct FitnessWorker : public Worker {
+   const RMatrix<double> genomic_data;
+   const RMatrix<double> population;
+   const RVector<double> weights;
+   RMatrix<double> fitness;
+   
+   FitnessWorker(const NumericMatrix& genomic_data, 
+                 const NumericMatrix& population, 
+                 const NumericVector& weights,
+                 NumericMatrix& fitness)
+      : genomic_data(genomic_data), population(population), 
+        weights(weights), fitness(fitness) {}
+   
+   void operator()(std::size_t begin, std::size_t end) {
+      for (std::size_t i = begin; i < end; ++i) {
+         double sum_fitness = 0.0;
+         double sparsity = 0.0;
+         
+         for (std::size_t j = 0; j < genomic_data.nrow(); ++j) {
+            double sum_gene_expression = 0.0;
+            
+            for (std::size_t k = 0; k < genomic_data.ncol(); ++k) {
+               double diff = genomic_data(j, k) - population(i, j);
+               sum_gene_expression += diff * diff;
+            }
+            
+            sum_fitness += sum_gene_expression;
+            
+            if (std::fabs(population(i, j)) > 1e-6)
+               sparsity += 1.0;
+         }
+         
+         fitness(i, 0) = weights[0] * sum_fitness;
+         fitness(i, 1) = weights[1] * sparsity / genomic_data.nrow();
+      }
+   }
+   
+};
+
 
 //' Function to evaluate fitness using genomic data with multi-objective support
 //'
@@ -21,52 +62,14 @@ using namespace RcppParallel;
 //' @export
 // [[Rcpp::export]]
 NumericMatrix evaluate_fitness_cpp(const NumericMatrix& genomic_data, 
-                                  const NumericMatrix& population,
-                                  const NumericVector& weights) {
- int num_genes = genomic_data.nrow();
- int num_samples = genomic_data.ncol();
- int population_size = population.nrow();
- int num_objectives = weights.length(); // Number of objectives (e.g., 2: expression diff, sparsity)
- 
- // Allocate memory for fitness matrix (rows: individuals, columns: objectives)
- NumericMatrix fitness(population_size, num_objectives);
- 
- // Parallelized fitness calculation
- struct FitnessWorker : public Worker {
-   const RMatrix<double> genomic_data;
-   const RMatrix<double> population;
-   const RVector<double> weights;
-   RMatrix<double> fitness;
+                                   const NumericMatrix& population,
+                                   const NumericVector& weights) {
+   int population_size = population.nrow();
+   int num_objectives = weights.length();
+   NumericMatrix fitness(population_size, num_objectives);
    
-   FitnessWorker(const NumericMatrix& genomic_data, 
-                 const NumericMatrix& population, 
-                 const NumericVector& weights,
-                 NumericMatrix& fitness)
-     : genomic_data(genomic_data), population(population), 
-       weights(weights), fitness(fitness) {}
+   FitnessWorker worker(genomic_data, population, weights, fitness);
+   parallelFor(0, population_size, worker);
    
-   void operator()(std::size_t begin, std::size_t end) {
-     for (std::size_t i = begin; i < end; ++i) {
-       double sum_fitness = 0.0;
-       double sparsity = 0.0;
-       // Objective 1: Sum of squared differences (expression difference)
-       for (int j = 0; j < genomic_data.nrow(); ++j) {
-         double sum_gene_expression = 0.0;
-         for (int k = 0; k < genomic_data.ncol(); ++k) {
-           sum_gene_expression += pow(genomic_data(j, k) - population(i, j), 2);
-         }
-         sum_fitness += sum_gene_expression;
-         // Objective 2: Sparsity (count non-zero genes)
-         if (fabs(population(i, j)) > 1e-6) sparsity += 1.0;
-       }
-       fitness(i, 0) = weights[0] * sum_fitness; // Weighted expression difference
-       fitness(i, 1) = weights[1] * sparsity / genomic_data.nrow(); // Weighted sparsity
-     }
-   }
- };
- 
- FitnessWorker worker(genomic_data, population, weights, fitness);
- parallelFor(0, population_size, worker);
- 
- return fitness;
+   return fitness;
 }

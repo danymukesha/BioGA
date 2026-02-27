@@ -1,5 +1,10 @@
+#include <RcppParallel.h>
 #include <Rcpp.h>
+#include <vector>
+#include <algorithm>
+
 using namespace Rcpp;
+using namespace RcppParallel;
 
 //' Function to replace population with elitism and diversity preservation
 //'
@@ -25,44 +30,64 @@ using namespace Rcpp;
 //' @export
 // [[Rcpp::export]]
 NumericMatrix replacement_cpp(const NumericMatrix& population, 
-                             const NumericMatrix& offspring, 
-                             const NumericMatrix& fitness, 
-                             const NumericMatrix& offspring_fitness, 
-                             int num_to_replace) {
- int population_size = population.nrow();
- int num_genes = population.ncol();
- int num_offspring = offspring.nrow();
- 
- // Allocate memory for updated population
- NumericMatrix updated_population = clone(population);
- 
- // Elitism: Copy best individual (based on first objective)
- int best_idx = 0;
- double best_fitness = fitness(0, 0);
- for (int i = 1; i < population_size; ++i) {
-   if (fitness(i, 0) < best_fitness) {
-     best_fitness = fitness(i, 0);
-     best_idx = i;
+                              const NumericMatrix& offspring, 
+                              const NumericMatrix& fitness, 
+                              const NumericMatrix& offspring_fitness, 
+                              int num_to_replace) {
+   int pop_size = population.nrow();
+   int off_size = offspring.nrow();
+   int num_genes = population.ncol();
+   int num_objs = fitness.ncol();
+   
+   // 1. Combine parents and offspring into a pool
+   int combined_size = pop_size + off_size;
+   NumericMatrix pool_pop(combined_size, num_genes);
+   NumericMatrix pool_fit(combined_size, num_objs);
+   
+   for(int i = 0; i < pop_size; ++i) {
+      pool_pop(i, _) = population(i, _);
+      pool_fit(i, _) = fitness(i, _);
    }
- }
- for (int j = 0; j < num_genes; ++j) {
-   updated_population(0, j) = population(best_idx, j);
- }
- 
- // Replace remaining individuals with diversity consideration
- for (int i = 0; i < num_to_replace && i < num_offspring; ++i) {
-   int index_to_replace = 1 + int(R::unif_rand() * (population_size - 1)); // Preserve elite
-   double diversity = 0.0;
-   for (int j = 0; j < num_genes; ++j) {
-     double diff = offspring(i, j) - updated_population(index_to_replace, j);
-     diversity += diff * diff;
+   for(int i = 0; i < off_size; ++i) {
+      pool_pop(i + pop_size, _) = offspring(i, _);
+      pool_fit(i + pop_size, _) = offspring_fitness(i, _);
    }
-   if (diversity > 1e-6) { // Replace only if sufficiently diverse
-     for (int j = 0; j < num_genes; ++j) {
-       updated_population(index_to_replace, j) = offspring(i, j);
-     }
+   
+   // 2. Find Non-Dominated Elites (Front 1) of the combined pool
+   std::vector<int> front1;
+   for (int i = 0; i < combined_size; ++i) {
+      bool dominated = false;
+      for (int j = 0; j < combined_size; ++j) {
+         if (i == j) continue;
+         bool j_better_or_equal_all = true;
+         bool j_strictly_better_one = false;
+         for (int k = 0; k < num_objs; ++k) {
+            if (pool_fit(j, k) > pool_fit(i, k)) j_better_or_equal_all = false;
+            if (pool_fit(j, k) < pool_fit(i, k)) j_strictly_better_one = true;
+         }
+         if (j_better_or_equal_all && j_strictly_better_one) {
+            dominated = true;
+            break;
+         }
+      }
+      if (!dominated) front1.push_back(i);
    }
- }
- 
- return updated_population;
+   
+   // 3. Construct the next generation
+   NumericMatrix next_gen(pop_size, num_genes);
+   int count = 0;
+   
+   // First, keep the entire Pareto Front (The Elites)
+   for (int idx : front1) {
+      if (count >= pop_size) break;
+      next_gen(count++, _) = pool_pop(idx, _);
+   }
+   
+   // Fill the remaining slots with children (or parents) randomly to maintain size
+   while (count < pop_size) {
+      int rand_idx = int(R::unif_rand() * combined_size);
+      next_gen(count++, _) = pool_pop(rand_idx, _);
+   }
+   
+   return next_gen;
 }
