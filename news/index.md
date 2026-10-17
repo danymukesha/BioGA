@@ -1,226 +1,166 @@
 # Changelog
 
+## BioGA 0.99.18
+
+### Major changes
+
+- Rewrote core algorithm as a correct NSGA-II implementation: strict
+  domination, full non-dominated front construction, crowding distance,
+  and NSGA-II environmental selection for replacement (new
+  `src/nsga2.h`).
+- Added a hybrid representation via
+  `representation = c("real", "binary")`. Real mode minimises squared
+  error (`f1`) and mean absolute value (`f2`); binary mode minimises the
+  negated mean ANOVA F-statistic of selected genes (`f1`) and the
+  fraction of selected genes (`f2`) using class `labels`.
+- Added idiomatic R wrappers
+  [`bioga()`](https://danymukesha.github.io/BioGA/reference/bioga.md)
+  and
+  [`bioga_fitness()`](https://danymukesha.github.io/BioGA/reference/bioga_fitness.md).
+- `crossover_cpp` now generates both complementary SBX children and
+  handles a single parent without hanging.
+- `mutation_cpp` uses degree-based network damping (bounded,
+  non-negative) for the real representation and bit-flip mutation for
+  the binary representation.
+- `replacement_cpp` now performs NSGA-II environmental selection;
+  `num_to_replace = 0` returns the population unchanged.
+- `bioga_main_cpp` returns `population`, `fitness`, `history`, `best`,
+  `best_fitness`, `pareto_population`, and `pareto_fitness`, and accepts
+  a `labels` argument for supervised objectives.
+
+### Documentation
+
+- Corrected scientific statements in the vignettes (removed unverified
+  claims about tools, benchmarks, databases, and convergence guarantees;
+  aligned formulae with the implementation).
+- Lowered `Depends` to `R (>= 4.3)`.
+
+### Testing
+
+- Rewrote the test suite for the new API and behaviours.
+
 ## BioGA 0.99.17
 
-Added: - Demo vignette for BioGA. - Mathematical background vignette for
-BioGA.
+### Added
 
-Updated: - BioGA vignettes with new examples and explanations. -
-`selection_cpp` function for improved performance and bug fixes.
+- Demo vignette for BioGA.
+- Mathematical background vignette for BioGA.
+
+### Updated
+
+- Vignettes with new examples and explanations.
+- `selection_cpp` for improved performance and bug fixes.
 
 ## BioGA 0.99.16
 
-*UPDATE: test_crossover_cpp*
+### Testing improvements
 
-The test verifies dimensions, value ranges, and new parameters.
-
-Changes: - Added tests for new parameters (`crossover_rate`, `eta_c`). -
-Verified that offspring values lie within parent ranges (due to SBX). -
-Included edge case test for single parent and zero crossover rate. -
-Simplified error/warning checks.
-
-*UPDATE: test_selection_cpp* The test checks dimensions, parent
-selection, and compatibility with multi-objective fitness.
-
-Changes: - Updated to handle multi-objective fitness matrix. - Verified
-that selected parents are exact copies of population rows. - Added edge
-case test for single individual and single objective. - Removed
-redundant fitness evaluation test (already covered in
-`evaluate_fitness_cpp`).
-
-*UPDATE: test_mutation_cpp* The test checks dimensions, mutation
-effects, and new parameters.
-
-Changes: - Added tests for new parameters (`iteration`,
-`max_iterations`, `network`). - Verified that zero mutation rate
-preserves offspring. - Tested network constraints with extreme cases
-(zero and full constraints). - Simplified error/warning checks.
-
-*UPDATE/ADDED: test_replacement_cpp*
-
-The test checks dimensions, elite preservation, and diversity.
-
-Changes: - Added test for new function signature (requires fitness
-matrices). - Verified elite preservation based on first objective. -
-Included edge case test for zero replacements. - Added checks for
-dimensions and error-free execution.
-
-*UPDATE: test_initialize_population_cpp*
-
-The test checks dimensions, value validity, and new parameters.
-
-Changes: - Added test for `seed` parameter to ensure reproducibility. -
-Included test for `clusters` parameter to verify correct
-initialization. - Maintained tests for dimensions and value validity. -
-Added edge case test for minimal input.
-
-*UPDATE: test_bioga_main_cpp* {PROVISIONAL}
-
-New test file is created to verify the main GA loop.
-
-Feature: - Tests the output structure (list with population and
-fitness). - Verifies dimensions of population and fitness matrices. -
-Checks optional parameters (`clusters`, `network`). - Includes edge case
-test for minimal input.
-
-*Test for Package (test-BioGA-package.R)*
-
-Created a new version to test the overall package integrity and ensure
-all functions are exported correctly.
-
-Feature: - Tests package loading and function exports. - Verifies a
-complete GA workflow without errors. - Ensures compatibility with the
-optimized functions.
+- Tests for `crossover_cpp`: new parameters (`crossover_rate`, `eta_c`),
+  SBX offspring range validation, edge cases.
+- Tests for `selection_cpp`: multi-objective fitness matrix support,
+  parent identity verification, single-individual edge case.
+- Tests for `mutation_cpp`: new parameters (`iteration`,
+  `max_iterations`, `network`), zero-rate preservation, network
+  constraint extremes.
+- Tests for `replacement_cpp`: new signature with fitness matrices,
+  elite preservation, zero-replacement edge case.
+- Tests for `initialize_population_cpp`: `seed` reproducibility,
+  `clusters` parameter, minimal input edge case.
+- Tests for `bioga_main_cpp`: output structure, dimension verification,
+  optional parameters, minimal input.
+- Package integration test: export verification, full workflow
+  execution.
 
 ## BioGA 0.99.15
 
-*UPDATE: test_evaluate_fitness_cpp* The test checks dimensions, values,
-and error-free execution.
+### Testing improvements
 
-Changes:
-
-- Updated to test the new matrix output (multiple objectives).
-- Added checks for non-negative fitness values (appropriate for
-  expression difference and sparsity).
-- Included edge case test for minimal input.
-- Removed redundant `tryCatch` and simplified error/warning checks.
+- Updated `evaluate_fitness_cpp` tests for multi-objective matrix
+  output.
+- Added non-negative fitness checks.
+- Added minimal input edge case.
+- Removed redundant `tryCatch`.
 
 ## BioGA 0.99.14
 
-*Commit -m “New Feature - Main GA Loop”*
+### New feature
 
-adding a main GA loop function that integrates all components and
-supports multi-objective optimization and parallelization.
-
-Features:
-
-- Integrates all optimized components into a cohesive GA loop.
-- Supports multi-objective optimization, gene networks, and clustering.
-- Returns both final population and fitness scores for analysis.
+- Main GA loop (`bioga_main_cpp`) integrating all components with
+  multi-objective optimization and parallelization.
 
 ## BioGA 0.99.13
 
-*Commit -m “Optimized initialize_population.cpp”*
+### Improvements
 
-Improvements:
-
-- Add option for biologically informed initialization using gene
-  clusters.
-- Improve random seed handling for reproducibility.
-
-Changes:
-
-- Added optional random seed for reproducibility.
-- Included support for gene clustering to initialize biologically
-  relevant populations.
-- Improved code readability and documentation.
+- Biologically informed initialization using gene clusters.
+- Reproducible random seed handling.
 
 ## BioGA 0.99.12
 
-*Commit -m “Optimized replacement.cpp”*
+### Maintenance
 
-indentation adjustments
+- Code cleanup and indentation in `replacement.cpp`.
 
 ## BioGA 0.99.11
 
-*Commit -m “Optimized replacement.cpp”*
+### Improvements
 
-Improvements:
-
-- Implement elitism to preserve best individuals.
-- Add diversity-based replacement to avoid premature convergence.
-
-Changes:
-
-- Added elitism to preserve the best individual.
-- Included diversity-based replacement to maintain population diversity.
-- Updated to use multi-objective fitness matrix.
+- Elitism to preserve best individuals.
+- Diversity-based replacement to avoid premature convergence.
+- Multi-objective fitness matrix support.
 
 ## BioGA 0.99.10
 
-*Commit -m “Optimized mutation.cpp”*
+### Improvements
 
-Improvements:
-
-- Add adaptive mutation rate based on iteration or fitness stagnation.
-- Incorporate gene network constraints (placeholder for user-provided
-  network).
-
-Changes:
-
-- Added adaptive mutation rate based on iteration progress.
-- Included optional gene network constraints to ensure biologically
-  relevant mutations.
-- Maintained compatibility with existing functionality.
+- Adaptive mutation rate based on iteration progress.
+- Optional gene network constraints for biologically relevant mutations.
 
 ## BioGA 0.99.9
 
-*Commit -m “Optimized selection.cpp”*
+### Improvements
 
-Improvements:
-
-- Implement NSGA-II non-dominated sorting for multi-objective
-  optimization.
-- Add tournament selection for better diversity.
-
-Changes:
-
-- Implemented NSGA-II non-dominated sorting for multi-objective
-  selection.
-- Added tournament selection to maintain diversity.
-- Updated to handle multi-objective fitness matrix.
+- NSGA-II non-dominated sorting for multi-objective selection.
+- Tournament selection for diversity.
 
 ## BioGA 0.99.8
 
-*Commit -m “Optimized crossover.cpp”* ” Improvements:
+### Improvements
 
-- Implement simulated binary crossover (SBX) for better exploration.
-- Add adaptive crossover rate based on population diversity.
-
-Changes:
-
-- Replaced simple averaging with SBX crossover for better exploration.
-- Added adaptive crossover rate based on population diversity.
-- Included parameters for crossover rate and distribution index.
+- Simulated binary crossover (SBX) for better exploration.
+- Adaptive crossover rate based on population diversity.
+- Configurable crossover rate and distribution index.
 
 ## BioGA 0.99.7
 
-*Commit -m “Optimized evaluate_fitness.cpp”*
+### Improvements
 
-Improvements:
-
-- Add multi-objective fitness evaluation (e.g., minimize expression
-  difference and maximize gene sparsity).
-- Use vectorized operations for faster computation.
-- Add parallelization with RcppParallel for large datasets.
-
-Changes:
-
-- Added multi-objective support (expression difference and sparsity).
-- Used `RcppParallel` for parallel computation.
-- Returned a matrix of fitness scores for each objective.
-- Added weights parameter for flexible objective prioritization.
+- Multi-objective fitness evaluation (expression difference and
+  sparsity).
+- Parallelized computation via RcppParallel.
+- Flexible objective weighting via `weights` parameter.
 
 ## BioGA 0.99.6
 
-- add the authors and date in the vignettes?
-- no R version less than 4.4
+### Maintenance
 
-## BioGA 0.99.5
+- Added authors and date to vignettes.
+- Set minimum R version to 4.4.
 
 ## BioGA 0.99.4
 
-- Fixed and added updates requested by Bioconductor Peer review
+### Maintenance
 
-## BioGA 0.99.3
+- Updates requested by Bioconductor peer review.
 
 ## BioGA 0.99.2
 
-- Fixed ERROR: System files ‘BioGA.Rproj’ found that should not be Git
-  tracked.
+### Bug fixes
 
-## BioGA 0.99.1
+- Fixed Git tracking of `.Rproj` system file.
 
 ## BioGA 0.99.0
 
-- Added a `NEWS.md` file to track changes to the package.
+### Initial release
+
+- Added `NEWS.md` to track changes.

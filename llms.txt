@@ -11,6 +11,7 @@ for use within R.
 To install this package, start R (preferably version “4.4”) and enter:
 
 ``` r
+
 if (!require("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 
@@ -24,6 +25,7 @@ You can also install the package directly from GitHub using the
 `devtools` package:
 
 ``` r
+
 devtools::install_github("danymukesha/BioGA")
 ```
 
@@ -31,23 +33,24 @@ devtools::install_github("danymukesha/BioGA")
 
 ## All functions
 
+- [`bioga()`](https://danymukesha.github.io/BioGA/reference/bioga.md) :
+  Run the BioGA genetic algorithm
+- [`bioga_fitness()`](https://danymukesha.github.io/BioGA/reference/bioga_fitness.md)
+  : Evaluate BioGA fitness
 - [`bioga_main_cpp()`](https://danymukesha.github.io/BioGA/reference/bioga_main_cpp.md)
-  : Main genetic algorithm loop for genomic data optimization
+  : Main genetic algorithm loop for genomic data optimisation
 - [`crossover_cpp()`](https://danymukesha.github.io/BioGA/reference/crossover_cpp.md)
-  : Function to perform simulated binary crossover (SBX)
+  : Generate offspring by crossover
 - [`evaluate_fitness_cpp()`](https://danymukesha.github.io/BioGA/reference/evaluate_fitness_cpp.md)
-  : Function to evaluate fitness using genomic data with multi-objective
-  support
+  : Evaluate fitness with two competing objectives
 - [`initialize_population_cpp()`](https://danymukesha.github.io/BioGA/reference/initialize_population_cpp.md)
-  : Function to initialize population with optional gene clustering
+  : Initialize a population, optionally guided by gene clusters
 - [`mutation_cpp()`](https://danymukesha.github.io/BioGA/reference/mutation_cpp.md)
-  : Function to mutate offspring with adaptive mutation and network
-  constraints
+  : Mutate offspring with an adaptive rate
 - [`replacement_cpp()`](https://danymukesha.github.io/BioGA/reference/replacement_cpp.md)
-  : Function to replace population with elitism and diversity
-  preservation
+  : Build the next population with NSGA-II environmental selection
 - [`selection_cpp()`](https://danymukesha.github.io/BioGA/reference/selection_cpp.md)
-  : Function to select individuals using NSGA-II non-dominated sorting
+  : Select parents using NSGA-II rank and crowding distance
 
 # Articles
 

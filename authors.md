@@ -12,7 +12,7 @@ Source:
 
 Mukesha D (2024). “Scalable and Interpretable Genetic Algorithm
 Framework for High-Throughput Genomic Data.” *Zenodo*.
-[doi:10.5281/zenodo.15801072](https://doi.org/10.5281/zenodo.15801072),
+[doi:10.5281/zenodo.15801072](https://doi.org/10.5281/zenodo.15801072).
 <https://doi.org/10.5281/zenodo.15801072>.
 
     @Article{,
@@ -25,15 +25,15 @@ Framework for High-Throughput Genomic Data.” *Zenodo*.
     }
 
 Mukesha D (2024). *BioGA: Bioinformatics Genetic Algorithm (BioGA)*.
-[doi:10.18129/B9.bioc.BioGA](https://doi.org/10.18129/B9.bioc.BioGA), R
-package version 1.0.0, <https://danymukesha.github.io/BioGA/>.
+[doi:10.18129/B9.bioc.BioGA](https://doi.org/10.18129/B9.bioc.BioGA). R
+package version 0.99.18, <https://danymukesha.github.io/BioGA/>.
 
     @Manual{,
       title = {BioGA: Bioinformatics Genetic Algorithm (BioGA)},
       author = {Dany Mukesha},
       year = {2024},
       journal = {Bioconductor},
-      note = {R package version 1.0.0},
+      note = {R package version 0.99.18},
       doi = {10.18129/B9.bioc.BioGA},
       url = {https://danymukesha.github.io/BioGA/},
     }

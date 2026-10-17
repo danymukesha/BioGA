@@ -1,11 +1,11 @@
-pandoc: 3.1.11
-pkgdown: 2.2.0
+pandoc: 3.8.3
+pkgdown: 2.2.1
 pkgdown_sha: ~
 articles:
   BioGA: BioGA.html
   Foundation: Foundation.html
   UsageDemostration: UsageDemostration.html
-last_built: 2025-12-04T19:18Z
+last_built: 2026-10-17T17:29Z
 urls:
   reference: https://danymukesha.github.io/BioGA/reference
   article: https://danymukesha.github.io/BioGA/articles

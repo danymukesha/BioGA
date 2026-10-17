@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>The Foundation of BioGA • BioGA</title>
 <script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="The Foundation of BioGA">
 </head>
@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">BioGA</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.99.17</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.99.18</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,7 +71,7 @@ Algorithm for Genomic Data Optimization</h3>
                         <h4 data-toc-skip class="author">Dany
 Mukesha</h4>
             
-            <h4 data-toc-skip class="date">2025-12-04</h4>
+            <h4 data-toc-skip class="date">2026-10-17</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/danymukesha/BioGA/blob/main/vignettes/Foundation.Rmd" class="external-link"><code>vignettes/Foundation.Rmd</code></a></small>
       <div class="d-none name"><code>Foundation.Rmd</code></div>
@@ -103,7 +103,7 @@ selection, reproduction (crossover and mutation), and replacement.</p>
 algorithm’s state:</p>
 <ul>
 <li>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>V</mi><mo>,</mo><mi>E</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">G = (V, E)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mo>=</mo><mo stretchy="false" form="prefix">(</mo><mi>V</mi><mo>,</mo><mi>E</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">G = (V, E)</annotation></semantics></math>
 is the gene network, where
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mo>=</mo><mo stretchy="false" form="prefix">{</mo><msub><mi>g</mi><mn>1</mn></msub><mo>,</mo><msub><mi>g</mi><mn>2</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>g</mi><mi>n</mi></msub><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">V = \{g_1, g_2, \ldots, g_n\}</annotation></semantics></math>
 are
@@ -129,7 +129,7 @@ gene values (columns).</li>
 <p>The evolution from one generation to the next,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>P</mi><mi>t</mi></msub><mo>→</mo><msub><mi>P</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">P_t \to P_{t+1}</annotation></semantics></math>,
 is described by the following functional relationship:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>P</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mi>R</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>M</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>C</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>S</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>P</mi><mi>t</mi></msub><mo>,</mo><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>P</mi><mi>t</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mi>X</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><msub><mi>P</mi><mi>t</mi></msub><mo>,</mo><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>P</mi><mi>t</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>P</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mi>R</mi><mo stretchy="false" form="prefix">(</mo><mi>M</mi><mo stretchy="false" form="prefix">(</mo><mi>C</mi><mo stretchy="false" form="prefix">(</mo><mi>S</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>P</mi><mi>t</mi></msub><mo>,</mo><mi>f</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>P</mi><mi>t</mi></msub><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo><mo>,</mo><msub><mi>P</mi><mi>t</mi></msub><mo>,</mo><mi>f</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>P</mi><mi>t</mi></msub><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">
 P_{t+1} = R(M(C(S(P_t, f(P_t)), X)), P_t, f(P_t))
 </annotation></semantics></math></p>
 <p>Where the functions represent the core operators:</p>
@@ -172,10 +172,10 @@ the value of gene
 in the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>-th
 individual of the initial population is set as:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>P</mi><mn>0</mn></msub><mrow><mo stretchy="true" form="prefix">[</mo><mi>i</mi><mo>,</mo><mi>j</mi><mo stretchy="true" form="postfix">]</mo></mrow><mo>=</mo><mi>X</mi><mrow><mo stretchy="true" form="prefix">[</mo><mi>j</mi><mo>,</mo><mi>k</mi><mo stretchy="true" form="postfix">]</mo></mrow><mspace width="1.0em"></mspace><mtext mathvariant="normal">where</mtext><mspace width="1.0em"></mspace><mi>k</mi><mo>∼</mo><mtext mathvariant="normal">Uniform</mtext><mo stretchy="false" form="prefix">{</mo><mn>1</mn><mo>,</mo><mi>…</mi><mo>,</mo><mi>m</mi><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>P</mi><mn>0</mn></msub><mo stretchy="false" form="prefix">[</mo><mi>i</mi><mo>,</mo><mi>j</mi><mo stretchy="false" form="postfix">]</mo><mo>=</mo><mi>X</mi><mo stretchy="false" form="prefix">[</mo><mi>j</mi><mo>,</mo><mi>k</mi><mo stretchy="false" form="postfix">]</mo><mspace width="1.0em"></mspace><mtext mathvariant="normal">where</mtext><mspace width="1.0em"></mspace><mi>k</mi><mo>∼</mo><mtext mathvariant="normal">Uniform</mtext><mo stretchy="false" form="prefix">{</mo><mn>1</mn><mo>,</mo><mi>…</mi><mo>,</mo><mi>m</mi><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">
 P_0[i,j] = X[j, k] \quad \text{where} \quad k \sim \text{Uniform}\{1, \ldots, m\}
 </annotation></semantics></math> This means that for each element
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo>,</mo><mi>j</mi><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(i, j)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>i</mi><mo>,</mo><mi>j</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(i, j)</annotation></semantics></math>
 in
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>P</mi><mn>0</mn></msub><annotation encoding="application/x-tex">P_0</annotation></semantics></math>,
 a sample
@@ -183,13 +183,13 @@ a sample
 is chosen uniformly at random from the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
 available samples, and the corresponding gene expression value
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mrow><mo stretchy="true" form="prefix">[</mo><mi>j</mi><mo>,</mo><mi>k</mi><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">X[j, k]</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo stretchy="false" form="prefix">[</mo><mi>j</mi><mo>,</mo><mi>k</mi><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">X[j, k]</annotation></semantics></math>
 is used.</p>
 <p><strong>Initialization with Clustering:</strong></p>
 <p>If a clustering breakdown is provided (e.g.,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math>
 is the set of clusters), the initialization respects the structure:
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>P</mi><mn>0</mn></msub><mrow><mo stretchy="true" form="prefix">[</mo><mi>i</mi><mo>,</mo><mi>j</mi><mo stretchy="true" form="postfix">]</mo></mrow><mo>=</mo><mi>X</mi><mrow><mo stretchy="true" form="prefix">[</mo><mi>j</mi><mo>,</mo><mi>k</mi><mo stretchy="true" form="postfix">]</mo></mrow><mspace width="1.0em"></mspace><mo>∀</mo><mi>j</mi><mo>∈</mo><mi>c</mi><mo>,</mo><mspace width="1.0em"></mspace><mi>k</mi><mo>∼</mo><mtext mathvariant="normal">Uniform</mtext><mo stretchy="false" form="prefix">{</mo><mn>1</mn><mo>,</mo><mi>…</mi><mo>,</mo><mi>m</mi><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>P</mi><mn>0</mn></msub><mo stretchy="false" form="prefix">[</mo><mi>i</mi><mo>,</mo><mi>j</mi><mo stretchy="false" form="postfix">]</mo><mo>=</mo><mi>X</mi><mo stretchy="false" form="prefix">[</mo><mi>j</mi><mo>,</mo><mi>k</mi><mo stretchy="false" form="postfix">]</mo><mspace width="1.0em"></mspace><mo>∀</mo><mi>j</mi><mo>∈</mo><mi>c</mi><mo>,</mo><mspace width="1.0em"></mspace><mi>k</mi><mo>∼</mo><mtext mathvariant="normal">Uniform</mtext><mo stretchy="false" form="prefix">{</mo><mn>1</mn><mo>,</mo><mi>…</mi><mo>,</mo><mi>m</mi><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">
 P_0[i,j] = X[j, k] \quad \forall j \in c, \quad k \sim \text{Uniform}\{1, \ldots, m\}
 </annotation></semantics></math> for all genes
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>
@@ -211,11 +211,11 @@ method preserves the pre-defined cluster structure within the initial
 population.</li>
 <li>
 <strong>Expected Value:</strong> The expected value of any element
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>P</mi><mn>0</mn></msub><mrow><mo stretchy="true" form="prefix">[</mo><mi>i</mi><mo>,</mo><mi>j</mi><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">P_0[i,j]</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>P</mi><mn>0</mn></msub><mo stretchy="false" form="prefix">[</mo><mi>i</mi><mo>,</mo><mi>j</mi><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">P_0[i,j]</annotation></semantics></math>
 over the initialization process is the mean of the observed expression
 for gene
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>:
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝔼</mi><mrow><mo stretchy="true" form="prefix">[</mo><msub><mi>P</mi><mn>0</mn></msub><mrow><mo stretchy="true" form="prefix">[</mo><mi>i</mi><mo>,</mo><mi>j</mi><mo stretchy="true" form="postfix">]</mo></mrow><mo stretchy="true" form="postfix">]</mo></mrow><mo>=</mo><msub><mi>μ</mi><mi>j</mi></msub><mo>=</mo><mfrac><mn>1</mn><mi>m</mi></mfrac><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi>m</mi></munderover><mi>X</mi><mrow><mo stretchy="true" form="prefix">[</mo><mi>j</mi><mo>,</mo><mi>k</mi><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝔼</mi><mo stretchy="false" form="prefix">[</mo><msub><mi>P</mi><mn>0</mn></msub><mo stretchy="false" form="prefix">[</mo><mi>i</mi><mo>,</mo><mi>j</mi><mo stretchy="false" form="postfix">]</mo><mo stretchy="false" form="postfix">]</mo><mo>=</mo><msub><mi>μ</mi><mi>j</mi></msub><mo>=</mo><mfrac><mn>1</mn><mi>m</mi></mfrac><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi>m</mi></munderover><mi>X</mi><mo stretchy="false" form="prefix">[</mo><mi>j</mi><mo>,</mo><mi>k</mi><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">
  \mathbb{E}[P_0[i,j]] = \mu_j = \frac{1}{m}\sum_{k=1}^m X[j,k]
  </annotation></semantics></math>
 </li>
@@ -225,126 +225,82 @@ for gene
 <div class="section level2">
 <h2 id="fitness-evaluation">Fitness Evaluation<a class="anchor" aria-label="anchor" href="#fitness-evaluation"></a>
 </h2>
-<p>The <code>BioGA</code> package utilizes a multi-objective approach,
-simultaneously optimizing two conflicting goals: data fidelity
-(Expression Difference) and model parsimony (Sparsity).</p>
+<p>The <code>BioGA</code> package uses a two-objective formulation. Both
+objectives are minimised. The package supports two representations, and
+the meaning of the objectives depends on which one is used.</p>
 <div class="section level3">
-<h3 id="objective-1-expression-difference-f_1">Objective 1: Expression Difference
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>f</mi><mn>1</mn></msub><annotation encoding="application/x-tex">f_1</annotation></semantics></math>)<a class="anchor" aria-label="anchor" href="#objective-1-expression-difference-f_1"></a>
+<h3 id="real-representation">Real representation<a class="anchor" aria-label="anchor" href="#real-representation"></a>
 </h3>
-<p>This function measures the squared Euclidean distance between the
-individual
+<p>In the real representation an individual
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
-and all
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
-observed data samples
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>X</mi><mrow><mi>j</mi><mi>k</mi></mrow></msub><annotation encoding="application/x-tex">X_{jk}</annotation></semantics></math>
-for all
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-genes. It quantifies how accurately the individual reflects the overall
-expression patterns.</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mn>1</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi>m</mi></munderover><msup><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>X</mi><mrow><mi>j</mi><mi>k</mi></mrow></msub><mo>−</mo><msub><mi>P</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">
+is a continuous expression profile
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>P</mi><mi>i</mi></msub><mo>∈</mo><msup><mi>ℝ</mi><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">P_i \in \mathbb{R}^n</annotation></semantics></math>.</p>
+<p><strong>Objective 1: Data fidelity
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>f</mi><mn>1</mn></msub><annotation encoding="application/x-tex">f_1</annotation></semantics></math>).</strong>
+The squared Euclidean distance between the individual and every observed
+sample. It is minimised when each gene value equals the per-gene mean
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>μ</mi><mi>j</mi></msub><annotation encoding="application/x-tex">\mu_j</annotation></semantics></math>:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mn>1</mn></msub><mo stretchy="false" form="prefix">(</mo><mi>i</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi>m</mi></munderover><mo stretchy="false" form="prefix">(</mo><msub><mi>X</mi><mrow><mi>j</mi><mi>k</mi></mrow></msub><mo>−</mo><msub><mi>P</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><msup><mo stretchy="false" form="postfix">)</mo><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">
 f_1(i) = \sum_{j=1}^n \sum_{k=1}^m (X_{jk} - P_{ij})^2
 </annotation></semantics></math></p>
-<div class="section level4">
-<h4 id="properties-of-f_1">Properties of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>f</mi><mn>1</mn></msub><annotation encoding="application/x-tex">f_1</annotation></semantics></math><a class="anchor" aria-label="anchor" href="#properties-of-f_1"></a>
-</h4>
-<ol style="list-style-type: decimal">
-<li>
-<strong>Convexity:</strong>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>f</mi><mn>1</mn></msub><annotation encoding="application/x-tex">f_1</annotation></semantics></math>
-is a convex function, which is a desirable property for optimization as
-it guarantees that any local minimum is also a global minimum in the
-absence of other constraints. The minimum occurs when
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>P</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><annotation encoding="application/x-tex">P_{ij}</annotation></semantics></math>
-is the mean expression
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>μ</mi><mi>j</mi></msub><annotation encoding="application/x-tex">\mu_j</annotation></semantics></math>.</li>
-<li>
-<strong>Gradient (for theoretical analysis):</strong> The partial
-derivative with respect to the gene value
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>P</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><annotation encoding="application/x-tex">P_{ij}</annotation></semantics></math>
-is:
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>∇</mi><msub><mi>P</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub></msub><msub><mi>f</mi><mn>1</mn></msub><mo>=</mo><mo>−</mo><mn>2</mn><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi>m</mi></munderover><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>X</mi><mrow><mi>j</mi><mi>k</mi></mrow></msub><mo>−</mo><msub><mi>P</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
- \nabla_{P_{ij}} f_1 = -2\sum_{k=1}^m (X_{jk} - P_{ij})
- </annotation></semantics></math>
-</li>
-</ol>
-</div>
-</div>
-<div class="section level3">
-<h3 id="objective-2-sparsity-f_2">Objective 2: Sparsity
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>f</mi><mn>2</mn></msub><annotation encoding="application/x-tex">f_2</annotation></semantics></math>)<a class="anchor" aria-label="anchor" href="#objective-2-sparsity-f_2"></a>
-</h3>
-<p>This objective promotes parsimonious solutions by penalizing non-zero
-gene values. It measures the fraction of non-zero genes within an
-individual
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>.</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mn>2</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mrow><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi>I</mi><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mo stretchy="true" form="prefix">|</mo><msub><mi>P</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo stretchy="true" form="postfix">|</mo></mrow><mo>&gt;</mo><mi>ϵ</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mi>n</mi></mfrac></mrow><annotation encoding="application/x-tex">
-f_2(i) = \frac{\sum_{j=1}^n I(|P_{ij}| &gt; \epsilon)}{n}
+<p><strong>Objective 2: Parsimony
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>f</mi><mn>2</mn></msub><annotation encoding="application/x-tex">f_2</annotation></semantics></math>).</strong>
+The mean absolute gene value (an
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>L</mi><mn>1</mn></msub><annotation encoding="application/x-tex">L_1</annotation></semantics></math>
+penalty). It is minimised by driving gene values toward zero:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mn>2</mn></msub><mo stretchy="false" form="prefix">(</mo><mi>i</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mn>1</mn><mi>n</mi></mfrac><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mo stretchy="false" form="prefix">|</mo><msub><mi>P</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">
+f_2(i) = \frac{1}{n}\sum_{j=1}^n |P_{ij}|
 </annotation></semantics></math></p>
-<p>Here,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>I</mi><annotation encoding="application/x-tex">I</annotation></semantics></math>
-is the indicator function, which equals 1 if the condition is met, and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ϵ</mi><annotation encoding="application/x-tex">\epsilon</annotation></semantics></math>
-is a small constant (typically
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>10</mn><mrow><mo>−</mo><mn>6</mn></mrow></msup><annotation encoding="application/x-tex">10^{-6}</annotation></semantics></math>)
-used to define “non-zero.”</p>
-<div class="section level4">
-<h4 id="properties-of-f_2">Properties of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>f</mi><mn>2</mn></msub><annotation encoding="application/x-tex">f_2</annotation></semantics></math><a class="anchor" aria-label="anchor" href="#properties-of-f_2"></a>
-</h4>
-<ol style="list-style-type: decimal">
-<li>
-<strong>Mathematical Form:</strong>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>f</mi><mn>2</mn></msub><annotation encoding="application/x-tex">f_2</annotation></semantics></math>
-is inherently <strong>Non-convex</strong> and
-<strong>Non-differentiable</strong> due to the indicator function
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>I</mi><annotation encoding="application/x-tex">I</annotation></semantics></math>.
-This makes standard gradient-based optimization methods unsuitable,
-justifying the use of a heuristic approach like the GA.</li>
-<li>
-<strong>Goal:</strong> It actively encourages sparse solutions,
-where many gene values are effectively zero.</li>
-<li>
-<strong>Range:</strong> The range of the function is restricted to
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="true" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">[0, 1]</annotation></semantics></math>,
-where
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0</mn><annotation encoding="application/x-tex">0</annotation></semantics></math>
-represents a fully sparse individual
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>P</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">P_{ij} = 0</annotation></semantics></math>
-for all
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>)
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>
-represents a non-sparse individual.</li>
-</ol>
-</div>
 </div>
 <div class="section level3">
-<h3 id="combined-fitness">Combined Fitness<a class="anchor" aria-label="anchor" href="#combined-fitness"></a>
+<h3 id="binary-representation">Binary representation<a class="anchor" aria-label="anchor" href="#binary-representation"></a>
 </h3>
-<p>The overall fitness value
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">F(i)</annotation></semantics></math>
-for an individual
+<p>In the binary representation an individual
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
-is a weighted combination of the two objectives:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msub><mi>w</mi><mn>1</mn></msub><msub><mi>f</mi><mn>1</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><msub><mi>w</mi><mn>2</mn></msub><msub><mi>f</mi><mn>2</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
-F(i) = w_1f_1(i) + w_2f_2(i)
-</annotation></semantics></math></p>
-<p>Where
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>w</mi><mn>1</mn></msub><annotation encoding="application/x-tex">w_1</annotation></semantics></math>
+is a selection indicator
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>P</mi><mi>i</mi></msub><mo>∈</mo><mo stretchy="false" form="prefix">{</mo><mn>0</mn><mo>,</mo><mn>1</mn><msup><mo stretchy="false" form="postfix">}</mo><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">P_i \in \{0,1\}^n</annotation></semantics></math>
+and class labels
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>∈</mo><mo stretchy="false" form="prefix">{</mo><mn>1</mn><mo>,</mo><mi>…</mi><mo>,</mo><mi>c</mi><msup><mo stretchy="false" form="postfix">}</mo><mi>m</mi></msup></mrow><annotation encoding="application/x-tex">y \in \{1,\dots,c\}^m</annotation></semantics></math>
+are required.</p>
+<p><strong>Objective 1: Predictive signal
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>f</mi><mn>1</mn></msub><annotation encoding="application/x-tex">f_1</annotation></semantics></math>).</strong>
+For each gene
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>
+an ANOVA
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math>-statistic
+measures how strongly it separates the classes:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>j</mi></msub><mo>=</mo><mfrac><mrow><msub><mrow><mi mathvariant="normal">S</mi><mi mathvariant="normal">S</mi><mi mathvariant="normal">B</mi></mrow><mi>j</mi></msub><mi>/</mi><mo stretchy="false" form="prefix">(</mo><mi>c</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><mrow><msub><mrow><mi mathvariant="normal">S</mi><mi mathvariant="normal">S</mi><mi mathvariant="normal">W</mi></mrow><mi>j</mi></msub><mi>/</mi><mo stretchy="false" form="prefix">(</mo><mi>m</mi><mo>−</mo><mi>c</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">
+F_j = \frac{\mathrm{SSB}_j/(c-1)}{\mathrm{SSW}_j/(m-c)}
+</annotation></semantics></math> where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mrow><mi mathvariant="normal">S</mi><mi mathvariant="normal">S</mi><mi mathvariant="normal">B</mi></mrow><mi>j</mi></msub><annotation encoding="application/x-tex">\mathrm{SSB}_j</annotation></semantics></math>
 and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>w</mi><mn>2</mn></msub><annotation encoding="application/x-tex">w_2</annotation></semantics></math>
-are user-specified weights that dictate the trade-off between minimizing
-expression error
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>f</mi><mn>1</mn></msub><annotation encoding="application/x-tex">f_1</annotation></semantics></math>)
-and maximizing sparsity
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>f</mi><mn>2</mn></msub><annotation encoding="application/x-tex">f_2</annotation></semantics></math>).</p>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mrow><mi mathvariant="normal">S</mi><mi mathvariant="normal">S</mi><mi mathvariant="normal">W</mi></mrow><mi>j</mi></msub><annotation encoding="application/x-tex">\mathrm{SSW}_j</annotation></semantics></math>
+are the between- and within-class sums of squares. The objective is the
+negated mean
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>F</mi><mi>j</mi></msub><annotation encoding="application/x-tex">F_j</annotation></semantics></math>
+over the selected genes (so that better-separating subsets have a
+smaller value):
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mn>1</mn></msub><mo stretchy="false" form="prefix">(</mo><mi>i</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>−</mi><mfrac><mn>1</mn><mrow><mo stretchy="false" form="prefix">|</mo><msub><mi>S</mi><mi>i</mi></msub><mo stretchy="false" form="prefix">|</mo></mrow></mfrac><munder><mo>∑</mo><mrow><mi>j</mi><mo>∈</mo><msub><mi>S</mi><mi>i</mi></msub></mrow></munder><msub><mi>F</mi><mi>j</mi></msub><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>S</mi><mi>i</mi></msub><mo>=</mo><mo stretchy="false" form="prefix">{</mo><mi>j</mi><mo>:</mo><msub><mi>P</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>&gt;</mo><mn>0.5</mn><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">
+f_1(i) = -\frac{1}{|S_i|}\sum_{j \in S_i} F_j, \qquad S_i = \{j : P_{ij} &gt; 0.5\}
+</annotation></semantics></math> with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mn>1</mn></msub><mo stretchy="false" form="prefix">(</mo><mi>i</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">f_1(i) = 0</annotation></semantics></math>
+when no gene is selected.</p>
+<p><strong>Objective 2: Sparsity
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>f</mi><mn>2</mn></msub><annotation encoding="application/x-tex">f_2</annotation></semantics></math>).</strong>
+The fraction of selected genes:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mn>2</mn></msub><mo stretchy="false" form="prefix">(</mo><mi>i</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mrow><mo stretchy="false" form="prefix">|</mo><msub><mi>S</mi><mi>i</mi></msub><mo stretchy="false" form="prefix">|</mo></mrow><mi>n</mi></mfrac></mrow><annotation encoding="application/x-tex">
+f_2(i) = \frac{|S_i|}{n}
+</annotation></semantics></math></p>
+<p>Because
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>f</mi><mn>1</mn></msub><annotation encoding="application/x-tex">f_1</annotation></semantics></math>
+rewards including informative genes while
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>f</mi><mn>2</mn></msub><annotation encoding="application/x-tex">f_2</annotation></semantics></math>
+rewards including few genes, the two objectives conflict and the
+solution is a Pareto front rather than a single point.</p>
 </div>
 </div>
 <div class="section level2">
-<h2 id="selection-nsga-ii-inspired">Selection (NSGA-II Inspired)<a class="anchor" aria-label="anchor" href="#selection-nsga-ii-inspired"></a>
+<h2 id="selection-nsga-ii">Selection (NSGA-II)<a class="anchor" aria-label="anchor" href="#selection-nsga-ii"></a>
 </h2>
 <p>The selection mechanism is based on the principles of the
 Non-dominated Sorting Genetic Algorithm II (NSGA-II), ensuring that
@@ -372,14 +328,14 @@ is strictly better than
 on at least one objective.</li>
 </ol>
 <p>Formally:
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>≻</mo><mi>j</mi><mspace width="1.0em"></mspace><mtext mathvariant="normal">iff</mtext><mspace width="1.0em"></mspace><mo>∀</mo><mi>k</mi><mo>∈</mo><mo stretchy="false" form="prefix">{</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo stretchy="false" form="postfix">}</mo><mo>:</mo><msub><mi>f</mi><mi>k</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>≤</mo><msub><mi>f</mi><mi>k</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>j</mi><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="1.0em"></mspace><mtext mathvariant="normal">and</mtext><mspace width="1.0em"></mspace><mo>∃</mo><mi>k</mi><mo>∈</mo><mo stretchy="false" form="prefix">{</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo stretchy="false" form="postfix">}</mo><mo>:</mo><msub><mi>f</mi><mi>k</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>&lt;</mo><msub><mi>f</mi><mi>k</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>j</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>≻</mo><mi>j</mi><mspace width="1.0em"></mspace><mtext mathvariant="normal">iff</mtext><mspace width="1.0em"></mspace><mo>∀</mo><mi>k</mi><mo>∈</mo><mo stretchy="false" form="prefix">{</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo stretchy="false" form="postfix">}</mo><mo>:</mo><msub><mi>f</mi><mi>k</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>i</mi><mo stretchy="false" form="postfix">)</mo><mo>≤</mo><msub><mi>f</mi><mi>k</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>j</mi><mo stretchy="false" form="postfix">)</mo><mspace width="1.0em"></mspace><mtext mathvariant="normal">and</mtext><mspace width="1.0em"></mspace><mo>∃</mo><mi>k</mi><mo>∈</mo><mo stretchy="false" form="prefix">{</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo stretchy="false" form="postfix">}</mo><mo>:</mo><msub><mi>f</mi><mi>k</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>i</mi><mo stretchy="false" form="postfix">)</mo><mo>&lt;</mo><msub><mi>f</mi><mi>k</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>j</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">
 i \succ j \quad \text{iff} \quad \forall k \in \{1, 2\}: f_k(i) \leq f_k(j) \quad \text{and} \quad \exists k \in \{1, 2\}: f_k(i) &lt; f_k(j)
 </annotation></semantics></math></p>
 <div class="section level4">
 <h4 id="proof-of-partial-order">Proof of Partial Order<a class="anchor" aria-label="anchor" href="#proof-of-partial-order"></a>
 </h4>
 <p>The two-objective domination relation
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mo>≻</mo><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(\succ)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mo>≻</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(\succ)</annotation></semantics></math>
 defines a <strong>partial order</strong> on the solution set because it
 satisfies the following properties:</p>
 <ol style="list-style-type: decimal">
@@ -387,7 +343,7 @@ satisfies the following properties:</p>
 <strong>Irreflexive:</strong> No individual dominates itself. If
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>=</mo><mi>j</mi></mrow><annotation encoding="application/x-tex">i = j</annotation></semantics></math>,
 the second condition
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∃</mo><mi>k</mi><mo>:</mo><msub><mi>f</mi><mi>k</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>&lt;</mo><msub><mi>f</mi><mi>k</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>j</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\exists k: f_k(i) &lt; f_k(j)</annotation></semantics></math>)
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∃</mo><mi>k</mi><mo>:</mo><msub><mi>f</mi><mi>k</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>i</mi><mo stretchy="false" form="postfix">)</mo><mo>&lt;</mo><msub><mi>f</mi><mi>k</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>j</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\exists k: f_k(i) &lt; f_k(j)</annotation></semantics></math>)
 is false.</li>
 <li>
 <strong>Antisymmetric Property:</strong> If
@@ -401,7 +357,7 @@ If
 is strictly better on at least one objective,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>
 must be strictly worse
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∀</mo><mi>k</mi><mo>:</mo><msub><mi>f</mi><mi>k</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>j</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>≰</mo><msub><mi>f</mi><mi>k</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\forall k: f_k(j) \not\leq f_k(i)</annotation></semantics></math>).</li>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∀</mo><mi>k</mi><mo>:</mo><msub><mi>f</mi><mi>k</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>j</mi><mo stretchy="false" form="postfix">)</mo><mo>≰</mo><msub><mi>f</mi><mi>k</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>i</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\forall k: f_k(j) \not\leq f_k(i)</annotation></semantics></math>).</li>
 <li>
 <strong>Transitive:</strong> If
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>≻</mo><mi>j</mi></mrow><annotation encoding="application/x-tex">i \succ j</annotation></semantics></math>
@@ -450,7 +406,7 @@ This process continues until the entire population is sorted.</li>
 in quadratic time complexity relative to the population size.</p>
 <p><strong>Theorem:</strong> The front construction algorithm terminates
 in
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>p</mi><mn>2</mn></msup><mi>o</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(p^2o)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>p</mi><mn>2</mn></msup><mi>o</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(p^2o)</annotation></semantics></math>
 time, where
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>
 is the population size and
@@ -459,19 +415,19 @@ is the number of objectives.</p>
 <p><strong>Proof Sketch:</strong></p>
 <ul>
 <li>The pairwise domination check between any two individuals is an
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>o</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(o)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>o</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(o)</annotation></semantics></math>
 operation.</li>
 <li>The computation of the domination count and dominated set for all
 individuals requires
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>p</mi><mn>2</mn></msup><mi>o</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(p^2o)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>p</mi><mn>2</mn></msup><mi>o</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(p^2o)</annotation></semantics></math>
 time, as it involves
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mfrac linethickness="0"><mi>p</mi><mn>2</mn></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\binom{p}{2}</annotation></semantics></math>
 comparisons.</li>
 <li>Once these metrics are computed, the iterative process of assigning
 individuals to fronts requires
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>p</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(p)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>p</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(p)</annotation></semantics></math>
 time per front, leading to an overall complexity dominated by the
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>p</mi><mn>2</mn></msup><mi>o</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(p^2o)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>p</mi><mn>2</mn></msup><mi>o</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(p^2o)</annotation></semantics></math>
 initial comparison phase.</li>
 </ul>
 </div>
@@ -485,46 +441,47 @@ real-coded GAs, designed to mimic the convergence properties of binary
 crossover while operating directly on continuous variables.</p>
 <p>Given two parent individuals,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>,</mo><mi>y</mi><mo>∈</mo><msup><mi>ℝ</mi><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">x, y \in \mathbb{R}^n</annotation></semantics></math>,
-the SBX operator generates a new offspring vector
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>z</mi><annotation encoding="application/x-tex">z</annotation></semantics></math>.
-For each gene
+the SBX operator generates two complementary offspring vectors. For each
+gene
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>:</p>
 <p>With crossover probability
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>p</mi><mi>c</mi></msub><annotation encoding="application/x-tex">p_c</annotation></semantics></math>,
-the offspring gene
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>z</mi><mi>j</mi></msub><annotation encoding="application/x-tex">z_j</annotation></semantics></math>
-is determined: 1. A random number
+the offspring genes are determined: 1. A random number
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>u</mi><annotation encoding="application/x-tex">u</annotation></semantics></math>
 is drawn:
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi><mo>∼</mo><mtext mathvariant="normal">Uniform</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">u \sim \text{Uniform}(0,1)</annotation></semantics></math>.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi><mo>∼</mo><mtext mathvariant="normal">Uniform</mtext><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">u \sim \text{Uniform}(0,1)</annotation></semantics></math>.
 2. The spreading factor
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>
 is computed based on the distribution index
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>η</mi><annotation encoding="application/x-tex">\eta</annotation></semantics></math>:
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>β</mi><mo>=</mo><mrow><mo stretchy="true" form="prefix">{</mo><mtable><mtr><mtd columnalign="left" style="text-align: left"><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mi>u</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mn>1</mn><mi>/</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>η</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></msup></mtd><mtd columnalign="left" style="text-align: left"><mrow><mtext mathvariant="normal">if </mtext><mspace width="0.333em"></mspace></mrow><mi>u</mi><mo>≤</mo><mn>0.5</mn></mtd></mtr><mtr><mtd columnalign="left" style="text-align: left"><msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>u</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mn>1</mn><mi>/</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>η</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></msup></mtd><mtd columnalign="left" style="text-align: left"><mtext mathvariant="normal">otherwise</mtext></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>β</mi><mo>=</mo><mrow><mo stretchy="true" form="prefix">{</mo><mtable><mtr><mtd columnalign="left" style="text-align: left"><mo stretchy="false" form="prefix">(</mo><mn>2</mn><mi>u</mi><msup><mo stretchy="false" form="postfix">)</mo><mrow><mn>1</mn><mi>/</mi><mo stretchy="false" form="prefix">(</mo><mi>η</mi><mo>+</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow></msup></mtd><mtd columnalign="left" style="text-align: left"><mrow><mtext mathvariant="normal">if </mtext><mspace width="0.333em"></mspace></mrow><mi>u</mi><mo>≤</mo><mn>0.5</mn></mtd></mtr><mtr><mtd columnalign="left" style="text-align: left"><msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>u</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mn>1</mn><mi>/</mi><mo stretchy="false" form="prefix">(</mo><mi>η</mi><mo>+</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow></msup></mtd><mtd columnalign="left" style="text-align: left"><mtext mathvariant="normal">otherwise</mtext></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
     \beta = \begin{cases}
     (2u)^{1/(\eta+1)} &amp; \text{if } u \leq 0.5 \\
     \left(\frac{1}{2(1-u)}\right)^{1/(\eta+1)} &amp; \text{otherwise}
     \end{cases}
-    </annotation></semantics></math> 3. The gene value
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>z</mi><mi>j</mi></msub><annotation encoding="application/x-tex">z_j</annotation></semantics></math>
-is calculated:
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>z</mi><mi>j</mi></msub><mo>=</mo><mn>0.5</mn><mrow><mo stretchy="true" form="prefix">[</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>x</mi><mi>j</mi></msub><mo>+</mo><msub><mi>y</mi><mi>j</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mi>β</mi><mrow><mo stretchy="true" form="prefix">|</mo><msub><mi>y</mi><mi>j</mi></msub><mo>−</mo><msub><mi>x</mi><mi>j</mi></msub><mo stretchy="true" form="postfix">|</mo></mrow><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">
-    z_j = 0.5[(x_j + y_j) - \beta|y_j - x_j|]
-    </annotation></semantics></math></p>
+    </annotation></semantics></math> 3. The two complementary gene
+values are calculated:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>c</mi><mn>1</mn></msub><mo>=</mo><mn>0.5</mn><mo stretchy="false" form="prefix">[</mo><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>+</mo><mi>β</mi><mo stretchy="false" form="postfix">)</mo><msub><mi>x</mi><mi>j</mi></msub><mo>+</mo><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>β</mi><mo stretchy="false" form="postfix">)</mo><msub><mi>y</mi><mi>j</mi></msub><mo stretchy="false" form="postfix">]</mo><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>c</mi><mn>2</mn></msub><mo>=</mo><mn>0.5</mn><mo stretchy="false" form="prefix">[</mo><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>β</mi><mo stretchy="false" form="postfix">)</mo><msub><mi>x</mi><mi>j</mi></msub><mo>+</mo><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>+</mo><mi>β</mi><mo stretchy="false" form="postfix">)</mo><msub><mi>y</mi><mi>j</mi></msub><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">
+    c_1 = 0.5[(1+\beta)x_j + (1-\beta)y_j], \qquad
+    c_2 = 0.5[(1-\beta)x_j + (1+\beta)y_j]
+    </annotation></semantics></math> and one of them is assigned to the
+offspring.</p>
 <p>Otherwise (with probability
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>−</mo><msub><mi>p</mi><mi>c</mi></msub></mrow><annotation encoding="application/x-tex">1-p_c</annotation></semantics></math>):
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>z</mi><mi>j</mi></msub><mo>=</mo><msub><mi>x</mi><mi>j</mi></msub><mspace width="1.0em"></mspace><mtext mathvariant="normal">or</mtext><mspace width="1.0em"></mspace><msub><mi>z</mi><mi>j</mi></msub><mo>=</mo><msub><mi>y</mi><mi>j</mi></msub></mrow><annotation encoding="application/x-tex">
-z_j = x_j \quad \text{or} \quad z_j = y_j
-</annotation></semantics></math></p>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>−</mo><msub><mi>p</mi><mi>c</mi></msub></mrow><annotation encoding="application/x-tex">1-p_c</annotation></semantics></math>)
+the gene is copied unchanged from one of the parents. In the binary
+representation uniform crossover is used instead: each gene is copied
+from a randomly chosen parent.</p>
 <div class="section level3">
 <h3 id="properties-of-sbx">Properties of SBX<a class="anchor" aria-label="anchor" href="#properties-of-sbx"></a>
 </h3>
 <ol style="list-style-type: decimal">
 <li>
-<strong>Mean Preservation:</strong> The expected value of the
-offspring gene is average of the parents’ genes:
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝔼</mi><mrow><mo stretchy="true" form="prefix">[</mo><msub><mi>z</mi><mi>j</mi></msub><mo stretchy="true" form="postfix">]</mo></mrow><mo>=</mo><mfrac><mrow><msub><mi>x</mi><mi>j</mi></msub><mo>+</mo><msub><mi>y</mi><mi>j</mi></msub></mrow><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">\mathbb{E}[z_j] = \frac{x_j + y_j}{2}</annotation></semantics></math>.</li>
+<strong>Mean Preservation:</strong> The two complementary children
+satisfy
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>c</mi><mn>1</mn></msub><mo>+</mo><msub><mi>c</mi><mn>2</mn></msub><mo>=</mo><msub><mi>x</mi><mi>j</mi></msub><mo>+</mo><msub><mi>y</mi><mi>j</mi></msub></mrow><annotation encoding="application/x-tex">c_1 + c_2 = x_j + y_j</annotation></semantics></math>,
+so the expected value of an offspring gene (with the child chosen
+uniformly at random) is the parents’ average:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝔼</mi><mo stretchy="false" form="prefix">[</mo><msub><mi>z</mi><mi>j</mi></msub><mo stretchy="false" form="postfix">]</mo><mo>=</mo><mfrac><mrow><msub><mi>x</mi><mi>j</mi></msub><mo>+</mo><msub><mi>y</mi><mi>j</mi></msub></mrow><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">\mathbb{E}[z_j] = \frac{x_j + y_j}{2}</annotation></semantics></math>.</li>
 <li>
 <strong>Distribution Control:</strong> The distribution index
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>η</mi><annotation encoding="application/x-tex">\eta</annotation></semantics></math>
@@ -555,8 +512,8 @@ mutation rate and incorporates network constraints.</p>
 <p>For each gene
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>,
 with adaptive probability
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>p</mi><mi>m</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">p_m(t)</annotation></semantics></math>:
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>p</mi><mi>m</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msub><mi>p</mi><mn>0</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>+</mo><mn>0.5</mn><mfrac><mi>t</mi><mi>T</mi></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>p</mi><mi>m</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">p_m(t)</annotation></semantics></math>:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>p</mi><mi>m</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mi>p</mi><mn>0</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>+</mo><mn>0.5</mn><mfrac><mi>t</mi><mi>T</mi></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
 p_m(t) = p_0\left(1 + 0.5\frac{t}{T}\right)
 </annotation></semantics></math> where
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>p</mi><mn>0</mn></msub><annotation encoding="application/x-tex">p_0</annotation></semantics></math>
@@ -566,57 +523,60 @@ is the current generation, and
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>T</mi><annotation encoding="application/x-tex">T</annotation></semantics></math>
 is the total number of generations. This rate increases linearly over
 time to enhance exploration in later stages.</p>
-<p>The change in the gene value,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>z</mi><mi>j</mi></msub><annotation encoding="application/x-tex">z_j</annotation></semantics></math>,
-is applied as follows:</p>
+<p>In the real representation the change applied to gene value
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>z</mi><mi>j</mi></msub><annotation encoding="application/x-tex">z_j</annotation></semantics></math>
+is:</p>
 <ol style="list-style-type: decimal">
 <li><p>A Gaussian perturbation is generated:
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Δ</mi><mi>j</mi></msub><mo>∼</mo><mi>N</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo>,</mo><msup><mi>σ</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Delta_j \sim N(0, \sigma^2)</annotation></semantics></math>.</p></li>
-<li><p><strong>If a Gene Network
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi mathvariant="normal">Δ</mi><mi>j</mi></msub><mo>∼</mo><mi>N</mi><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo>,</mo><msup><mi>σ</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\Delta_j \sim N(0, \sigma^2)</annotation></semantics></math>.</p></li>
+<li><p><strong>If a gene network
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>
-is provided
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>N</mi><mrow><mi>j</mi><mi>k</mi></mrow></msub><annotation encoding="application/x-tex">N_{jk}</annotation></semantics></math>
-being the adjacency matrix):</strong> The mutation is penalized by the
-network connectivity:
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>z</mi><mi>j</mi></msub><mo>←</mo><msub><mi>z</mi><mi>j</mi></msub><mo>+</mo><msub><mi>Δ</mi><mi>j</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><munder><mo>∑</mo><mi>k</mi></munder><msub><mi>N</mi><mrow><mi>j</mi><mi>k</mi></mrow></msub><msub><mi>z</mi><mi>k</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
- z_j \leftarrow z_j + \Delta_j\left(1 - \sum_{k} N_{jk}z_k\right)
- </annotation></semantics></math></p></li>
-<li><p><strong>If no Network is provided:</strong> Standard Gaussian
+is provided</strong> (adjacency matrix
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>N</mi><mrow><mi>j</mi><mi>k</mi></mrow></msub><annotation encoding="application/x-tex">N_{jk}</annotation></semantics></math>),
+the perturbation is damped by the gene’s relative connectivity. With the
+degree
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mi>j</mi></msub><mo>=</mo><msub><mo>∑</mo><mrow><mi>k</mi><mo>≠</mo><mi>j</mi></mrow></msub><mo stretchy="false" form="prefix">|</mo><msub><mi>N</mi><mrow><mi>j</mi><mi>k</mi></mrow></msub><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">d_j = \sum_{k \neq j}|N_{jk}|</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mi mathvariant="normal">max</mi></msub><mo>=</mo><msub><mrow><mi mathvariant="normal">max</mi><mo>⁡</mo></mrow><mi>j</mi></msub><msub><mi>d</mi><mi>j</mi></msub></mrow><annotation encoding="application/x-tex">d_{\max} = \max_j d_j</annotation></semantics></math>:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>z</mi><mi>j</mi></msub><mo>←</mo><msub><mi>z</mi><mi>j</mi></msub><mo>+</mo><msub><mi mathvariant="normal">Δ</mi><mi>j</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mfrac><msub><mi>d</mi><mi>j</mi></msub><msub><mi>d</mi><mi mathvariant="normal">max</mi></msub></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
+ z_j \leftarrow z_j + \Delta_j\left(1 - \frac{d_j}{d_{\max}}\right)
+ </annotation></semantics></math> so highly connected genes mutate
+less.</p></li>
+<li><p><strong>If no network is provided</strong>, standard Gaussian
 mutation is applied:
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>z</mi><mi>j</mi></msub><mo>←</mo><msub><mi>z</mi><mi>j</mi></msub><mo>+</mo><msub><mi>Δ</mi><mi>j</mi></msub></mrow><annotation encoding="application/x-tex">
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>z</mi><mi>j</mi></msub><mo>←</mo><msub><mi>z</mi><mi>j</mi></msub><mo>+</mo><msub><mi mathvariant="normal">Δ</mi><mi>j</mi></msub></mrow><annotation encoding="application/x-tex">
  z_j \leftarrow z_j + \Delta_j
  </annotation></semantics></math></p></li>
 </ol>
+<p>In the binary representation mutation is a bit flip: with the
+adaptive probability the selected/not-selected state of a gene is
+inverted.</p>
 <div class="section level3">
 <h3 id="properties-of-adaptive-network-mutation">Properties of Adaptive Network Mutation<a class="anchor" aria-label="anchor" href="#properties-of-adaptive-network-mutation"></a>
 </h3>
 <ol style="list-style-type: decimal">
 <li>
-<strong>Adaptive Rate:</strong> The mutation rate monotonically
-increases with generation
+<strong>Adaptive Rate:</strong> The mutation rate increases with
+generation
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>,
-preventing premature convergence and maintaining diversity late in the
-run.</li>
+maintaining exploration later in the run.</li>
 <li>
-<strong>Network Constraint Impact:</strong> The term
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><msub><mo>∑</mo><mi>k</mi></msub><msub><mi>N</mi><mrow><mi>j</mi><mi>k</mi></mrow></msub><msub><mi>z</mi><mi>k</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(1 - \sum_{k} N_{jk}z_k)</annotation></semantics></math>
-acts as a coefficient. Highly connected genes (large
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mo>∑</mo><mi>k</mi></msub><msub><mi>N</mi><mrow><mi>j</mi><mi>k</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\sum_{k} N_{jk}</annotation></semantics></math>)
-experience a reduced magnitude of mutation, preserving known network
-structures.</li>
+<strong>Network Constraint Impact:</strong> The damping factor
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><msub><mi>d</mi><mi>j</mi></msub><mi>/</mi><msub><mi>d</mi><mi mathvariant="normal">max</mi></msub><mo stretchy="false" form="postfix">)</mo><mo>∈</mo><mo stretchy="false" form="prefix">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">(1 - d_j/d_{\max}) \in [0, 1]</annotation></semantics></math>
+reduces the mutation magnitude for highly connected genes, preserving
+known network structure. It is a normalised, non-negative quantity, so
+mutation is never amplified.</li>
 <li>
 <strong>Expected Change:</strong> Since
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝔼</mi><mrow><mo stretchy="true" form="prefix">[</mo><msub><mi>Δ</mi><mi>j</mi></msub><mo stretchy="true" form="postfix">]</mo></mrow><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\mathbb{E}[\Delta_j] = 0</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝔼</mi><mo stretchy="false" form="prefix">[</mo><msub><mi mathvariant="normal">Δ</mi><mi>j</mi></msub><mo stretchy="false" form="postfix">]</mo><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\mathbb{E}[\Delta_j] = 0</annotation></semantics></math>,
 the expected change remains zero:
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝔼</mi><mrow><mo stretchy="true" form="prefix">[</mo><mi>Δ</mi><msub><mi>z</mi><mi>j</mi></msub><mo stretchy="true" form="postfix">]</mo></mrow><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\mathbb{E}[\Delta z_j] = 0</annotation></semantics></math>.</li>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝔼</mi><mo stretchy="false" form="prefix">[</mo><mi mathvariant="normal">Δ</mi><msub><mi>z</mi><mi>j</mi></msub><mo stretchy="false" form="postfix">]</mo><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\mathbb{E}[\Delta z_j] = 0</annotation></semantics></math>.</li>
 <li>
-<strong>Variance Control:</strong> For the network-constrained case,
-the variance of the change is:
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Var</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>Δ</mi><msub><mi>z</mi><mi>j</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msup><mi>σ</mi><mn>2</mn></msup><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><munder><mo>∑</mo><mi>k</mi></munder><msub><mi>N</mi><mrow><mi>j</mi><mi>k</mi></mrow></msub><msub><mi>z</mi><mi>k</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">
- \text{Var}(\Delta z_j) = \sigma^2\left(1 - \sum_{k} N_{jk}z_k\right)^2
- </annotation></semantics></math> This mathematical structure formalizes
-how network relationships dynamically control evolutionary
-exploration.</li>
+<strong>Variance Control:</strong> The variance of the change is
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Var</mtext><mo stretchy="false" form="prefix">(</mo><mi mathvariant="normal">Δ</mi><msub><mi>z</mi><mi>j</mi></msub><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msup><mi>σ</mi><mn>2</mn></msup><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mfrac><msub><mi>d</mi><mi>j</mi></msub><msub><mi>d</mi><mi mathvariant="normal">max</mi></msub></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mo>,</mo></mrow><annotation encoding="application/x-tex">
+ \text{Var}(\Delta z_j) = \sigma^2\left(1 - \frac{d_j}{d_{\max}}\right)^2,
+ </annotation></semantics></math> which shrinks monotonically with the
+gene’s connectivity.</li>
 </ol>
 </div>
 </div>
@@ -630,129 +590,96 @@ constructs the next population
 from the current population
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>P</mi><mi>t</mi></msub><annotation encoding="application/x-tex">P_t</annotation></semantics></math>
 and the offspring
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>O</mi><mi>t</mi></msub><annotation encoding="application/x-tex">O_t</annotation></semantics></math>.
-It employs an Elitism strategy combined with a metric for diversity
-preservation.</p>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>O</mi><mi>t</mi></msub><annotation encoding="application/x-tex">O_t</annotation></semantics></math>
+using NSGA-II environmental selection.</p>
 <ol style="list-style-type: decimal">
 <li>
-<strong>Elitism:</strong> The best individual,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>x</mi><mo>*</mo></msup><annotation encoding="application/x-tex">x^*</annotation></semantics></math>,
-defined as the solution minimizing the primary objective
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>f</mi><mn>1</mn></msub><annotation encoding="application/x-tex">f_1</annotation></semantics></math>,
-is always retained in the next generation:
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>x</mi><mo>*</mo></msup><mo>=</mo><msub><mtext mathvariant="normal">argmin</mtext><mrow><mi>x</mi><mo>∈</mo><msub><mi>P</mi><mi>t</mi></msub><mo>∪</mo><msub><mi>O</mi><mi>t</mi></msub></mrow></msub><msub><mi>f</mi><mn>1</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
- x^* = \text{argmin}_{x \in P_t \cup O_t} f_1(x)
- </annotation></semantics></math>
-</li>
+<strong>Rank and crowding.</strong> The candidates are sorted into
+non-dominated fronts and a crowding distance is computed within each
+front (as in selection).</li>
 <li>
-<strong>Diversity-Preserving Replacement:</strong> For the remaining
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">p-1</annotation></semantics></math>
-slots in
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>P</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><annotation encoding="application/x-tex">P_{t+1}</annotation></semantics></math>,
-a non-elitist replacement strategy is performed iteratively:
-<ul>
-<li>Randomly select an individual
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>
-from the current population
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>P</mi><mi>t</mi></msub><annotation encoding="application/x-tex">P_t</annotation></semantics></math>.</li>
-<li>Select an offspring
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>y</mi><annotation encoding="application/x-tex">y</annotation></semantics></math>
-from the newly generated offspring
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>O</mi><mi>t</mi></msub><annotation encoding="application/x-tex">O_t</annotation></semantics></math>.</li>
-<li>Replace
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>
-with
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>y</mi><annotation encoding="application/x-tex">y</annotation></semantics></math>
-only if the increase in diversity is significant:
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mtext mathvariant="normal">Replace </mtext><mspace width="0.333em"></mspace></mrow><mi>x</mi><mo>←</mo><mi>y</mi><mspace width="1.0em"></mspace><mtext mathvariant="normal">if</mtext><mspace width="1.0em"></mspace><mtext mathvariant="normal">diversity</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>&gt;</mo><mi>ϵ</mi></mrow><annotation encoding="application/x-tex">
-  \text{Replace } x \leftarrow y \quad \text{if} \quad \text{diversity}(x,y) &gt; \epsilon
-  </annotation></semantics></math> Where the diversity metric is the
-squared Euclidean distance:
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">diversity</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mo stretchy="false" form="postfix">∥</mo><mi>x</mi><mo>−</mo><mi>y</mi><msubsup><mo stretchy="false" form="postfix">∥</mo><mn>2</mn><mn>2</mn></msubsup></mrow><annotation encoding="application/x-tex">\text{diversity}(x,y) = \|x - y\|_2^2</annotation></semantics></math>.</li>
-</ul>
-</li>
+<strong>Elitist retention.</strong> The best
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>−</mo><msub><mi>k</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">p - k_0</annotation></semantics></math>
+parents, where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mn>0</mn></msub><annotation encoding="application/x-tex">k_0</annotation></semantics></math>
+is the replacement budget <code>num_to_replace</code>, are
+retained.</li>
+<li>
+<strong>Offspring admission.</strong> The best
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mn>0</mn></msub><annotation encoding="application/x-tex">k_0</annotation></semantics></math>
+offspring, ranked by the same (rank, crowding) criterion, fill the
+remaining slots.</li>
 </ol>
-<div class="section level3">
-<h3 id="theorem-on-population-quality">Theorem on Population Quality<a class="anchor" aria-label="anchor" href="#theorem-on-population-quality"></a>
-</h3>
-<p><strong>Theorem:</strong> This replacement strategy preserves elitism
-while ensuring that the population’s diversity does not collapse into a
-single point.</p>
-<p><strong>Proof Sketch:</strong></p>
-<ol style="list-style-type: decimal">
-<li>
-<strong>Elitism Preservation (Quality):</strong> By explicitly
-retaining
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>x</mi><mo>*</mo></msup><annotation encoding="application/x-tex">x^*</annotation></semantics></math>,
-the search process ensures that the best solution found so far across
-the primary objective
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>f</mi><mn>1</mn></msub><annotation encoding="application/x-tex">f_1</annotation></semantics></math>
-is never lost. This guarantees monotonic, non-decreasing convergence
-quality on
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>f</mi><mn>1</mn></msub><annotation encoding="application/x-tex">f_1</annotation></semantics></math>.</li>
-<li>
-<strong>Diversity Maintenance:</strong> Replacements are conditional
-on
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">diversity</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>&gt;</mo><mi>ϵ</mi></mrow><annotation encoding="application/x-tex">\text{diversity}(x,y) &gt; \epsilon</annotation></semantics></math>.
-Since only replacements that increase or maintain the distance (and
-hence diversity) above a threshold are accepted, the expected diversity
-of the population is non-decreasing over the generations, effectively
-counteracting sampling drift.</li>
-</ol>
-</div>
+<p>Because
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtext mathvariant="normal">rank</mtext><annotation encoding="application/x-tex">\text{rank}</annotation></semantics></math>
+dominates
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtext mathvariant="normal">crowding</mtext><annotation encoding="application/x-tex">\text{crowding}</annotation></semantics></math>,
+non-dominated solutions are never discarded in favour of dominated ones;
+ties are broken towards less crowded (more diverse) solutions. The best
+solution with respect to the first objective is non-dominated by
+construction, so it is always retained when
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi><mn>0</mn></msub><mo>&lt;</mo><mi>p</mi></mrow><annotation encoding="application/x-tex">k_0 &lt; p</annotation></semantics></math>,
+giving monotonic non-increasing best
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>f</mi><mn>1</mn></msub><annotation encoding="application/x-tex">f_1</annotation></semantics></math>.
+If <code>num_to_replace</code> is zero the population is returned
+unchanged.</p>
 </div>
 <div class="section level2">
 <h2 id="convergence-analysis">Convergence Analysis<a class="anchor" aria-label="anchor" href="#convergence-analysis"></a>
 </h2>
-<p>The convergence of the BioGA algorithm, derived from established
-Multi-objective Evolutionary Algorithm (MOEA) theory, guarantees
-convergence to the optimal set under general conditions.</p>
+<p>BioGA is a heuristic. It does not provide a guarantee of finding the
+global Pareto front in a finite number of generations; the results below
+only outline the idealised conditions under which asymptotic convergence
+is expected, and should not be read as a practical guarantee.</p>
 <div class="section level3">
 <h3 id="assumptions">Assumptions<a class="anchor" aria-label="anchor" href="#assumptions"></a>
 </h3>
-<p>For convergence proofs in MOEAs, the following are often assumed:</p>
+<p>For convergence results in MOEAs, the following are typically
+assumed:</p>
 <ol style="list-style-type: decimal">
 <li>
 <strong>Finite Search Space:</strong> While the gene values are
-continuous, they can be discretized in theory (or bounded in
-practice).</li>
+continuous, they can be discretised in theory (or bounded in practice).
+The real-coded search space is not finite, so this assumption does not
+strictly hold for <code>"real"</code> mode.</li>
 <li>
 <strong>Strictly Positive Mutation Probability:</strong>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>p</mi><mi>m</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">p_m(t) &gt; 0</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>p</mi><mi>m</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">p_m(t) &gt; 0</annotation></semantics></math>
 for all
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>,
-which ensures ergodicity.</li>
+which enables ergodicity. This fails when
+<code>mutation_rate = 0</code>.</li>
 <li>
 <strong>Elitism:</strong> The best solutions are preserved across
-generations.</li>
+generations. This holds only when
+<code>num_to_replace &lt; population_size</code>.</li>
 </ol>
 </div>
 <div class="section level3">
-<h3 id="theorem-on-convergence">Theorem on Convergence<a class="anchor" aria-label="anchor" href="#theorem-on-convergence"></a>
+<h3 id="result-idealised">Result (idealised)<a class="anchor" aria-label="anchor" href="#result-idealised"></a>
 </h3>
-<p><strong>Theorem:</strong> Under the assumptions above, the BioGA
-algorithm converges in probability to the global Pareto front of the
-multi-objective optimization problem.</p>
-<p><strong>Proof Sketch:</strong></p>
+<p><strong>Statement:</strong> Under the assumptions above, standard
+MOEA theory (e.g. Rudolph 1998, and analyses of NSGA-II) indicates that
+the population converges in probability to the true Pareto front as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>→</mo><mi>∞</mi></mrow><annotation encoding="application/x-tex">t \to \infty</annotation></semantics></math>.</p>
+<p><strong>Sketch:</strong></p>
 <ol style="list-style-type: decimal">
 <li>
-<strong>Preservation of Optimality:</strong> The NSGA-II selection
-and Elitism replacement ensure that once a solution is found on the
-Pareto front, it or a strictly better non-dominated alternative is
-retained.</li>
+<strong>Preservation of optimality:</strong> Elitist replacement
+retains non-dominated solutions across generations.</li>
 <li>
-<strong>Ergodicity:</strong> The strictly positive mutation
-probability guarantees that any point in the search space can
-theoretically be reached from any other point in a finite number of
+<strong>Ergodicity:</strong> A strictly positive mutation
+probability lets any point be reached from any other in finitely many
 steps.</li>
 <li>
-<strong>Convergence Result:</strong> Based on general MOEA
-convergence theorems (e.g., Rudolph 1998, or similar proofs for
-NSGA-II), the combination of selection pressure toward non-dominated
-solutions and exploratory power (mutation/crossover) ensures that the
-population will tend toward the true Pareto optimal set as
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>→</mo><mi>∞</mi></mrow><annotation encoding="application/x-tex">t \to \infty</annotation></semantics></math>.</li>
+<strong>Convergence:</strong> Selection pressure toward
+non-dominated solutions, combined with ergodic variation, drives the
+population toward the Pareto front in the limit.</li>
 </ol>
+<p>In practice, the useful convergence diagnostics are the
+per-generation best objective (<code>history</code>) and the final
+Pareto front; the theoretical guarantee above requires assumptions that
+real runs may violate.</p>
 </div>
 </div>
 <div class="section level2">
@@ -791,37 +718,37 @@ in BioGA)</li>
 <tbody>
 <tr class="odd">
 <td align="left">Initialization</td>
-<td align="left"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>p</mi><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(pn)</annotation></semantics></math></td>
+<td align="left"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>p</mi><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(pn)</annotation></semantics></math></td>
 <td align="left"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>,</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">p, n</annotation></semantics></math></td>
 </tr>
 <tr class="even">
 <td align="left">Fitness Evaluation</td>
 <td align="left">
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>p</mi><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>×</mo><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>m</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(pn) \times O(m)</annotation></semantics></math><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>p</mi><mi>m</mi><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(pmn)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>p</mi><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mo>×</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>m</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(pn) \times O(m)</annotation></semantics></math><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>p</mi><mi>m</mi><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(pmn)</annotation></semantics></math>
 </td>
 <td align="left"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>,</mo><mi>m</mi><mo>,</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">p, m, n</annotation></semantics></math></td>
 </tr>
 <tr class="odd">
-<td align="left">Selection (Sorting)</td>
-<td align="left"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>p</mi><mn>2</mn></msup><mi>o</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(p^2o)</annotation></semantics></math></td>
+<td align="left">Selection (NSGA-II sort)</td>
+<td align="left"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>p</mi><mn>2</mn></msup><mi>o</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(p^2o)</annotation></semantics></math></td>
 <td align="left">
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>
 (quadratic)</td>
 </tr>
 <tr class="even">
 <td align="left">Crossover (SBX)</td>
-<td align="left"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>p</mi><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(pn)</annotation></semantics></math></td>
+<td align="left"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>p</mi><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(pn)</annotation></semantics></math></td>
 <td align="left"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>,</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">p, n</annotation></semantics></math></td>
 </tr>
 <tr class="odd">
 <td align="left">Mutation (Adaptive)</td>
-<td align="left"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>p</mi><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(pn)</annotation></semantics></math></td>
+<td align="left"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>p</mi><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(pn)</annotation></semantics></math></td>
 <td align="left"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>,</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">p, n</annotation></semantics></math></td>
 </tr>
 <tr class="even">
-<td align="left">Replacement</td>
-<td align="left"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>p</mi><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(pn)</annotation></semantics></math></td>
-<td align="left"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>,</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">p, n</annotation></semantics></math></td>
+<td align="left">Replacement (environmental selection)</td>
+<td align="left"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">(</mo><mi>p</mi><mo>+</mo><mi>q</mi><msup><mo stretchy="false" form="postfix">)</mo><mn>2</mn></msup><mi>o</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O((p+q)^2o)</annotation></semantics></math></td>
+<td align="left"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>,</mo><mi>q</mi></mrow><annotation encoding="application/x-tex">p, q</annotation></semantics></math></td>
 </tr>
 </tbody>
 </table>
@@ -833,11 +760,11 @@ in BioGA)</li>
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>T</mi><annotation encoding="application/x-tex">T</annotation></semantics></math>
 generations is dominated by the Fitness Evaluation and the Selection
 phases:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Total Complexity</mtext><mo>=</mo><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>T</mi><mo>⋅</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>p</mi><mi>m</mi><mi>n</mi><mo>+</mo><msup><mi>p</mi><mn>2</mn></msup><mi>o</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Total Complexity</mtext><mo>=</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>T</mi><mo>⋅</mo><mo stretchy="false" form="prefix">(</mo><mi>p</mi><mi>m</mi><mi>n</mi><mo>+</mo><msup><mi>p</mi><mn>2</mn></msup><mi>o</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">
 \text{Total Complexity} = O(T \cdot (pmn + p^2o))
 </annotation></semantics></math> Factoring
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>:
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Total Complexity</mtext><mo>=</mo><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>T</mi><mi>p</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>m</mi><mi>n</mi><mo>+</mo><mi>p</mi><mi>o</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Total Complexity</mtext><mo>=</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>T</mi><mi>p</mi><mo stretchy="false" form="prefix">(</mo><mi>m</mi><mi>n</mi><mo>+</mo><mi>p</mi><mi>o</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">
 \text{Total Complexity} = O(Tp(mn + po))
 </annotation></semantics></math> This result highlights that scalability
 is limited by the quadratic dependency on population size
@@ -854,7 +781,7 @@ genes/samples
 <p>From a purely mathematical perspective, the BioGA algorithm serves as
 a robust stochastic optimization solver for the following
 multi-objective problem:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mrow><mtext mathvariant="normal">minimize </mtext><mspace width="0.333em"></mspace></mrow></mtd><mtd columnalign="left" style="text-align: left"><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>f</mi><mn>1</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>P</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><msub><mi>f</mi><mn>2</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>P</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><mrow><mtext mathvariant="normal">subject to </mtext><mspace width="0.333em"></mspace></mrow></mtd><mtd columnalign="left" style="text-align: left"><mi>P</mi><mo>∈</mo><msup><mi>ℝ</mi><mrow><mi>p</mi><mo>×</mo><mi>n</mi></mrow></msup></mtd></mtr></mtable><annotation encoding="application/x-tex">
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><mrow><mtext mathvariant="normal">minimize </mtext><mspace width="0.333em"></mspace></mrow></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo stretchy="false" form="prefix">(</mo><msub><mi>f</mi><mn>1</mn></msub><mo stretchy="false" form="prefix">(</mo><mi>P</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo><msub><mi>f</mi><mn>2</mn></msub><mo stretchy="false" form="prefix">(</mo><mi>P</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><mrow><mtext mathvariant="normal">subject to </mtext><mspace width="0.333em"></mspace></mrow></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mi>P</mi><mo>∈</mo><msup><mi>ℝ</mi><mrow><mi>p</mi><mo>×</mo><mi>n</mi></mrow></msup></mtd></mtr></mtable><annotation encoding="application/x-tex">
 \begin{aligned}
 \text{minimize } &amp; (f_1(P), f_2(P)) \\
 \text{subject to } &amp; P \in \mathbb{R}^{p \times n}
@@ -866,19 +793,19 @@ multi-objective problem:</p>
 <strong>Multi-Objective Nature:</strong> Explicitly seeking a set of
 trade-off solutions (the Pareto front).</li>
 <li>
-<strong>High Dimensionality:</strong> Search space size is
+<strong>High Dimensionality:</strong> The real search space is
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>×</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">p \times n</annotation></semantics></math>,
 making deterministic grid search intractable.</li>
 <li>
-<strong>Non-Differentiable Objectives:</strong> The sparsity
+<strong>Non-Differentiable Objective:</strong> The sparsity
 objective
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>f</mi><mn>2</mn></msub><annotation encoding="application/x-tex">f_2</annotation></semantics></math>
-is non-differentiable, making standard calculus-based methods
-impossible.</li>
+in the binary representation is non-differentiable, so gradient-based
+methods do not apply.</li>
 <li>
-<strong>Non-Convexity:</strong> The fitness landscape, when
-combined, may be non-convex, meaning the GA’s global search capability
-is essential to avoid local optima.</li>
+<strong>Non-Convexity:</strong> The combined fitness landscape may
+be non-convex, so global search heuristics are useful to avoid poor
+local optima.</li>
 </ol>
 </div>
 <div class="section level2">
@@ -933,62 +860,63 @@ initialization.</td>
 <div class="section level2">
 <h2 id="conclusion">Conclusion<a class="anchor" aria-label="anchor" href="#conclusion"></a>
 </h2>
-<p>The <code>BioGA</code> package implements a theoretically sound and
-computationally structured multi-objective evolutionary algorithm. Its
-mathematical foundation—encompassing NSGA-II principles for
-multi-objective handling, sophisticated SBX and adaptive
-network-constrained mutation for exploration, and diversity-preserving
-replacement—provides a rigorous framework for simultaneously achieving
-data fidelity and model sparsity in genomic data optimization.</p>
+<p>The <code>BioGA</code> package implements a structured
+multi-objective evolutionary algorithm. Its components—NSGA-II rank and
+crowding for selection and environmental replacement, SBX (or uniform)
+crossover, and adaptive mutation with optional degree-based network
+damping—provide a coherent framework for trade-offs between data
+fidelity (or predictive signal) and model sparsity in genomic data
+optimisation.</p>
 <details><summary><strong>Session Info</strong>
 </summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">sessioninfo</span><span class="fu">::</span><span class="fu"><a href="https://sessioninfo.r-lib.org/reference/session_info.html" class="external-link">session_info</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">─ Session info ───────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt;  <span style="color: #555555; font-style: italic;">setting </span> <span style="color: #555555; font-style: italic;">value</span></span></span>
-<span><span class="co">#&gt;  version  R version 4.5.2 (2025-10-31)</span></span>
-<span><span class="co">#&gt;  os       Ubuntu 24.04.3 LTS</span></span>
+<span><span class="co">#&gt;  version  R version 4.6.1 (2026-06-24)</span></span>
+<span><span class="co">#&gt;  os       Ubuntu 24.04.5 LTS</span></span>
 <span><span class="co">#&gt;  system   x86_64, linux-gnu</span></span>
 <span><span class="co">#&gt;  ui       X11</span></span>
 <span><span class="co">#&gt;  language en</span></span>
 <span><span class="co">#&gt;  collate  C.UTF-8</span></span>
 <span><span class="co">#&gt;  ctype    C.UTF-8</span></span>
 <span><span class="co">#&gt;  tz       UTC</span></span>
-<span><span class="co">#&gt;  date     2025-12-04</span></span>
-<span><span class="co">#&gt;  pandoc   3.1.11 @ /opt/hostedtoolcache/pandoc/3.1.11/x64/ (via rmarkdown)</span></span>
+<span><span class="co">#&gt;  date     2026-10-17</span></span>
+<span><span class="co">#&gt;  pandoc   3.8.3 @ /opt/hostedtoolcache/pandoc/3.8.3/x64/ (via rmarkdown)</span></span>
 <span><span class="co">#&gt;  quarto   NA</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">─ Packages ───────────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt;  <span style="color: #555555; font-style: italic;">package    </span> <span style="color: #555555; font-style: italic;">*</span> <span style="color: #555555; font-style: italic;">version</span> <span style="color: #555555; font-style: italic;">date (UTC)</span> <span style="color: #555555; font-style: italic;">lib</span> <span style="color: #555555; font-style: italic;">source</span></span></span>
-<span><span class="co">#&gt;  bookdown      0.45    <span style="color: #555555;">2025-10-03</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
-<span><span class="co">#&gt;  bslib         0.9.0   <span style="color: #555555;">2025-01-30</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  bookdown      0.48    <span style="color: #555555;">2026-08-28</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  bslib         0.12.0  <span style="color: #555555;">2026-08-04</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
 <span><span class="co">#&gt;  cachem        1.1.0   <span style="color: #555555;">2024-05-16</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
-<span><span class="co">#&gt;  cli           3.6.5   <span style="color: #555555;">2025-04-23</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  cli           3.6.6   <span style="color: #555555;">2026-04-09</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
 <span><span class="co">#&gt;  desc          1.4.3   <span style="color: #555555;">2023-12-10</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
 <span><span class="co">#&gt;  digest        0.6.39  <span style="color: #555555;">2025-11-19</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
 <span><span class="co">#&gt;  evaluate      1.0.5   <span style="color: #555555;">2025-08-27</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
 <span><span class="co">#&gt;  fastmap       1.2.0   <span style="color: #555555;">2024-05-15</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
-<span><span class="co">#&gt;  fs            1.6.6   <span style="color: #555555;">2025-04-12</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
-<span><span class="co">#&gt;  htmltools     0.5.8.1 <span style="color: #555555;">2024-04-04</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  fs            2.1.0   <span style="color: #555555;">2026-04-18</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  htmltools     0.5.9   <span style="color: #555555;">2025-12-04</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
 <span><span class="co">#&gt;  htmlwidgets   1.6.4   <span style="color: #555555;">2023-12-06</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
 <span><span class="co">#&gt;  jquerylib     0.1.4   <span style="color: #555555;">2021-04-26</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
 <span><span class="co">#&gt;  jsonlite      2.0.0   <span style="color: #555555;">2025-03-27</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
-<span><span class="co">#&gt;  knitr         1.50    <span style="color: #555555;">2025-03-16</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
-<span><span class="co">#&gt;  lifecycle     1.0.4   <span style="color: #555555;">2023-11-07</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
-<span><span class="co">#&gt;  pkgdown       2.2.0   <span style="color: #555555;">2025-11-06</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">any (@2.2.0)</span></span></span>
+<span><span class="co">#&gt;  knitr         1.52    <span style="color: #555555;">2026-09-06</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  lifecycle     1.0.5   <span style="color: #555555;">2026-01-08</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  otel          0.2.0   <span style="color: #555555;">2025-08-29</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  pkgdown       2.2.1   <span style="color: #555555;">2026-07-07</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
 <span><span class="co">#&gt;  R6            2.6.1   <span style="color: #555555;">2025-02-15</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
-<span><span class="co">#&gt;  ragg          1.5.0   <span style="color: #555555;">2025-09-02</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
-<span><span class="co">#&gt;  rlang         1.1.6   <span style="color: #555555;">2025-04-11</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
-<span><span class="co">#&gt;  rmarkdown     2.30    <span style="color: #555555;">2025-09-28</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  ragg          1.5.2   <span style="color: #555555;">2026-03-23</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  rlang         1.3.0   <span style="color: #555555;">2026-07-05</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  rmarkdown     2.32    <span style="color: #555555;">2026-09-01</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
 <span><span class="co">#&gt;  sass          0.4.10  <span style="color: #555555;">2025-04-11</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
-<span><span class="co">#&gt;  sessioninfo   1.2.3   <span style="color: #555555;">2025-02-05</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
-<span><span class="co">#&gt;  systemfonts   1.3.1   <span style="color: #555555;">2025-10-01</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
-<span><span class="co">#&gt;  textshaping   1.0.4   <span style="color: #555555;">2025-10-10</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
-<span><span class="co">#&gt;  xfun          0.54    <span style="color: #555555;">2025-10-30</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
-<span><span class="co">#&gt;  yaml          2.3.11  <span style="color: #555555;">2025-11-28</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  sessioninfo   1.2.4   <span style="color: #555555;">2026-06-04</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  systemfonts   1.3.2   <span style="color: #555555;">2026-03-05</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  textshaping   1.0.5   <span style="color: #555555;">2026-03-06</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  xfun          0.62    <span style="color: #555555;">2026-10-16</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  yaml          2.3.12  <span style="color: #555555;">2025-12-10</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #555555;"> [1] /home/runner/work/_temp/Library</span></span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"> [2] /opt/R/4.5.2/lib/R/site-library</span></span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"> [3] /opt/R/4.5.2/lib/R/library</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"> [2] /opt/R/4.6.1/lib/R/site-library</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"> [3] /opt/R/4.6.1/lib/R/library</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">──────────────────────────────────────────────────────────────────────────────</span></span></span></code></pre></div>
 </details>
@@ -1004,7 +932,7 @@ data fidelity and model sparsity in genomic data optimization.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

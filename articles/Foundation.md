@@ -21,126 +21,128 @@ selection, reproduction (crossover and mutation), and replacement.
 Let us define the core elements of the search space and the algorithm’s
 state:
 
-- $G = (V,E)$ is the gene network, where
-  $V = \{ g_{1},g_{2},\ldots,g_{n}\}$ are $n$ genes.
-- $X \in {\mathbb{R}}^{n \times m}$ is the genomic data matrix,
-  consisting of $n$ genes across $m$ samples.
-- $P_{t} \in {\mathbb{R}}^{p \times n}$ is the population matrix at
-  generation $t$, containing $p$ individuals (rows) and $n$ gene values
-  (columns).
+- $`G = (V, E)`$ is the gene network, where
+  $`V = \{g_1, g_2, \ldots, g_n\}`$ are $`n`$ genes.
+- $`X \in \mathbb{R}^{n \times m}`$ is the genomic data matrix,
+  consisting of $`n`$ genes across $`m`$ samples.
+- $`P_t \in \mathbb{R}^{p \times n}`$ is the population matrix at
+  generation $`t`$, containing $`p`$ individuals (rows) and $`n`$ gene
+  values (columns).
 
-The evolution from one generation to the next,
-$\left. P_{t}\rightarrow P_{t + 1} \right.$, is described by the
-following functional relationship:
+The evolution from one generation to the next, $`P_t \to P_{t+1}`$, is
+described by the following functional relationship:
 
-$$P_{t + 1} = R\left( M\left( C\left( S\left( P_{t},f\left( P_{t} \right) \right),X \right) \right),P_{t},f\left( P_{t} \right) \right)$$
+``` math
+P_{t+1} = R(M(C(S(P_t, f(P_t)), X)), P_t, f(P_t))
+```
 
 Where the functions represent the core operators:
 
-- $f$: **Fitness Evaluation** function.
-- $S$: **Selection** operator (NSGA-II inspired).
-- $C$: **Crossover** operator (SBX).
-- $M$: **Mutation** operator (Adaptive).
-- $R$: **Replacement** operator (Elitism + Diversity Preservation).
+- $`f`$: **Fitness Evaluation** function.
+- $`S`$: **Selection** operator (NSGA-II inspired).
+- $`C`$: **Crossover** operator (SBX).
+- $`M`$: **Mutation** operator (Adaptive).
+- $`R`$: **Replacement** operator (Elitism + Diversity Preservation).
 
 ## Population Initialization
 
-The initialization phase creates the starting population, $P_{0}$, by
-drawing random samples directly from the measured genomic data $X$.
+The initialization phase creates the starting population, $`P_0`$, by
+drawing random samples directly from the measured genomic data $`X`$.
 
 ### Mathematical Formulation
 
-Given the genomic data $X \in {\mathbb{R}}^{n \times m}$ and a
-population size $p$, the value of gene $j$ in the $i$-th individual of
-the initial population is set as:
+Given the genomic data $`X \in \mathbb{R}^{n \times m}`$ and a
+population size $`p`$, the value of gene $`j`$ in the $`i`$-th
+individual of the initial population is set as:
 
-$$P_{0}\lbrack i,j\rbrack = X\lbrack j,k\rbrack\quad\text{where}\quad k \sim \text{Uniform}\{ 1,\ldots,m\}$$
-This means that for each element $(i,j)$ in $P_{0}$, a sample $k$ is
-chosen uniformly at random from the $m$ available samples, and the
-corresponding gene expression value $X\lbrack j,k\rbrack$ is used.
+``` math
+P_0[i,j] = X[j, k] \quad \text{where} \quad k \sim \text{Uniform}\{1, \ldots, m\}
+```
+This means that for each element $`(i, j)`$ in $`P_0`$, a sample $`k`$
+is chosen uniformly at random from the $`m`$ available samples, and the
+corresponding gene expression value $`X[j, k]`$ is used.
 
 **Initialization with Clustering:**
 
-If a clustering breakdown is provided (e.g., $C$ is the set of
+If a clustering breakdown is provided (e.g., $`C`$ is the set of
 clusters), the initialization respects the structure:
-$$P_{0}\lbrack i,j\rbrack = X\lbrack j,k\rbrack\quad\forall j \in c,\quad k \sim \text{Uniform}\{ 1,\ldots,m\}$$
-for all genes $j$ belonging to the same cluster $c$.
+``` math
+P_0[i,j] = X[j, k] \quad \forall j \in c, \quad k \sim \text{Uniform}\{1, \ldots, m\}
+```
+for all genes $`j`$ belonging to the same cluster $`c`$.
 
 ### Statistical Properties
 
 1.  **Distribution Preservation:** This method ensures that the initial
     population individuals maintain the original statistical
-    distribution of expression values for each gene $j$.
+    distribution of expression values for each gene $`j`$.
 2.  **Structural Integrity:** If clustering is used, the method
     preserves the pre-defined cluster structure within the initial
     population.
-3.  **Expected Value:** The expected value of any element
-    $P_{0}\lbrack i,j\rbrack$ over the initialization process is the
-    mean of the observed expression for gene $j$:
-    $${\mathbb{E}}\left\lbrack P_{0}\lbrack i,j\rbrack \right\rbrack = \mu_{j} = \frac{1}{m}\sum\limits_{k = 1}^{m}X\lbrack j,k\rbrack$$
+3.  **Expected Value:** The expected value of any element $`P_0[i,j]`$
+    over the initialization process is the mean of the observed
+    expression for gene $`j`$:
+    ``` math
+     \mathbb{E}[P_0[i,j]] = \mu_j = \frac{1}{m}\sum_{k=1}^m X[j,k]
+     
+    ```
 
 ## Fitness Evaluation
 
-The `BioGA` package utilizes a multi-objective approach, simultaneously
-optimizing two conflicting goals: data fidelity (Expression Difference)
-and model parsimony (Sparsity).
+The `BioGA` package uses a two-objective formulation. Both objectives
+are minimised. The package supports two representations, and the meaning
+of the objectives depends on which one is used.
 
-### Objective 1: Expression Difference ($f_{1}$)
+### Real representation
 
-This function measures the squared Euclidean distance between the
-individual $i$ and all $m$ observed data samples $X_{jk}$ for all $n$
-genes. It quantifies how accurately the individual reflects the overall
-expression patterns.
+In the real representation an individual $`i`$ is a continuous
+expression profile $`P_i \in \mathbb{R}^n`$.
 
-$$f_{1}(i) = \sum\limits_{j = 1}^{n}\sum\limits_{k = 1}^{m}\left( X_{jk} - P_{ij} \right)^{2}$$
+**Objective 1: Data fidelity ($`f_1`$).** The squared Euclidean distance
+between the individual and every observed sample. It is minimised when
+each gene value equals the per-gene mean $`\mu_j`$:
 
-#### Properties of $f_{1}$
+``` math
+f_1(i) = \sum_{j=1}^n \sum_{k=1}^m (X_{jk} - P_{ij})^2
+```
 
-1.  **Convexity:** $f_{1}$ is a convex function, which is a desirable
-    property for optimization as it guarantees that any local minimum is
-    also a global minimum in the absence of other constraints. The
-    minimum occurs when $P_{ij}$ is the mean expression $\mu_{j}$.
-2.  **Gradient (for theoretical analysis):** The partial derivative with
-    respect to the gene value $P_{ij}$ is:
-    $$\nabla_{P_{ij}}f_{1} = - 2\sum\limits_{k = 1}^{m}\left( X_{jk} - P_{ij} \right)$$
+**Objective 2: Parsimony ($`f_2`$).** The mean absolute gene value (an
+$`L_1`$ penalty). It is minimised by driving gene values toward zero:
 
-### Objective 2: Sparsity ($f_{2}$)
+``` math
+f_2(i) = \frac{1}{n}\sum_{j=1}^n |P_{ij}|
+```
 
-This objective promotes parsimonious solutions by penalizing non-zero
-gene values. It measures the fraction of non-zero genes within an
-individual $i$.
+### Binary representation
 
-$$f_{2}(i) = \frac{\sum\limits_{j = 1}^{n}I\left( \left| P_{ij} \right| > \epsilon \right)}{n}$$
+In the binary representation an individual $`i`$ is a selection
+indicator $`P_i \in \{0,1\}^n`$ and class labels
+$`y \in \{1,\dots,c\}^m`$ are required.
 
-Here, $I$ is the indicator function, which equals 1 if the condition is
-met, and $\epsilon$ is a small constant (typically $10^{- 6}$) used to
-define “non-zero.”
+**Objective 1: Predictive signal ($`f_1`$).** For each gene $`j`$ an
+ANOVA $`F`$-statistic measures how strongly it separates the classes:
+``` math
+F_j = \frac{\mathrm{SSB}_j/(c-1)}{\mathrm{SSW}_j/(m-c)}
+```
+where $`\mathrm{SSB}_j`$ and $`\mathrm{SSW}_j`$ are the between- and
+within-class sums of squares. The objective is the negated mean $`F_j`$
+over the selected genes (so that better-separating subsets have a
+smaller value):
+``` math
+f_1(i) = -\frac{1}{|S_i|}\sum_{j \in S_i} F_j, \qquad S_i = \{j : P_{ij} > 0.5\}
+```
+with $`f_1(i) = 0`$ when no gene is selected.
 
-#### Properties of $f_{2}$
+**Objective 2: Sparsity ($`f_2`$).** The fraction of selected genes:
+``` math
+f_2(i) = \frac{|S_i|}{n}
+```
 
-1.  **Mathematical Form:** $f_{2}$ is inherently **Non-convex** and
-    **Non-differentiable** due to the indicator function $I$. This makes
-    standard gradient-based optimization methods unsuitable, justifying
-    the use of a heuristic approach like the GA.
-2.  **Goal:** It actively encourages sparse solutions, where many gene
-    values are effectively zero.
-3.  **Range:** The range of the function is restricted to
-    $\lbrack 0,1\rbrack$, where $0$ represents a fully sparse individual
-    ($P_{ij} = 0$ for all $j$) and $1$ represents a non-sparse
-    individual.
+Because $`f_1`$ rewards including informative genes while $`f_2`$
+rewards including few genes, the two objectives conflict and the
+solution is a Pareto front rather than a single point.
 
-### Combined Fitness
-
-The overall fitness value $F(i)$ for an individual $i$ is a weighted
-combination of the two objectives:
-
-$$F(i) = w_{1}f_{1}(i) + w_{2}f_{2}(i)$$
-
-Where $w_{1}$ and $w_{2}$ are user-specified weights that dictate the
-trade-off between minimizing expression error ($f_{1}$) and maximizing
-sparsity ($f_{2}$).
-
-## Selection (NSGA-II Inspired)
+## Selection (NSGA-II)
 
 The selection mechanism is based on the principles of the Non-dominated
 Sorting Genetic Algorithm II (NSGA-II), ensuring that evolutionary
@@ -148,30 +150,33 @@ pressure drives the population toward the Pareto front.
 
 ### Domination Criteria
 
-Individual $i$ dominates individual $j$ (denoted $i \succ j$) if and
-only if:
+Individual $`i`$ dominates individual $`j`$ (denoted $`i \succ j`$) if
+and only if:
 
-1.  Individual $i$ is no worse than $j$ on all objectives, and
-2.  Individual $i$ is strictly better than $j$ on at least one
+1.  Individual $`i`$ is no worse than $`j`$ on all objectives, and
+2.  Individual $`i`$ is strictly better than $`j`$ on at least one
     objective.
 
 Formally:
-$$i \succ j\quad\text{iff}\quad\forall k \in \{ 1,2\}:f_{k}(i) \leq f_{k}(j)\quad\text{and}\quad\exists k \in \{ 1,2\}:f_{k}(i) < f_{k}(j)$$
+``` math
+i \succ j \quad \text{iff} \quad \forall k \in \{1, 2\}: f_k(i) \leq f_k(j) \quad \text{and} \quad \exists k \in \{1, 2\}: f_k(i) < f_k(j)
+```
 
 #### Proof of Partial Order
 
-The two-objective domination relation $( \succ )$ defines a **partial
+The two-objective domination relation $`(\succ)`$ defines a **partial
 order** on the solution set because it satisfies the following
 properties:
 
-1.  **Irreflexive:** No individual dominates itself. If $i = j$, the
-    second condition ($\exists k:f_{k}(i) < f_{k}(j)$) is false.
-2.  **Antisymmetric Property:** If $i \succ j$, then $j$ cannot dominate
-    $i$. If $i$ is strictly better on at least one objective, $j$ must
-    be strictly worse ($\forall k:f_{k}(j) \nleq f_{k}(i)$).
-3.  **Transitive:** If $i \succ j$ and $j \succ k$, then $i \succ k$.
-    This follows directly from the transitivity of the combined $\leq$
-    and $<$ relations.
+1.  **Irreflexive:** No individual dominates itself. If $`i = j`$, the
+    second condition ($`\exists k: f_k(i) < f_k(j)`$) is false.
+2.  **Antisymmetric Property:** If $`i \succ j`$, then $`j`$ cannot
+    dominate $`i`$. If $`i`$ is strictly better on at least one
+    objective, $`j`$ must be strictly worse
+    ($`\forall k: f_k(j) \not\leq f_k(i)`$).
+3.  **Transitive:** If $`i \succ j`$ and $`j \succ k`$, then
+    $`i \succ k`$. This follows directly from the transitivity of the
+    combined $`\leq`$ and $`<`$ relations.
 
 ### Front Construction
 
@@ -180,14 +185,14 @@ The population is sorted into non-dominated fronts:
 1.  **Domination Metrics:** For every individual, we compute its
     **domination count** (number of individuals that dominate it) and
     its **dominated set** (set of individuals it dominates).
-2.  **First Front ($\mathcal{F}_{1}$):** This front consists of all
-    individuals whose domination count is $0$. These are the current
+2.  **First Front ($`\mathcal{F}_1`$):** This front consists of all
+    individuals whose domination count is $`0`$. These are the current
     non-dominated solutions.
-3.  **Subsequent Fronts:** Individuals in $\mathcal{F}_{t}$ are
+3.  **Subsequent Fronts:** Individuals in $`\mathcal{F}_t`$ are
     temporarily removed. The domination counts of the individuals they
-    dominated are reduced by one. The next front, $\mathcal{F}_{t + 1}$,
+    dominated are reduced by one. The next front, $`\mathcal{F}_{t+1}`$,
     consists of all remaining individuals whose updated domination count
-    is $0$. This process continues until the entire population is
+    is $`0`$. This process continues until the entire population is
     sorted.
 
 #### Theorem on Computational Complexity
@@ -195,21 +200,21 @@ The population is sorted into non-dominated fronts:
 The non-dominated sorting and front construction algorithm terminates in
 quadratic time complexity relative to the population size.
 
-**Theorem:** The front construction algorithm terminates in
-$O\left( p^{2}o \right)$ time, where $p$ is the population size and $o$
-is the number of objectives.
+**Theorem:** The front construction algorithm terminates in $`O(p^2o)`$
+time, where $`p`$ is the population size and $`o`$ is the number of
+objectives.
 
 **Proof Sketch:**
 
-- The pairwise domination check between any two individuals is an $O(o)$
-  operation.
+- The pairwise domination check between any two individuals is an
+  $`O(o)`$ operation.
 - The computation of the domination count and dominated set for all
-  individuals requires $O\left( p^{2}o \right)$ time, as it involves
-  $\left( \frac{p}{2} \right)$ comparisons.
+  individuals requires $`O(p^2o)`$ time, as it involves $`\binom{p}{2}`$
+  comparisons.
 - Once these metrics are computed, the iterative process of assigning
-  individuals to fronts requires $O(p)$ time per front, leading to an
-  overall complexity dominated by the $O\left( p^{2}o \right)$ initial
-  comparison phase.
+  individuals to fronts requires $`O(p)`$ time per front, leading to an
+  overall complexity dominated by the $`O(p^2o)`$ initial comparison
+  phase.
 
 ## Crossover (Simulated Binary Crossover - SBX)
 
@@ -217,34 +222,45 @@ The Simulated Binary Crossover (SBX) is a prominent operator for
 real-coded GAs, designed to mimic the convergence properties of binary
 crossover while operating directly on continuous variables.
 
-Given two parent individuals, $x,y \in {\mathbb{R}}^{n}$, the SBX
-operator generates a new offspring vector $z$. For each gene $j$:
+Given two parent individuals, $`x, y \in \mathbb{R}^n`$, the SBX
+operator generates two complementary offspring vectors. For each gene
+$`j`$:
 
-With crossover probability $p_{c}$, the offspring gene $z_{j}$ is
-determined: 1. A random number $u$ is drawn:
-$u \sim \text{Uniform}(0,1)$. 2. The spreading factor $\beta$ is
-computed based on the distribution index $\eta$: $$\beta = \begin{cases}
-(2u)^{1/{(\eta + 1)}} & {{\text{if}\mspace{6mu}}u \leq 0.5} \\
-\left( \frac{1}{2(1 - u)} \right)^{1/{(\eta + 1)}} & \text{otherwise}
-\end{cases}$$ 3. The gene value $z_{j}$ is calculated:
-$$z_{j} = 0.5\left\lbrack \left( x_{j} + y_{j} \right) - \beta\left| y_{j} - x_{j} \right| \right\rbrack$$
+With crossover probability $`p_c`$, the offspring genes are
+determined: 1. A random number $`u`$ is drawn:
+$`u \sim \text{Uniform}(0,1)`$. 2. The spreading factor $`\beta`$ is
+computed based on the distribution index $`\eta`$:
+``` math
+    \beta = \begin{cases}
+    (2u)^{1/(\eta+1)} & \text{if } u \leq 0.5 \\
+    \left(\frac{1}{2(1-u)}\right)^{1/(\eta+1)} & \text{otherwise}
+    \end{cases}
+    
+```
+3. The two complementary gene values are calculated:
+``` math
+    c_1 = 0.5[(1+\beta)x_j + (1-\beta)y_j], \qquad
+    c_2 = 0.5[(1-\beta)x_j + (1+\beta)y_j]
+    
+```
+and one of them is assigned to the offspring.
 
-Otherwise (with probability $1 - p_{c}$):
-$$z_{j} = x_{j}\quad\text{or}\quad z_{j} = y_{j}$$
+Otherwise (with probability $`1-p_c`$) the gene is copied unchanged from
+one of the parents. In the binary representation uniform crossover is
+used instead: each gene is copied from a randomly chosen parent.
 
 ### Properties of SBX
 
-1.  **Mean Preservation:** The expected value of the offspring gene is
-    average of the parents’ genes:
-    ${\mathbb{E}}\left\lbrack z_{j} \right\rbrack = \frac{x_{j} + y_{j}}{2}$.
-2.  **Distribution Control:** The distribution index $\eta$ controls the
-    proximity of the offspring to the parents.
-3.  **Low $\eta$ (e.g., $\left. \eta\rightarrow 0 \right.$):** Produces
-    a wide spread and approaches uniform crossover, generating many
-    extreme values.
-4.  **High $\eta$ (e.g., $\left. \eta\rightarrow\infty \right.$):**
-    Clusters offspring tightly around the parents, approaching no
-    crossover.
+1.  **Mean Preservation:** The two complementary children satisfy
+    $`c_1 + c_2 = x_j + y_j`$, so the expected value of an offspring
+    gene (with the child chosen uniformly at random) is the parents’
+    average: $`\mathbb{E}[z_j] = \frac{x_j + y_j}{2}`$.
+2.  **Distribution Control:** The distribution index $`\eta`$ controls
+    the proximity of the offspring to the parents.
+3.  **Low $`\eta`$ (e.g., $`\eta \to 0`$):** Produces a wide spread and
+    approaches uniform crossover, generating many extreme values.
+4.  **High $`\eta`$ (e.g., $`\eta \to \infty`$):** Clusters offspring
+    tightly around the parents, approaching no crossover.
 
 ## Mutation
 
@@ -252,155 +268,156 @@ The mutation operation introduces random small changes to the offspring
 for exploration. The `BioGA` uses an adaptive mutation rate and
 incorporates network constraints.
 
-For each gene $j$, with adaptive probability $p_{m}(t)$:
-$$p_{m}(t) = p_{0}\left( 1 + 0.5\frac{t}{T} \right)$$ where $p_{0}$ is
-the initial rate, $t$ is the current generation, and $T$ is the total
-number of generations. This rate increases linearly over time to enhance
-exploration in later stages.
+For each gene $`j`$, with adaptive probability $`p_m(t)`$:
+``` math
+p_m(t) = p_0\left(1 + 0.5\frac{t}{T}\right)
+```
+where $`p_0`$ is the initial rate, $`t`$ is the current generation, and
+$`T`$ is the total number of generations. This rate increases linearly
+over time to enhance exploration in later stages.
 
-The change in the gene value, $z_{j}$, is applied as follows:
+In the real representation the change applied to gene value $`z_j`$ is:
 
 1.  A Gaussian perturbation is generated:
-    $\Delta_{j} \sim N\left( 0,\sigma^{2} \right)$.
+    $`\Delta_j \sim N(0, \sigma^2)`$.
 
-2.  **If a Gene Network $N$ is provided ($N_{jk}$ being the adjacency
-    matrix):** The mutation is penalized by the network connectivity:
-    $$\left. z_{j}\leftarrow z_{j} + \Delta_{j}\left( 1 - \sum\limits_{k}N_{jk}z_{k} \right) \right.$$
+2.  **If a gene network $`N`$ is provided** (adjacency matrix
+    $`N_{jk}`$), the perturbation is damped by the gene’s relative
+    connectivity. With the degree $`d_j = \sum_{k \neq j}|N_{jk}|`$ and
+    $`d_{\max} = \max_j d_j`$:
+    ``` math
+     z_j \leftarrow z_j + \Delta_j\left(1 - \frac{d_j}{d_{\max}}\right)
+     
+    ```
+    so highly connected genes mutate less.
 
-3.  **If no Network is provided:** Standard Gaussian mutation is
-    applied: $$\left. z_{j}\leftarrow z_{j} + \Delta_{j} \right.$$
+3.  **If no network is provided**, standard Gaussian mutation is
+    applied:
+    ``` math
+     z_j \leftarrow z_j + \Delta_j
+     
+    ```
+
+In the binary representation mutation is a bit flip: with the adaptive
+probability the selected/not-selected state of a gene is inverted.
 
 ### Properties of Adaptive Network Mutation
 
-1.  **Adaptive Rate:** The mutation rate monotonically increases with
-    generation $t$, preventing premature convergence and maintaining
-    diversity late in the run.
-2.  **Network Constraint Impact:** The term
-    $\left( 1 - \sum_{k}N_{jk}z_{k} \right)$ acts as a coefficient.
-    Highly connected genes (large $\sum_{k}N_{jk}$) experience a reduced
-    magnitude of mutation, preserving known network structures.
-3.  **Expected Change:** Since
-    ${\mathbb{E}}\left\lbrack \Delta_{j} \right\rbrack = 0$, the
-    expected change remains zero:
-    ${\mathbb{E}}\left\lbrack \Delta z_{j} \right\rbrack = 0$.
-4.  **Variance Control:** For the network-constrained case, the variance
-    of the change is:
-    $$\text{Var}\left( \Delta z_{j} \right) = \sigma^{2}\left( 1 - \sum\limits_{k}N_{jk}z_{k} \right)^{2}$$
-    This mathematical structure formalizes how network relationships
-    dynamically control evolutionary exploration.
+1.  **Adaptive Rate:** The mutation rate increases with generation
+    $`t`$, maintaining exploration later in the run.
+2.  **Network Constraint Impact:** The damping factor
+    $`(1 - d_j/d_{\max}) \in [0, 1]`$ reduces the mutation magnitude for
+    highly connected genes, preserving known network structure. It is a
+    normalised, non-negative quantity, so mutation is never amplified.
+3.  **Expected Change:** Since $`\mathbb{E}[\Delta_j] = 0`$, the
+    expected change remains zero: $`\mathbb{E}[\Delta z_j] = 0`$.
+4.  **Variance Control:** The variance of the change is
+    ``` math
+     \text{Var}(\Delta z_j) = \sigma^2\left(1 - \frac{d_j}{d_{\max}}\right)^2,
+     
+    ```
+    which shrinks monotonically with the gene’s connectivity.
 
 ## Replacement
 
-The replacement operator $R$ constructs the next population $P_{t + 1}$
-from the current population $P_{t}$ and the offspring $O_{t}$. It
-employs an Elitism strategy combined with a metric for diversity
-preservation.
+The replacement operator $`R`$ constructs the next population
+$`P_{t+1}`$ from the current population $`P_t`$ and the offspring
+$`O_t`$ using NSGA-II environmental selection.
 
-1.  **Elitism:** The best individual, $x^{*}$, defined as the solution
-    minimizing the primary objective $f_{1}$, is always retained in the
-    next generation:
-    $$x^{*} = \text{argmin}_{x \in P_{t} \cup O_{t}}f_{1}(x)$$
-2.  **Diversity-Preserving Replacement:** For the remaining $p - 1$
-    slots in $P_{t + 1}$, a non-elitist replacement strategy is
-    performed iteratively:
-    - Randomly select an individual $x$ from the current population
-      $P_{t}$.
-    - Select an offspring $y$ from the newly generated offspring
-      $O_{t}$.
-    - Replace $x$ with $y$ only if the increase in diversity is
-      significant:
-      $$\left. {\text{Replace}\mspace{6mu}}x\leftarrow y\quad\text{if}\quad\text{diversity}(x,y) > \epsilon \right.$$
-      Where the diversity metric is the squared Euclidean distance:
-      $\text{diversity}(x,y) = \parallel x - y \parallel_{2}^{2}$.
+1.  **Rank and crowding.** The candidates are sorted into non-dominated
+    fronts and a crowding distance is computed within each front (as in
+    selection).
+2.  **Elitist retention.** The best $`p - k_0`$ parents, where $`k_0`$
+    is the replacement budget `num_to_replace`, are retained.
+3.  **Offspring admission.** The best $`k_0`$ offspring, ranked by the
+    same (rank, crowding) criterion, fill the remaining slots.
 
-### Theorem on Population Quality
-
-**Theorem:** This replacement strategy preserves elitism while ensuring
-that the population’s diversity does not collapse into a single point.
-
-**Proof Sketch:**
-
-1.  **Elitism Preservation (Quality):** By explicitly retaining $x^{*}$,
-    the search process ensures that the best solution found so far
-    across the primary objective $f_{1}$ is never lost. This guarantees
-    monotonic, non-decreasing convergence quality on $f_{1}$.
-2.  **Diversity Maintenance:** Replacements are conditional on
-    $\text{diversity}(x,y) > \epsilon$. Since only replacements that
-    increase or maintain the distance (and hence diversity) above a
-    threshold are accepted, the expected diversity of the population is
-    non-decreasing over the generations, effectively counteracting
-    sampling drift.
+Because $`\text{rank}`$ dominates $`\text{crowding}`$, non-dominated
+solutions are never discarded in favour of dominated ones; ties are
+broken towards less crowded (more diverse) solutions. The best solution
+with respect to the first objective is non-dominated by construction, so
+it is always retained when $`k_0 < p`$, giving monotonic non-increasing
+best $`f_1`$. If `num_to_replace` is zero the population is returned
+unchanged.
 
 ## Convergence Analysis
 
-The convergence of the BioGA algorithm, derived from established
-Multi-objective Evolutionary Algorithm (MOEA) theory, guarantees
-convergence to the optimal set under general conditions.
+BioGA is a heuristic. It does not provide a guarantee of finding the
+global Pareto front in a finite number of generations; the results below
+only outline the idealised conditions under which asymptotic convergence
+is expected, and should not be read as a practical guarantee.
 
 ### Assumptions
 
-For convergence proofs in MOEAs, the following are often assumed:
+For convergence results in MOEAs, the following are typically assumed:
 
 1.  **Finite Search Space:** While the gene values are continuous, they
-    can be discretized in theory (or bounded in practice).
-2.  **Strictly Positive Mutation Probability:** $p_{m}(t) > 0$ for all
-    $t$, which ensures ergodicity.
+    can be discretised in theory (or bounded in practice). The
+    real-coded search space is not finite, so this assumption does not
+    strictly hold for `"real"` mode.
+2.  **Strictly Positive Mutation Probability:** $`p_m(t) > 0`$ for all
+    $`t`$, which enables ergodicity. This fails when
+    `mutation_rate = 0`.
 3.  **Elitism:** The best solutions are preserved across generations.
+    This holds only when `num_to_replace < population_size`.
 
-### Theorem on Convergence
+### Result (idealised)
 
-**Theorem:** Under the assumptions above, the BioGA algorithm converges
-in probability to the global Pareto front of the multi-objective
-optimization problem.
+**Statement:** Under the assumptions above, standard MOEA theory (e.g.
+Rudolph 1998, and analyses of NSGA-II) indicates that the population
+converges in probability to the true Pareto front as $`t \to \infty`$.
 
-**Proof Sketch:**
+**Sketch:**
 
-1.  **Preservation of Optimality:** The NSGA-II selection and Elitism
-    replacement ensure that once a solution is found on the Pareto
-    front, it or a strictly better non-dominated alternative is
-    retained.
-2.  **Ergodicity:** The strictly positive mutation probability
-    guarantees that any point in the search space can theoretically be
-    reached from any other point in a finite number of steps.
-3.  **Convergence Result:** Based on general MOEA convergence theorems
-    (e.g., Rudolph 1998, or similar proofs for NSGA-II), the combination
-    of selection pressure toward non-dominated solutions and exploratory
-    power (mutation/crossover) ensures that the population will tend
-    toward the true Pareto optimal set as
-    $\left. t\rightarrow\infty \right.$.
+1.  **Preservation of optimality:** Elitist replacement retains
+    non-dominated solutions across generations.
+2.  **Ergodicity:** A strictly positive mutation probability lets any
+    point be reached from any other in finitely many steps.
+3.  **Convergence:** Selection pressure toward non-dominated solutions,
+    combined with ergodic variation, drives the population toward the
+    Pareto front in the limit.
+
+In practice, the useful convergence diagnostics are the per-generation
+best objective (`history`) and the final Pareto front; the theoretical
+guarantee above requires assumptions that real runs may violate.
 
 ## Computational Complexity
 
 Analyzing the complexity is crucial for understanding the algorithm’s
 performance on large genomic datasets. Key variables are defined:
 
-- $p$ = population size
-- $n$ = number of genes
-- $m$ = number of samples
-- $o$ = number of objectives ($o = 2$ in BioGA)
-- $T$ = number of generations
+- $`p`$ = population size
+- $`n`$ = number of genes
+- $`m`$ = number of samples
+- $`o`$ = number of objectives ($`o=2`$ in BioGA)
+- $`T`$ = number of generations
 
 ### Component Complexities
 
-| GA Component        | Complexity (Per Generation)              | Dominating Variables |
-|:--------------------|:-----------------------------------------|:---------------------|
-| Initialization      | $O(pn)$                                  | $p,n$                |
-| Fitness Evaluation  | $O(pn) \times O(m)$$\rightarrow$$O(pmn)$ | $p,m,n$              |
-| Selection (Sorting) | $O\left( p^{2}o \right)$                 | $p$ (quadratic)      |
-| Crossover (SBX)     | $O(pn)$                                  | $p,n$                |
-| Mutation (Adaptive) | $O(pn)$                                  | $p,n$                |
-| Replacement         | $O(pn)$                                  | $p,n$                |
+| GA Component | Complexity (Per Generation) | Dominating Variables |
+|:---|:---|:---|
+| Initialization | $`O(pn)`$ | $`p, n`$ |
+| Fitness Evaluation | $`O(pn) \times O(m)`$$`\to`$$`O(pmn)`$ | $`p, m, n`$ |
+| Selection (NSGA-II sort) | $`O(p^2o)`$ | $`p`$ (quadratic) |
+| Crossover (SBX) | $`O(pn)`$ | $`p, n`$ |
+| Mutation (Adaptive) | $`O(pn)`$ | $`p, n`$ |
+| Replacement (environmental selection) | $`O((p+q)^2o)`$ | $`p, q`$ |
 
 ### Total Complexity
 
-The total complexity for $T$ generations is dominated by the Fitness
+The total complexity for $`T`$ generations is dominated by the Fitness
 Evaluation and the Selection phases:
 
-$$\text{Total Complexity} = O\left( T \cdot \left( pmn + p^{2}o \right) \right)$$
-Factoring $p$: $$\text{Total Complexity} = O\left( Tp(mn + po) \right)$$
+``` math
+\text{Total Complexity} = O(T \cdot (pmn + p^2o))
+```
+Factoring $`p`$:
+``` math
+\text{Total Complexity} = O(Tp(mn + po))
+```
 This result highlights that scalability is limited by the quadratic
-dependency on population size $p$ (due to sorting) and the linear
-dependency on the product of genes/samples $mn$ (due to fitness
+dependency on population size $`p`$ (due to sorting) and the linear
+dependency on the product of genes/samples $`mn`$ (due to fitness
 evaluation).
 
 ## Mathematical Optimization Interpretation
@@ -409,23 +426,24 @@ From a purely mathematical perspective, the BioGA algorithm serves as a
 robust stochastic optimization solver for the following multi-objective
 problem:
 
-$$\begin{aligned}
-{\text{minimize}\mspace{6mu}} & \left( f_{1}(P),f_{2}(P) \right) \\
-{\text{subject to}\mspace{6mu}} & {P \in {\mathbb{R}}^{p \times n}}
-\end{aligned}$$
+``` math
+\begin{aligned}
+\text{minimize } & (f_1(P), f_2(P)) \\
+\text{subject to } & P \in \mathbb{R}^{p \times n}
+\end{aligned}
+```
 
 **Core Characteristics that Favor GA:**
 
 1.  **Multi-Objective Nature:** Explicitly seeking a set of trade-off
     solutions (the Pareto front).
-2.  **High Dimensionality:** Search space size is $p \times n$, making
-    deterministic grid search intractable.
-3.  **Non-Differentiable Objectives:** The sparsity objective $f_{2}$ is
-    non-differentiable, making standard calculus-based methods
-    impossible.
-4.  **Non-Convexity:** The fitness landscape, when combined, may be
-    non-convex, meaning the GA’s global search capability is essential
-    to avoid local optima.
+2.  **High Dimensionality:** The real search space is $`p \times n`$,
+    making deterministic grid search intractable.
+3.  **Non-Differentiable Objective:** The sparsity objective $`f_2`$ in
+    the binary representation is non-differentiable, so gradient-based
+    methods do not apply.
+4.  **Non-Convexity:** The combined fitness landscape may be non-convex,
+    so global search heuristics are useful to avoid poor local optima.
 
 ## Biological Interpretation and Relevance
 
@@ -433,73 +451,74 @@ The mathematical operations within the BioGA framework have direct
 analogues in the biological context of genomic data analysis, ensuring
 the algorithm is biologically meaningful.
 
-| Mathematical Component        | Biological Concept              | Function                                                                                                                                |
-|:------------------------------|:--------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------|
-| **Population Initialization** | Initial Biological Variability  | Starting the search process by sampling observed expression levels.                                                                     |
-| **Fitness ($f_{1},f_{2}$)**   | Functional Efficacy & Parsimony | $f_{1}$ ensures the optimized solution is relevant to observed data; $f_{2}$ enforces biological simplicity (Minimal Regulatory Model). |
-| **Network Constraints**       | Gene-Gene Interactions          | Incorporating known biological constraints (e.g., regulatory or metabolic pathways) to guide mutation.                                  |
-| **Clustering**                | Co-expressed Gene Modules       | Respecting known functional groupings during initialization.                                                                            |
+| Mathematical Component | Biological Concept | Function |
+|:---|:---|:---|
+| **Population Initialization** | Initial Biological Variability | Starting the search process by sampling observed expression levels. |
+| **Fitness ($`f_1, f_2`$)** | Functional Efficacy & Parsimony | $`f_1`$ ensures the optimized solution is relevant to observed data; $`f_2`$ enforces biological simplicity (Minimal Regulatory Model). |
+| **Network Constraints** | Gene-Gene Interactions | Incorporating known biological constraints (e.g., regulatory or metabolic pathways) to guide mutation. |
+| **Clustering** | Co-expressed Gene Modules | Respecting known functional groupings during initialization. |
 
 ## Conclusion
 
-The `BioGA` package implements a theoretically sound and computationally
-structured multi-objective evolutionary algorithm. Its mathematical
-foundation—encompassing NSGA-II principles for multi-objective handling,
-sophisticated SBX and adaptive network-constrained mutation for
-exploration, and diversity-preserving replacement—provides a rigorous
-framework for simultaneously achieving data fidelity and model sparsity
-in genomic data optimization.
+The `BioGA` package implements a structured multi-objective evolutionary
+algorithm. Its components—NSGA-II rank and crowding for selection and
+environmental replacement, SBX (or uniform) crossover, and adaptive
+mutation with optional degree-based network damping—provide a coherent
+framework for trade-offs between data fidelity (or predictive signal)
+and model sparsity in genomic data optimisation.
 
 **Session Info**
 
 ``` r
+
 sessioninfo::session_info()
 #> ─ Session info ───────────────────────────────────────────────────────────────
 #>  setting  value
-#>  version  R version 4.5.2 (2025-10-31)
-#>  os       Ubuntu 24.04.3 LTS
+#>  version  R version 4.6.1 (2026-06-24)
+#>  os       Ubuntu 24.04.5 LTS
 #>  system   x86_64, linux-gnu
 #>  ui       X11
 #>  language en
 #>  collate  C.UTF-8
 #>  ctype    C.UTF-8
 #>  tz       UTC
-#>  date     2025-12-04
-#>  pandoc   3.1.11 @ /opt/hostedtoolcache/pandoc/3.1.11/x64/ (via rmarkdown)
+#>  date     2026-10-17
+#>  pandoc   3.8.3 @ /opt/hostedtoolcache/pandoc/3.8.3/x64/ (via rmarkdown)
 #>  quarto   NA
 #> 
 #> ─ Packages ───────────────────────────────────────────────────────────────────
 #>  package     * version date (UTC) lib source
-#>  bookdown      0.45    2025-10-03 [1] RSPM
-#>  bslib         0.9.0   2025-01-30 [1] RSPM
+#>  bookdown      0.48    2026-08-28 [1] RSPM
+#>  bslib         0.12.0  2026-08-04 [1] RSPM
 #>  cachem        1.1.0   2024-05-16 [1] RSPM
-#>  cli           3.6.5   2025-04-23 [1] RSPM
+#>  cli           3.6.6   2026-04-09 [1] RSPM
 #>  desc          1.4.3   2023-12-10 [1] RSPM
 #>  digest        0.6.39  2025-11-19 [1] RSPM
 #>  evaluate      1.0.5   2025-08-27 [1] RSPM
 #>  fastmap       1.2.0   2024-05-15 [1] RSPM
-#>  fs            1.6.6   2025-04-12 [1] RSPM
-#>  htmltools     0.5.8.1 2024-04-04 [1] RSPM
+#>  fs            2.1.0   2026-04-18 [1] RSPM
+#>  htmltools     0.5.9   2025-12-04 [1] RSPM
 #>  htmlwidgets   1.6.4   2023-12-06 [1] RSPM
 #>  jquerylib     0.1.4   2021-04-26 [1] RSPM
 #>  jsonlite      2.0.0   2025-03-27 [1] RSPM
-#>  knitr         1.50    2025-03-16 [1] RSPM
-#>  lifecycle     1.0.4   2023-11-07 [1] RSPM
-#>  pkgdown       2.2.0   2025-11-06 [1] any (@2.2.0)
+#>  knitr         1.52    2026-09-06 [1] RSPM
+#>  lifecycle     1.0.5   2026-01-08 [1] RSPM
+#>  otel          0.2.0   2025-08-29 [1] RSPM
+#>  pkgdown       2.2.1   2026-07-07 [1] RSPM
 #>  R6            2.6.1   2025-02-15 [1] RSPM
-#>  ragg          1.5.0   2025-09-02 [1] RSPM
-#>  rlang         1.1.6   2025-04-11 [1] RSPM
-#>  rmarkdown     2.30    2025-09-28 [1] RSPM
+#>  ragg          1.5.2   2026-03-23 [1] RSPM
+#>  rlang         1.3.0   2026-07-05 [1] RSPM
+#>  rmarkdown     2.32    2026-09-01 [1] RSPM
 #>  sass          0.4.10  2025-04-11 [1] RSPM
-#>  sessioninfo   1.2.3   2025-02-05 [1] RSPM
-#>  systemfonts   1.3.1   2025-10-01 [1] RSPM
-#>  textshaping   1.0.4   2025-10-10 [1] RSPM
-#>  xfun          0.54    2025-10-30 [1] RSPM
-#>  yaml          2.3.11  2025-11-28 [1] RSPM
+#>  sessioninfo   1.2.4   2026-06-04 [1] RSPM
+#>  systemfonts   1.3.2   2026-03-05 [1] RSPM
+#>  textshaping   1.0.5   2026-03-06 [1] RSPM
+#>  xfun          0.62    2026-10-16 [1] RSPM
+#>  yaml          2.3.12  2025-12-10 [1] RSPM
 #> 
 #>  [1] /home/runner/work/_temp/Library
-#>  [2] /opt/R/4.5.2/lib/R/site-library
-#>  [3] /opt/R/4.5.2/lib/R/library
+#>  [2] /opt/R/4.6.1/lib/R/site-library
+#>  [3] /opt/R/4.6.1/lib/R/library
 #> 
 #> ──────────────────────────────────────────────────────────────────────────────
 ```

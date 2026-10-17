@@ -1,6 +1,8 @@
-# Main genetic algorithm loop for genomic data optimization
+# Main genetic algorithm loop for genomic data optimisation
 
-Main genetic algorithm loop for genomic data optimization
+Runs a generational multi-objective genetic algorithm combining
+initialization, fitness evaluation, NSGA-II selection, crossover,
+mutation and NSGA-II replacement.
 
 ## Usage
 
@@ -18,7 +20,9 @@ bioga_main_cpp(
   weights,
   seed = NULL,
   clusters = NULL,
-  network = NULL
+  network = NULL,
+  labels = NULL,
+  representation = "real"
 )
 ```
 
@@ -42,7 +46,7 @@ bioga_main_cpp(
 
 - eta_c:
 
-  SBX distribution index (default: 20.0).
+  SBX distribution index (real representation).
 
 - mutation_rate:
 
@@ -50,19 +54,19 @@ bioga_main_cpp(
 
 - num_parents:
 
-  Number of parents to select per generation.
+  Number of parents selected per generation.
 
 - num_offspring:
 
-  Number of offspring to generate per generation.
+  Number of offspring generated per generation.
 
 - num_to_replace:
 
-  Number of individuals to replace per generation.
+  Maximum number of offspring admitted per generation.
 
 - weights:
 
-  Numeric vector of weights for multi-objective fitness.
+  Numeric vector of objective weights.
 
 - seed:
 
@@ -74,30 +78,46 @@ bioga_main_cpp(
 
 - network:
 
-  Optional matrix of gene network constraints.
+  Optional symmetric gene network adjacency matrix.
+
+- labels:
+
+  Optional class labels (required when `representation = "binary"`).
+  Accepted as an integer, numeric, factor, character or logical vector.
+
+- representation:
+
+  Either `"real"` or `"binary"`.
 
 ## Value
 
-List containing final population and fitness scores.
+A list with `population` (final population), `fitness` (final fitness
+matrix), `history` (best first objective per generation), `best` (best
+individual), `best_fitness`, `pareto_population` and `pareto_fitness`
+(the first non-dominated front of the final population).
+
+## References
+
+Deb K, Pratap A, Agarwal S, Meyarivan T (2002). "A fast and elitist
+multiobjective genetic algorithm: NSGA-II." *IEEE Transactions on
+Evolutionary Computation*, 6(2), 182-197.
+[doi:10.1109/4235.996017](https://doi.org/10.1109/4235.996017)
+
+## See also
+
+[`initialize_population_cpp()`](https://danymukesha.github.io/BioGA/reference/initialize_population_cpp.md),
+[`evaluate_fitness_cpp()`](https://danymukesha.github.io/BioGA/reference/evaluate_fitness_cpp.md),
+[`selection_cpp()`](https://danymukesha.github.io/BioGA/reference/selection_cpp.md),
+[`crossover_cpp()`](https://danymukesha.github.io/BioGA/reference/crossover_cpp.md),
+[`mutation_cpp()`](https://danymukesha.github.io/BioGA/reference/mutation_cpp.md),
+[`replacement_cpp()`](https://danymukesha.github.io/BioGA/reference/replacement_cpp.md)
 
 ## Examples
 
 ``` r
 genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
-result <- BioGA::bioga_main_cpp(genomic_data,
-population_size = 50, num_generations = 10,
-        crossover_rate = 0.9, eta_c = 20.0, mutation_rate = 0.1,
-        num_parents = 20, num_offspring = 20, num_to_replace = 10,
-        weights = c(1.0, 0.5), seed = 123)
-#> Current front size: 1
-#> Current front size: 1
-#> Current front size: 1
-#> Current front size: 1
-#> Current front size: 1
-#> Current front size: 1
-#> Current front size: 1
-#> Current front size: 0
-#> Warning: No non-dominated individuals found.     Using full population for selection.
-#> Current front size: 1
-#> Current front size: 1
+result <- BioGA::bioga_main_cpp(genomic_data, population_size = 50,
+  num_generations = 10, crossover_rate = 0.9, eta_c = 20.0,
+  mutation_rate = 0.1, num_parents = 20, num_offspring = 20,
+  num_to_replace = 10, weights = c(1.0, 0.5), seed = 123)
 ```

@@ -11,6 +11,7 @@ for use within R.
 To install this package, start R (preferably version “4.4”) and enter:
 
 ``` r
+
 if (!require("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 
@@ -24,5 +25,6 @@ You can also install the package directly from GitHub using the
 `devtools` package:
 
 ``` r
+
 devtools::install_github("danymukesha/BioGA")
 ```
