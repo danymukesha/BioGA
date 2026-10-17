@@ -2,13 +2,14 @@
 % Please edit documentation in R/RcppExports.R
 \name{crossover_cpp}
 \alias{crossover_cpp}
-\title{Function to perform simulated binary crossover (SBX)}
+\title{Generate offspring by crossover}
 \usage{
 crossover_cpp(
   selected_parents,
   offspring_size,
   crossover_rate = 0.9,
-  eta_c = 20
+  eta_c = 20,
+  representation = "real"
 )
 }
 \arguments{
@@ -16,23 +17,35 @@ crossover_cpp(
 
 \item{offspring_size}{Number of offspring to generate.}
 
-\item{crossover_rate}{Probability of crossover (default: 0.9).}
+\item{crossover_rate}{Probability of crossover per offspring (default: 0.9).}
 
 \item{eta_c}{SBX distribution index (default: 20.0).}
+
+\item{representation}{Either \code{"real"} or \code{"binary"}.}
 }
 \value{
 Numeric matrix of offspring.
 }
 \description{
-Function to perform simulated binary crossover (SBX)
+Real-coded mode uses simulated binary crossover (SBX); binary mode uses
+uniform crossover. When only one parent is available the offspring are
+exact copies of that parent.
 }
 \examples{
 genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
-population <- BioGA::initialize_population_cpp(genomic_data, 
-population_size = 5)
-fitness <- BioGA::evaluate_fitness_cpp(genomic_data, population, 
-c(1.0, 0.5))
-selected_parents <- BioGA::selection_cpp(population, fitness, 
-num_parents = 2)
-BioGA::crossover_cpp(selected_parents, offspring_size = 2)
+population <- BioGA::initialize_population_cpp(genomic_data, population_size = 5)
+fitness <- BioGA::evaluate_fitness_cpp(genomic_data, population, c(1.0, 0.5))
+parents <- BioGA::selection_cpp(population, fitness, num_parents = 2)
+BioGA::crossover_cpp(parents, offspring_size = 2)
 }
+\references{
+Deb K, Agrawal RB (1995).
+"Simulated binary crossover for continuous search space."
+\emph{Complex Systems}, 9(2), 115-148.
+}
+\seealso{
+\code{\link[=initialize_population_cpp]{initialize_population_cpp()}}, \code{\link[=evaluate_fitness_cpp]{evaluate_fitness_cpp()}},
+\code{\link[=selection_cpp]{selection_cpp()}}, \code{\link[=mutation_cpp]{mutation_cpp()}}, \code{\link[=replacement_cpp]{replacement_cpp()}},
+\code{\link[=bioga_main_cpp]{bioga_main_cpp()}}
+}
+\concept{crossover}

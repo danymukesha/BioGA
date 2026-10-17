@@ -11,8 +11,8 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // bioga_main_cpp
-List bioga_main_cpp(const NumericMatrix& genomic_data, int population_size, int num_generations, double crossover_rate, double eta_c, double mutation_rate, int num_parents, int num_offspring, int num_to_replace, const NumericVector& weights, Nullable<int> seed, Nullable<IntegerVector> clusters, Nullable<NumericMatrix> network);
-RcppExport SEXP _BioGA_bioga_main_cpp(SEXP genomic_dataSEXP, SEXP population_sizeSEXP, SEXP num_generationsSEXP, SEXP crossover_rateSEXP, SEXP eta_cSEXP, SEXP mutation_rateSEXP, SEXP num_parentsSEXP, SEXP num_offspringSEXP, SEXP num_to_replaceSEXP, SEXP weightsSEXP, SEXP seedSEXP, SEXP clustersSEXP, SEXP networkSEXP) {
+List bioga_main_cpp(const NumericMatrix& genomic_data, int population_size, int num_generations, double crossover_rate, double eta_c, double mutation_rate, int num_parents, int num_offspring, int num_to_replace, const NumericVector& weights, Nullable<int> seed, Nullable<IntegerVector> clusters, Nullable<NumericMatrix> network, SEXP labels, std::string representation);
+RcppExport SEXP _BioGA_bioga_main_cpp(SEXP genomic_dataSEXP, SEXP population_sizeSEXP, SEXP num_generationsSEXP, SEXP crossover_rateSEXP, SEXP eta_cSEXP, SEXP mutation_rateSEXP, SEXP num_parentsSEXP, SEXP num_offspringSEXP, SEXP num_to_replaceSEXP, SEXP weightsSEXP, SEXP seedSEXP, SEXP clustersSEXP, SEXP networkSEXP, SEXP labelsSEXP, SEXP representationSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -29,13 +29,15 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< Nullable<int> >::type seed(seedSEXP);
     Rcpp::traits::input_parameter< Nullable<IntegerVector> >::type clusters(clustersSEXP);
     Rcpp::traits::input_parameter< Nullable<NumericMatrix> >::type network(networkSEXP);
-    rcpp_result_gen = Rcpp::wrap(bioga_main_cpp(genomic_data, population_size, num_generations, crossover_rate, eta_c, mutation_rate, num_parents, num_offspring, num_to_replace, weights, seed, clusters, network));
+    Rcpp::traits::input_parameter< SEXP >::type labels(labelsSEXP);
+    Rcpp::traits::input_parameter< std::string >::type representation(representationSEXP);
+    rcpp_result_gen = Rcpp::wrap(bioga_main_cpp(genomic_data, population_size, num_generations, crossover_rate, eta_c, mutation_rate, num_parents, num_offspring, num_to_replace, weights, seed, clusters, network, labels, representation));
     return rcpp_result_gen;
 END_RCPP
 }
 // crossover_cpp
-NumericMatrix crossover_cpp(const NumericMatrix& selected_parents, int offspring_size, double crossover_rate, double eta_c);
-RcppExport SEXP _BioGA_crossover_cpp(SEXP selected_parentsSEXP, SEXP offspring_sizeSEXP, SEXP crossover_rateSEXP, SEXP eta_cSEXP) {
+NumericMatrix crossover_cpp(const NumericMatrix& selected_parents, int offspring_size, double crossover_rate, double eta_c, std::string representation);
+RcppExport SEXP _BioGA_crossover_cpp(SEXP selected_parentsSEXP, SEXP offspring_sizeSEXP, SEXP crossover_rateSEXP, SEXP eta_cSEXP, SEXP representationSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -43,26 +45,29 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int >::type offspring_size(offspring_sizeSEXP);
     Rcpp::traits::input_parameter< double >::type crossover_rate(crossover_rateSEXP);
     Rcpp::traits::input_parameter< double >::type eta_c(eta_cSEXP);
-    rcpp_result_gen = Rcpp::wrap(crossover_cpp(selected_parents, offspring_size, crossover_rate, eta_c));
+    Rcpp::traits::input_parameter< std::string >::type representation(representationSEXP);
+    rcpp_result_gen = Rcpp::wrap(crossover_cpp(selected_parents, offspring_size, crossover_rate, eta_c, representation));
     return rcpp_result_gen;
 END_RCPP
 }
 // evaluate_fitness_cpp
-NumericMatrix evaluate_fitness_cpp(const NumericMatrix& genomic_data, const NumericMatrix& population, const NumericVector& weights);
-RcppExport SEXP _BioGA_evaluate_fitness_cpp(SEXP genomic_dataSEXP, SEXP populationSEXP, SEXP weightsSEXP) {
+NumericMatrix evaluate_fitness_cpp(const NumericMatrix& genomic_data, const NumericMatrix& population, const NumericVector& weights, SEXP labels, std::string representation);
+RcppExport SEXP _BioGA_evaluate_fitness_cpp(SEXP genomic_dataSEXP, SEXP populationSEXP, SEXP weightsSEXP, SEXP labelsSEXP, SEXP representationSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const NumericMatrix& >::type genomic_data(genomic_dataSEXP);
     Rcpp::traits::input_parameter< const NumericMatrix& >::type population(populationSEXP);
     Rcpp::traits::input_parameter< const NumericVector& >::type weights(weightsSEXP);
-    rcpp_result_gen = Rcpp::wrap(evaluate_fitness_cpp(genomic_data, population, weights));
+    Rcpp::traits::input_parameter< SEXP >::type labels(labelsSEXP);
+    Rcpp::traits::input_parameter< std::string >::type representation(representationSEXP);
+    rcpp_result_gen = Rcpp::wrap(evaluate_fitness_cpp(genomic_data, population, weights, labels, representation));
     return rcpp_result_gen;
 END_RCPP
 }
 // initialize_population_cpp
-NumericMatrix initialize_population_cpp(const NumericMatrix& genomic_data, int population_size, Nullable<int> seed, Nullable<IntegerVector> clusters);
-RcppExport SEXP _BioGA_initialize_population_cpp(SEXP genomic_dataSEXP, SEXP population_sizeSEXP, SEXP seedSEXP, SEXP clustersSEXP) {
+NumericMatrix initialize_population_cpp(const NumericMatrix& genomic_data, int population_size, Nullable<int> seed, Nullable<IntegerVector> clusters, std::string representation);
+RcppExport SEXP _BioGA_initialize_population_cpp(SEXP genomic_dataSEXP, SEXP population_sizeSEXP, SEXP seedSEXP, SEXP clustersSEXP, SEXP representationSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -70,13 +75,14 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int >::type population_size(population_sizeSEXP);
     Rcpp::traits::input_parameter< Nullable<int> >::type seed(seedSEXP);
     Rcpp::traits::input_parameter< Nullable<IntegerVector> >::type clusters(clustersSEXP);
-    rcpp_result_gen = Rcpp::wrap(initialize_population_cpp(genomic_data, population_size, seed, clusters));
+    Rcpp::traits::input_parameter< std::string >::type representation(representationSEXP);
+    rcpp_result_gen = Rcpp::wrap(initialize_population_cpp(genomic_data, population_size, seed, clusters, representation));
     return rcpp_result_gen;
 END_RCPP
 }
 // mutation_cpp
-NumericMatrix mutation_cpp(const NumericMatrix& offspring, double mutation_rate, int iteration, int max_iterations, Nullable<NumericMatrix> network);
-RcppExport SEXP _BioGA_mutation_cpp(SEXP offspringSEXP, SEXP mutation_rateSEXP, SEXP iterationSEXP, SEXP max_iterationsSEXP, SEXP networkSEXP) {
+NumericMatrix mutation_cpp(const NumericMatrix& offspring, double mutation_rate, int iteration, int max_iterations, Nullable<NumericMatrix> network, std::string representation);
+RcppExport SEXP _BioGA_mutation_cpp(SEXP offspringSEXP, SEXP mutation_rateSEXP, SEXP iterationSEXP, SEXP max_iterationsSEXP, SEXP networkSEXP, SEXP representationSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -85,7 +91,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int >::type iteration(iterationSEXP);
     Rcpp::traits::input_parameter< int >::type max_iterations(max_iterationsSEXP);
     Rcpp::traits::input_parameter< Nullable<NumericMatrix> >::type network(networkSEXP);
-    rcpp_result_gen = Rcpp::wrap(mutation_cpp(offspring, mutation_rate, iteration, max_iterations, network));
+    Rcpp::traits::input_parameter< std::string >::type representation(representationSEXP);
+    rcpp_result_gen = Rcpp::wrap(mutation_cpp(offspring, mutation_rate, iteration, max_iterations, network, representation));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -119,11 +126,11 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_BioGA_bioga_main_cpp", (DL_FUNC) &_BioGA_bioga_main_cpp, 13},
-    {"_BioGA_crossover_cpp", (DL_FUNC) &_BioGA_crossover_cpp, 4},
-    {"_BioGA_evaluate_fitness_cpp", (DL_FUNC) &_BioGA_evaluate_fitness_cpp, 3},
-    {"_BioGA_initialize_population_cpp", (DL_FUNC) &_BioGA_initialize_population_cpp, 4},
-    {"_BioGA_mutation_cpp", (DL_FUNC) &_BioGA_mutation_cpp, 5},
+    {"_BioGA_bioga_main_cpp", (DL_FUNC) &_BioGA_bioga_main_cpp, 15},
+    {"_BioGA_crossover_cpp", (DL_FUNC) &_BioGA_crossover_cpp, 5},
+    {"_BioGA_evaluate_fitness_cpp", (DL_FUNC) &_BioGA_evaluate_fitness_cpp, 5},
+    {"_BioGA_initialize_population_cpp", (DL_FUNC) &_BioGA_initialize_population_cpp, 5},
+    {"_BioGA_mutation_cpp", (DL_FUNC) &_BioGA_mutation_cpp, 6},
     {"_BioGA_replacement_cpp", (DL_FUNC) &_BioGA_replacement_cpp, 5},
     {"_BioGA_selection_cpp", (DL_FUNC) &_BioGA_selection_cpp, 3},
     {NULL, NULL, 0}

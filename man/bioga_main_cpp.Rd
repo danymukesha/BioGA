@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcppExports.R
 \name{bioga_main_cpp}
 \alias{bioga_main_cpp}
-\title{Main genetic algorithm loop for genomic data optimization}
+\title{Main genetic algorithm loop for genomic data optimisation}
 \usage{
 bioga_main_cpp(
   genomic_data,
@@ -17,7 +17,9 @@ bioga_main_cpp(
   weights,
   seed = NULL,
   clusters = NULL,
-  network = NULL
+  network = NULL,
+  labels = NULL,
+  representation = "real"
 )
 }
 \arguments{
@@ -30,35 +32,57 @@ columns: samples).}
 
 \item{crossover_rate}{Probability of crossover.}
 
-\item{eta_c}{SBX distribution index (default: 20.0).}
+\item{eta_c}{SBX distribution index (real representation).}
 
 \item{mutation_rate}{Base probability of mutation.}
 
-\item{num_parents}{Number of parents to select per generation.}
+\item{num_parents}{Number of parents selected per generation.}
 
-\item{num_offspring}{Number of offspring to generate per generation.}
+\item{num_offspring}{Number of offspring generated per generation.}
 
-\item{num_to_replace}{Number of individuals to replace per generation.}
+\item{num_to_replace}{Maximum number of offspring admitted per generation.}
 
-\item{weights}{Numeric vector of weights for multi-objective fitness.}
+\item{weights}{Numeric vector of objective weights.}
 
 \item{seed}{Optional random seed for reproducibility.}
 
 \item{clusters}{Optional vector of gene cluster assignments.}
 
-\item{network}{Optional matrix of gene network constraints.}
+\item{network}{Optional symmetric gene network adjacency matrix.}
+
+\item{labels}{Optional class labels (required when
+\code{representation = "binary"}). Accepted as an integer, numeric, factor,
+character or logical vector.}
+
+\item{representation}{Either \code{"real"} or \code{"binary"}.}
 }
 \value{
-List containing final population and fitness scores.
+A list with \code{population} (final population), \code{fitness} (final
+fitness matrix), \code{history} (best first objective per generation), \code{best}
+(best individual), \code{best_fitness}, \code{pareto_population} and
+\code{pareto_fitness} (the first non-dominated front of the final population).
 }
 \description{
-Main genetic algorithm loop for genomic data optimization
+Runs a generational multi-objective genetic algorithm combining
+initialization, fitness evaluation, NSGA-II selection, crossover,
+mutation and NSGA-II replacement.
 }
 \examples{
 genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
-result <- BioGA::bioga_main_cpp(genomic_data,
-population_size = 50, num_generations = 10,
-        crossover_rate = 0.9, eta_c = 20.0, mutation_rate = 0.1,
-        num_parents = 20, num_offspring = 20, num_to_replace = 10,
-        weights = c(1.0, 0.5), seed = 123)
+result <- BioGA::bioga_main_cpp(genomic_data, population_size = 50,
+  num_generations = 10, crossover_rate = 0.9, eta_c = 20.0,
+  mutation_rate = 0.1, num_parents = 20, num_offspring = 20,
+  num_to_replace = 10, weights = c(1.0, 0.5), seed = 123)
 }
+\references{
+Deb K, Pratap A, Agarwal S, Meyarivan T (2002).
+"A fast and elitist multiobjective genetic algorithm: NSGA-II."
+\emph{IEEE Transactions on Evolutionary Computation}, 6(2), 182-197.
+\doi{10.1109/4235.996017}
+}
+\seealso{
+\code{\link[=initialize_population_cpp]{initialize_population_cpp()}}, \code{\link[=evaluate_fitness_cpp]{evaluate_fitness_cpp()}},
+\code{\link[=selection_cpp]{selection_cpp()}}, \code{\link[=crossover_cpp]{crossover_cpp()}}, \code{\link[=mutation_cpp]{mutation_cpp()}},
+\code{\link[=replacement_cpp]{replacement_cpp()}}
+}
+\concept{main genetic algorithm loop}

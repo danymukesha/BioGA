@@ -2,14 +2,15 @@
 % Please edit documentation in R/RcppExports.R
 \name{mutation_cpp}
 \alias{mutation_cpp}
-\title{Function to mutate offspring with adaptive mutation and network constraints}
+\title{Mutate offspring with an adaptive rate}
 \usage{
 mutation_cpp(
   offspring,
   mutation_rate,
   iteration,
   max_iterations,
-  network = NULL
+  network = NULL,
+  representation = "real"
 )
 }
 \arguments{
@@ -17,29 +18,36 @@ mutation_cpp(
 
 \item{mutation_rate}{Base probability of mutation.}
 
-\item{iteration}{Current GA iteration for adaptive mutation.}
+\item{iteration}{Current GA iteration.}
 
 \item{max_iterations}{Maximum number of GA iterations.}
 
-\item{network}{Optional matrix of gene network constraints (rows: genes,
-cols: genes).}
+\item{network}{Optional symmetric adjacency matrix
+(rows: genes, columns: genes).}
+
+\item{representation}{Either \code{"real"} or \code{"binary"}.}
 }
 \value{
 Numeric matrix of mutated offspring.
 }
 \description{
-Function to mutate offspring with adaptive mutation and network constraints
+The mutation rate increases linearly with the generation index. Real-coded
+mode applies Gaussian perturbation; binary mode flips selection bits.
+When a gene network is supplied, the perturbation of each gene is damped by
+its relative connectivity (degree), so network hubs change less.
 }
 \examples{
 genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
-population <- BioGA::initialize_population_cpp(genomic_data, 
-population_size = 5)
-fitness <- BioGA::evaluate_fitness_cpp(genomic_data, population, 
-c(1.0, 0.5))
-selected_parents <- BioGA::selection_cpp(population, fitness, 
-num_parents = 2)
-offspring <- BioGA::crossover_cpp(selected_parents, 
-offspring_size = 2)
-BioGA::mutation_cpp(offspring, mutation_rate = 0.1, iteration = 1, 
-max_iterations = 100)
+population <- BioGA::initialize_population_cpp(genomic_data, population_size = 5)
+fitness <- BioGA::evaluate_fitness_cpp(genomic_data, population, c(1.0, 0.5))
+parents <- BioGA::selection_cpp(population, fitness, num_parents = 2)
+offspring <- BioGA::crossover_cpp(parents, offspring_size = 2)
+BioGA::mutation_cpp(offspring, mutation_rate = 0.1, iteration = 1,
+  max_iterations = 100)
 }
+\seealso{
+\code{\link[=initialize_population_cpp]{initialize_population_cpp()}}, \code{\link[=evaluate_fitness_cpp]{evaluate_fitness_cpp()}},
+\code{\link[=selection_cpp]{selection_cpp()}}, \code{\link[=crossover_cpp]{crossover_cpp()}}, \code{\link[=replacement_cpp]{replacement_cpp()}},
+\code{\link[=bioga_main_cpp]{bioga_main_cpp()}}
+}
+\concept{mutation}

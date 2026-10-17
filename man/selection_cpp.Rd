@@ -2,14 +2,15 @@
 % Please edit documentation in R/RcppExports.R
 \name{selection_cpp}
 \alias{selection_cpp}
-\title{Function to select individuals using NSGA-II non-dominated sorting}
+\title{Select parents using NSGA-II rank and crowding distance}
 \usage{
 selection_cpp(population, fitness, num_parents)
 }
 \arguments{
 \item{population}{Numeric matrix of individuals.}
 
-\item{fitness}{Numeric matrix of fitness scores (columns: objectives).}
+\item{fitness}{Numeric matrix of fitness scores (rows: individuals,
+columns: objectives, all minimised).}
 
 \item{num_parents}{Number of individuals to select.}
 }
@@ -17,13 +18,25 @@ selection_cpp(population, fitness, num_parents)
 Numeric matrix of selected individuals.
 }
 \description{
-Function to select individuals using NSGA-II non-dominated sorting
+Ranks the population into non-dominated fronts, computes crowding
+distances, and performs binary tournament selection that prefers lower
+rank and, on ties, higher crowding distance.
 }
 \examples{
 genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
-population <- BioGA::initialize_population_cpp(genomic_data, 
-     population_size = 5)
-fitness <- BioGA::evaluate_fitness_cpp(genomic_data, population, 
-     c(1.0, 0.5))
+population <- BioGA::initialize_population_cpp(genomic_data, population_size = 5)
+fitness <- BioGA::evaluate_fitness_cpp(genomic_data, population, c(1.0, 0.5))
 BioGA::selection_cpp(population, fitness, num_parents = 2)
 }
+\references{
+Deb K, Pratap A, Agarwal S, Meyarivan T (2002).
+"A fast and elitist multiobjective genetic algorithm: NSGA-II."
+\emph{IEEE Transactions on Evolutionary Computation}, 6(2), 182-197.
+\doi{10.1109/4235.996017}
+}
+\seealso{
+\code{\link[=initialize_population_cpp]{initialize_population_cpp()}}, \code{\link[=evaluate_fitness_cpp]{evaluate_fitness_cpp()}},
+\code{\link[=crossover_cpp]{crossover_cpp()}}, \code{\link[=mutation_cpp]{mutation_cpp()}}, \code{\link[=replacement_cpp]{replacement_cpp()}},
+\code{\link[=bioga_main_cpp]{bioga_main_cpp()}}
+}
+\concept{selection}

@@ -2,13 +2,14 @@
 % Please edit documentation in R/RcppExports.R
 \name{initialize_population_cpp}
 \alias{initialize_population_cpp}
-\title{Function to initialize population with optional gene clustering}
+\title{Initialize a population, optionally guided by gene clusters}
 \usage{
 initialize_population_cpp(
   genomic_data,
   population_size,
   seed = NULL,
-  clusters = NULL
+  clusters = NULL,
+  representation = "real"
 )
 }
 \arguments{
@@ -19,16 +20,28 @@ columns: samples).}
 
 \item{seed}{Optional random seed for reproducibility.}
 
-\item{clusters}{Optional vector of gene cluster assignments.}
+\item{clusters}{Optional vector of gene cluster assignments (length equal
+to the number of genes, non-negative integers).}
+
+\item{representation}{Either \code{"real"} (continuous expression values) or
+\code{"binary"} (gene selection indicators).}
 }
 \value{
-Numeric matrix of initialized population.
+Numeric matrix of initialized population (rows: individuals,
+columns: genes).
 }
 \description{
-Function to initialize population with optional gene clustering
+Creates the starting population. In \code{"real"} mode each gene value is drawn
+from an observed sample of that gene, so individuals preserve the marginal
+distribution of the data. In \code{"binary"} mode each gene is encoded as
+selected (1) or not selected (0).
 }
 \examples{
 genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
-BioGA::initialize_population_cpp(genomic_data, population_size = 5, 
-seed = 123)
+BioGA::initialize_population_cpp(genomic_data, population_size = 5, seed = 123)
 }
+\seealso{
+\code{\link[=evaluate_fitness_cpp]{evaluate_fitness_cpp()}}, \code{\link[=selection_cpp]{selection_cpp()}}, \code{\link[=crossover_cpp]{crossover_cpp()}},
+\code{\link[=mutation_cpp]{mutation_cpp()}}, \code{\link[=replacement_cpp]{replacement_cpp()}}, \code{\link[=bioga_main_cpp]{bioga_main_cpp()}}
+}
+\concept{population initialization}

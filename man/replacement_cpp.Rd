@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcppExports.R
 \name{replacement_cpp}
 \alias{replacement_cpp}
-\title{Function to replace population with elitism and diversity preservation}
+\title{Build the next population with NSGA-II environmental selection}
 \usage{
 replacement_cpp(
   population,
@@ -13,33 +13,36 @@ replacement_cpp(
 )
 }
 \arguments{
-\item{population}{Numeric matrix of individuals.}
+\item{population}{Numeric matrix of current individuals.}
 
 \item{offspring}{Numeric matrix of offspring.}
 
-\item{fitness}{Numeric matrix of population fitness scores.}
+\item{fitness}{Numeric matrix of current population fitness scores.}
 
 \item{offspring_fitness}{Numeric matrix of offspring fitness scores.}
 
-\item{num_to_replace}{Number of individuals to replace.}
+\item{num_to_replace}{Maximum number of offspring to admit.}
 }
 \value{
-Numeric matrix of updated population.
+Numeric matrix of the updated population.
 }
 \description{
-Function to replace population with elitism and diversity preservation
+The \code{num_to_replace} best offspring (by NSGA-II rank and crowding distance)
+replace the lowest-quality parents, keeping the best \code{population_size - num_to_replace} parents. This preserves elitism while letting offspring
+enter only on merit. If \code{num_to_replace <= 0} the population is unchanged.
 }
 \examples{
 genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
-population <- BioGA::initialize_population_cpp(genomic_data, 
-population_size = 5)
-fitness <- BioGA::evaluate_fitness_cpp(genomic_data, population, 
-c(1.0, 0.5))
-selected_parents <- BioGA::selection_cpp(population, fitness, 
-num_parents = 2)
-offspring <- BioGA::crossover_cpp(selected_parents, offspring_size = 2)
-offspring_fitness <- BioGA::evaluate_fitness_cpp(genomic_data, offspring, 
-c(1.0, 0.5))
-BioGA::replacement_cpp(population, offspring, fitness, offspring_fitness, 
-num_to_replace = 1)
+population <- BioGA::initialize_population_cpp(genomic_data, population_size = 5)
+fitness <- BioGA::evaluate_fitness_cpp(genomic_data, population, c(1.0, 0.5))
+offspring <- population
+offspring_fitness <- fitness
+BioGA::replacement_cpp(population, offspring, fitness, offspring_fitness,
+  num_to_replace = 1)
 }
+\seealso{
+\code{\link[=initialize_population_cpp]{initialize_population_cpp()}}, \code{\link[=evaluate_fitness_cpp]{evaluate_fitness_cpp()}},
+\code{\link[=selection_cpp]{selection_cpp()}}, \code{\link[=crossover_cpp]{crossover_cpp()}}, \code{\link[=mutation_cpp]{mutation_cpp()}},
+\code{\link[=bioga_main_cpp]{bioga_main_cpp()}}
+}
+\concept{replacement}

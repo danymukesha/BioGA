@@ -7,7 +7,6 @@ output:
   bookdown::html_document2:
     toc_float: true
     number_sections: true
-    css: style.css
 vignette: >
   %\VignetteIndexEntry{Usage demonstration}
   %\VignetteEngine{knitr::rmarkdown}
@@ -99,7 +98,7 @@ computation:
 | `crossover_rate` | 0.9 | Probability of performing Crossover (SBX). |
 | `eta_c` | 20.0 | Distribution index for SBX (controls locality). |
 | `mutation_rate` | 0.1 | Base probability of mutation. |
-| `weights` | `c(1.0, 0.5)` | Weights for ($f_1$, $f_2$). $f_1$ (Expression Difference) is prioritized over $f_2$ (Sparsity). |
+| `weights` | `c(1.0, 0.5)` | Scaling factors applied to ($f_1$, $f_2$) before storage. Under Pareto (NSGA-II) ranking these do not change which solutions are non-dominated. |
 
 ```{r run_ga}
 result <- bioga_main_cpp(
@@ -174,8 +173,9 @@ approaches the Pareto front.
 # 4. Analysis of Final Population
 
 The `result$population` matrix contains the 30 individuals (rows) evolved
-after 50 generations. Since the objective encouraged sparsity ($f_2$ non-zero
-weight), we expect many gene values to be reduced to or near zero.
+after 50 generations. Because the second objective penalises large gene values
+(the mean absolute value, $f_2$), we expect the individuals to have shrunk
+many expression values toward zero relative to the raw data.
 
 ## 4.1 Population Diversity Heatmap
 
@@ -192,31 +192,48 @@ pheatmap(result$population,
 
 ## 4.2 Gene Selection Frequency
 
-A key application is gene signature selection. We can identify which genes the
-algorithm consistently preserved (i.e., maintained a non-zero value) across
-the final population.
+A key application is gene signature selection. The real representation applies
+an $L_1$ magnitude penalty (a soft, continuous effect), so it does not give a
+clean selected/not-selected answer. To obtain a strict signature we use the
+**binary representation**, where each gene is either selected or not and the
+class `labels` guide the objective. We run the GA again in binary mode and
+measure how often each gene is selected across the final population.
 
-```{r selection_frequency, fig.width=8, fig.height=5}
-# Calculate the mean frequency of non-zero values per gene (column)
-gene_selection_freq <- colMeans(result$population != 0)
+```{r binary_gene_selection, fig.width=8, fig.height=5}
+result_binary <- bioga_main_cpp(
+    genomic_data = genomic_data,
+    population_size = 30,
+    num_generations = 50,
+    crossover_rate = 0.9,
+    eta_c = 20.0,
+    mutation_rate = 0.1,
+    num_parents = 20,
+    num_offspring = 20,
+    num_to_replace = 10,
+    weights = c(1.0, 1.0),
+    seed = 42,
+    labels = class_labels,
+    representation = "binary"
+)
+
+# Each gene is selected when its indicator exceeds 0.5
+gene_selection_freq <- colMeans(result_binary$population > 0.5)
 gene_selection_df <- data.frame(
     Gene = rownames(genomic_data),
     Frequency = gene_selection_freq
 )
 
-# Plotting the frequency
 ggplot(gene_selection_df, aes(x = Gene, y = Frequency)) +
     geom_bar(stat = "identity", fill = "#D55E00") +
-    labs(x = "Gene", y = "Selection Frequency (Non-Zero)",
+    labs(x = "Gene", y = "Selection Frequency",
          title = "Frequency of Gene Selection in Final Population") +
     theme_minimal(base_size = 12) +
     theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
 ```
-Genes with high selection frequency (approaching 1.0) represent the core
-"signature" identified by the GA that optimally balances expression difference
-and sparsity. In this example, we observe high frequency for the `Gene1`
-through `Gene10` region, which matches our simulated differentially expressed
-genes.
+Genes with high selection frequency are those the algorithm most consistently
+kept in the selected set, and form the candidate gene "signature". The
+differentially expressed genes (the first ten) tend to be selected more often
+than the remaining genes.
 
 # 5. Advanced Feature: Network Constraint
 
@@ -235,7 +252,7 @@ diag(network_mat) <- 0 # No self-loops
 pop_to_mutate <- result$population 
 
 mutated_with_net <- mutation_cpp(
-    population = pop_to_mutate,
+    offspring = pop_to_mutate,
     mutation_rate = 0.1,
     iteration = 10,
     max_iterations = 50,
@@ -246,20 +263,19 @@ pheatmap(mutated_with_net,
     main = "Population After Mutation with Network Constraint",
     show_rownames = FALSE, show_colnames = FALSE)
 ```
-When a network is provided, the operator uses the expression 
-$\Delta_j(1 - \sum_k N_{jk}z_k)$, mathematically imposing that changes are
-dampened for key network hub genes.
+When a network is provided, the mutation magnitude of gene $j$ is damped by
+its relative connectivity, $\Delta_j(1 - d_j/d_{\max})$, so that changes to
+highly connected hub genes are reduced.
 
 # Summary
 
 The practical application:
 
-1.  Simulated and visualized a multi-class genomic dataset.
-2.  Executed the multi-objective GA with defined weights for data fidelity
-and sparsity.
+1.  Simulated and visualized a two-class genomic dataset.
+2.  Executed the two-objective GA, tracking data fidelity and parsimony.
 3.  Provided a robust method for tracking and visualizing fitness convergence.
-4.  Analyzed the final population for diversity and identified the optimal
-gene signature subset.
+4.  Analyzed the final population for diversity and, using the binary
+representation, identified candidate gene-signature members.
 
 ## Further Customization
 
@@ -267,12 +283,12 @@ To apply `BioGA` to your research:
 
 * **Real Data:** Replace `genomic_data` with your own RNA-seq, microarrays,
 or proteomics data matrix.
-* **Custom Objectives:** Extend the multiple objectives by including
-clinical data (e.g., survival time, drug response) or external scores (e.g.,
-literature scores) to guide the evolution.
+* **Custom Objectives:** `BioGA` optimises two fixed objectives per
+representation (see `?bioga_fitness`). Domain knowledge cannot yet be injected
+as an arbitrary user-supplied fitness function in this release.
 * **Network Integration:** Define a meaningful adjacency matrix for `network`
-based on databases like STRING or pre-computed co-expression to ensure
-biological relevance during mutation.
+based on databases like STRING or pre-computed co-expression to damp mutation
+of highly connected genes.
 
 ## Performance Tip
 

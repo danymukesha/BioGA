@@ -16,7 +16,7 @@ bibentry(
   author = person("Dany", "Mukesha"),
   year = "2024",
   Journal = "Bioconductor",
-  note = "R package version 1.0.0",
+  note = "R package version 0.99.18",
   doi = "10.18129/B9.bioc.BioGA",
   url = "https://danymukesha.github.io/BioGA/"
 )

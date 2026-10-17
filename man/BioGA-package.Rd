@@ -4,23 +4,57 @@
 \name{BioGA-package}
 \alias{BioGA}
 \alias{BioGA-package}
-\title{BioGA: Bioinformatics Genetic Algorithm (BioGA)}
+\title{BioGA: Bioinformatics Genetic Algorithm}
 \description{
-\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
-
-Genetic algorithm are a class of optimization algorithms inspired by the process of natural selection and genetics. This package allows users to analyze and optimize high throughput genomic data using genetic algorithms. The functions provided are implemented in C++ for improved speed and efficiency, with an easy-to-use interface for use within R.
+BioGA provides a genetic algorithm framework for analyzing and optimizing
+high throughput genomic data. All core functions are implemented in C++
+for performance via Rcpp and RcppParallel, with an easy-to-use R interface.
 }
+\details{
+Two representations are supported. In \code{"real"} mode individuals are
+continuous expression profiles; in \code{"binary"} mode individuals are gene
+selection indicators and class \code{labels} are required. The workflow is:
+\enumerate{
+\item \strong{Initialization:} \code{\link{initialize_population_cpp}()} —
+Creates an initial population, optionally guided by gene clusters.
+\item \strong{Fitness evaluation:} \code{\link{evaluate_fitness_cpp}()} —
+Evaluates two minimised objectives (data fidelity and parsimony in
+\code{"real"} mode; predictive signal and sparsity in \code{"binary"} mode),
+computed in parallel.
+\item \strong{Selection:} \code{\link{selection_cpp}()} —
+Selects parents using NSGA-II rank and crowding-distance tournament
+selection.
+\item \strong{Crossover:} \code{\link{crossover_cpp}()} —
+Generates offspring via simulated binary crossover (SBX) in \code{"real"}
+mode or uniform crossover in \code{"binary"} mode.
+\item \strong{Mutation:} \code{\link{mutation_cpp}()} —
+Applies adaptive Gaussian (or bit-flip) mutation with optional
+degree-based network damping.
+\item \strong{Replacement:} \code{\link{replacement_cpp}()} —
+Admits the best offspring by NSGA-II environmental selection.
+\item \strong{Main loop:} \code{\link{bioga_main_cpp}()} —
+Orchestrates the full pipeline; \code{\link{bioga}()} is the
+user-facing entry point.
+}
+}
+\section{Citation}{
+
+If you use BioGA in your research, please cite:
+\preformatted{
+Mukesha D (2024). "Scalable and Interpretable Genetic Algorithm Framework
+for High-Throughput Genomic Data." Zenodo. \doi{10.5281/zenodo.15801072}
+}
+}
+
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://danymukesha.github.io/BioGA/}
-  \item \url{https://bioconductor.org/packages/BioGA/}
-  \item Report bugs at \url{https://github.com/danymukesha/BioGA/issues}
+\item \url{https://danymukesha.github.io/BioGA/}
+\item \url{https://bioconductor.org/packages/BioGA/}
+\item Report bugs at \url{https://github.com/danymukesha/BioGA/issues}
 }
-
 }
 \author{
-\strong{Maintainer}: Dany Mukesha \email{danymukesha@gmail.com} (\href{https://orcid.org/0009-0001-9514-751X}{ORCID})
-
+\strong{Maintainer:} Dany Mukesha \email{danymukesha@gmail.com}
 }
 \keyword{internal}

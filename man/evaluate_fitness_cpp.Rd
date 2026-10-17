@@ -2,30 +2,64 @@
 % Please edit documentation in R/RcppExports.R
 \name{evaluate_fitness_cpp}
 \alias{evaluate_fitness_cpp}
-\title{Function to evaluate fitness using genomic data with multi-objective support}
+\title{Evaluate fitness with two competing objectives}
 \usage{
-evaluate_fitness_cpp(genomic_data, population, weights)
+evaluate_fitness_cpp(
+  genomic_data,
+  population,
+  weights,
+  labels = NULL,
+  representation = "real"
+)
 }
 \arguments{
 \item{genomic_data}{Numeric matrix of genomic data (rows: genes,
 columns: samples).}
 
-\item{population}{Numeric matrix representing the population of individuals.}
+\item{population}{Numeric matrix of individuals (rows: individuals,
+columns: genes).}
 
-\item{weights}{Numeric vector of weights for multi-objective fitness
-(e.g., expression difference, sparsity).}
+\item{weights}{Numeric vector of objective weights (recycled if shorter
+than two).}
+
+\item{labels}{Optional class labels (length == number of samples); an
+integer, numeric, factor, character or logical vector is accepted and
+mapped to integer class codes. Required for \code{representation = "binary"}.}
+
+\item{representation}{Either \code{"real"} or \code{"binary"}.}
 }
 \value{
-Numeric matrix of fitness scores (columns: objectives,
-rows: individuals).
+Numeric matrix of fitness scores (rows: individuals,
+columns: objectives).
 }
 \description{
-Function to evaluate fitness using genomic data with multi-objective support
+Objectives are always minimised. Weighted columns are returned so the
+caller can inspect each objective (\code{weights} are recycled when shorter than
+the number of objectives).
+}
+\details{
+In \code{"real"} mode individuals are continuous expression profiles:
+\itemize{
+\item \code{f1}: squared Euclidean distance between the individual and every
+observed sample (data fidelity).
+\item \code{f2}: mean absolute gene value (L1 parsimony).
+}
+
+In \code{"binary"} mode individuals are gene-selection indicators and \code{labels}
+(one class label per sample) are required:
+\itemize{
+\item \code{f1}: negated mean ANOVA F-statistic of the selected genes
+(predictive signal).
+\item \code{f2}: fraction of selected genes (cardinality / sparsity).
+}
 }
 \examples{
 genomic_data <- matrix(rnorm(100), nrow = 10, ncol = 10)
-population <- BioGA::initialize_population_cpp(genomic_data, 
-population_size = 5)
-weights <- c(1.0, 0.5) # Weight for expression difference and sparsity
-BioGA::evaluate_fitness_cpp(genomic_data, population, weights)
+population <- BioGA::initialize_population_cpp(genomic_data, population_size = 5)
+BioGA::evaluate_fitness_cpp(genomic_data, population, weights = c(1.0, 0.5))
 }
+\seealso{
+\code{\link[=initialize_population_cpp]{initialize_population_cpp()}}, \code{\link[=selection_cpp]{selection_cpp()}}, \code{\link[=crossover_cpp]{crossover_cpp()}},
+\code{\link[=mutation_cpp]{mutation_cpp()}}, \code{\link[=replacement_cpp]{replacement_cpp()}}, \code{\link[=bioga_main_cpp]{bioga_main_cpp()}}
+}
+\concept{fitness evaluation}
